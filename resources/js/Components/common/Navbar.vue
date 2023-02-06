@@ -50,6 +50,15 @@
                 class="nav-link px-3 py-3 text-dark"
                 exact
                 active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
+                to="/posts"
+                ><font-awesome-icon class="me-2" icon="blog" />Posts</router-link
+              >
+            </li>
+            <li class="nav-item mx-0">
+              <router-link
+                class="nav-link px-3 py-3 text-dark"
+                exact
+                active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
                 to="/postimages"
                 ><font-awesome-icon class="me-2" icon="image" />Gallery</router-link
               >

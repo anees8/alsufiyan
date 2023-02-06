@@ -6,7 +6,7 @@
     <a class="nav-link" href="https://wa.me/9876543210?text=[Hi]" target="_blank"
       ><font-awesome-icon
         class="whatsapp text-success me-4 h1 position-fixed end-0"
-        style="z-index: 99; bottom: 20px"
+        style="z-index: 99; bottom: 50vh"
         icon="fa-brands fa-whatsapp"
         size="xl"
     /></a>

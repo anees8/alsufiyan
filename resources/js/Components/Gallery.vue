@@ -1,19 +1,48 @@
 <template>
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-12 col-md-3 p-1" v-for="image in images" :key="image.id">
-        <div class="thumbnail p-1">
-          <div class="img-container">
-            <img
-              :src="image.src"
-              alt=""
-              class="d-block rounded gallery_img shadow-lg border border-1 border-dark w-100 hover-shadow"
-              style="height: 350px"
-            />
+  <div>
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md-3 p-1" v-for="(image, index) in images" :key="image.id">
+          <div class="thumbnail p-1">
+            <div class="img-container">
+              <img
+                :src="image.src"
+                alt=""
+                @click="show(index)"
+                class="img-fluid d-block rounded gallery_img shadow-lg w-100 hover-shadow"
+                style="height: 21rem"
+              />
+            </div>
           </div>
         </div>
       </div>
+      <div>
+        <vue-easy-lightbox
+          :visible="visible"
+          :imgs="images"
+          :index="currentindex"
+          @hide="handleHide"
+        ></vue-easy-lightbox>
+      </div>
+
+      <div class="d-flex justify-content-end my-4">
+        <div class="me-4">
+          <b-form-select v-model="perPage" :options="options" size="md"></b-form-select>
+        </div>
+        <div>
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            first-text="First"
+            prev-text="Prev"
+            next-text="Next"
+            last-text="Last"
+          ></b-pagination>
+        </div>
+      </div>
     </div>
+    <!-- all props & events -->
   </div>
 </template>
 
@@ -37,17 +66,35 @@ export default {
         {
           id: 13,
           src:
-            " https://images.unsplash.com/photo-1675317047656-eb9ebd0eacc6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80",
+            "https://images.unsplash.com/photo-1675317047656-eb9ebd0eacc6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80",
         },
       ],
+      perPage: 10,
+      currentPage: 1,
+      options: [
+        { value: 5, text: "5" },
+        { value: 10, text: "10" },
+        { value: 50, text: "50" },
+        { value: 100, text: "100" },
+        { value: null, text: "All" },
+      ],
+      visible: false,
+      currentindex: null,
     };
+  },
+  methods: {
+    show(index) {
+      this.currentindex = index;
+      this.visible = true;
+    },
+    handleHide() {
+      this.visible = false;
+    },
+  },
+  computed: {
+    rows() {
+      return this.images.length;
+    },
   },
 };
 </script>
-<style>
-.gallery_img:hover {
-  transform: scale(
-    1.03
-  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-}
-</style>

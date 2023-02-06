@@ -5,7 +5,7 @@ import NotFound from "@/Components/NotFound.vue";
 import Contact from "@/Components/Contact.vue";
 import Login from "@/Components/Login.vue";
 import Gallery from "@/Components/Gallery.vue";
-
+import Posts from "@/Components/Posts.vue";
 
     
 const routes = [
@@ -33,6 +33,14 @@ requireAuth:false
     requireAuth:false
     }
     },
+    {
+        path: "/posts",
+        name: "posts",
+        component: Posts,
+        meta:{
+        requireAuth:false
+        }
+        },
 {
 path: "/contact",
 name: "contact",
