@@ -5,9 +5,10 @@ import NotFound from "@/Components/NotFound.vue";
 import Contact from "@/Components/Contact.vue";
 import Login from "@/Components/Login.vue";
 import Gallery from "@/Components/Gallery.vue";
-import Posts from "@/Components/Posts.vue";
+import blog from "@/Components/Blog.vue";
+import PostDetail from "@/Components/BlogComponents/PostDetail.vue";
 
-    
+
 const routes = [
 {
 path: "/",
@@ -26,21 +27,33 @@ requireAuth:false
 }
 },
 {
-    path: "/postimages",
-    name: "gallery",
-    component: Gallery,
-    meta:{
-    requireAuth:false
-    }
-    },
-    {
-        path: "/posts",
-        name: "posts",
-        component: Posts,
-        meta:{
-        requireAuth:false
-        }
-        },
+path: "/postimages",
+name: "gallery",
+component: Gallery,
+meta:{
+requireAuth:false
+}
+},
+{
+path: "/blog",
+name: "blog",
+component: blog,
+meta:{
+requireAuth:false
+}
+},
+
+{
+path: "/post/:id",
+name: "PostDetail",
+component: PostDetail,
+props: true,
+meta:{
+requireAuth:false
+}
+},
+
+
 {
 path: "/contact",
 name: "contact",
@@ -51,13 +64,13 @@ requireAuth:false
 },
 
 {
-    path: "/login",
-    name: "login",
-    component: Login,
-    meta:{
-    requireAuth:false
-    }
-    },
+path: "/login",
+name: "login",
+component: Login,
+meta:{
+requireAuth:false
+}
+},
 {
 path: "/:catchAll(.*)",
 name: "NotFound",

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="router_view_min">
     <div class="container py-5">
       <div class="row">
         <div class="col-12 col-md-3 p-1" v-for="(image, index) in images" :key="image.id">
@@ -27,7 +27,12 @@
 
       <div class="d-flex justify-content-end my-4">
         <div class="me-4">
-          <b-form-select v-model="perPage" :options="options" size="md"></b-form-select>
+          <b-form-select
+            v-model="perPage"
+            :options="options"
+            size="md"
+            varient="dark"
+          ></b-form-select>
         </div>
         <div>
           <b-pagination

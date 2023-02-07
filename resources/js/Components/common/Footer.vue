@@ -9,14 +9,9 @@
         <!-- Grid column -->
         <div class="col-md-6 col-lg-4 col-xl-4 mx-auto mb-4">
           <!-- Content -->
-          <h5 class="text-uppercase logo_text mb-4">
-            <img
-              class="ms-5"
-              :src="'/logo/logo3.png'"
-              alt=""
-              width="50"
-              height="40"
-            />AL-SUFIYAN
+          <h5 class="text-uppercase mb-4">
+            <img class="ms-5" :src="'/logo/logo.png'" alt="" width="50" height="50" />
+            <img :src="'/logo/slogo2.png'" alt="" height="60" />
           </h5>
           <p>
             Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and

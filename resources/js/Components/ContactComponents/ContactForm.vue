@@ -3,10 +3,10 @@
     <div class="row py-5 my-5 no-gutters align-items-center">
       <div class="col-md-6">
         <div class="d-flex align-items-center justify-content-center">
-          <img class="w-50 contact-form-logo" :src="'/logo/logo3.png'" />
+          <img class="w-50 contact-form-logo" :src="'/logo/logo.png'" />
         </div>
         <div class="d-flex align-items-center justify-content-center">
-          <h3 class="logo_text">AL-SUFIYAN</h3>
+          <img :src="'/logo/slogo2.png'" alt="" height="100" />
         </div>
       </div>
       <div class="col-md-6">

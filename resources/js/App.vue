@@ -11,9 +11,9 @@
         size="xl"
     /></a>
   </div>
-  <div class="router_view_min">
-    <RouterView />
-  </div>
+
+  <RouterView />
+
   <div v-if="!['NotFound', 'login'].includes($route.name)">
     <Footer />
   </div>
@@ -35,13 +35,20 @@ import Footer from "@/Components/common/Footer.vue";
 
 .router_view_min {
   max-width: 100%;
-  min-height: calc(100vh - 367px); /* adjust the height based on the navbar height*/
+  margin-top: 55px;
+  min-height: calc(100vh - 367px);
+  /* adjust the height based on the navbar height*/
 }
 * {
   font-family: "Poppins", cursive;
 }
 .logo_text {
-  font-family: "hexoct";
+  font-family: "slipstream";
+}
+
+@font-face {
+  font-family: "slipstream";
+  src: url("/fontstyle/slipstream/slipstream.ttf") format("truetype");
 }
 @font-face {
   font-family: "hexoct";
