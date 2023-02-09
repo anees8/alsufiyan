@@ -1,35 +1,40 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "@/Components/Home.vue";
-import About from "@/Components/About.vue";
-import NotFound from "@/Components/NotFound.vue";
-import Contact from "@/Components/Contact.vue";
-import Login from "@/Components/Login.vue";
-import Gallery from "@/Components/Gallery.vue";
-import blog from "@/Components/Blog.vue";
-import PostDetail from "@/Components/BlogComponents/PostDetail.vue";
 
+// webpage Pannel
+import Home from "@/Components/web/Home.vue";
+import AboutPage from "@/Components/web/AboutPage.vue";
+import NotFound from "@/Components/web/NotFound.vue";
+import Contact from "@/Components/web/Contact.vue";
+import Gallery from "@/Components/web/Gallery.vue";
+import blog from "@/Components/web/Blog.vue";
+import PostDetail from "@/Components/web/BlogComponents/PostDetail.vue";
+
+
+// Admin Pannel
+
+import Login from "@/Components/dashboard/Login.vue";
 
 const routes = [
 {
 path: "/",
 name: "Home",
-component: Home,
+component:Home,
 meta:{
 requireAuth:false
 }
 },
 {
-path: "/about",
+path: "/about_us",
 name: "About",
-component: About,
+component:AboutPage,
 meta:{
 requireAuth:false
 }
 },
 {
-path: "/postimages",
+path: "/images",
 name: "gallery",
-component: Gallery,
+component:Gallery,
 meta:{
 requireAuth:false
 }
@@ -53,6 +58,7 @@ requireAuth:false
 }
 },
 
+    
 
 {
 path: "/contact",
@@ -78,12 +84,8 @@ component: NotFound,
 },
 ];
 
-
-const router = createRouter({
-history: createWebHistory(),
-routes,
+export default createRouter({
+    history: createWebHistory(),
+    routes
 });
 
-
-
-export default router;
