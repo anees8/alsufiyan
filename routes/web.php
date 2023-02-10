@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('unauthorized', function () {
+    return response()->json(['message'=>'Unauthorized.'], 401);
+})->name('unauthorized');
+
 Route::get('/{any}', function () { 
     return view('App'); 
 })->where('any','.*'); 
+
