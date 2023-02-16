@@ -9,22 +9,53 @@
           <img :src="'/logo/slogo2.png'" alt="" height="100" />
         </div>
       </div>
+
       <div class="col-md-6">
-        <b-form @submit.prevent="submitForm">
+        <span v-if="errors.error" class="text-danger">{{ errors.error }}</span>
+        <b-form @submit.prevent="contact">
           <b-form-group label="Name" label-for="name">
-            <b-form-input id="name" class="rounded" v-model="name" type="text" required />
+            <b-form-input
+              id="name"
+              v-model="contactForm.name"
+              :class="errors.name ? 'is-invalid' : ''"
+              type="text"
+            />
+            <span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
           </b-form-group>
           <b-form-group label="Email" label-for="email">
-            <b-form-input id="email" v-model="email" type="email" required />
+            <b-form-input
+              id="email"
+              v-model="contactForm.email"
+              :class="errors.email ? 'is-invalid' : ''"
+              type="email"
+            />
+            <span v-if="errors.email" class="text-danger">{{ errors.email[0] }}</span>
           </b-form-group>
           <b-form-group label="phone" label-for="phone">
-            <b-form-input id="phone" v-model="phone" type="number" required />
+            <b-form-input
+              id="phone"
+              v-model="contactForm.phone"
+              :class="errors.phone ? 'is-invalid' : ''"
+              type="number"
+            />
+            <span v-if="errors.phone" class="text-danger">{{ errors.phone[0] }}</span>
           </b-form-group>
           <b-form-group label="Subject" label-for="subject">
-            <b-form-input id="subject" v-model="subject" type="text" />
+            <b-form-input
+              id="subject"
+              v-model="contactForm.subject"
+              :class="errors.subject ? 'is-invalid' : ''"
+              type="text"
+            />
+            <span v-if="errors.subject" class="text-danger">{{ errors.subject[0] }}</span>
           </b-form-group>
           <b-form-group label="Message" label-for="message">
-            <b-form-textarea id="message" v-model="message" required />
+            <b-form-textarea
+              id="message"
+              v-model="contactForm.message"
+              :class="errors.message ? 'is-invalid' : ''"
+            />
+            <span v-if="errors.message" class="text-danger">{{ errors.message[0] }}</span>
           </b-form-group>
           <div class="col-12">
             <b-button
@@ -85,4 +116,9 @@
     </div>
   </div>
 </template>
-<script></script>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useContactStore } from "../../../stores/web/contactStore.js";
+const { contactForm, message, errors } = storeToRefs(useContactStore());
+const { contact } = useContactStore();
+</script>

@@ -1,18 +1,23 @@
 import { createWebHistory, createRouter } from "vue-router";
-
-// webpage Pannel
-import Home from "@/Components/web/Home.vue";
-import AboutPage from "@/Components/web/AboutPage.vue";
-import NotFound from "@/Components/web/NotFound.vue";
-import Contact from "@/Components/web/Contact.vue";
-import Gallery from "@/Components/web/Gallery.vue";
-import blog from "@/Components/web/Blog.vue";
-import PostDetail from "@/Components/web/BlogComponents/PostDetail.vue";
+import { useLoginStore } from "@/stores/admin/loginStore.js";
 
 
-// Admin Pannel
+// webpage
+import Home from "./Components/web/Home.vue";
+import AboutPage from "./Components/web/AboutPage.vue";
+import NotFound from "./Components/web/NotFound.vue";
+import Contact from "./Components/web/Contact.vue";
+import Gallery from "./Components/web/Gallery.vue";
+import blog from "./Components/web/Blog.vue";
+import PostDetail from "./Components/web/BlogComponents/PostDetail.vue";
 
-import Login from "@/Components/dashboard/Login.vue";
+
+// Dashboard
+import Login from "./Components/admin/Login.vue";
+import Logout from "./Components/admin/Logout.vue";
+import Dashboard from "./Components/admin/Dashboard.vue";
+import AdminAbout from "./Components/admin/AdminAbout.vue";
+import AdminHome from "./Components/admin/AdminHome.vue";
 
 const routes = [
 {
@@ -57,9 +62,6 @@ meta:{
 requireAuth:false
 }
 },
-
-    
-
 {
 path: "/contact",
 name: "contact",
@@ -68,24 +70,82 @@ meta:{
 requireAuth:false
 }
 },
-
+{
+path: "/:catchAll(.*)",
+name: "NotFound",
+component: NotFound,
+meta:{
+requireAuth:false
+}
+},
+// Admin Router Link
 {
 path: "/login",
-name: "login",
-component: Login,
+name: "Login",
+component:Login,
 meta:{
 requireAuth:false
 }
 },
 {
-path: "/:catchAll(.*)",
-name: "NotFound",
-component: NotFound,
+path: "/dashboard",
+name: "Dashboard",
+component: Dashboard,
+meta:{
+requireAuth:true
+}
 },
+{
+path: "/logout",
+name: "Logout",
+component: Logout,
+meta:{
+requireAuth:true
+}
+},
+{
+path: "/admin_about",
+name: "AdminAbout",
+component: AdminAbout,
+meta:{
+requireAuth:true
+}
+},
+{
+path: "/admin_home",
+name: "AdminHome",
+component: AdminHome,
+meta:{
+requireAuth:true
+}
+},
+
+
+
 ];
 
-export default createRouter({
-    history: createWebHistory(),
-    routes
+const router=createRouter({
+history: createWebHistory(),
+routes
 });
+
+router.beforeEach((to, from, next) => {
+const { getAccessToken } = useLoginStore();
+if(to.meta.requireAuth  && getAccessToken === null){
+next({ name: 'Login' });
+}
+if (to.name === 'Login' && !to.meta.requireAuth && getAccessToken !== null){ 
+next({ name: 'Dashboard' });
+}
+
+
+next();
+})
+
+
+
+export default router;
+
+
+
 

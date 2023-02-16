@@ -1,5 +1,3 @@
-import { RouterLink } from 'vue-router';
-
 <template>
   <nav
     class="navbar navbar-expand-lg fixed-top navbar-light bg-white justify-content-between p-0 border"
@@ -76,7 +74,7 @@ import { RouterLink } from 'vue-router';
               class="nav-link px-3 py-3 text-dark"
               exact
               active-class="active  border-bottom border-1  shadow-sm border-dark bg-light"
-              :to="{ name: 'login' }"
+              :to="{ name: 'Login' }"
               >Login<font-awesome-icon class="ms-2" icon="arrow-right"
             /></RouterLink>
           </li>

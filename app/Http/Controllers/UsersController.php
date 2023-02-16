@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Response;
+
 use Validator;
 
 
@@ -16,21 +18,26 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
-
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+   
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
         if (!Auth::attempt($request->only('email', 'password'))) {
-        return response()->json([
-        'message' => 'Invalid login details'
-        ], 400);
+            return $this->sendError('Invalid Credential.',['error'=>'Invalid Credential'], Response::HTTP_BAD_REQUEST);          
         }
         $data['user'] = User::where('email', $request['email'])->firstOrFail();
 
-        $data['token'] = $data['user']->createToken('Token Name')->accessToken;
+        $data['token'] = $data['user']->createToken('Alsufiyan')->accessToken;
 
-
-    
+       
+        
         $data['token_type'] ='Bearer';
-        return response()->json(['status'=> true,'message'=>'Login Successfully ','data'=>$data], 200);    
-
+    
+        return $this->sendResponse($data, 'Login Successfully.',Response::HTTP_OK);
         }
     
 
@@ -50,17 +57,32 @@ class UsersController extends Controller
         ]);
    
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(), 400);       
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
    
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        $success['token'] =  $user->createToken('Alsufiyan')->accessToken;
         $success['name'] =  $user->name;
    
-        return $this->sendResponse($success, 'User register successfully.',201);
+        return $this->sendResponse($success, 'User register successfully.',Response::HTTP_CREATED);
     }
+
+
+    public function logout(Request $request){
+
+
+        
+        $request->user()->token()->revoke();
+        // Auth::user()->tokens->each(function($token, $key) {
+        //     $token->delete();
+        // });
+
+        return $this->sendResponse('User Successfully logged out.',Response::HTTP_OK);
+       
+
+        }
 
     /**
      * Store a newly created resource in storage.

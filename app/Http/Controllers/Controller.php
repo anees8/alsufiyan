@@ -12,8 +12,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
-//  200 - success/OK
-// 201 - CREATED - used in POST or PUT methods.
+//  200 - HTTP_OK- success/OK 
+// 201 - HTTP_CREATED-  CREATED - used in POST or PUT methods.
 // 304 - NOT MODIFIED - used in conditional GET requests to reduce the bandwidth use of the network. Here, the body of the response sent should be empty.
 // 400 - BAD REQUEST - This can be due to validation errors or missing input data.
 // 401- UNAUTHORIZED - This is returned when there is no valid authentication credentials sent along with the request.
@@ -35,6 +35,8 @@ class Controller extends BaseController
 
     public function sendError($error, $errorMessages = [], $code = 404)
     {
+
+        
     	$response = [
             'success' => false,
             'message' => $error,

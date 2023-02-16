@@ -1,8 +1,18 @@
 <template>
-  <div v-if="!['NotFound', 'login'].includes($route.name)">
+  <div
+    v-if="
+      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact'].includes($route.name)
+    "
+  >
     <Navbar />
   </div>
-  <div class="mh-100" v-if="!['NotFound', 'login'].includes($route.name)">
+
+  <div
+    class="mh-100"
+    v-if="
+      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact'].includes($route.name)
+    "
+  >
     <a class="nav-link" href="https://wa.me/9876543210?text=[Hi]" target="_blank"
       ><font-awesome-icon
         class="whatsapp text-success me-4 h1 position-fixed end-0"
@@ -14,13 +24,17 @@
 
   <RouterView />
 
-  <div v-if="!['NotFound', 'login'].includes($route.name)">
+  <div
+    v-if="
+      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact'].includes($route.name)
+    "
+  >
     <Footer />
   </div>
 </template>
 <script setup>
-import Navbar from "@/Components/web/common/Navbar.vue";
-import Footer from "@/Components/web/common/Footer.vue";
+import Navbar from "@/Components/common/Navbar.vue";
+import Footer from "@/Components/common/Footer.vue";
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rowdies:wght@300;400;700&display=swap");
@@ -39,6 +53,7 @@ import Footer from "@/Components/web/common/Footer.vue";
   min-height: calc(100vh - 367px);
   /* adjust the height based on the navbar height*/
 }
+
 * {
   font-family: "Poppins", cursive;
 }

@@ -1,6 +1,6 @@
 <template>
-  <b-container class="my-5">
-    <carousel :items-to-show="itemsToShow">
+  <b-container fluid class="my-5">
+    <carousel :autoplay="3000" :wrap-around="true" :breakpoints="breakpoints">
       <slide v-for="(pack, index) in packages" :key="pack.id">
         <div class="card m-2 h-100">
           <img :src="pack.src" class="card-img-top" style="height: 15rem" alt="..." />
@@ -93,7 +93,27 @@ export default {
           desc: "We will arrange corporate tours for your employees.",
         },
       ],
-      itemsToShow: 4,
+
+      breakpoints: {
+        // 700px and up
+        480: {
+          itemsToShow: 1,
+          snapAlign: "start",
+        },
+        // 1024 and up
+        768: {
+          itemsToShow: 2,
+          snapAlign: "start",
+        },
+        1024: {
+          itemsToShow: 3,
+          snapAlign: "start",
+        },
+        1400: {
+          itemsToShow: 4,
+          snapAlign: "start",
+        },
+      },
     };
   },
   components: {
@@ -101,23 +121,6 @@ export default {
     Slide,
     Pagination,
     Navigation,
-  },
-  mounted() {
-    window.addEventListener("resize", this.onResize);
-    this.onResize();
-  },
-  methods: {
-    onResize() {
-      if (window.innerWidth < 768) {
-        this.itemsToShow = 1;
-      } else if (window.innerWidth < 992) {
-        this.itemsToShow = 2;
-      } else if (window.innerWidth < 1200) {
-        this.itemsToShow = 3;
-      } else {
-        this.itemsToShow = 4;
-      }
-    },
   },
 };
 </script>
