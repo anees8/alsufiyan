@@ -11,12 +11,12 @@ import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
+// import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
 
-
-import BootstrapVue3 from "bootstrap-vue-3";
+import BootstrapVueNext from "bootstrap-vue-next";
 import VueEasyLightbox from 'vue-easy-lightbox';
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
+import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 
 
 import { library} from "@fortawesome/fontawesome-svg-core";
@@ -33,18 +33,21 @@ library.add(faArrowRight,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,
 
 axios.defaults.baseURL = '/api/';
 
+ 
+
 const pinia = createPinia()
 
 const app=createApp(App);
 app.use(VueAxios, axios);
-app.use(BootstrapVue3);
+app.use(BootstrapVueNext);
 app.use(VueEasyLightbox);
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.component('font-awesome-layers', FontAwesomeLayers)
 app.component('font-awesome-layer-text', FontAwesomeLayersText)
 app.use(pinia);
-app.use(router);
 
+app.use(router);
+// app.use(VueReCaptcha, { siteKey: '6LenSowkAAAAADTvKcDRW33ZtVkpr-I2vLVlbP3B' });
 app.mount("#app");  
 
     

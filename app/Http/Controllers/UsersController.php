@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
-
 use Validator;
 
 
@@ -72,13 +71,9 @@ class UsersController extends Controller
 
     public function logout(Request $request){
 
-
         
         $request->user()->token()->revoke();
-        // Auth::user()->tokens->each(function($token, $key) {
-        //     $token->delete();
-        // });
-
+    
         return $this->sendResponse('User Successfully logged out.',Response::HTTP_OK);
        
 

@@ -11,7 +11,11 @@
       </div>
 
       <div class="col-md-6">
-        <span v-if="errors.error" class="text-danger">{{ errors.error }}</span>
+        <div>
+          <span v-if="message" class="text-success">{{ message }}</span>
+
+          <span v-if="errors.error" class="text-danger">{{ errors.error }}</span>
+        </div>
         <b-form @submit.prevent="contact">
           <b-form-group label="Name" label-for="name">
             <b-form-input
@@ -117,8 +121,13 @@
   </div>
 </template>
 <script setup>
+import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useContactStore } from "../../../stores/web/contactStore.js";
-const { contactForm, message, errors } = storeToRefs(useContactStore());
-const { contact } = useContactStore();
+const { contactForm, errors, message } = storeToRefs(useContactStore());
+const { contact, resetForm } = useContactStore();
+
+onMounted(() => {
+  resetForm();
+});
 </script>
