@@ -23,6 +23,7 @@
               v-model="contactForm.name"
               :class="errors.name ? 'is-invalid' : ''"
               type="text"
+              :disabled="loading ? '' : disabled"
             />
             <span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
           </b-form-group>
@@ -32,6 +33,7 @@
               v-model="contactForm.email"
               :class="errors.email ? 'is-invalid' : ''"
               type="email"
+              :disabled="loading ? '' : disabled"
             />
             <span v-if="errors.email" class="text-danger">{{ errors.email[0] }}</span>
           </b-form-group>
@@ -41,16 +43,18 @@
               v-model="contactForm.phone"
               :class="errors.phone ? 'is-invalid' : ''"
               type="number"
+              :disabled="loading ? '' : disabled"
             />
             <span v-if="errors.phone" class="text-danger">{{ errors.phone[0] }}</span>
           </b-form-group>
           <b-form-group label="Subject" label-for="subject">
-            <b-form-input
+            <b-form-select
               id="subject"
               v-model="contactForm.subject"
+              :options="options"
               :class="errors.subject ? 'is-invalid' : ''"
-              type="text"
-            />
+              :disabled="loading ? '' : disabled"
+            ></b-form-select>
             <span v-if="errors.subject" class="text-danger">{{ errors.subject[0] }}</span>
           </b-form-group>
           <b-form-group label="Message" label-for="message">
@@ -58,6 +62,7 @@
               id="message"
               v-model="contactForm.message"
               :class="errors.message ? 'is-invalid' : ''"
+              :disabled="loading ? '' : disabled"
             />
             <span v-if="errors.message" class="text-danger">{{ errors.message[0] }}</span>
           </b-form-group>
@@ -66,10 +71,17 @@
               size="md"
               type="submit"
               variant="outline-dark"
+              :class="loading ? 'disabled' : ''"
               class="px-4 fw-bold d-flex m-auto"
               pill
             >
-              <font-awesome-icon class="me-1" icon="paper-plane" /> Send
+              <font-awesome-icon
+                v-if="!loading"
+                class="me-1"
+                icon="paper-plane"
+              /><b-spinner class="me-1" v-if="loading" small variant="dark"></b-spinner>
+              <span v-if="loading">Sending...</span>
+              <span v-if="!loading">Send</span>
             </b-button>
           </div>
         </b-form>
@@ -124,7 +136,7 @@
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useContactStore } from "../../../stores/web/contactStore.js";
-const { contactForm, errors, message } = storeToRefs(useContactStore());
+const { contactForm, options, errors, message, loading } = storeToRefs(useContactStore());
 const { contact, resetForm } = useContactStore();
 
 onMounted(() => {

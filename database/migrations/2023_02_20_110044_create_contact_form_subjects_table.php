@@ -13,16 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->bigInteger('phone');
-            $table->integer('subject_id')->index('contacts_subject_id');
-            $table->text('message');
+        Schema::create('contact_form_subjects', function (Blueprint $table) {
+            $table->integer('subject_id')->unique(); 
+            $table->string('subject');
             $table->timestamps();
         });
+
+
+      
+
+
+
+        
     }
 
     /**
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('contact_form_subjects');
     }
 };

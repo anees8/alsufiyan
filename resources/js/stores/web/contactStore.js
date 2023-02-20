@@ -6,12 +6,26 @@ import router from '../../router';
 export const useContactStore = defineStore('contactStore',{
   state: () => ({
     contactForm:{
-    name:'',
-    email:'',
-    phone:'',
-    subject:'',
-    message:'',
-  },    
+    name:null,
+    email:null,
+    phone:null,
+    subject:null,
+    message:null,
+  }, 
+  options: [
+    { value: null, text: 'Please select an option' },
+    { value: '1', text: 'Hajj and Umrah package inquiry' },
+    { value: '2', text: 'Request for Hajj and Umrah travel information' },
+    { value: '3', text: 'Hajj and Umrah booking or reservation' },
+    { value: '4', text: 'Feedback on previous Hajj or Umrah trip' },
+    { value: '5', text: 'Questions about Hajj or Umrah requirements' },
+    { value: '6', text: 'Hajj or Umrah group booking inquiry' },
+    { value: '7', text: 'Hajj or Umrah visa application inquiry' },
+    { value: '8', text: 'Complaint or dispute related to Hajj or Umrah services' },
+    { value: '9', text: 'Others'},
+
+    
+  ],
   errors:{},
   message:'',
   loading : false, 
@@ -23,26 +37,28 @@ export const useContactStore = defineStore('contactStore',{
 
       try {
             const response = await  axios.post('contactForm',this.contactForm );
-
-            this.showMessage(response.data.message); 
+              this.showMessage(response.data.message); 
         
       } catch (error) {
-          if(error.response){
-        this.errors=error.response.data.errors;
+      
+      if(error.response){
+      this.errors=error.response.data.errors;
       }
-       
+      this.loading = false;
+
       }         
     },
         showMessage:function(message){
         this.message = message;
         this.errors={};
         this.contactForm={
-        name:'',
-        email:'',
-        phone:'',
-        subject:'',
-        message:'',
+          name:null,
+          email:null,
+          phone:null,
+          subject:null,
+          message:null,
         };
+        this.loading = false;
         setTimeout(() => {
         this.message = null;
         }, 5000);
@@ -52,11 +68,11 @@ export const useContactStore = defineStore('contactStore',{
       this.errors={};
       this.message='';
       this.contactForm={
-      name:'',
-      email:'',
-      phone:'',
-      subject:'',
-      message:'',
+        name:null,
+    email:null,
+    phone:null,
+    subject:null,
+    message:null,
       };
 
       },

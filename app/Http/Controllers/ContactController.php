@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormEmail;
+use App\Mail\ContactReceiptFormEmail;
+
 use Validator;
 
 class ContactController extends Controller
@@ -46,7 +48,7 @@ class ContactController extends Controller
             'name' => 'required',
             'email' => 'required|email:rfc,dns',
             'phone' => 'required|digits:10',
-            'subject'=> 'max:255',
+            'subject'=> 'required|max:255',
             'message' => 'required',
             
            
@@ -57,7 +59,21 @@ class ContactController extends Controller
         }
         $request_all = $request->all();
         Contact::create($request_all);
-        Mail::to('your-email@example.com')->send(new ContactFormEmail($request->name, $request->email, $request->phone, $request->subject, $request->message));
+
+        $email="meeranjianees1@gmail.com";
+
+        $ContactForm=[
+           'name' =>   $request->name, 
+            'email' =>  $request->email, 
+            'phone' =>  $request->phone, 
+            'subject' =>  $request->subject,
+            'message' =>  $request->message,
+            'company' =>  config('app.name'),
+        ];
+
+
+        Mail::to($email)->send(new ContactFormEmail($ContactForm));
+        Mail::to($ContactForm['email'])->send(new ContactReceiptFormEmail($ContactForm));
 
 
         return $this->sendResponse([],'Thanks for contacting with Us.',Response::HTTP_CREATED);
