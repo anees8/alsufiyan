@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactFormSubject;
-use Illuminate\Http\Request;
+use App\Models\ContactSubject;
 
-class ContactFormSubjectController extends Controller
+use App\Models\Contact;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+
+class ContactSubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,8 @@ class ContactFormSubjectController extends Controller
      */
     public function index()
     {
-        $data['subject'] =ContactFormSubject::all();
+
+          $data['subject']=ContactSubject::select('id as value', 'subject as text')->get();
 
         return $this->sendResponse($data, 'Subject return successfully.',Response::HTTP_OK);
     }
@@ -43,10 +48,10 @@ class ContactFormSubjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ContactFormSubject  $contactFormSubject
+     * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function show(ContactFormSubject $contactFormSubject)
+    public function show(ContactSubject $ContactSubject)
     {
         //
     }
@@ -54,10 +59,10 @@ class ContactFormSubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ContactFormSubject  $contactFormSubject
+     * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function edit(ContactFormSubject $contactFormSubject)
+    public function edit(ContactSubject $ContactSubject)
     {
         //
     }
@@ -66,10 +71,10 @@ class ContactFormSubjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ContactFormSubject  $contactFormSubject
+     * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactFormSubject $contactFormSubject)
+    public function update(Request $request, ContactSubject $ContactSubject)
     {
         //
     }
@@ -77,10 +82,10 @@ class ContactFormSubjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ContactFormSubject  $contactFormSubject
+     * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactFormSubject $contactFormSubject)
+    public function destroy(ContactSubject $ContactSubject)
     {
         //
     }

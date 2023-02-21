@@ -11,7 +11,7 @@ export const useLoginStore = defineStore('loginStore',{
    
   }, 
     loading:false,  
-   
+
     accessToken: localStorage.getItem('token') || null,
     errors:{},
     
@@ -33,12 +33,14 @@ export const useLoginStore = defineStore('loginStore',{
           this.setToken(response.data.data.token); 
           if (response.data.data.token) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.data.token;
+            
         }
    
       } catch (error) {
           if(error.response){
         this.errors=error.response.data.errors;
       }
+      this.loading = false;
        
         
       }
@@ -67,6 +69,7 @@ export const useLoginStore = defineStore('loginStore',{
     this.errors={};
     this.user.email=null;
     this.user.password=null;
+    this.loading = false;
     router.push({ name: "Dashboard" });
     },
     removeToken:function(){
@@ -79,6 +82,7 @@ export const useLoginStore = defineStore('loginStore',{
       this.errors={};
       this.user.email=null;
       this.user.password=null;
+      this.loading = false;
       },
 
     

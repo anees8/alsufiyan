@@ -4,8 +4,8 @@
   >
     <div class="container-fluid text-center">
       <a class="navbar-brand" href="#">
-        <img class="mx-1" :src="'/logo/logo.png'" alt="" width="50" height="50" />
-        <img :src="'/logo/slogo2.png'" alt="" height="50" />
+        <img class="mx-1" :src="logo" alt="" width="50" height="50" />
+        <img :src="slogo" alt="" height="50" />
       </a>
 
       <button
@@ -88,3 +88,8 @@
   font-weight: 500;
 }
 </style>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useSettingStore } from "../../stores/web/settingStore.js";
+const { logo, slogo } = storeToRefs(useSettingStore());
+</script>

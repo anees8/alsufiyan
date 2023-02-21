@@ -3,10 +3,10 @@
     <div class="row py-5 my-5 no-gutters align-items-center">
       <div class="col-md-6">
         <div class="d-flex align-items-center justify-content-center">
-          <img class="w-50 contact-form-logo" :src="'/logo/logo.png'" />
+          <img class="w-50 contact-form-logo" :src="logo" />
         </div>
         <div class="d-flex align-items-center justify-content-center">
-          <img :src="'/logo/slogo2.png'" alt="" height="100" />
+          <img :src="slogo" alt="" height="100" />
         </div>
       </div>
 
@@ -23,7 +23,7 @@
               v-model="contactForm.name"
               :class="errors.name ? 'is-invalid' : ''"
               type="text"
-              :disabled="loading ? '' : disabled"
+              :disabled="!loading ? false : true"
             />
             <span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
           </b-form-group>
@@ -33,7 +33,7 @@
               v-model="contactForm.email"
               :class="errors.email ? 'is-invalid' : ''"
               type="email"
-              :disabled="loading ? '' : disabled"
+              :disabled="!loading ? false : true"
             />
             <span v-if="errors.email" class="text-danger">{{ errors.email[0] }}</span>
           </b-form-group>
@@ -43,26 +43,28 @@
               v-model="contactForm.phone"
               :class="errors.phone ? 'is-invalid' : ''"
               type="number"
-              :disabled="loading ? '' : disabled"
+              :disabled="!loading ? false : true"
             />
             <span v-if="errors.phone" class="text-danger">{{ errors.phone[0] }}</span>
           </b-form-group>
-          <b-form-group label="Subject" label-for="subject">
+          <b-form-group label="Subject" label-for="Subject">
             <b-form-select
-              id="subject"
-              v-model="contactForm.subject"
+              id="subject_id"
+              v-model="contactForm.subject_id"
               :options="options"
-              :class="errors.subject ? 'is-invalid' : ''"
-              :disabled="loading ? '' : disabled"
+              :class="errors.subject_id ? 'is-invalid' : ''"
+              :disabled="!loading ? false : true"
             ></b-form-select>
-            <span v-if="errors.subject" class="text-danger">{{ errors.subject[0] }}</span>
+            <span v-if="errors.subject_id" class="text-danger">{{
+              errors.subject_id[0]
+            }}</span>
           </b-form-group>
           <b-form-group label="Message" label-for="message">
             <b-form-textarea
               id="message"
               v-model="contactForm.message"
               :class="errors.message ? 'is-invalid' : ''"
-              :disabled="loading ? '' : disabled"
+              :disabled="!loading ? false : true"
             />
             <span v-if="errors.message" class="text-danger">{{ errors.message[0] }}</span>
           </b-form-group>
@@ -71,7 +73,7 @@
               size="md"
               type="submit"
               variant="outline-dark"
-              :class="loading ? 'disabled' : ''"
+              :class="!loading ? false : true"
               class="px-4 fw-bold d-flex m-auto"
               pill
             >
@@ -135,11 +137,14 @@
 <script setup>
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
+import { useSettingStore } from "../../../stores/web/settingStore.js";
 import { useContactStore } from "../../../stores/web/contactStore.js";
 const { contactForm, options, errors, message, loading } = storeToRefs(useContactStore());
-const { contact, resetForm } = useContactStore();
+const { contact, resetForm, get_subject } = useContactStore();
+const { logo, slogo } = storeToRefs(useSettingStore());
 
 onMounted(() => {
   resetForm();
+  get_subject();
 });
 </script>

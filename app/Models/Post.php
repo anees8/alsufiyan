@@ -4,21 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Mail\ContactSubject;
 
-class Contact extends Model
+class Post extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'subject_id',
-        'message',
+        'title',
+        'content',
+        'attachment',
+        'user_id',
     ];
-    
     public $timestamps = true;
-
-   
 }

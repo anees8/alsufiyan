@@ -10,13 +10,11 @@
         <div class="col-md-6 col-lg-4 col-xl-4 mx-auto mb-4">
           <!-- Content -->
           <h5 class="text-uppercase mb-4">
-            <img class="ms-5" :src="'/logo/logo.png'" alt="" width="50" height="50" />
-            <img :src="'/logo/slogo2.png'" alt="" height="60" />
+            <img class="ms-5" :src="logo" alt="" width="50" height="50" />
+            <img :src="slogo" alt="" height="60" />
           </h5>
-          <p>
-            Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and
-            Umrah being optional. Service providers offer packages including
-            transportation, accommodation, food, etc.
+          <p v-if="FooterAbout">
+            {{ FooterAbout }}
           </p>
         </div>
 
@@ -53,25 +51,17 @@
 
           <p>
             <a
+              v-for="(social_icon, index) in social_icons"
               class="nav-link text-dark me-3 d-inline"
-              to="https://www.facebook.com/ColanInfotechTeam/"
+              :to="social_icon.url"
               target="_blank"
             >
               <font-awesome-icon
-                class="text-primary"
-                icon="fa-brands fa-facebook-f"
+                :icon="social_icon.icon"
+                :class="social_icon.iconclass"
                 size="xl"
               />
             </a>
-            <a
-              class="nav-link text-dark me-3 d-inline"
-              href="https://wa.me/9876543210?text=[Hi]"
-              target="_blank"
-              ><font-awesome-icon
-                class="text-success"
-                icon="fa-brands fa-whatsapp"
-                size="xl"
-            /></a>
           </p>
         </div>
         <!-- Grid column -->
@@ -102,3 +92,8 @@
   </footer>
   <!-- Footer -->
 </template>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useSettingStore } from "../../stores/web/settingStore.js";
+const { logo, slogo, FooterAbout, social_icons } = storeToRefs(useSettingStore());
+</script>

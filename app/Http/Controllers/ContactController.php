@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\ContactSubject;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -41,14 +42,12 @@ class ContactController extends Controller
      * @param  \App\Http\Requests\StoreContactRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
+    public function store(Request $request){           
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email:rfc,dns',
             'phone' => 'required|digits:10',
-            'subject'=> 'required|max:255',
+            'subject_id'=> 'required|max:255',
             'message' => 'required',
             
            
@@ -66,7 +65,8 @@ class ContactController extends Controller
            'name' =>   $request->name, 
             'email' =>  $request->email, 
             'phone' =>  $request->phone, 
-            'subject' =>  $request->subject,
+            'subject' => ContactSubject::find($request->subject_id)
+            ->subject,
             'message' =>  $request->message,
             'company' =>  config('app.name'),
         ];
@@ -76,7 +76,7 @@ class ContactController extends Controller
         Mail::to($ContactForm['email'])->send(new ContactReceiptFormEmail($ContactForm));
 
 
-        return $this->sendResponse([],'Thanks for contacting with Us.',Response::HTTP_CREATED);
+        return $this->sendResponse([],'Thanks for Contacting with Us.',Response::HTTP_CREATED);
     }
 
     /**

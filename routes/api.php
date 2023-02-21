@@ -4,6 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactSubjectController;
+use App\Http\Controllers\PostController;
+
+
+
 
 
 
@@ -33,8 +38,12 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/logout', [UsersController::class, 'logout']);
     
 });
-Route::post('/contactForm', [ContactController::class, 'store']);
 
+
+
+Route::post('/contactForm', [ContactController::class, 'store']);
+Route::get('/contactSubject', [ContactSubjectController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index']);
     
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
