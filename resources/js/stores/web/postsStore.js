@@ -6,6 +6,7 @@ import axios from 'axios';
 export const usePostsStore = defineStore('postsStore',{
     state: () => ({
         posts:[],
+          post: {},
         perPage:10,
         currentPage: 1,
         loading:false,  
@@ -21,7 +22,6 @@ export const usePostsStore = defineStore('postsStore',{
 
     getters: {
       getperPage: (state) => state.perPage,
-    
     },
 
     actions: {
@@ -32,7 +32,6 @@ export const usePostsStore = defineStore('postsStore',{
           try {
 
           const response = await  axios.get('posts/?page='+this.currentPage+'&perPage='+this.getperPage);
-         
           this.posts=response.data.data.posts.data;
           this.currentPage=response.data.data.posts.current_page;
           this.rows=response.data.data.posts.total;
@@ -48,6 +47,18 @@ export const usePostsStore = defineStore('postsStore',{
 
           }         
 
+          },
+          async getPost(id) {
+          
+          try {
+            const response = await  axios.get('posts/' + id);
+          this.post=response.data.data.post;
+          } catch (error) {
+          if (error.response) {
+            this.errors = error.response.data.errors;
+          }
+          $router.go(-1);
+          }
           },
       
 

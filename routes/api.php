@@ -43,7 +43,8 @@ Route::middleware('auth:api')->group(function () {
 
 Route::post('/contactForm', [ContactController::class, 'store']);
 Route::get('/contactSubject', [ContactSubjectController::class, 'index']);
-Route::get('/posts', [PostController::class, 'index']);
+Route::resource('posts', PostController::class);
+
     
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

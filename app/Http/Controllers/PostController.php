@@ -49,7 +49,8 @@ public function index(Request $request)
      */
     public function show(Post $post)
     {
-        //
+        $data['post']=$post;
+     return $this->sendResponse($data, 'Posts return successfully.',Response::HTTP_OK);
     }
 
     /**

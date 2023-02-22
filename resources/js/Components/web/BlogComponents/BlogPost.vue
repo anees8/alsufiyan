@@ -48,15 +48,11 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { usePostsStore } from "../../../stores/web/postsStore.js";
-const { posts, options, perPage, currentPage, rows } = storeToRefs(usePostsStore());
-const { getPosts } = usePostsStore();
-
-onMounted(() => {
-  getPosts();
-});
+const { posts, options, perPage, currentPage, rows, loading } = storeToRefs(
+  usePostsStore()
+);
 </script>
 
 <style>
