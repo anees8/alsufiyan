@@ -1,7 +1,9 @@
 <template>
   <div
     v-if="
-      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact'].includes($route.name)
+      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
+        $route.name
+      )
     "
   >
     <Navbar />
@@ -10,7 +12,9 @@
   <div
     class="mh-100"
     v-if="
-      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact'].includes($route.name)
+      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
+        $route.name
+      )
     "
   >
     <a class="nav-link" href="https://wa.me/9876543210?text=[Hi]" target="_blank"
@@ -26,7 +30,9 @@
 
   <div
     v-if="
-      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact'].includes($route.name)
+      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
+        $route.name
+      )
     "
   >
     <Footer />

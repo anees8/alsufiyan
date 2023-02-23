@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PostController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-public function index(Request $request)
+    public function index(Request $request)
     {
-        $data['posts']= Post::orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->Paginate($request->perPage);
+
+        $data['images']= Image::orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->Paginate($request->perPage);
     
 
-        return $this->sendResponse($data, 'Posts return successfully.',Response::HTTP_OK);
-
+        return $this->sendResponse($data, 'Images return successfully.',Response::HTTP_OK);
+        
     }
 
     /**
@@ -46,22 +47,21 @@ public function index(Request $request)
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Image $image)
     {
-        $data['post']=$post;
-     return $this->sendResponse($data, 'Posts return successfully.',Response::HTTP_OK);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Image $image)
     {
         //
     }
@@ -70,10 +70,10 @@ public function index(Request $request)
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Image $image)
     {
         //
     }
@@ -81,10 +81,10 @@ public function index(Request $request)
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Image $image)
     {
         //
     }

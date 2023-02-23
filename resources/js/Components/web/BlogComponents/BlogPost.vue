@@ -13,8 +13,8 @@
 
         <router-link
           class="btn btn-outline-dark float-end"
-          :to="{
-            path: '/post/' + post.id,
+          v-bind:to="{
+            path: '/post/' + `${post.id}`,
           }"
           >Read More<font-awesome-icon class="ms-2" icon="arrow-right"
         /></router-link>
@@ -30,7 +30,7 @@
         v-model="perPage"
         :options="options"
         size="md"
-        @click="getPosts"
+        v-on:change="setPerPage"
       ></b-form-select>
     </div>
     <div>
@@ -50,11 +50,6 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { usePostsStore } from "../../../stores/web/postsStore.js";
-const { posts, options, perPage, currentPage, rows, loading } = storeToRefs(
-  usePostsStore()
-);
+const { posts, options, perPage, currentPage, rows } = storeToRefs(usePostsStore());
+const { getPosts, setPerPage } = usePostsStore();
 </script>
-
-<style>
-/* Add custom styles here */
-</style>

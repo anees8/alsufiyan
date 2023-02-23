@@ -8,6 +8,7 @@ import AboutPage from "./Components/web/AboutPage.vue";
 import NotFound from "./Components/web/NotFound.vue";
 import Contact from "./Components/web/Contact.vue";
 import Gallery from "./Components/web/Gallery.vue";
+import Videos from "./Components/web/Videos.vue";
 import blog from "./Components/web/Blog.vue";
 import PostDetail from "./Components/web/BlogComponents/PostDetail.vue";
 
@@ -45,6 +46,16 @@ requireAuth:false
 }
 },
 {
+    path: "/videos",
+    name: "Videos",
+    component:Videos,
+    meta:{
+    requireAuth:false
+    }
+    },
+
+
+{
 path: "/blog",
 name: "blog",
 component: blog,
@@ -54,10 +65,12 @@ requireAuth:false
 },
 
 {
-path: "/post/:id",
+    path: '/post/:id',
 name: "PostDetail",
 component: PostDetail,
-props: true,
+props: route => ({
+id: Number(route.params.id)
+}),
 meta:{
 requireAuth:false
 }
@@ -125,6 +138,10 @@ requireAuth:true
 ];
 
 const router=createRouter({
+scrollBehavior(to, from, savedPosition) {
+// always scroll to top
+return { top: 0 }
+},
 history: createWebHistory(),
 routes
 });

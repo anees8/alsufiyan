@@ -2,8 +2,8 @@
   <div class="router_view_min">
     <div class="container py-5">
       <div class="row">
-        <div class="col-12 col-md-3 p-1" v-for="(image, index) in images" :key="image.id">
-          <div class="thumbnail p-1">
+        <div class="col-12 col-md-4 p-1" v-for="(image, index) in images" :key="image.id">
+          <div class="thumbnail p-2">
             <div class="img-container">
               <img
                 :src="image.src"
@@ -74,13 +74,14 @@ export default {
             "https://images.unsplash.com/photo-1675317047656-eb9ebd0eacc6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80",
         },
       ],
-      perPage: 10,
+      perPage: 5,
       currentPage: 1,
       options: [
+        { value: 5, text: "5" },
         { value: 10, text: "10" },
         { value: 50, text: "50" },
         { value: 100, text: "100" },
-        { value: null, text: "All" },
+        { value: 200, text: "200" },
       ],
       visible: false,
       currentindex: null,

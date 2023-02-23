@@ -63,6 +63,15 @@
             <RouterLink
               class="nav-link px-3 py-3 text-dark"
               exact
+              active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
+              :to="{ name: 'Videos' }"
+              ><font-awesome-icon class="me-2" icon="video" />Videos</RouterLink
+            >
+          </li>
+          <li class="nav-item mx-0">
+            <RouterLink
+              class="nav-link px-3 py-3 text-dark"
+              exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark bg-light "
               :to="{ name: 'contact' }"
               ><font-awesome-icon class="me-2" icon="envelope" />Contact</RouterLink

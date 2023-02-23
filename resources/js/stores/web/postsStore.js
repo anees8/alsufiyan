@@ -1,5 +1,6 @@
 import {defineStore } from 'pinia';
 import axios from 'axios';
+import router from '../../router.js';
 
 
 
@@ -7,7 +8,7 @@ export const usePostsStore = defineStore('postsStore',{
     state: () => ({
         posts:[],
           post: {},
-        perPage:10,
+        perPage:5,
         currentPage: 1,
         loading:false,  
         rows:null,
@@ -16,26 +17,39 @@ export const usePostsStore = defineStore('postsStore',{
         { value: 10, text: "10" },
         { value: 50, text: "50" },
         { value: 100, text: "100" },
-        { value: null, text: "All" },
       ],
     }),
 
+   
     getters: {
-      getperPage: (state) => state.perPage,
+      
+  
     },
 
     actions: {
-      
+      setPerPage(value) {
+        this.perPage = value;
+       this.getPosts();
+      },
+         
           async getPosts() {
 
           this.loading = true;
           try {
 
-          const response = await  axios.get('posts/?page='+this.currentPage+'&perPage='+this.getperPage);
+
+          let url = 'posts';
+          if (this.perPage) {
+          url += `?perPage=${this.perPage}`;
+          }
+          if (this.currentPage > 1) {
+          url += `${this.perPage ? '&' : '?'}page=${this.currentPage}`;
+          }
+          const response = await  axios.get(url);
           this.posts=response.data.data.posts.data;
           this.currentPage=response.data.data.posts.current_page;
           this.rows=response.data.data.posts.total;
-          this.perPage=response.data.data.posts.per_page;
+     
           this.loading = false;
 
           } catch (error) {
@@ -54,14 +68,13 @@ export const usePostsStore = defineStore('postsStore',{
             const response = await  axios.get('posts/' + id);
           this.post=response.data.data.post;
           } catch (error) {
-          if (error.response) {
-            this.errors = error.response.data.errors;
-          }
-          $router.go(-1);
+            router.push({ name: "blog" });         
           }
           },
-      
-
+          setCurrentPage(pageNumber) {
+            this.currentPage = pageNumber
+          },
+        
 
     }
     

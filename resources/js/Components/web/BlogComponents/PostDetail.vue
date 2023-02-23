@@ -2,6 +2,14 @@
   <div class="router_view_min">
     <b-container class="py-5 my-5">
       <b-row>
+        <b-col cols="12">
+          <b-breadcrumb>
+            <b-breadcrumb-item class="nav-link" :to="{ name: 'blog' }">
+              <font-awesome-icon class="me-2" icon="blog" />Blog Post</b-breadcrumb-item
+            >
+            <b-breadcrumb-item active>Blog Detail</b-breadcrumb-item>
+          </b-breadcrumb>
+        </b-col>
         <b-col class="col-12 col-md-8">
           <router-link
             class="btn btn-outline-dark float-start mb-3"
@@ -18,7 +26,7 @@
             </header>
             <!-- Preview image figure-->
             <figure class="mb-4">
-              <img class="img-fluid rounded" :src="post.attachment" alt="..." />
+              <img class="thumbnail img-fluid rounded" :src="post.attachment" alt="..." />
             </figure>
             <!-- Post content-->
             <section class="mb-5">
@@ -42,10 +50,7 @@ import { storeToRefs } from "pinia";
 import { usePostsStore } from "../../../stores/web/postsStore.js";
 
 const props = defineProps({
-  id: {
-    type: Number,
-    required: true,
-  },
+  id: Number,
 });
 const { post } = storeToRefs(usePostsStore());
 const { getPost } = usePostsStore();
