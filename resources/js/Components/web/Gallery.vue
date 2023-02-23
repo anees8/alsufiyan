@@ -1,5 +1,15 @@
 <template>
-  <div class="router_view_min">
+  <b-container v-if="loading" class="py-5">
+    <b-row class="router_view_min" align-v="center" align-h="center">
+      <b-col>
+        <div class="text-center">
+          <b-spinner variant="dark"></b-spinner>
+          <strong align-v="center" align-h="center">Loading...</strong>
+        </div>
+      </b-col>
+    </b-row>
+  </b-container>
+  <div v-else class="router_view_min">
     <div class="container py-5">
       <div class="row">
         <div class="col-12 col-md-4 p-1" v-for="(image, index) in images" :key="image.id">
@@ -65,6 +75,7 @@ const {
   rows,
   visible,
   currentindex,
+  loading,
 } = storeToRefs(useImagesStore());
 
 const { getImages, setPerPage, show, handleHide } = useImagesStore();

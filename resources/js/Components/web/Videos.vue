@@ -1,5 +1,15 @@
 <template>
-  <div class="router_view_min">
+  <b-container v-if="loading" class="py-5">
+    <b-row class="router_view_min" align-v="center" align-h="center">
+      <b-col>
+        <div class="text-center">
+          <b-spinner variant="dark"></b-spinner>
+          <strong align-v="center" align-h="center">Loading...</strong>
+        </div>
+      </b-col>
+    </b-row>
+  </b-container>
+  <div v-else class="router_view_min">
     <div class="container py-5">
       <div class="row">
         <div class="col-12 col-md-4 p-1" v-for="(video, index) in videos" :key="video.id">
@@ -54,7 +64,9 @@
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useVideosStore } from "../../stores/web/videosStore.js";
-const { videos, options, perPage, currentPage, rows } = storeToRefs(useVideosStore());
+const { videos, options, perPage, currentPage, loading, rows } = storeToRefs(
+  useVideosStore()
+);
 
 const { getVideos, setPerPage } = useVideosStore();
 
