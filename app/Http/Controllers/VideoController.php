@@ -16,10 +16,10 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         
-        $data['images']= Video::orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->Paginate($request->perPage);
+        $data['videos']= Video::select('video_url as src')->orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->Paginate($request->perPage);
     
 
-        return $this->sendResponse($data, 'Images return successfully.',Response::HTTP_OK);
+        return $this->sendResponse($data, 'Videos return successfully.',Response::HTTP_OK);
     }
 
     /**

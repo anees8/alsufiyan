@@ -29,6 +29,7 @@ export const usePostsStore = defineStore('postsStore',{
     actions: {
       setPerPage(value) {
         this.perPage = value;
+        this.currentPage = 1;
        this.getPosts();
       },
          

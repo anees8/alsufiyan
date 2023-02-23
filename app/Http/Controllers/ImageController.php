@@ -16,7 +16,7 @@ class ImageController extends Controller
     public function index(Request $request)
     {
 
-        $data['images']= Image::orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->Paginate($request->perPage);
+        $data['images']= Image::select('image_url as src')->orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->Paginate($request->perPage);
     
 
         return $this->sendResponse($data, 'Images return successfully.',Response::HTTP_OK);

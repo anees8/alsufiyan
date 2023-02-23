@@ -2,19 +2,19 @@
   <div class="router_view_min">
     <div class="container py-5">
       <div class="row">
-        <div class="col-12 col-md-4 p-1" v-for="(image, index) in images" :key="image.id">
+        <div class="col-12 col-md-4 p-1" v-for="(video, index) in videos" :key="video.id">
           <div class="thumbnail p-1">
             <div class="img-container">
               <iframe
-                v-if="image.src.includes('https://www.youtube.com/')"
+                v-if="video.src.includes('https://www.youtube.com/')"
                 width="420"
-                height="345"
-                :src="image.src"
+                height="320"
+                :src="video.src"
                 allowfullscreen
               >
               </iframe>
-              <video v-else width="420" height="345" controls muted>
-                <source :src="image.src" />
+              <video v-else width="420" height="320" controls muted>
+                <source :src="video.src" />
               </video>
             </div>
           </div>
@@ -27,12 +27,14 @@
           <b-form-select
             v-model="perPage"
             :options="options"
+            v-on:change="setPerPage"
             size="md"
             varient="dark"
           ></b-form-select>
         </div>
         <div>
           <b-pagination
+            v-on:click="getVideos"
             v-model="currentPage"
             :total-rows="rows"
             :per-page="perPage"
@@ -48,85 +50,15 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      images: [
-        {
-          id: 1,
-          src: "https://www.youtube.com/embed/tgbNymZ7vqY",
-        },
-        {
-          id: 2,
-          src: "https://www.youtube.com/embed/Mklo9VDZCNM",
-        },
-        {
-          id: 3,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 4,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 5,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 6,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 7,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 8,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 9,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 10,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 11,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-        {
-          id: 12,
-          src:
-            "https://colaninfotech.com/wp-content/themes/twentytwenty/custom/videos/Management%20Video.mp4",
-        },
-      ],
-      perPage: 5,
-      currentPage: 1,
-      options: [
-        { value: 5, text: "5" },
-        { value: 10, text: "10" },
-        { value: 50, text: "50" },
-        { value: 100, text: "100" },
-      ],
-    };
-  },
+<script setup>
+import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
+import { useVideosStore } from "../../stores/web/videosStore.js";
+const { videos, options, perPage, currentPage, rows } = storeToRefs(useVideosStore());
 
-  computed: {
-    rows() {
-      return this.images.length;
-    },
-  },
-};
+const { getVideos, setPerPage } = useVideosStore();
+
+onMounted(() => {
+  getVideos();
+});
 </script>

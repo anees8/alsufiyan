@@ -154,8 +154,6 @@ next({ name: 'Login' });
 if (to.name === 'Login' && !to.meta.requireAuth && getAccessToken !== null){ 
 next({ name: 'Dashboard' });
 }
-
-
 next();
 })
 
