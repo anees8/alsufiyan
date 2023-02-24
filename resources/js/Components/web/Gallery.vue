@@ -9,7 +9,7 @@
           alt=""
           @click="show(index)"
           class="thumbnail img-container img-fluid d-block rounded gallery_img shadow-lg w-100 hover-shadow"
-          style="height: 21rem"
+          style="height: 30rem"
         />
       </b-col>
       <b-col>
@@ -32,7 +32,7 @@
           varient="dark"
         ></b-form-select>
       </b-col>
-      <b-col lg="4" md="5" class="p-2">
+      <b-col lg="4" md="4" class="p-2">
         <b-pagination
           v-on:click="getImages"
           v-model="currentPage"

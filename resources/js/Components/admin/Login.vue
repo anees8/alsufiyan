@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row align-items-center justify-content-center vh-100">
       <div class="col-12 col-xl-4 col-lg-5 col-md-6 p-5 card shadow rounded">
         <div class="text-center">

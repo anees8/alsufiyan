@@ -2,9 +2,7 @@
   <Loader v-if="loading" />
   <div v-else class="router_view_min">
     <b-container class="py-5">
-      <b-row>
-        <BlogPost />
-      </b-row>
+      <BlogPost />
     </b-container>
   </div>
 </template>

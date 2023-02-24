@@ -1,35 +1,43 @@
 <template>
-  <b-col
-    v-for="(post, index) in posts"
-    :key="index"
-    cols="12"
-    lg="4"
-    md="6"
-    class="mb-4 col-12 col-md-4"
-  >
-    <b-card class="hover-shadow">
-      <b-card-img
-        :src="post.attachment"
-        alt="Image"
-        class="img-fluid d-block rounded gallery_img w-100"
-        style="height: 22rem"
-      />
-      <b-card-body>
-        <b-card-title>{{ post.title.substring(0, 25) + "..." }}</b-card-title>
-        <b-card-text>{{ post.content.substring(0, 160) + "..." }}</b-card-text>
+  <!-- <b-row>
+    <b-col cols="12" lg="8"> test</b-col>
+    <b-col cols="12" lg="4"> test</b-col></b-row
+  > -->
+  <b-row>
+    <b-col
+      v-for="(post, index) in posts"
+      :key="index"
+      cols="12"
+      xl="4"
+      lg="4"
+      md="6"
+      class="mb-4 col-12 col-md-4"
+    >
+      <b-card class="hover-shadow">
+        <b-card-img
+          :src="post.attachment"
+          alt="Image"
+          class="img-fluid d-block rounded gallery_img w-100"
+          style="height: 22rem"
+        />
+        <b-card-body>
+          <b-card-title>{{ post.title.substring(0, 25) + "..." }}</b-card-title>
+          <b-card-text>{{ post.content.substring(0, 160) + "..." }}</b-card-text>
 
-        <router-link
-          class="btn btn-outline-dark float-end"
-          v-bind:to="{
-            path: '/post/' + `${post.id}`,
-          }"
-          >Read More<font-awesome-icon class="ms-2" icon="arrow-right"
-        /></router-link>
-      </b-card-body>
-    </b-card>
+          <router-link
+            class="btn btn-outline-dark float-end"
+            v-bind:to="{
+              path: '/post/' + `${post.id}`,
+            }"
+            >Read More<font-awesome-icon class="ms-2" icon="arrow-right"
+          /></router-link>
+        </b-card-body>
+      </b-card>
 
-    <!-- :to="'/post/' + post.id" -->
-  </b-col>
+      <!-- :to="'/post/' + post.id" -->
+    </b-col>
+    <b-col> </b-col>
+  </b-row>
   <b-row align-h="end" class="mt-5">
     <b-col lg="1" md="2" class="p-2">
       <b-form-select
