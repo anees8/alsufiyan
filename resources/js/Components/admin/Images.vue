@@ -1,4 +1,4 @@
 <template>
-  <div>dashboard</div>
+  <div>Image</div>
 </template>
 <script setup></script>

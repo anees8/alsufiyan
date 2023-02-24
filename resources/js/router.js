@@ -4,7 +4,7 @@ import { useLoginStore } from "@/stores/admin/loginStore.js";
 
 // webpage
 import Home from "./Components/web/Home.vue";
-import AboutPage from "./Components/web/AboutPage.vue";
+import About from "./Components/web/About.vue";
 import NotFound from "./Components/web/NotFound.vue";
 import Contact from "./Components/web/Contact.vue";
 import Gallery from "./Components/web/Gallery.vue";
@@ -17,8 +17,10 @@ import PostDetail from "./Components/web/BlogComponents/PostDetail.vue";
 import Login from "./Components/admin/Login.vue";
 import Logout from "./Components/admin/Logout.vue";
 import Dashboard from "./Components/admin/Dashboard.vue";
-import AdminAbout from "./Components/admin/AdminAbout.vue";
-import AdminHome from "./Components/admin/AdminHome.vue";
+import AdminAbout from "./Components/admin/About.vue";
+import AdminHome from "./Components/admin/Home.vue";
+import AdminImages from "./Components/admin/Images.vue";
+import AdminVideos from "./Components/admin/Videos.vue";
 
 const routes = [
 {
@@ -30,9 +32,9 @@ requireAuth:false
 }
 },
 {
-path: "/about_us",
+path: "/aboutus",
 name: "About",
-component:AboutPage,
+component:About,
 meta:{
 requireAuth:false
 }
@@ -117,7 +119,7 @@ requireAuth:true
 }
 },
 {
-path: "/admin_about",
+path: "/admin/about",
 name: "AdminAbout",
 component: AdminAbout,
 meta:{
@@ -125,15 +127,29 @@ requireAuth:true
 }
 },
 {
-path: "/admin_home",
+path: "/admin/home",
 name: "AdminHome",
 component: AdminHome,
 meta:{
 requireAuth:true
 }
 },
-
-
+{
+    path: "/admin/image",
+    name: "AdminImage",
+    component: AdminImages,
+    meta:{
+    requireAuth:true
+    }
+    },
+    {
+        path: "/admin/video",
+        name: "AdminVideo",
+        component: AdminVideos,
+        meta:{
+        requireAuth:true
+        }
+        },
 
 ];
 

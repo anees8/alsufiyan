@@ -1,11 +1,11 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg fixed-top navbar-light bg-white justify-content-between p-0 border"
+    class="navbar navbar-expand-lg fixed-top navbar-light bg-white justify-content-between p-0"
   >
     <div class="container-fluid text-center">
       <a class="navbar-brand" href="#">
-        <img class="mx-1" :src="logo" alt="" width="50" height="50" />
-        <img :src="slogo" alt="" height="50" />
+        <img class="mx-1" :src="logo" height="48" />
+        <img :src="slogo" height="48" />
       </a>
 
       <button

@@ -1,5 +1,6 @@
 <template>
-  <div class="router_view_min">
+  <Loader v-if="loading" />
+  <div v-else class="router_view_min">
     <b-container class="py-5 my-5">
       <b-row>
         <b-col cols="12">
@@ -46,13 +47,14 @@
 
 <script setup>
 import { onMounted, defineProps } from "vue";
+import Loader from "../../common/loader.vue";
 import { storeToRefs } from "pinia";
 import { usePostsStore } from "../../../stores/web/postsStore.js";
 
 const props = defineProps({
   id: Number,
 });
-const { post } = storeToRefs(usePostsStore());
+const { post, loading } = storeToRefs(usePostsStore());
 const { getPost } = usePostsStore();
 
 onMounted(() => {

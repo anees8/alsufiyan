@@ -1,5 +1,12 @@
 <template>
-  <b-col v-for="(post, index) in posts" :key="index" class="mb-4 col-12 col-md-4">
+  <b-col
+    v-for="(post, index) in posts"
+    :key="index"
+    cols="12"
+    lg="4"
+    md="6"
+    class="mb-4 col-12 col-md-4"
+  >
     <b-card class="hover-shadow">
       <b-card-img
         :src="post.attachment"
@@ -23,32 +30,33 @@
 
     <!-- :to="'/post/' + post.id" -->
   </b-col>
-
-  <div class="d-flex justify-content-end my-4">
-    <div class="me-4">
+  <b-row align-h="between" class="mt-5">
+    <b-col cols="8" md="2" lg="1">
       <b-form-select
         v-model="perPage"
         :options="options"
         size="md"
         v-on:change="setPerPage"
+        varient="dark"
       ></b-form-select>
-    </div>
-    <div>
+    </b-col>
+    <b-col cols="12" md="6" lg="2">
       <b-pagination
+        v-on:click="getPosts"
         v-model="currentPage"
         :total-rows="rows"
         :per-page="perPage"
-        v-on:click="getPosts"
         first-text="First"
         prev-text="Prev"
         next-text="Next"
         last-text="Last"
       ></b-pagination>
-    </div>
-  </div>
+    </b-col>
+  </b-row>
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
+
 import { usePostsStore } from "../../../stores/web/postsStore.js";
 const { posts, options, perPage, currentPage, rows } = storeToRefs(usePostsStore());
 const { getPosts, setPerPage } = usePostsStore();

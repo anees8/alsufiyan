@@ -1,33 +1,73 @@
 <template>
-  <div
-    v-if="
-      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
-        $route.name
-      )
-    "
-  >
-    <Navbar />
+  <div class="bodybackground">
+    <div
+      v-if="
+        ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
+          $route.name
+        )
+      "
+    >
+      <Navbar />
+    </div>
+
+    <div
+      v-if="
+        ![
+          'Home',
+          'About',
+          'gallery',
+          'blog',
+          'PostDetail',
+          'contact',
+          'Videos',
+          'Login',
+          'NotFound',
+          'Logout',
+        ].includes($route.name)
+      "
+    >
+      <div class="sidebar">
+        <Sidebar />
+        <div class="content p-5">
+          <RouterView />
+        </div>
+      </div>
+    </div>
+    <div
+      class="mh-100"
+      v-if="
+        ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
+          $route.name
+        )
+      "
+    >
+      <a class="nav-link" href="https://wa.me/9876543210?text=[Hi]" target="_blank"
+        ><font-awesome-icon
+          class="whatsapp text-success me-4 h1 position-fixed end-0"
+          style="z-index: 1; bottom: 80px"
+          icon="fa-brands fa-whatsapp"
+          size="xl"
+      /></a>
+    </div>
+    <div
+      v-if="
+        [
+          'Home',
+          'About',
+          'gallery',
+          'blog',
+          'PostDetail',
+          'contact',
+          'Videos',
+          'Login',
+          'NotFound',
+          'Logout',
+        ].includes($route.name)
+      "
+    >
+      <RouterView />
+    </div>
   </div>
-
-  <div
-    class="mh-100"
-    v-if="
-      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
-        $route.name
-      )
-    "
-  >
-    <a class="nav-link" href="https://wa.me/9876543210?text=[Hi]" target="_blank"
-      ><font-awesome-icon
-        class="whatsapp text-success me-4 h1 position-fixed end-0"
-        style="z-index: 99; bottom: 50vh"
-        icon="fa-brands fa-whatsapp"
-        size="xl"
-    /></a>
-  </div>
-
-  <RouterView />
-
   <div
     v-if="
       ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
@@ -40,6 +80,7 @@
 </template>
 <script setup>
 import Navbar from "@/Components/common/Navbar.vue";
+import Sidebar from "@/Components/common/Sidebar.vue";
 import Footer from "@/Components/common/Footer.vue";
 </script>
 <style>
@@ -51,6 +92,15 @@ import Footer from "@/Components/common/Footer.vue";
   --tertiary: #f7f7f7;
   --black: #000;
   --white: #fff;
+  --one: #0098c9;
+  --two: #0098c9;
+  --three: #00b8c2;
+  --four: #00d4a7;
+  --five: #96eb84;
+  --six: #f9f871;
+}
+.bodybackground {
+  background-color: var(--tertiary);
 }
 
 .router_view_min {
@@ -89,5 +139,14 @@ import Footer from "@/Components/common/Footer.vue";
 @font-face {
   font-family: "hidayat";
   src: url("/fontstyle/hidayath/Hidayatullah.ttf") format("truetype");
+}
+</style>
+<style scoped>
+.sidebar {
+  display: flex;
+}
+
+.sidebar .content {
+  flex: 1 1 0;
 }
 </style>

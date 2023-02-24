@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="my-5">
+  <b-container fluid class="py-5">
     <carousel :autoplay="3000" :wrap-around="true" :breakpoints="breakpoints">
       <slide v-for="(pack, index) in packages" :key="pack.id">
         <div class="card m-2 h-100">

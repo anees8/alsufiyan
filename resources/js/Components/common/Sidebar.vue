@@ -62,19 +62,18 @@ const menuTree = [
     name: "AdminAbout",
     Permissions: 1,
   },
-  // {
-  //   label: "About",
-  //   icon: "address-card",
-  //   Permissions: 1,
-  //   children: [
-  //     {
-  //       label: "Home",
-  //       icon: "house",
-  //       name: "About",
-  //       Permissions: 1,
-  //     },
-  //   ],
-  // },
+  {
+    label: "Images",
+    icon: "image",
+    name: "AdminImage",
+    Permissions: 1,
+  },
+  {
+    label: "Videos",
+    icon: "video",
+    name: "AdminVideo",
+    Permissions: 1,
+  },
 
   {
     label: "Logout",

@@ -7,7 +7,7 @@ import router from '../../router.js';
 export const usePostsStore = defineStore('postsStore',{
     state: () => ({
         posts:[],
-          post: {},
+        post: {},
         perPage:5,
         currentPage: 1,
         loading:false,  
@@ -64,11 +64,13 @@ export const usePostsStore = defineStore('postsStore',{
 
           },
           async getPost(id) {
-          
+            this.loading = true;
           try {
             const response = await  axios.get('posts/' + id);
           this.post=response.data.data.post;
+          this.loading = false;
           } catch (error) {
+            this.post={};
             router.push({ name: "blog" });         
           }
           },
