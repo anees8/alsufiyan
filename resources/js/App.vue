@@ -1,16 +1,15 @@
 <template>
   <div class="bodybackground">
-    <div
+    <Navbar
       v-if="
         ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
           $route.name
         )
       "
-    >
-      <Navbar />
-    </div>
+    />
 
     <div
+      class="sidebar"
       v-if="
         ![
           'Home',
@@ -26,13 +25,12 @@
         ].includes($route.name)
       "
     >
-      <div class="sidebar">
-        <Sidebar />
-        <div class="content p-5">
-          <RouterView />
-        </div>
+      <Sidebar />
+      <div class="content p-5">
+        <RouterView />
       </div>
     </div>
+
     <div
       class="mh-100"
       v-if="
@@ -49,7 +47,8 @@
           size="xl"
       /></a>
     </div>
-    <div
+
+    <RouterView
       v-if="
         [
           'Home',
@@ -64,19 +63,16 @@
           'Logout',
         ].includes($route.name)
       "
-    >
-      <RouterView />
-    </div>
+    />
   </div>
-  <div
+
+  <Footer
     v-if="
       ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
         $route.name
       )
     "
-  >
-    <Footer />
-  </div>
+  />
 </template>
 <script setup>
 import Navbar from "@/Components/common/Navbar.vue";

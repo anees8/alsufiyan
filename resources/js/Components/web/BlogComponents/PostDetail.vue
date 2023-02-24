@@ -11,14 +11,14 @@
             <b-breadcrumb-item active>Blog Detail</b-breadcrumb-item>
           </b-breadcrumb>
         </b-col>
-        <b-col class="col-12 col-md-8">
+        <b-col class="col-12">
           <router-link
             class="btn btn-outline-dark float-start mb-3"
             @click="$router.go(-1)"
             to=""
             ><font-awesome-icon icon="fa-solid fa-arrow-left" class="me-2" /></router-link
         ></b-col>
-        <b-col class="col-12 col-md-8">
+        <b-col class="col-12">
           <article>
             <!-- Post header-->
             <header class="mb-4">

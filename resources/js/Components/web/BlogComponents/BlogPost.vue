@@ -30,8 +30,8 @@
 
     <!-- :to="'/post/' + post.id" -->
   </b-col>
-  <b-row align-h="between" class="mt-5">
-    <b-col cols="8" md="2" lg="1">
+  <b-row align-h="end" class="mt-5">
+    <b-col lg="1" md="2" class="p-2">
       <b-form-select
         v-model="perPage"
         :options="options"
@@ -40,16 +40,13 @@
         varient="dark"
       ></b-form-select>
     </b-col>
-    <b-col cols="12" md="6" lg="2">
+    <b-col lg="4" md="5" class="p-2">
       <b-pagination
         v-on:click="getPosts"
         v-model="currentPage"
         :total-rows="rows"
+        align="fill"
         :per-page="perPage"
-        first-text="First"
-        prev-text="Prev"
-        next-text="Next"
-        last-text="Last"
       ></b-pagination>
     </b-col>
   </b-row>

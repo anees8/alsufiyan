@@ -54,6 +54,6 @@ export default {
 <style scoped>
 .home_carousel_img {
   width: 100%;
-  height: calc(100vh - 15rem); /* adjust the height based on the navbar height*/
+  height: calc(100vh - 100px); /* adjust the height based on the navbar height*/
 }
 </style>

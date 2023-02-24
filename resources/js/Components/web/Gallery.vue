@@ -1,7 +1,7 @@
 <template>
   <Loader v-if="loading" />
 
-  <b-container v-else class="router_view_min py-5">
+  <b-container class="router_view_min py-5" v-else>
     <b-row>
       <b-col sm="12" md="4" class="p-1" v-for="(image, index) in images" :key="image.id">
         <img
@@ -21,8 +21,9 @@
         ></vue-easy-lightbox>
       </b-col>
     </b-row>
-    <b-row align-h="between" class="mt-5">
-      <b-col cols="8" md="2" lg="1">
+
+    <b-row align-h="end" class="mt-5">
+      <b-col lg="1" md="2" class="p-2">
         <b-form-select
           v-model="perPage"
           :options="options"
@@ -31,16 +32,13 @@
           varient="dark"
         ></b-form-select>
       </b-col>
-      <b-col cols="12" md="6" lg="2">
+      <b-col lg="4" md="5" class="p-2">
         <b-pagination
           v-on:click="getImages"
           v-model="currentPage"
           :total-rows="rows"
+          align="fill"
           :per-page="perPage"
-          first-text="First"
-          prev-text="Prev"
-          next-text="Next"
-          last-text="Last"
         ></b-pagination>
       </b-col>
     </b-row>
