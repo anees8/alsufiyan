@@ -20,6 +20,7 @@
         "@vitejs/plugin-vue": "^4.0.0",
         "bootstrap": "^5.2.3",
         "bootstrap-vue-next": "^0.7.3",
+        "moment": "^2.29.4",
         "pinia": "^2.0.30",
         "sass": "^1.58.1",
         "vue": "^3.2.36",

@@ -122,7 +122,10 @@
       </div>
       <div class="col-12 col-md-3">
         <div class="d-flex align-items-center justify-content-center">
-          <font-awesome-icon icon="clock" class="btn btn-dark rounded-circle my-3 p-3" />
+          <font-awesome-icon
+            icon="fa-regular fa-clock"
+            class="btn btn-dark rounded-circle my-3 p-3"
+          />
         </div>
         <div class="d-flex align-items-center justify-content-center text-center">
           <p>

@@ -4,7 +4,7 @@
       <div class="col-12 col-xl-4 col-lg-5 col-md-6 p-5 card shadow rounded">
         <div class="text-center">
           <button class="btn btn-dark rounded-circle p-4 mb-3">
-            <font-awesome-icon icon="user" size="2x" />
+            <font-awesome-icon icon="fa-regular fa-user" size="2x" />
           </button>
           <div>
             <div>

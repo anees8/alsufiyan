@@ -1,6 +1,7 @@
 import {defineStore } from 'pinia';
 import axios from 'axios';
 import router from '../../router.js';
+import moment from "moment";
 
 
 
@@ -9,6 +10,7 @@ export const usePostsStore = defineStore('postsStore',{
         posts:[],
         post: {},
         perPage:5,
+        search:null,
         currentPage: 1,
         loading:false,  
         rows:null,
@@ -22,11 +24,15 @@ export const usePostsStore = defineStore('postsStore',{
 
    
     getters: {
-      
+     
   
     },
 
     actions: {
+      dateTime(value) {
+        return moment(value).format("MMM D, Y");
+      },
+      
       setPerPage(value) {
         this.perPage = value;
         this.currentPage = 1;
@@ -43,12 +49,20 @@ export const usePostsStore = defineStore('postsStore',{
           if (this.perPage) {
           url += `?perPage=${this.perPage}`;
           }
+            if (this.search) {
+            url +=`${this.perPage ? '&' : '?'}search=${this.search}`;
+            }
           if (this.currentPage > 1) {
-          url += `${this.perPage ? '&' : '?'}page=${this.currentPage}`;
+          url += `${this.perPage || this.search ? '&' : '?'}page=${this.currentPage}`;
           }
           const response = await  axios.get(url);
           this.posts=response.data.data.posts.data;
-          this.currentPage=response.data.data.posts.current_page;
+          if(this.search){
+            this.currentPage=1;
+          }else{
+            this.currentPage=response.data.data.posts.current_page;
+          }
+         
           this.rows=response.data.data.posts.total;
      
           this.loading = false;

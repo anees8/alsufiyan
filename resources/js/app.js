@@ -23,27 +23,30 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 
 
+
 import { library} from "@fortawesome/fontawesome-svg-core";
-import { faArrowRight,faArrowLeft,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,faPaperPlane,faLocationDot,faClock,faImage,faBlog,faAt,faEyeSlash,faUser,faChevronLeft,faChevronDown,faSpinner,faHouse,faRightFromBracket,faGlobe,faGauge,faVideo} from "@fortawesome/free-solid-svg-icons";
-import {faAddressBook } from "@fortawesome/free-regular-svg-icons";
+import { faArrowRight,faArrowLeft,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,faPaperPlane,faLocationDot,faImage,faBlog,faAt,faEyeSlash,faChevronLeft,faChevronDown,faSpinner,faHouse,faRightFromBracket,faGlobe,faGauge,faVideo,faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import {faAddressBook ,faUser,faClock,faComment} from "@fortawesome/free-regular-svg-icons";
 
 
 import { faFacebookF,faWhatsapp} from "@fortawesome/free-brands-svg-icons";
 
+
 import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText  } from "@fortawesome/vue-fontawesome";
 
-library.add(faArrowRight,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,faFacebookF,faWhatsapp,faPaperPlane,faLocationDot,faClock,faImage,faBlog,faArrowLeft,faAt,faEyeSlash,faUser,faChevronLeft,faChevronDown,faSpinner,faHouse,faRightFromBracket,faGlobe,faGauge,faVideo);
+library.add(faArrowRight,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,faFacebookF,faWhatsapp,faPaperPlane,faLocationDot,faClock,faImage,faBlog,faArrowLeft,faAt,faEyeSlash,faUser,faChevronLeft,faChevronDown,faSpinner,faHouse,faRightFromBracket,faGlobe,faGauge,faVideo,faMagnifyingGlass,faComment);
 
 
 axios.defaults.baseURL = '/api/';
 
  
-import { onMounted, defineProps } from "vue";
+
 const pinia = createPinia()
 
 const app=createApp(App);
 app.use(VueAxios, axios);
 app.use(BootstrapVueNext);
+
 app.use(VueEasyLightbox);
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.component('font-awesome-layers', FontAwesomeLayers)

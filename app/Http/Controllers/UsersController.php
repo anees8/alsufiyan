@@ -16,6 +16,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+   
     public function index(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',

@@ -53,6 +53,8 @@ Route::get('/posts/{post}', [PostController::class,'show']);
 Route::get('/images', [ImageController::class, 'index']);
 Route::get('/videos', [VideoController::class, 'index']);
 
+
+
     
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
