@@ -5,8 +5,8 @@
       class="logo d-flex justify-content-between align-items-center"
     >
       <div class="d-flex">
-        <img :src="'logo/logo.png'" width="50" />
-        <img v-if="!smallMenu" :src="'logo/slogo2.png'" height="50" />
+        <img :src="logo" width="50" />
+        <img v-if="!smallMenu" :src="slogo" height="50" />
       </div>
       <div>
         <font-awesome-icon
@@ -34,6 +34,9 @@
 <script setup>
 import MenuItem from "./Menu/MenuItem.vue";
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useSettingStore } from "../../stores/web/settingStore.js";
+const { logo, slogo } = storeToRefs(useSettingStore());
 
 let smallMenu = ref(false);
 

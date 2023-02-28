@@ -10,6 +10,7 @@ export const usePostsStore = defineStore('postsStore',{
         posts:[],
         post: {},
         perPage:5,
+        limit:4,
         search:null,
         currentPage: 1,
         loading:false,  
@@ -81,6 +82,7 @@ export const usePostsStore = defineStore('postsStore',{
             this.loading = true;
           try {
             const response = await  axios.get('posts/' + id);
+           
           this.post=response.data.data.post;
           this.loading = false;
           } catch (error) {

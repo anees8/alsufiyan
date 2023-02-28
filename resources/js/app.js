@@ -25,8 +25,8 @@ import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 
 
 import { library} from "@fortawesome/fontawesome-svg-core";
-import { faArrowRight,faArrowLeft,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,faPaperPlane,faLocationDot,faImage,faBlog,faAt,faEyeSlash,faChevronLeft,faChevronDown,faSpinner,faHouse,faRightFromBracket,faGlobe,faGauge,faVideo,faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
-import {faAddressBook ,faUser,faClock,faComment} from "@fortawesome/free-regular-svg-icons";
+import { faArrowRight,faArrowLeft,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,faPaperPlane,faLocationDot,faImage,faBlog,faAt,faEyeSlash,faChevronLeft,faChevronDown,faSpinner,faHouse,faRightFromBracket,faGlobe,faGauge,faVideo,faMagnifyingGlass,faPen} from "@fortawesome/free-solid-svg-icons";
+import {faAddressBook ,faUser,faClock,faComment,faTrashAlt,faPenToSquare} from "@fortawesome/free-regular-svg-icons";
 
 
 import { faFacebookF,faWhatsapp} from "@fortawesome/free-brands-svg-icons";
@@ -34,7 +34,7 @@ import { faFacebookF,faWhatsapp} from "@fortawesome/free-brands-svg-icons";
 
 import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText  } from "@fortawesome/vue-fontawesome";
 
-library.add(faArrowRight,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,faFacebookF,faWhatsapp,faPaperPlane,faLocationDot,faClock,faImage,faBlog,faArrowLeft,faAt,faEyeSlash,faUser,faChevronLeft,faChevronDown,faSpinner,faHouse,faRightFromBracket,faGlobe,faGauge,faVideo,faMagnifyingGlass,faComment);
+library.add(faArrowRight,faHome,faAddressCard,faEnvelope,faEnvelopeOpen,faPhone,faFacebookF,faWhatsapp,faPaperPlane,faLocationDot,faClock,faImage,faBlog,faArrowLeft,faAt,faEyeSlash,faUser,faChevronLeft,faChevronDown,faSpinner,faHouse,faRightFromBracket,faGlobe,faGauge,faVideo,faMagnifyingGlass,faComment,faPen,faTrashAlt,faPenToSquare);
 
 
 axios.defaults.baseURL = '/api/';

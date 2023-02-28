@@ -1,8 +1,8 @@
 <template>
   <div class="router_view_min">
-    <ContactForm />
+    <ContactDetails />
   </div>
 </template>
 <script setup>
-import ContactForm from "./ContactComponents/ContactForm.vue";
+import ContactDetails from "./ContactComponents/ContactDetails.vue";
 </script>

@@ -32,7 +32,7 @@
           v-on:click="getVideos"
           v-model="currentPage"
           :total-rows="rows"
-          align="fill"
+          :limit="limit"
           :per-page="perPage"
         ></b-pagination>
       </b-col>
@@ -45,7 +45,7 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import Loader from "../common/loader.vue";
 import { useVideosStore } from "../../stores/web/videosStore.js";
-const { videos, options, perPage, currentPage, loading, rows } = storeToRefs(
+const { videos, options, perPage, limit, currentPage, loading, rows } = storeToRefs(
   useVideosStore()
 );
 

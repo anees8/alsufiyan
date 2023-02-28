@@ -25,6 +25,7 @@
     <b-row align-h="end" class="mt-5">
       <b-col lg="1" md="2" class="p-2">
         <b-form-select
+          v-if="rows > 5"
           v-model="perPage"
           :options="options"
           size="md"
@@ -32,13 +33,14 @@
           varient="dark"
         ></b-form-select>
       </b-col>
-      <b-col lg="4" md="4" class="p-2">
+      <b-col lg="4" md="6" class="p-2">
         <b-pagination
+          v-if="rows / perPage > 1"
           v-on:click="getImages"
           v-model="currentPage"
           :total-rows="rows"
-          align="fill"
           :per-page="perPage"
+          :limit="limit"
         ></b-pagination>
       </b-col>
     </b-row>
@@ -59,6 +61,7 @@ const {
   visible,
   currentindex,
   loading,
+  limit,
 } = storeToRefs(useImagesStore());
 
 const { getImages, setPerPage, show, handleHide } = useImagesStore();

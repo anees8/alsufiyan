@@ -26,8 +26,10 @@
       "
     >
       <Sidebar />
-      <div class="content p-5">
-        <RouterView />
+
+      <div class="content">
+        <Header />
+        <RouterView class="m-3" />
       </div>
     </div>
 
@@ -76,6 +78,7 @@
 </template>
 <script setup>
 import Navbar from "@/Components/common/Navbar.vue";
+import Header from "@/Components/common/Header.vue";
 import Sidebar from "@/Components/common/Sidebar.vue";
 import Footer from "@/Components/common/Footer.vue";
 </script>
@@ -96,7 +99,7 @@ import Footer from "@/Components/common/Footer.vue";
   --six: #f9f871;
 }
 .bodybackground {
-  background-color: var(--tertiary);
+  background-color: var(--secondary);
 }
 
 .router_view_min {

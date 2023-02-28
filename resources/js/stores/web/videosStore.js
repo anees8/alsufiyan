@@ -9,6 +9,7 @@ export const useVideosStore = defineStore('videosStore',{
         videos:[],
         perPage:5,
         currentPage: 1,
+        limit:4,
         loading:false,  
         rows:null,
       options: [

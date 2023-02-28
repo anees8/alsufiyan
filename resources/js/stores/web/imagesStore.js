@@ -9,6 +9,7 @@ export const useImagesStore = defineStore('imagesStore',{
         images:[],
         perPage:5,
         currentPage: 1,
+        limit:4,
         loading:false,  
         rows:null,
         visible: false,

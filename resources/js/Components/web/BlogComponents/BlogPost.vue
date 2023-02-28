@@ -17,7 +17,7 @@
                 :img-src="post.attachment"
                 img-top
                 img-height="250"
-                class="mb-2 w-100"
+                class="mb-1 w-100"
               >
                 <router-link
                   class="nav-link"
@@ -56,12 +56,12 @@
                       dateTime(post.created_at)
                     }}</span></b-col
                   >
-                  <b-col cols="12" class="text-end"
+                  <!-- <b-col cols="12" class="text-end"
                     ><font-awesome-icon
                       icon="fa-regular fa-comment"
                       class="text-muted me-1"
                     /><span class="fs-6 fw-light">0 Comments</span></b-col
-                  >
+                  > -->
                 </b-row>
                 <b-card-text
                   style="
@@ -89,7 +89,7 @@
           </b-col>
         </b-row>
         <b-row align-h="center" class="mt-5">
-          <b-col lg="2" md="3" class="p-2">
+          <b-col xl="1" lg="2" md="3" class="p-2">
             <b-form-select
               v-if="rows > 5"
               v-model="perPage"
@@ -105,6 +105,7 @@
               v-on:click="getPosts"
               v-model="currentPage"
               :total-rows="rows"
+              :limit="limit"
               :per-page="perPage"
             ></b-pagination>
           </b-col>
@@ -140,9 +141,16 @@ import { onMounted } from "vue";
 import Loader from "../../common/loader.vue";
 
 import { usePostsStore } from "../../../stores/web/postsStore.js";
-const { posts, options, search, perPage, currentPage, rows, loading } = storeToRefs(
-  usePostsStore()
-);
+const {
+  posts,
+  options,
+  search,
+  limit,
+  perPage,
+  currentPage,
+  rows,
+  loading,
+} = storeToRefs(usePostsStore());
 const { getPosts, dateTime, setPerPage } = usePostsStore();
 
 onMounted(() => {

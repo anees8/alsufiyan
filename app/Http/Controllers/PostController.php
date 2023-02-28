@@ -49,11 +49,10 @@ public function index(Request $request)
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post  $post)
     {
-
-      
-        $data['post']=$post;
+     
+        $data['post']=$post->load('user');
      return $this->sendResponse($data, 'Post return successfully.',Response::HTTP_OK);
     }
 
