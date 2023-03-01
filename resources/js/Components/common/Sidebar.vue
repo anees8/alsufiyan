@@ -88,8 +88,8 @@ const menuTree = [
 </script>
 <style lang="scss" scoped>
 aside {
-  height: 100vh;
-  max-height: 100%;
+  min-height: 100vh;
+
   width: 16rem;
   transition: all 0.3s ease;
 

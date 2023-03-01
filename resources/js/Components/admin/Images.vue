@@ -2,13 +2,49 @@
   <b-row>
     <b-card>
       <b-col>
-        <b-row>
-          <b-col>Images List</b-col>
-          <b-col><b-button variant="outline-dark">Add Image</b-button> </b-col>
+        <b-row align-v="center">
+          <b-col><h5>Image List</h5></b-col>
+          <b-col>
+            <b-button
+              @click="modal = !modal"
+              class="float-end"
+              pill
+              variant="outline-dark"
+            >
+              <font-awesome-icon icon="plus" class="me-2" />Add Image</b-button
+            >
+            <div>
+              <b-modal v-model="modal" title="Add Image">
+                <template #footer>
+                  <div>
+                    <button class="btn btn-outline-dark" @click="modal = !modal">
+                      Close
+                    </button>
+                  </div>
+                  <div>
+                    <button class="btn btn-outline-primary" @click="uploadFile">
+                      Submit
+                    </button>
+                  </div>
+                </template>
+              </b-modal>
+            </div>
+          </b-col>
         </b-row>
       </b-col>
       <b-col
-        ><b-table striped hover :items="images" :fields="fields" :busy="isBusy">
+        ><b-table
+          striped
+          outlined
+          empty-filtered-text
+          caption-top
+          hover
+          footClone
+          :items="images"
+          :fields="fields"
+          :busy="isBusy"
+          responsive
+        >
           <template #cell(image)="data">
             <b-img
               :src="data.item.src"
@@ -55,9 +91,18 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useImagesStore } from "../../stores/admin/imagesStore.js";
-const { images, fields, options, perPage, currentPage, rows, isBusy } = storeToRefs(
-  useImagesStore()
-);
+const {
+  images,
+  fields,
+  options,
+  perPage,
+  currentPage,
+  modal,
+  rows,
+  isBusy,
+
+  errors,
+} = storeToRefs(useImagesStore());
 
 const { getImages, setPerPage, dateTime } = useImagesStore();
 

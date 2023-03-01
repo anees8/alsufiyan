@@ -5,10 +5,11 @@ import moment from "moment";
 
 
 
+
 export const useImagesStore = defineStore('imagesStore',{
     state: () => ({
         fields:[
-          { key: 'id',label:'ID'}, 
+          { key: 'id',label:'ID' }, 
           { key: 'image' ,label:'Image'},
           { key: 'username',label:'Username'}, 
           { key: 'created_at',label:'Created Date'},
@@ -16,10 +17,11 @@ export const useImagesStore = defineStore('imagesStore',{
           
       ],
         images: [],
-        
+
         perPage:5,
         currentPage: 1,
         isBusy: false, 
+        modal:false,
         rows:null,
       options: [
         { value: 5, text: "5" },
@@ -28,10 +30,17 @@ export const useImagesStore = defineStore('imagesStore',{
         { value: 50, text: "50" },
         { value: 100, text: "100" },
       ],
+       
+       
+       
+       
+    
+     
     }),
 
     
 actions: {
+
   dateTime(value) {
     return moment(value).format("D-MMM-Y");
   },

@@ -113,7 +113,6 @@
       </b-col>
       <b-col cols="12" xl="3" lg="4" md="5">
         <b-card>
-          <h4 class="sidebar-title">Search</h4>
           <b-form class="mt-3">
             <b-input-group label="Small">
               <b-input-group-append>

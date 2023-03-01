@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Validator;
 
 class ImageController extends Controller
 {
@@ -16,7 +17,7 @@ class ImageController extends Controller
     public function index(Request $request)
     {
 
-        $data['images']= Image::select('*','image_url as src')->with('user')->orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->Paginate($request->perPage);
+        $data['images']= Image::select('*','image_url as src')->with('user')->orderBy('id', 'DESC')->Paginate($request->perPage);
     
 
         return $this->sendResponse($data, 'Images return successfully.',Response::HTTP_OK);
@@ -41,7 +42,8 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+    
     }
 
     /**

@@ -12,7 +12,7 @@ export const useLoginStore = defineStore('loginStore',{
   }, 
     loading:false,  
 
-    accessToken: localStorage.getItem('token') || null,
+    accessToken: localStorage.getItem('token'),
     errors:{},
     
   }),
