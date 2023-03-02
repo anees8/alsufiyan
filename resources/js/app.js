@@ -93,11 +93,15 @@ library.add(
     faPlus
 );
 
+
+  
 axios.defaults.baseURL = "/api/";
 
 axios.defaults.headers.common["Authorization"] =
     "Bearer " + localStorage.getItem("token");
 
+   
+    
 const pinia = createPinia();
 
 const app = createApp(App);

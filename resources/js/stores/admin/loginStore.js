@@ -8,10 +8,13 @@ export const useLoginStore = defineStore("loginStore", {
             email: "",
             password: "",
         },
+       
+       
         loading: false,
 
         accessToken: localStorage.getItem("token"),
         errors: {},
+      
     }),
 
     getters: {
@@ -19,6 +22,7 @@ export const useLoginStore = defineStore("loginStore", {
     },
     mutations: {},
     actions: {
+        
         async login() {
             this.loading = true;
             try {

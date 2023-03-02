@@ -158,6 +158,7 @@ const router = createRouter({
     routes,
 });
 
+
 router.beforeEach((to, from, next) => {
     const { getAccessToken } = useLoginStore();
     if (to.meta.requireAuth && getAccessToken === null) {
@@ -172,5 +173,6 @@ router.beforeEach((to, from, next) => {
     }
     next();
 });
+
 
 export default router;

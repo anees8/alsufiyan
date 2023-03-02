@@ -23,11 +23,11 @@ export const useImagesStore = defineStore("imagesStore", {
             { value: 10, text: "10" },
             { value: 50, text: "50" },
             { value: 100, text: "100" },
-        ],
-       
+        ],              
             edit_id: null,
             image: null,
             previewImage: null,
+        
         
         errors: {},
     }),
@@ -58,6 +58,47 @@ export const useImagesStore = defineStore("imagesStore", {
                 }
                 this.isBusy = false;
             }
+        }, 
+        async uploadFile() {
+
+            if(!this.edit_id){
+            const formData = new FormData();
+            formData.append('image', this.image);
+
+            this.loading = true;
+            try {
+            let url = "images";
+
+            const response = await axios.post(url,formData);
+
+            this.getImages();
+            this.hideModel();
+
+            } catch (error) {
+            if (error.response) {
+            this.errors = error.response.data.errors;
+            }
+            this.loading = false;
+
+            }
+        }else{
+            console.log("ff");
+        }
+
+
+        },
+        editItem(id){
+            let img =this.images.find(img=>img.id==id);
+            if(img){
+                this.edit_id=id;
+                this.previewImage=img.src;
+                this.modal = !this.modal;
+            }
+    
+
+        },
+        deleteImage(id){
+
         },
         dateTime(value) {
             return moment(value).format("D-MMM-Y");
@@ -91,33 +132,7 @@ export const useImagesStore = defineStore("imagesStore", {
         },
 
 
-        async uploadFile() {
-
-
-            const formData = new FormData();
-           
-            formData.append('image', this.image);
-    
-    
-            this.loading = true;
-                try {
-                let url = "images";
-
-                const response = await axios.post(url,formData);
-
-                this.getImages();
-                this.hideModel();
-
-                } catch (error) {
-                if (error.response) {
-                this.errors = error.response.data.errors;
-                }
-                this.loading = false;
-
-                }
-
-
-        },
+       
         hideModel: function () {
             this.modal = !this.modal;
               this.resetForm();

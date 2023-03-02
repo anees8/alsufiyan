@@ -46,7 +46,7 @@
                   </div>
                   <div>
                     <button class="btn btn-outline-primary" @click="uploadFile">
-                      Submit
+                      {{ edit_id ? "Update Image" : "Add Image" }}
                     </button>
                   </div>
                 </template>
@@ -78,7 +78,11 @@
           <template #cell(username)="data">{{ data.item.user.name }}</template>
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
           <template #cell(actions)="data">
-            <b-button class="rounded-circle p-2 me-2" variant="outline-success">
+            <b-button
+              class="rounded-circle p-2 me-2"
+              @click="editItem(data.item.id)"
+              variant="outline-success"
+            >
               <font-awesome-icon icon=" fa-regular fa-pen-to-square" />
             </b-button>
 
@@ -124,6 +128,7 @@ const {
   isBusy,
   previewImage,
   loading,
+  edit_id,
   errors,
 } = storeToRefs(useImagesStore());
 
@@ -135,6 +140,7 @@ const {
   resetForm,
   hideModel,
   uploadFile,
+  editItem,
 } = useImagesStore();
 
 getImages();
