@@ -74,13 +74,10 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useLoginStore } from "@/stores/admin/loginStore.js";
 const { user, errors, loading } = storeToRefs(useLoginStore());
 const { login, resetForm } = useLoginStore();
 
-onMounted(() => {
-  resetForm();
-});
+resetForm();
 </script>

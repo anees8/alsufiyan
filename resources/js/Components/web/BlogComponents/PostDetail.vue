@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-import { onMounted, defineProps } from "vue";
+import { defineProps } from "vue";
 import Loader from "../../common/loader.vue";
 import { storeToRefs } from "pinia";
 import { usePostsStore } from "../../../stores/web/postsStore.js";
@@ -90,7 +90,5 @@ const props = defineProps({
 const { post, loading } = storeToRefs(usePostsStore());
 const { getPost, dateTime } = usePostsStore();
 
-onMounted(() => {
-  getPost(props.id);
-});
+getPost(props.id);
 </script>

@@ -14,12 +14,35 @@
               <font-awesome-icon icon="plus" class="me-2" />Add Image</b-button
             >
             <div>
-              <b-modal v-model="modal" title="Add Image">
+              <b-modal
+                v-model="modal"
+                title="Add Image"
+                hide-header-close
+                no-close-on-backdrop
+              >
+                <input
+                  type="file"
+                  id="image"
+                  @change="onFileChange"
+                  class="form-control-file"
+                  :disabled="!loading ? false : true"
+                />
+                <div>
+                  <span v-if="errors.image" class="text-danger">{{
+                    errors.image[0]
+                  }}</span>
+                </div>
+                <b-img
+                  v-if="previewImage"
+                  :src="previewImage"
+                  class="mt-2"
+                  style="height: 250px; width: auto"
+                  rounded
+                ></b-img>
+
                 <template #footer>
                   <div>
-                    <button class="btn btn-outline-dark" @click="modal = !modal">
-                      Close
-                    </button>
+                    <button class="btn btn-outline-dark" @click="hideModel">Close</button>
                   </div>
                   <div>
                     <button class="btn btn-outline-primary" @click="uploadFile">
@@ -87,7 +110,6 @@
   </b-row>
 </template>
 <script setup>
-import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useImagesStore } from "../../stores/admin/imagesStore.js";
@@ -100,13 +122,21 @@ const {
   modal,
   rows,
   isBusy,
-
+  previewImage,
+  loading,
   errors,
 } = storeToRefs(useImagesStore());
 
-const { getImages, setPerPage, dateTime } = useImagesStore();
+const {
+  getImages,
+  setPerPage,
+  dateTime,
+  onFileChange,
+  resetForm,
+  hideModel,
+  uploadFile,
+} = useImagesStore();
 
-onMounted(() => {
-  getImages();
-});
+getImages();
+resetForm();
 </script>

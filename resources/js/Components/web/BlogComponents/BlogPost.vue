@@ -135,7 +135,6 @@
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
 
 import Loader from "../../common/loader.vue";
 
@@ -152,7 +151,5 @@ const {
 } = storeToRefs(usePostsStore());
 const { getPosts, dateTime, setPerPage } = usePostsStore();
 
-onMounted(() => {
-  getPosts();
-});
+getPosts();
 </script>

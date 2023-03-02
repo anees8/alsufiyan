@@ -76,14 +76,12 @@
   </b-form>
 </template>
 <script setup>
-import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useContactStore } from "../../../stores/web/contactStore.js";
 const { contactForm, options, errors, message, loading } = storeToRefs(useContactStore());
 const { contact, resetForm, get_subject } = useContactStore();
-onMounted(() => {
-  resetForm();
-  get_subject();
-});
+
+resetForm();
+get_subject();
 </script>

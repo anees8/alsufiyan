@@ -41,7 +41,6 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import Loader from "../common/loader.vue";
 import { useVideosStore } from "../../stores/web/videosStore.js";
@@ -51,7 +50,5 @@ const { videos, options, perPage, limit, currentPage, loading, rows } = storeToR
 
 const { getVideos, setPerPage } = useVideosStore();
 
-onMounted(() => {
-  getVideos();
-});
+getVideos();
 </script>

@@ -48,7 +48,6 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import Loader from "../common/loader.vue";
 import { useImagesStore } from "../../stores/web/imagesStore.js";
@@ -66,7 +65,5 @@ const {
 
 const { getImages, setPerPage, show, handleHide } = useImagesStore();
 
-onMounted(() => {
-  getImages();
-});
+getImages();
 </script>
