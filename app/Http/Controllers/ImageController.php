@@ -54,10 +54,15 @@ class ImageController extends Controller
         }
 
 
-        $path = $request->file('image')->store('public/Gallery');
+
+        $imageName = time().'.'.$request->image->extension();  
+       
+        $request->image->move(public_path('gallery'), $imageName);
+        
+
 
         $image = new Image;
-        $image->image_url = $path;
+        $image->image_url = "/gallery/".$imageName;
         $image->user_id = Auth::user()->id;
        
         $image->save();
