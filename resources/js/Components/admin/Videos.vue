@@ -1,4 +1,1 @@
-<template>
-  <div>Videos</div>
-</template>
-<script setup></script>
+<template>Video</template>
