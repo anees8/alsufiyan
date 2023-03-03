@@ -7,9 +7,7 @@ export const useLoginStore = defineStore("loginStore", {
         user: {
             email: "",
             password: "",
-        },
-       
-       
+        },       
         loading: false,
 
         accessToken: localStorage.getItem("token"),

@@ -80,13 +80,17 @@
           <template #cell(actions)="data">
             <b-button
               class="rounded-circle p-2 me-2"
-              @click="editItem(data.item.id)"
-              variant="outline-success"
+              @click="editImage(data.item.id)"
+              variant="success"
             >
               <font-awesome-icon icon=" fa-regular fa-pen-to-square" />
             </b-button>
 
-            <b-button class="rounded-circle p-2 me-2" variant="outline-danger">
+            <b-button
+              class="rounded-circle p-2 me-2"
+              @click="deleteImage(data.item.id)"
+              variant="danger"
+            >
               <font-awesome-icon icon="fa-regular fa-trash-alt" />
             </b-button>
           </template> </b-table
@@ -140,7 +144,8 @@ const {
   resetForm,
   hideModel,
   uploadFile,
-  editItem,
+  editImage,
+  deleteImage,
 } = useImagesStore();
 
 getImages();

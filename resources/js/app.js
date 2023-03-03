@@ -94,6 +94,8 @@ library.add(
 );
 
 
+import Swal from 'sweetalert2';
+window.Swal=Swal;
   
 axios.defaults.baseURL = "/api/";
 
@@ -107,7 +109,6 @@ const pinia = createPinia();
 const app = createApp(App);
 app.use(VueAxios, axios);
 app.use(BootstrapVueNext);
-
 app.use(VueEasyLightbox);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.component("font-awesome-layers", FontAwesomeLayers);

@@ -23,6 +23,7 @@
         "moment": "^2.29.4",
         "pinia": "^2.0.30",
         "sass": "^1.58.1",
+        "sweetalert2": "^11.4.8",
         "vue": "^3.2.36",
         "vue-axios": "^3.5.2",
         "vue-easy-lightbox": "^1.12.0",
