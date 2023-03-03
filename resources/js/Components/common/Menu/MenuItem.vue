@@ -3,6 +3,9 @@
     <RouterLink
       v-show="Permissions"
       class="nav-link text-dark"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      v-bind:title="label"
       v-bind:to="{ name: name }"
     >
       <div

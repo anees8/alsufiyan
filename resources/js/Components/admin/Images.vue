@@ -55,7 +55,7 @@
                     v-if="previewImage"
                     :src="previewImage"
                     class="mt-2"
-                    style="height: 250px; width: auto"
+                    style="height: auto; width: auto; max-height: 250px; max-width: 450px"
                     rounded
                   ></b-img>
                 </form>
@@ -91,7 +91,7 @@
           <template #cell(image)="data">
             <b-img
               :src="data.item.src"
-              style="height: 100px; width: auto"
+              style="width: auto height: auto; width: auto; max-height: 100px; max-width: 300px"
               rounded
             ></b-img>
           </template>
