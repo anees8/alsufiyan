@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
-
+import {ref} from 'vue';
 export const useImagesStore = defineStore("imagesStore", {
 state: () => ({
                 fields: [
@@ -25,7 +25,13 @@ state: () => ({
                 { value: 100, text: "100" },
                 ],              
                 edit_id: null,
-                image: null,
+                imageTypes:[
+                    { value: 1, text: "File" },
+                    { value: 2, text: "Image Url" },
+                    ],
+                imageType:1,
+                image:'',
+                image_url:'',
                 previewImage: null,
                 errors: {},
     }),
@@ -59,16 +65,33 @@ actions: {
     }, 
 
     async uploadFile() {
+    
             if(!this.edit_id){
             const formData = new FormData();
-            formData.append('image', this.image);
+            
+            // formData.append('image', this.image);
+            if(this.image){
+            formData.append('image',this.image);
+            }
+            if(this.image_url){
+                formData.append('url',this.image_url);
+            }           
+
+            let config={
+            header:{ "content-type": "multipart/form-data",
+            },
+
+            };
             this.loading = true;
+        
             try {
             let url = "images";
-            const response = await axios.post(url,formData);
+            const response = await axios.post(url,formData,config);
+            this.imageType=1;
             this.getImages();
             this.hideModel();
             } catch (error) {
+             
             if (error.response) {
             this.errors = error.response.data.errors;
             }
@@ -79,13 +102,20 @@ actions: {
             try {
             let url = "images/";
             const formData = new FormData();
-            formData.append('image', this.image);
+
+            if(this.image){
+            formData.append('image',this.image);
+            }
+            if(this.image_url){
+            formData.append('url',this.image_url);
+            }  
             formData.append('_method','put');
             let config={
-            header:{'content_type':'image'},
+            header:{ 'Content-Type': 'multipart/form-data'},
+            
             };
             const response = await axios.post(url+this.edit_id,formData,config);
-
+            this.imageType=1;
             this.getImages();
             this.hideModel();
 
@@ -104,6 +134,7 @@ actions: {
         let img =this.images.find(img=>img.id==id);
         if(img){
         this.edit_id=id;
+        this.imageType=1;
         this.previewImage=img.src;
         this.modal = !this.modal;
     }
@@ -151,7 +182,7 @@ actions: {
     },
 
     onFileChange: function (e) {
-            this.image = e.target.files[0];
+            this.image = e.target.files[0];            ;
             const reader = new FileReader();
             reader.readAsDataURL(e.target.files[0]);
             reader.onload = () => {
@@ -166,16 +197,23 @@ actions: {
             if (input) {
             input.value = '';
             }
-
-            this.edit_id=null;
+        
+            
             this.image=null;
+            if(!this.edit_id){
             this.previewImage=null;
-
+            }
+            this.image_url=null;
+        
+            
             this.loading = false;
     },
 
     hideModel: function () {
         this.modal = !this.modal;
+        this.previewImage=null;
+        this.imageType=1;
+        this.edit_id=null;
         this.resetForm();
     },
     

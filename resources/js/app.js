@@ -48,7 +48,7 @@ import {
     faClock,
     faComment,
     faTrashAlt,
-    faPenToSquare,
+    
 } from "@fortawesome/free-regular-svg-icons";
 
 import { faFacebookF, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
@@ -89,7 +89,7 @@ library.add(
     faComment,
     faPen,
     faTrashAlt,
-    faPenToSquare,
+
     faPlus
 );
 

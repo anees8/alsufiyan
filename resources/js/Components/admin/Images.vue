@@ -20,25 +20,45 @@
                 hide-header-close
                 no-close-on-backdrop
               >
-                <input
-                  type="file"
-                  id="image"
-                  @change="onFileChange"
-                  class="form-control-file"
-                  :disabled="!loading ? false : true"
-                />
-                <div>
-                  <span v-if="errors.image" class="text-danger">{{
-                    errors.image[0]
-                  }}</span>
-                </div>
-                <b-img
-                  v-if="previewImage"
-                  :src="previewImage"
-                  class="mt-2"
-                  style="height: 250px; width: auto"
-                  rounded
-                ></b-img>
+                <form id="uploadForm" enctype="multipart/form-data">
+                  <b-form-group label="Select Image Type">
+                    <b-form-radio-group
+                      id="radio-group-1"
+                      v-model="imageType"
+                      :options="imageTypes"
+                      @change="resetForm"
+                    ></b-form-radio-group>
+                  </b-form-group>
+
+                  <div v-if="imageType == 1">
+                    <input
+                      type="file"
+                      id="image"
+                      class="form-control"
+                      v-on:change="onFileChange"
+                      :disabled="!loading ? false : true"
+                    />
+                    <span v-if="errors.image" class="text-danger">{{
+                      errors.image[0]
+                    }}</span>
+                  </div>
+                  <div v-else>
+                    <b-form-input
+                      type="url"
+                      v-model="image_url"
+                      placeholder="Enter your name"
+                    ></b-form-input>
+
+                    <span v-if="errors.url" class="text-danger">{{ errors.url[0] }}</span>
+                  </div>
+                  <b-img
+                    v-if="previewImage"
+                    :src="previewImage"
+                    class="mt-2"
+                    style="height: 250px; width: auto"
+                    rounded
+                  ></b-img>
+                </form>
 
                 <template #footer>
                   <div>
@@ -81,15 +101,15 @@
             <b-button
               class="rounded-circle p-2 me-2"
               @click="editImage(data.item.id)"
-              variant="success"
+              variant="outline-success"
             >
-              <font-awesome-icon icon=" fa-regular fa-pen-to-square" />
+              <font-awesome-icon icon="pen" />
             </b-button>
 
             <b-button
               class="rounded-circle p-2 me-2"
               @click="deleteImage(data.item.id)"
-              variant="danger"
+              variant="outline-danger"
             >
               <font-awesome-icon icon="fa-regular fa-trash-alt" />
             </b-button>
@@ -131,6 +151,9 @@ const {
   rows,
   isBusy,
   previewImage,
+  imageTypes,
+  imageType,
+  image_url,
   loading,
   edit_id,
   errors,

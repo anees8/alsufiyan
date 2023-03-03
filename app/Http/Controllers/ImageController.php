@@ -6,6 +6,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Validator;
 
 class ImageController extends Controller{
@@ -37,23 +38,33 @@ public function create(){
      * @return \Illuminate\Http\Response
      */
 public function store(Request $request){
-       
+     
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+           
+            'image' => 'bail|required_without:url|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'url'=> 'bail|required_without:image|url',
         ]);
+
        
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
 
+        $image = new Image;
+      
+        $image->user_id = Auth::user()->id;
         if ($request->has('image')) {
         $imageName = time().'.'.$request->image->extension();  
         $request->image->move(public_path('gallery'), $imageName);
+        $image->image_url = "/gallery/".$imageName;
         }
 
-        $image = new Image;
-        $image->image_url = "/gallery/".$imageName;
-        $image->user_id = Auth::user()->id;
+        if($request->has('url')){
+            $image->image_url = $request->url;
+
+        }
+
+       
        
         $image->save();
 
@@ -93,17 +104,27 @@ public function edit(Image $image){
      */
 public function update(Request $request,Image $image){  
         $validator = Validator::make($request->all(), [
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'bail|required_without:url|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'url'=> 'bail|required_without:image|url',
         ]);
         if($validator->fails()){
         return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
-        if ($request->has('image')) {
+        if (File::exists(public_path($image->image_url))) {
         unlink(public_path($image->image_url));
+        }
+        if ($request->has('image')) {
         $imageName = time().'.'.$request->image->extension();  
         $request->image->move(public_path('gallery'), $imageName);
         $image->image_url = "/gallery/".$imageName;
         }
+
+        if($request->has('url')){
+            $image->image_url = $request->url;
+
+        }
+
+        
         $image->update();
         return $this->sendResponse('Image Updated Successfully.',Response::HTTP_OK);
       
@@ -116,7 +137,11 @@ public function update(Request $request,Image $image){
      * @return \Illuminate\Http\Response
      */
 public function destroy(Image $image){
-    unlink(public_path($image->image_url));
+
+        if (File::exists(public_path($image->image_url))) {
+        unlink(public_path($image->image_url));
+        }
+
     $image->delete();
     return $this->sendResponse('Image Deleted Successfully.',Response::HTTP_OK);
     }
