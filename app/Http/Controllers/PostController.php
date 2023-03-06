@@ -13,11 +13,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-public function index(Request $request)
-    {
+public function index(Request $request){
        
         $data['posts']= Post::with('user')->orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->where('title', 'like', '%'.$request->search.'%')->orwhere('content', 'like', '%'.$request->search.'%')->Paginate($request->perPage);
-
         return $this->sendResponse($data, 'Posts return successfully.',Response::HTTP_OK);
 
     }

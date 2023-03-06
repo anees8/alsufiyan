@@ -32,6 +32,7 @@
   </aside>
 </template>
 <script setup>
+import { onMounted } from "vue";
 import MenuItem from "./Menu/MenuItem.vue";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
@@ -66,6 +67,12 @@ const menuTree = [
     Permissions: 1,
   },
   {
+    label: "Blog",
+    icon: "blog",
+    name: "AdminBlog",
+    Permissions: 1,
+  },
+  {
     label: "Images",
     icon: "image",
     name: "AdminImage",
@@ -77,7 +84,6 @@ const menuTree = [
     name: "AdminVideo",
     Permissions: 1,
   },
-
   {
     label: "Logout",
     icon: "right-from-bracket",
@@ -101,11 +107,11 @@ aside {
   &.small-menu {
     transition: all 0.3s ease;
     .logo {
-      width: 6rem;
+      width: 5rem;
       height: 4rem;
     }
     overflow: inherit;
-    width: 6rem;
+    width: 5rem;
   }
 }
 </style>

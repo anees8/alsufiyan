@@ -19,6 +19,9 @@ import AdminAbout from "./Components/admin/About.vue";
 import AdminHome from "./Components/admin/Home.vue";
 import AdminImages from "./Components/admin/Images.vue";
 import AdminVideos from "./Components/admin/Videos.vue";
+import AdminBlog from "./Components/admin/Blog.vue";
+
+
 
 const routes = [
     {
@@ -131,6 +134,16 @@ const routes = [
             requireAuth: true,
         },
     },
+
+    {
+        path: "/admin/blog",
+        name: "AdminBlog",
+        component: AdminBlog,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    
     {
         path: "/admin/image",
         name: "AdminImage",

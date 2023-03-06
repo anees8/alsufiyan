@@ -115,9 +115,9 @@
         <b-card>
           <b-form class="mt-3">
             <b-input-group label="Small">
-              <b-input-group-append>
+              <!-- <b-input-group-append>
                 <b-button> <font-awesome-icon icon="magnifying-glass" /></b-button>
-              </b-input-group-append>
+              </b-input-group-append> -->
 
               <b-form-input
                 v-model="search"

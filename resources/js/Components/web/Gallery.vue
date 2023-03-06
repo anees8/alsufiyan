@@ -12,16 +12,13 @@
           style="height: 30rem"
         />
       </b-col>
-      <b-col>
-        <vue-easy-lightbox
-          :visible="visible"
-          :imgs="images"
-          :index="currentindex"
-          @hide="handleHide"
-        ></vue-easy-lightbox>
-      </b-col>
     </b-row>
-
+    <vue-easy-lightbox
+      :visible="visible"
+      :imgs="images"
+      :index="currentindex"
+      @hide="handleHide"
+    ></vue-easy-lightbox>
     <b-row align-h="end" class="mt-5">
       <b-col lg="1" md="2" class="p-2">
         <b-form-select

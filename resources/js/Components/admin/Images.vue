@@ -34,6 +34,7 @@
                     <input
                       type="file"
                       id="image"
+                      accept="image/*"
                       class="form-control"
                       v-on:change="onFileChange"
                       :disabled="!loading ? false : true"
@@ -172,5 +173,5 @@ const {
 } = useImagesStore();
 
 getImages();
-resetForm();
+resetForm;
 </script>

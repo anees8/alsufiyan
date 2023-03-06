@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row align-items-center justify-content-center vh-100">
-      <div class="col-12 col-xl-4 col-lg-5 col-md-6 p-5 card shadow rounded">
+      <div class="col-11 col-xl-3 col-lg-5 col-md-6 card shadow rounded p-md-4 p-2 py-5">
         <div class="text-center">
           <button class="btn btn-dark rounded-circle p-4 mb-3">
             <font-awesome-icon icon="fa-regular fa-user" size="2x" />

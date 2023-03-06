@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class VideoController extends Controller
 {
@@ -16,8 +19,7 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         
-        $data['videos']= Video::select('*','video_url as src')->orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->Paginate($request->perPage);
-    
+        $data['videos']= Video::select('*','video_url as src')->with('user')->orderBy('id', 'DESC')->Paginate($request->perPage);    
 
         return $this->sendResponse($data, 'Videos return successfully.',Response::HTTP_OK);
     }
@@ -40,7 +42,40 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validator = Validator::make($request->all(), [
+           
+            'video' => 'bail|required_without:url|mimes:mp4,mov,ogg|max:20000',
+            'url'=> 'bail|required_without:video|url',
+        ]);
+
+       
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+
+        $video = new Video;
+      
+        $video->user_id = Auth::user()->id;
+        if ($request->has('video')) {
+        $videoName = time().'.'.$request->video->extension();  
+        $request->video->move(public_path('Videos'), $videoName);
+        $video->video_url = "/Videos/".$videoName;
+        }
+
+        if($request->has('url')){
+            $video->video_url = $request->url;
+
+        }
+
+       
+       
+        $video->save();
+
+        $success['video'] =  $video ;
+
+        return $this->sendResponse($success, 'Video Uploaded Successfully.',Response::HTTP_CREATED);
+
     }
 
     /**
@@ -74,7 +109,32 @@ class VideoController extends Controller
      */
     public function update(Request $request, Video $video)
     {
-        //
+        
+        $validator = Validator::make($request->all(), [
+            'video' => 'bail|required_without:url|mimes:mp4,mov,ogg|max:20000',
+            'url'=> 'bail|required_without:video|url',
+        ]);
+        if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+        if (File::exists(public_path($video->video_url))) {
+        unlink(public_path($video->video_url));
+        }
+        if ($request->has('video')) {
+        $videoName = time().'.'.$request->video->extension();  
+        $request->video->move(public_path('Videos'), $videoName);
+        $video->video_url = "/Videos/".$videoName;
+        }
+
+        if($request->has('url')){
+            $video->video_url = $request->url;
+
+        }
+
+        
+        $video->update();
+        return $this->sendResponse('Video Updated Successfully.',Response::HTTP_OK);
+      
     }
 
     /**
@@ -83,8 +143,13 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
-    {
-        //
+public function destroy(Video $video){
+        
+        if (File::exists(public_path($video->video_url))) {
+            unlink(public_path($video->video_url));
+            }
+    
+        $video->delete();
+        return $this->sendResponse('Video Deleted Successfully.',Response::HTTP_OK);
     }
 }
