@@ -9,7 +9,7 @@
           alt=""
           @click="show(index)"
           class="thumbnail img-container img-fluid d-block rounded gallery_img shadow-lg w-100 hover-shadow"
-          style="height: 30rem"
+          style="max-height: 30rem"
         />
       </b-col>
     </b-row>
