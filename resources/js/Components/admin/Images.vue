@@ -50,7 +50,7 @@
                       placeholder="Enter your name"
                     ></b-form-input>
 
-                    <span v-if="errors.url" class="text-danger">{{ errors.url[0] }}</span>
+                    <span v-if="errors" class="text-danger">{{ errors.url[0] }}</span>
                   </div>
                   <b-img
                     v-if="previewImage"
@@ -173,5 +173,6 @@ const {
 } = useImagesStore();
 
 getImages();
-resetForm;
+
+resetForm();
 </script>

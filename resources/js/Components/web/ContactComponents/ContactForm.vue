@@ -25,7 +25,7 @@
       />
       <span v-if="errors.email" class="text-danger">{{ errors.email[0] }}</span>
     </b-form-group>
-    <b-form-group label="phone" label-for="phone">
+    <b-form-group label="Phone" label-for="phone">
       <b-form-input
         id="phone"
         v-model="contactForm.phone"

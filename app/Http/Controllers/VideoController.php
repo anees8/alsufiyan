@@ -117,10 +117,11 @@ class VideoController extends Controller
         if($validator->fails()){
         return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
+        
+        if ($request->has('video')) {
         if (File::exists(public_path($video->video_url))) {
         unlink(public_path($video->video_url));
         }
-        if ($request->has('video')) {
         $videoName = time().'.'.$request->video->extension();  
         $request->video->move(public_path('Videos'), $videoName);
         $video->video_url = "/Videos/".$videoName;

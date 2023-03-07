@@ -110,10 +110,11 @@ public function update(Request $request,Image $image){
         if($validator->fails()){
         return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
+      
+        if ($request->has('image')) {
         if (File::exists(public_path($image->image_url))) {
         unlink(public_path($image->image_url));
         }
-        if ($request->has('image')) {
         $imageName = time().'.'.$request->image->extension();  
         $request->image->move(public_path('gallery'), $imageName);
         $image->image_url = "/gallery/".$imageName;

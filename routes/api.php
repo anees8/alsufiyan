@@ -36,7 +36,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-        Route::resource('Posts', PostController::class);
+        Route::resource('posts', PostController::class);
         Route::resource('images', ImageController::class);
         Route::resource('videos', VideoController::class);
 

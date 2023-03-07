@@ -5,7 +5,7 @@ import router from "../../router.js";
 export const useImagesStore = defineStore("imagesStore", {
     state: () => ({
         images: [],
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         limit: 4,
         loading: false,

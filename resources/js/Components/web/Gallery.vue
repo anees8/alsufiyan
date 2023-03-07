@@ -3,15 +3,24 @@
 
   <b-container class="router_view_min py-5" v-else>
     <b-row>
-      <b-col sm="12" md="4" class="p-1" v-for="(image, index) in images" :key="image.id">
+      <div class="image-grid">
+        <div v-for="(image, index) in images" :key="index" class="image-container">
+          <img
+            :src="image.src"
+            @click="show(index)"
+            class="image img-fluid rounded shadow-lg hover-shadow"
+          />
+        </div>
+      </div>
+      <!-- <b-col sm="12" md="4" class="p-1" v-for="(image, index) in images" :key="image.id">
         <img
           :src="image.src"
           alt=""
           @click="show(index)"
-          class="thumbnail img-container img-fluid d-block rounded gallery_img shadow-lg w-100 hover-shadow"
-          style="max-height: 30rem"
+          class="thumbnail img-container img-fluid d-block rounded shadow-lg w-100 hover-shadow"
+          style="height: 30rem"
         />
-      </b-col>
+      </b-col> -->
     </b-row>
     <vue-easy-lightbox
       :visible="visible"
@@ -64,3 +73,25 @@ const { getImages, setPerPage, show, handleHide } = useImagesStore();
 
 getImages();
 </script>
+<style scoped>
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+</style>

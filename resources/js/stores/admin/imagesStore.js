@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
-import {ref} from 'vue';
+
 export const useImagesStore = defineStore("imagesStore", {
 state: () => ({
                 fields: [
@@ -15,23 +15,23 @@ state: () => ({
                 perPage: 5,
                 currentPage: 1,
                 isBusy: false,
-                loading:false,
-                modal: false,
                 rows: null,
                 options: [
                 { value: 5, text: "5" },
                 { value: 10, text: "10" },
                 { value: 50, text: "50" },
                 { value: 100, text: "100" },
-                ],              
+                ],   
+                loading:false,
+                modal: false,           
                 edit_id: null,
                 imageTypes:[
                     { value: 1, text: "File" },
                     { value: 2, text: "Image Url" },
                     ],
                 imageType:1,
-                image:'',
-                image_url:'',
+                image:null,
+                image_url:null,
                 previewImage: null,
                 errors: {},
     }),
@@ -161,7 +161,7 @@ actions: {
             .delete(url + id)
             .then((res) => {
             this.getImages();
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            Swal.fire("Deleted!", "Your Image has been deleted.", "success");
             })
             .catch((error) => {
             this.errors = error.response.data.errors;
@@ -190,7 +190,7 @@ actions: {
             };
     },
 
-    resetForm: function () {
+    resetForm(){
             this.errors = {};
             this.message = "";
             const input = document.getElementById('image');
@@ -209,7 +209,7 @@ actions: {
             this.loading = false;
     },
 
-    hideModel: function () {
+    hideModel(){
         this.modal = !this.modal;
         this.previewImage=null;
         this.imageType=1;
