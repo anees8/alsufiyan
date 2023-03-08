@@ -20,6 +20,7 @@ import AdminHome from "./Components/admin/Home.vue";
 import AdminImages from "./Components/admin/Images.vue";
 import AdminVideos from "./Components/admin/Videos.vue";
 import AdminBlog from "./Components/admin/Blog.vue";
+import AdminContact from "./Components/admin/contact.vue";
 
 
 
@@ -159,7 +160,16 @@ const routes = [
         meta: {
             requireAuth: true,
         },
+    },{
+        path: "/admin/contact",
+        name: "AdminContact",
+        component: AdminContact,
+        meta: {
+            requireAuth: true,
+        },
     },
+
+    
 ];
 
 const router = createRouter({

@@ -10,6 +10,7 @@ import VueAxios from "vue-axios";
 
 // import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
 
+
 import BootstrapVueNext from "bootstrap-vue-next";
 import VueEasyLightbox from "vue-easy-lightbox";
 import "bootstrap/dist/css/bootstrap.css";
@@ -116,5 +117,6 @@ app.component("font-awesome-layer-text", FontAwesomeLayersText);
 app.use(pinia);
 
 app.use(router);
+
 // app.use(VueReCaptcha, { siteKey: '6LenSowkAAAAADTvKcDRW33ZtVkpr-I2vLVlbP3B' });
 app.mount("#app");

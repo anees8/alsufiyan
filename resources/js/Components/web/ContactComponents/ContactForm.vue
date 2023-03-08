@@ -51,6 +51,7 @@
         v-model="contactForm.message"
         :class="errors.message ? 'is-invalid' : ''"
         :disabled="!loading ? false : true"
+        rows="3"
       />
       <span v-if="errors.message" class="text-danger">{{ errors.message[0] }}</span>
     </b-form-group>

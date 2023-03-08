@@ -39,6 +39,7 @@ Route::middleware('auth:api')->group(function () {
         Route::resource('posts', PostController::class);
         Route::resource('images', ImageController::class);
         Route::resource('videos', VideoController::class);
+        Route::resource('contacts', ContactController::class);
 
     Route::get('/logout', [UsersController::class, 'logout']);
     

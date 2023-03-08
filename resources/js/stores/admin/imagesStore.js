@@ -9,7 +9,7 @@ state: () => ({
                 { key: "image", label: "Image" },
                 { key: "username", label: "Username" },
                 { key: "created_at", label: "Created Date" },
-                { key: "actions" },
+                { key: "actions", label: "Action" },
                 ],
                 images: [],
                 perPage: 5,

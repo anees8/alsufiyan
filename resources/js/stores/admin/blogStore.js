@@ -11,7 +11,7 @@ state: () => ({
         { key: "content", label: "Description",thStyle: { width: "50%" } },
         { key: "username", label: "Username" },
         { key: "created_at", label: "Created Date" },
-        { key: "actions" },
+        { key: "actions", label: "Action" },
         ],
         posts: [],
         perPage: 5,

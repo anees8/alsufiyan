@@ -4,7 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Mail\ContactSubject;
+
+use App\Models\ContactSubject;
+
+
 
 class Contact extends Model
 {
@@ -20,5 +23,8 @@ class Contact extends Model
     
     public $timestamps = true;
 
+    public function subject(){
+        return $this->hasOne(ContactSubject::class,'id', 'subject_id');
+    }
    
 }

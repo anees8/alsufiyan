@@ -85,6 +85,12 @@ const menuTree = [
     Permissions: 1,
   },
   {
+    label: "Contact",
+    icon: "envelope",
+    name: "AdminContact",
+    Permissions: 1,
+  },
+  {
     label: "Logout",
     icon: "right-from-bracket",
     name: "Logout",

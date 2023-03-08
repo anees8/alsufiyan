@@ -107,6 +107,7 @@
           :busy="isBusy"
           responsive
           small
+          show-empty
         >
           <template #cell(video)="data">
             <iframe
@@ -148,6 +149,7 @@
       <b-row align-h="end" class="mt-5">
         <b-col xl="1" lg="2" md="2" class="p-2">
           <b-form-select
+            v-if="rows > 5"
             v-model="perPage"
             :options="options"
             size="md"
@@ -157,6 +159,7 @@
         </b-col>
         <b-col xl="5" lg="6" md="8" class="p-2">
           <b-pagination
+            v-if="rows / perPage > 1"
             v-on:click="getVideos"
             v-model="currentPage"
             :total-rows="rows"

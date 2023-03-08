@@ -21,9 +21,11 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $data['contacts']= Contact::with('subject')->orderBy('id', 'DESC')->Paginate($request->perPage);
+        return $this->sendResponse($data, 'Contacts return successfully.',Response::HTTP_OK);
     }
 
     /**
