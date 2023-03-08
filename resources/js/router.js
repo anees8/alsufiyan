@@ -21,7 +21,7 @@ import AdminImages from "./Components/admin/Images.vue";
 import AdminVideos from "./Components/admin/Videos.vue";
 import AdminBlog from "./Components/admin/Blog.vue";
 import AdminContact from "./Components/admin/contact.vue";
-
+import AdminContactSubject  from "./Components/admin/ContactComponents/ContactSubject.vue";
 
 
 const routes = [
@@ -168,6 +168,15 @@ const routes = [
             requireAuth: true,
         },
     },
+    {
+        path: "/admin/contact/subject",
+        name: "AdminContactSubject",
+        component: AdminContactSubject,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    
 
     
 ];

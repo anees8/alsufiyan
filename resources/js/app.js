@@ -23,7 +23,6 @@ import {
     faHome,
     faAddressCard,
     faEnvelope,
-    faEnvelopeOpen,
     faPhone,
     faPaperPlane,
     faLocationDot,
@@ -49,6 +48,7 @@ import {
     faClock,
     faComment,
     faTrashAlt,
+    faEnvelopeOpen
     
 } from "@fortawesome/free-regular-svg-icons";
 
@@ -90,7 +90,6 @@ library.add(
     faComment,
     faPen,
     faTrashAlt,
-
     faPlus
 );
 

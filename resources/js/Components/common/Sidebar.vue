@@ -87,8 +87,16 @@ const menuTree = [
   {
     label: "Contact",
     icon: "envelope",
-    name: "AdminContact",
     Permissions: 1,
+    children: [
+      { label: "Contact List", icon: "envelope", name: "AdminContact", Permissions: 1 },
+      {
+        label: "Contact Subject",
+        icon: "envelope",
+        name: "AdminContactSubject",
+        Permissions: 1,
+      },
+    ],
   },
   {
     label: "Logout",
