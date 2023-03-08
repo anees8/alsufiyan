@@ -7,6 +7,7 @@ use App\Models\ContactSubject;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Validator;
 
 
 class ContactSubjectController extends Controller
@@ -16,13 +17,22 @@ class ContactSubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->perPage){
+        
+        $data['subject']= ContactSubject::Paginate($request->perPage);
+    }else{
 
-          $data['subject']=ContactSubject::select('id as value', 'subject as text')->get();
-
-        return $this->sendResponse($data, 'Subject return successfully.',Response::HTTP_OK);
+        $data['subject']=ContactSubject::select('id as value', 'subject as text')->get();
     }
+        return $this->sendResponse($data, 'Subject return successfully.',Response::HTTP_OK);
+
+        
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

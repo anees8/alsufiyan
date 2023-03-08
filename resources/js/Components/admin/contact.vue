@@ -21,6 +21,7 @@
           show-empty
         >
           <template #cell(subject)="data">{{ data.item.subject.subject }}</template>
+          <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
           <template #cell(actions)="data"> </template> </b-table
       ></b-col>
       <b-row align-h="end" class="mt-5">
@@ -37,7 +38,7 @@
         <b-col xl="5" lg="6" md="8" class="p-2">
           <b-pagination
             v-if="rows / perPage > 1"
-            v-on:click="getImages"
+            v-on:click="getContacts"
             v-model="currentPage"
             :total-rows="rows"
             :per-page="perPage"

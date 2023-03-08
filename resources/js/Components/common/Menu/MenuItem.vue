@@ -6,12 +6,10 @@
       data-bs-toggle="tooltip"
       data-bs-placement="top"
       v-bind:title="label"
+      v-on:click="togggleMenu()"
       v-bind:to="{ name: name }"
     >
-      <div
-        class="label d-flex align-items-center justify-content-between"
-        v-on:click="togggleMenu()"
-      >
+      <div class="label d-flex align-items-center justify-content-between">
         <div>
           <font-awesome-icon class="me-4" v-if="icon && !smallMenu" :icon="icon" />
           <font-awesome-icon v-if="icon && smallMenu" :icon="icon" class="ms-2" />

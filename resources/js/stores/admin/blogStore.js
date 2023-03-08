@@ -77,7 +77,7 @@ state: () => ({
             setPerPage(value) {
             this.perPage = value;
             this.currentPage = 1;
-            this.getImages();
+            this.getPosts();
             },
             resetForm() {
             this.errors = {};

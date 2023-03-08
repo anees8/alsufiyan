@@ -2,19 +2,15 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
 
-export const useContactsStore = defineStore("contactsStore", {
+export const useContactSubjectsStore = defineStore("contactsubjectsStore", {
 state: () => ({
                 fields: [
                 { key: "id", label: "ID" },
-                { key: "name", label: "Name" },
-                { key: "email", label: "Email" },
-                { key: "phone", label: "Phone" },
-                { key: "subject", label: "Subject" ,thStyle: { width: "15%" } },
-                { key: "message", label: "Message" ,thStyle: { width: "40%" } },
+                { key: "subject", label: "Subject" },
                 { key: "created_at", label: "Created Date" },
                 { key: "actions", label: "Action" },
                 ],
-                contacts: [],
+                subjects: [],
                 perPage: 5,
                 currentPage: 1,
                 isBusy: false,
@@ -32,10 +28,10 @@ state: () => ({
     }),
 
 actions: {
-    async getContacts() {
+    async getContactSubject() {
                 this.isBusy = true;
                 try {
-                let url = "contacts";
+                let url = "contactSubject";
                 if (this.perPage) {
                 url += `?perPage=${this.perPage}`;
                 }
@@ -45,10 +41,10 @@ actions: {
                 }`;
                 }
                 const response = await axios.get(url);
-                this.contacts = response.data.data.contacts.data;
+                this.subjects = response.data.data.subject.data;
 
-                this.currentPage = response.data.data.contacts.current_page;
-                this.rows = response.data.data.contacts.total;
+                this.currentPage = response.data.data.subject.current_page;
+                this.rows = response.data.data.subject.total;
 
                 this.isBusy = false;
                 } catch (error) {
@@ -59,10 +55,6 @@ actions: {
                 }
     }, 
 
-    deleteContactSubject(id){
-
-    },
-
 
 
     dateTime(value) {
@@ -72,7 +64,7 @@ actions: {
     setPerPage(value) {
         this.perPage = value;
         this.currentPage = 1;
-        this.getContacts();
+        this.getContactSubject();
     },
 
 
