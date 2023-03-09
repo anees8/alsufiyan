@@ -97,7 +97,7 @@ library.add(
     faTrashAlt,
     faPlus
 );
-
+import VueNumber from 'vue-number-animation'
 
 import Swal from 'sweetalert2';
 window.Swal=Swal;
@@ -121,6 +121,9 @@ app.component("font-awesome-layer-text", FontAwesomeLayersText);
 app.use(pinia);
 
 app.use(router);
+app.use(VueNumber);
+
+
 
 // app.use(VueReCaptcha, { siteKey: '6LenSowkAAAAADTvKcDRW33ZtVkpr-I2vLVlbP3B' });
 app.mount("#app");
