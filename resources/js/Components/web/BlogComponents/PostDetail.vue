@@ -51,7 +51,7 @@
                   </span>
 
                   <font-awesome-icon
-                    icon="fa-regular fa-clock"
+                    icon="clock"
                     class="text-muted me-1 fs-6 fw-light me-2"
                   /><span class="fs-6 fw-light me-2">{{
                     dateTime(post.created_at)

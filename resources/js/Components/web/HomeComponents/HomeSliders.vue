@@ -1,55 +1,22 @@
 <template>
   <carousel :items-to-show="itemsToShow" :autoplay="2000" :wrap-around="true">
-    <slide v-for="(pack, index) in packages" :key="pack.id">
-      <img :src="pack.src" class="d-block w-100 home_carousel_img" alt="..." />
+    <slide v-for="(slider, index) in sliders" :key="slider.id">
+      <img :src="slider.src" class="d-block w-100 home_carousel_img" alt="..." />
     </slide>
     <template #addons>
       <navigation />
-      <!-- <pagination /> -->
+      <pagination />
     </template>
   </carousel>
 </template>
-<script>
-// If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
+
+<script setup>
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
-export default {
-  name: "App",
-  components: {
-    Carousel,
-    Slide,
-    Pagination,
-    Navigation,
-  },
-  data() {
-    return {
-      packages: [
-        {
-          id: 1,
-          src: "HomeSlider/1.jpg",
-        },
-        {
-          id: 2,
-          src: "HomeSlider/2.jpg",
-        },
-        {
-          id: 3,
-          src: "HomeSlider/3.jpg",
-        },
-        {
-          id: 4,
-          src: "HomeSlider/4.jpg",
-        },
-        {
-          id: 5,
-          src: "HomeSlider/5.jpg",
-        },
-      ],
-      itemsToShow: 1,
-    };
-  },
-};
+import { storeToRefs } from "pinia";
+import { useSliderStore } from "../../../stores/web/HomeComponents/sliderStore";
+const { sliders, itemsToShow } = storeToRefs(useSliderStore());
 </script>
 <style scoped>
 .home_carousel_img {

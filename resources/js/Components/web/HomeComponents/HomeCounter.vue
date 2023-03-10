@@ -9,7 +9,7 @@
           ><b-card class="shadow-lg">
             <number
               :from="0"
-              :to="100"
+              :to="inquiry"
               :duration="5"
               class="h1"
               easing="Power1.easeOut"
@@ -22,7 +22,7 @@
           ><b-card class="shadow-lg">
             <number
               :from="0"
-              :to="100"
+              :to="satisfy"
               :duration="5"
               class="h1"
               easing="Power1.easeOut"
@@ -34,7 +34,7 @@
           ><b-card class="shadow-lg">
             <number
               :from="0"
-              :to="100"
+              :to="team"
               :duration="5"
               class="h1"
               easing="Power1.easeOut"
@@ -46,7 +46,7 @@
           ><b-card class="shadow-lg">
             <number
               :from="0"
-              :to="diffYears"
+              :to="serviceYear"
               :duration="5"
               class="h1"
               easing="Power1.easeOut"
@@ -61,9 +61,9 @@
 </template>
 
 <script setup>
-const dateString = "20-11-2009";
-const [day, month, year] = dateString.split("-");
-const date = new Date(year, month - 1, day);
-const date2 = new Date();
-const diffYears = date2.getFullYear() - date.getFullYear();
+import { storeToRefs } from "pinia";
+import { useCountersStore } from "../../../stores/web/HomeComponents/counterStore";
+const { inquiry, satisfy, team, serviceYear } = storeToRefs(useCountersStore());
+const { getExperiance } = useCountersStore();
+getExperiance();
 </script>

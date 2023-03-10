@@ -1,11 +1,11 @@
 <template>
-  <b-container class="py-5"
+  <b-container class="pt-5"
     ><b-row>
-      <b-col class="d-flex justify-content-between align-items-center my-2">
-        <h2 class="fw-bolder text-dark">Blog<u>Posts</u></h2>
+      <b-col>
+        <h2 class="fw-bolder text-dark text-center">Blog<u>Posts</u></h2>
 
         <router-link
-          class="btn btn-dark"
+          class="btn btn-dark float-end mb-3"
           v-bind:to="{
             name: 'blog',
           }"
@@ -16,7 +16,7 @@
 
     <b-row
       ><b-col
-        v-for="(post, index) in posts.slice(0, 3)"
+        v-for="(post, index) in posts"
         :key="index"
         cols="12"
         xl="4"
@@ -59,7 +59,7 @@
             </b-col>
             <b-col cols="12" lg="6" md="6">
               <font-awesome-icon
-                icon="fa-regular fa-clock"
+                icon="clock"
                 class="text-muted me-1 fs-6 fw-light"
               /><span class="fs-6 fw-light">{{ dateTime(post.created_at) }}</span></b-col
             >
@@ -92,7 +92,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import { usePostsStore } from "../../../stores/web/postsStore.js";
+import { usePostsStore } from "../../../stores/web/HomeComponents/blogStore.js";
 const { posts } = storeToRefs(usePostsStore());
 const { getPosts, dateTime } = usePostsStore();
 

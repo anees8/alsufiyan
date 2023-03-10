@@ -176,6 +176,4 @@ const {
 } = useImagesStore();
 
 getImages();
-
-resetForm();
 </script>

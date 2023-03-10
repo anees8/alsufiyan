@@ -1,5 +1,5 @@
 <template>
-  <div class="bodybackground">
+  <div class="bg-light">
     <Navbar
       v-if="
         ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(

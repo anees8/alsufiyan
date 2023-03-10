@@ -86,7 +86,8 @@
     <!-- Copyright -->
     <div class="text-center p-4 bg-white text-dark border-top border-1">
       © 2023 Copyright:
-      <a class="text-reset fw-bold" href="#">MA TECHNOLGY</a>
+      <a class="text-reset fw-bold" href="#">Al Sufiyan</a>
+      Website Proudly Developed & Maintained by MEERANJI TECHNOLOGY, INDIA
     </div>
     <!-- Copyright -->
   </footer>

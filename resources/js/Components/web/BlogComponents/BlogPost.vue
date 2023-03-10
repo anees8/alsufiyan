@@ -50,7 +50,7 @@
                   </b-col>
                   <b-col cols="12" lg="6" md="6">
                     <font-awesome-icon
-                      icon="fa-regular fa-clock"
+                      icon="clock"
                       class="text-muted me-1 fs-6 fw-light"
                     /><span class="fs-6 fw-light">{{
                       dateTime(post.created_at)

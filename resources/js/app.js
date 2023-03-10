@@ -42,12 +42,12 @@ import {
     faMagnifyingGlass,
     faPen,
     faPlus,
+    faClock,
     faEnvelopesBulk
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faAddressBook,
     faUser,
-    faClock,
     faComment,
     faTrashAlt,
     faEnvelopeOpen

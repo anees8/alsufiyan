@@ -22,48 +22,49 @@
   <b-container class="py-5 text-center text-uppercase">
     <b-row class="d-flex align-self-center pb-5 text-center"
       ><b-col cols="12" class="col-md-3"
-        ><b-card class="h-100">
-          <font-awesome-icon icon="location-dot" size="xl" />
-
-          <hr class="mx-5" />
+        ><b-card class="h-100"
+          ><div>
+            <font-awesome-icon icon="location-dot" size="xl" class="my-2" />
+          </div>
+          <div>
+            <span class="fw-bold">Address</span>
+          </div>
+          <hr class="mx-5 my-2" />
 
           <p>
-            <span class="fw-bold">Address : </span>
-            <span class="font-monospace fst-italic"
+            <span class="fw-normal"
               >198 West 21th Street, Suite 721 New York NY 10016</span
             >
           </p>
         </b-card> </b-col
       ><b-col cols="12" class="col-md-3"
         ><b-card class="h-100">
-          <font-awesome-icon icon="phone" size="xl" />
-          <hr class="mx-5" />
+          <div><font-awesome-icon icon="phone" size="xl" class="my-2" /></div>
+          <div><span class="fw-bold">Phone</span></div>
+          <hr class="mx-5 my-2" />
           <p>
-            <span class="fw-bold">Phone : </span>
-            <span class="font-monospace fst-italic"> + 01 234 567 89</span>
+            <span class="fw-normal"> + 01 234 567 89</span>
           </p>
         </b-card></b-col
       ><b-col cols="12" class="col-md-3"
         ><b-card class="h-100">
-          <font-awesome-icon icon="envelope" size="xl" />
-
-          <hr class="mx-5" />
+          <div><font-awesome-icon icon="envelope" size="xl" class="my-2" /></div>
+          <div><span class="fw-bold">Email</span></div>
+          <hr class="mx-5 my-2" />
           <p>
-            <span class="fw-bold">Email : </span>
-            <span class="font-monospace fst-italic"> info@example.com</span>
+            <span class="fw-normal"> info@example.com</span>
           </p>
         </b-card></b-col
       ><b-col cols="12" class="col-md-3"
         ><b-card class="h-100">
-          <font-awesome-icon icon="fa-regular fa-clock" size="xl" />
-
-          <hr class="mx-5" />
+          <div>
+            <font-awesome-icon icon="clock" size="xl" class="my-2" />
+          </div>
+          <div><span class="fw-bold">OPENING TIMES</span></div>
+          <hr class="mx-5 my-2" />
           <p>
-            <span class="fw-bold">OPENING TIMES : </span>
-            <span class="font-monospace fst-italic">
-              Monday - Friday : 10:00AM - 11:00PM </span
-            ><br />
-            <span class="font-monospace fst-italic"> Saturday : 10:00 AM - 07:00 PM</span>
+            <span class="fw-normal"> MON - FRI: 10 AM - 11 PM </span><br />
+            <span class="fw-normal"> SAT : 10 AM - 07 PM</span>
           </p>
         </b-card></b-col
       ></b-row
