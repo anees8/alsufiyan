@@ -41,12 +41,8 @@
 
             <p class="card-text pt-3" v-if="pack.desc">{{ pack.desc }}</p>
           </div>
-          <b-col class="my-2">
-            <RouterLink v-if="link" class="btn btn-secondary float-start ms-4 mb-2" to=""
-              >Details<font-awesome-icon class="ms-2" icon="arrow-right"
-            /></RouterLink>
-          </b-col></div
-      ></slide>
+        </div></slide
+      >
 
       <template #addons="{ slidesCount }">
         <navigation v-if="slidesCount > 1" class="my-4" />
@@ -58,7 +54,6 @@
 <script setup>
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import { RouterLink } from "vue-router";
 import { storeToRefs } from "pinia";
 import { usePackagesStore } from "../../../stores/web/HomeComponents/packagesStore";
 const { packages, breakpoints } = storeToRefs(usePackagesStore());
