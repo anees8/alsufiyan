@@ -92,9 +92,9 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import { usePostsStore } from "../../../stores/web/HomeComponents/blogStore.js";
-const { posts } = storeToRefs(usePostsStore());
-const { getPosts, dateTime } = usePostsStore();
+import { usePostStore } from "../../../stores/web/HomeComponents/blogStore.js";
+const { posts } = storeToRefs(usePostStore());
+const { getPosts, dateTime } = usePostStore();
 
 getPosts();
 </script>

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
-export const usePostsStore = defineStore("postsStore", {
+export const usePostStore = defineStore("postStore", {
     state: () => ({
         posts: [],
         limit:3,

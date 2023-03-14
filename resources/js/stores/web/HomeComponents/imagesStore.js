@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 
-export const useImagesStore = defineStore("imagesStore", {
+export const useImageStore = defineStore("imageStore", {
 state: () => ({
 images: [],
 perPage: 3,

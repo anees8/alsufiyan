@@ -40,10 +40,10 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import { useImagesStore } from "../../../stores/web/HomeComponents/imagesStore";
-const { images, visible, currentindex } = storeToRefs(useImagesStore());
+import { useImageStore } from "../../../stores/web/HomeComponents/imagesStore";
+const { images, visible, currentindex } = storeToRefs(useImageStore());
 
-const { getImages, show, handleHide } = useImagesStore();
+const { getImages, show, handleHide } = useImageStore();
 
 getImages();
 </script>
