@@ -21,8 +21,12 @@ state: () => ({
                 { value: 50, text: "50" },
                 { value: 100, text: "100" },
                 ],   
-               
-                
+
+                loading:false,
+                modal: false,  
+                subject:{
+                    edit_id:null,
+                 },
                 
                 errors: {},
     }),
@@ -66,6 +70,57 @@ actions: {
         this.currentPage = 1;
         this.getContactSubject();
     },
+    
+    editContactSubject(id){
+    this.subject =this.subjects.find(subject=>subject.id==id);
+    if(this.subject){
+    this.modal = !this.modal;
+    }
+
+
+    },  deleteImage(id){
+        Swal.fire({
+        title: 'Are you sure?',
+        text:  "Do you want to Delete this Contact Subject : " + id,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: 'Yes, delete',
+        cancelButtonText: 'No, cancel'
+        }).then((result) => {
+        if (result.isConfirmed) {
+
+        let url = "contactSubject/";
+
+        axios
+        .delete(url + id)
+        .then((res) => {
+        this.getContactSubject();
+        Swal.fire("Deleted!", "Your Contact Subject has been deleted.", "success");
+        })
+        .catch((error) => {
+        this.errors = error.response.data.errors;
+        });
+        }
+        });
+
+},
+
+
+        resetForm(){
+        this.errors = {};
+        this.loading = false;
+        },
+
+        hideModel(){
+        this.modal = !this.modal;
+        this.subject={
+            edit_id:null,
+            },
+      
+        this.resetForm();
+        },
 
 
     },

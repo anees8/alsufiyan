@@ -3,7 +3,40 @@
     <b-card>
       <b-col>
         <b-row align-v="center">
-          <b-col><h5>Contact Subjects List</h5></b-col>
+          <b-col><h5>Contact Subject List</h5></b-col>
+          <b-col>
+            <b-button
+              @click="modal = !modal"
+              class="float-end"
+              pill
+              variant="outline-dark"
+            >
+              <font-awesome-icon icon="plus" class="me-2" />Add Contact Subject</b-button
+            >
+            <b-modal
+              v-model="modal"
+              title="Add Contact Subject"
+              hide-header-close
+              no-close-on-backdrop
+            >
+              
+             
+
+           
+
+              <template #footer>
+                <div>
+                  <button class="btn btn-outline-dark" @click="hideModel">Close</button>
+                </div>
+                <div>
+                  <button class="btn btn-outline-primary" @click="uploadData">
+                    {{ subject.id ? "Update Contact Subject" : "Add Contact Subject" }}
+                  </button>
+                </div>
+              </template>
+            </b-modal>
+            <div></div>
+          </b-col>
         </b-row>
       </b-col>
       <b-col
@@ -69,11 +102,12 @@ import { storeToRefs } from "pinia";
 import { useContactSubjectsStore } from "../../../stores/admin/ContactComponents/contactsubjectStore.js";
 const {
   subjects,
+  subject,
   fields,
   options,
   perPage,
   currentPage,
-
+  modal,
   rows,
   isBusy,
 } = storeToRefs(useContactSubjectsStore());
@@ -81,7 +115,7 @@ const {
 const {
   getContactSubject,
   setPerPage,
-  dateTime,
+  dateTime,hideModel,resetForm,
   editContactSubject,
   deleteContactSubject,
 } = useContactSubjectsStore();

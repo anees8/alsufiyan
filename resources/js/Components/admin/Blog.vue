@@ -149,7 +149,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import { useBlogsStore } from "../../stores/admin/blogStore";
+import { useAdminBlogsStore } from "../../stores/admin/blogStore";
 
 const {
   posts,
@@ -162,7 +162,7 @@ const {
   isBusy,
   post,
   errors,
-} = storeToRefs(useBlogsStore());
+} = storeToRefs(useAdminBlogsStore());
 
 const {
   getPosts,
@@ -174,7 +174,7 @@ const {
   deletePost,
   onFileChange,
   uploadData,
-} = useBlogsStore();
+} = useAdminBlogsStore();
 
 getPosts();
 resetForm();

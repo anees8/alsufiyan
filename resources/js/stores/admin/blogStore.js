@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
 
-export const useBlogsStore = defineStore("blogsStore", {
+export const useAdminBlogsStore = defineStore("adminblogsStore", {
 state: () => ({
         fields: [
         { key: "id", label: "ID" },

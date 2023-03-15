@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
 import {ref} from 'vue';
-export const useVideosStore = defineStore("videosStore", {
+export const useAdminVideosStore = defineStore("adminvideosStore", {
 state: () => ({
                 fields: [
                 { key: "id", label: "ID" , tdClass: 'align-middle'},

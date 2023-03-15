@@ -173,7 +173,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import { useVideosStore } from "../../stores/admin/videosStore.js";
+import { useAdminVideosStore } from "../../stores/admin/videosStore.js";
 const {
   videos,
   fields,
@@ -190,7 +190,7 @@ const {
   loading,
   edit_id,
   errors,
-} = storeToRefs(useVideosStore());
+} = storeToRefs(useAdminVideosStore());
 
 const {
   getVideos,
@@ -202,7 +202,7 @@ const {
   uploadFile,
   editVideo,
   deleteVideo,
-} = useVideosStore();
+} = useAdminVideosStore();
 
 getVideos();
 resetForm;

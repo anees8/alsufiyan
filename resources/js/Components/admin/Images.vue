@@ -144,7 +144,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import { useImagesStore } from "../../stores/admin/imagesStore.js";
+import { useAdminImagesStore } from "../../stores/admin/imagesStore.js";
 const {
   images,
   fields,
@@ -161,7 +161,7 @@ const {
   loading,
   edit_id,
   errors,
-} = storeToRefs(useImagesStore());
+} = storeToRefs(useAdminImagesStore());
 
 const {
   getImages,
@@ -173,7 +173,7 @@ const {
   uploadFile,
   editImage,
   deleteImage,
-} = useImagesStore();
+} = useAdminImagesStore();
 
 getImages();
 </script>
