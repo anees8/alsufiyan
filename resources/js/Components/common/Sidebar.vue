@@ -80,6 +80,12 @@ name: "AdminAbout",
 Permissions: 1,
 },
 {
+label: "Users",
+icon: "users",
+name: "AdminUsers",
+Permissions: 1,
+},
+{
 label: "Blog",
 icon: "blog",
 name: "AdminBlog",

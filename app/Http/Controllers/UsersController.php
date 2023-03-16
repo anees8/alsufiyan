@@ -17,9 +17,14 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     public function index(Request $request){
+
+        $data['users']= User::orderBy('id', 'DESC')->Paginate($request->perPage);
+        return $this->sendResponse($data, 'Users return successfully.',Response::HTTP_OK);
+     }
 
    
-    public function index(Request $request){
+    public function login(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
@@ -51,24 +56,7 @@ class UsersController extends Controller
     public function create(Request $request)
     {
         
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
-        ]);
-   
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
-        }
-   
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $success['token'] =  $user->createToken('Alsufiyan')->accessToken;
-        $success['name'] =  $user->name;
-   
-        return $this->sendResponse($success, 'User register successfully.',Response::HTTP_CREATED);
+      
     }
 
 
@@ -90,7 +78,24 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'password_confirmation' => 'required|same:password',
+        ]);
+   
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+   
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $success['token'] =  $user->createToken('Alsufiyan')->accessToken;
+        $success['name'] =  $user->name;
+   
+        return $this->sendResponse($success, 'User register successfully.',Response::HTTP_CREATED);
     }
 
     /**
@@ -99,7 +104,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
     }
@@ -110,9 +115,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+      
+
     }
 
     /**
@@ -122,9 +128,23 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            
+        ]);
+   
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+        $user->name =  $request->name;    
+        $user->email =  $request->email;   
+         
+        $user->update();
+        return $this->sendResponse('User Updated Successfully.',Response::HTTP_OK);
+
     }
 
     /**
@@ -133,8 +153,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+    
+        $user->delete();
+        return $this->sendResponse('User Deleted Successfully.',Response::HTTP_OK);
+
     }
 }

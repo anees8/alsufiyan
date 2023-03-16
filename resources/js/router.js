@@ -24,6 +24,8 @@ import AdminContact from "./Components/admin/contact.vue";
 import AdminContactSubject  from "./Components/admin/ContactComponents/ContactSubject.vue";
 import AdminHomeSlider from "./Components/admin/HomeComponents/HomeSlider.vue";
 import AdminHomePackage from './Components/admin/HomeComponents/HomePackage.vue';
+import AdminUsers from './Components/admin/Users.vue';
+
 
 const routes = [
     {
@@ -137,6 +139,7 @@ const routes = [
         },
     },
 
+
     {
         path: "/admin/blog",
         name: "AdminBlog",
@@ -145,6 +148,15 @@ const routes = [
             requireAuth: true,
         },
     },
+    {
+        path: "/admin/users",
+        name: "AdminUsers",
+        component: AdminUsers,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    
     
     {
         path: "/admin/image",

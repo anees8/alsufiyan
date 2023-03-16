@@ -30,14 +30,15 @@ use App\Http\Controllers\HomePackageSliderController;
 
 
 
-Route::post('/login', [UsersController::class, 'index']);
-Route::post('/register', [UsersController::class, 'create']);
+Route::post('/login', [UsersController::class, 'login']);
+// Route::post('/register', [UsersController::class, 'store']);
 
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::resource('users', UsersController::class);
         Route::resource('posts', PostController::class);
         Route::resource('images', ImageController::class);
         Route::resource('videos', VideoController::class);

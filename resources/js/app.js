@@ -44,7 +44,8 @@ import {
     faPlus,
     faClock,
     faEnvelopesBulk,
-    faPlaneDeparture
+    faPlaneDeparture,
+    faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faAddressBook,
@@ -66,6 +67,7 @@ import {
 library.add(
      faA, faB, faC, faD, faE, faF, faG, faH, faI, faJ, faK, faL, faM, faN, faO, faP, faQ, faR, faS, faT, faU, faV, faW, faX, faY, faZ,
     faArrowRight,
+    faUsers,
     faPlaneDeparture,
     faHome,
     faAddressCard,
