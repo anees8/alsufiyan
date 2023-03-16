@@ -5,21 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\HomeSlider;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 
-class HomeSliderController extends Controller
-{
+class HomeSliderController extends Controller{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+public function index(Request $request)
     {
         
     if($request->perPage){
-    $data['sliders']= HomeSlider::orderBy('id', 'DESC')->Paginate($request->perPage);
+    $data['sliders']= HomeSlider::orderBy('id', 'DESC')->with('user')->Paginate($request->perPage);
     }else{
     $data['sliders']=HomeSlider::select('*', 'image as src')->get();
     }
@@ -31,7 +32,7 @@ class HomeSliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+public function create()
     {
         //
     }
@@ -42,18 +43,54 @@ class HomeSliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+public function store(Request $request){
+        
+    $validator = Validator::make($request->all(), [
+           
+        'image' => 'bail|required_without:url|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'url'=> 'bail|required_without:image|url',
+    ]);
+
+   
+    if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+    }
+
+    $homeslider = new HomeSlider;
+  
+    $homeslider->user_id = Auth::user()->id;
+    if ($request->has('image')) {
+    $imageName = time().'.'.$request->image->extension();  
+    $request->image->move(public_path('homeslider'), $imageName);
+    $homeslider->image = "/homeslider/".$imageName;
+    }
+
+    if($request->has('url')){
+        $homeslider->image = $request->url;
+
+    }
+    if($request->has('content')){
+        $homeslider->content = $request->content;
+
+    }
+
+
+   
+   
+    $homeslider->save();
+
+    $success['homeslider'] =  $homeslider ;
+
+    return $this->sendResponse($success, 'Home  Slider Uploaded Successfully.',Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\HomeSlider  $homeSlider
+     * @param  \App\Models\HomeSlider  $homeslider
      * @return \Illuminate\Http\Response
      */
-    public function show(HomeSlider $homeSlider)
+public function show(HomeSlider $homeslider)
     {
         //
     }
@@ -61,10 +98,10 @@ class HomeSliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\HomeSlider  $homeSlider
+     * @param  \App\Models\HomeSlider  $homeslider
      * @return \Illuminate\Http\Response
      */
-    public function edit(HomeSlider $homeSlider)
+public function edit(HomeSlider $homeslider)
     {
         //
     }
@@ -73,22 +110,57 @@ class HomeSliderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\HomeSlider  $homeSlider
+     * @param  \App\Models\HomeSlider  $homeslider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HomeSlider $homeSlider)
-    {
-        //
+public function update(Request $request, HomeSlider $homeslider){
+    $validator = Validator::make($request->all(), [
+        'image' => 'bail|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'url'=> 'bail|url',
+    ]);
+    if($validator->fails()){
+    return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+    }
+  
+    if ($request->has('image')) {
+    if (File::exists(public_path($homeslider->image))) {
+    unlink(public_path($homeslider->image));
+    }
+    $imageName = time().'.'.$request->image->extension();  
+    $request->image->move(public_path('homeslider'), $imageName);
+    $homeslider->image = "/homeslider/".$imageName;
+    }
+
+    if($request->has('url')){
+        $homeslider->image = $request->url;
+
+    }
+    if($request->has('content')){
+        $homeslider->content = $request->content;
+
+    }
+
+    
+    $homeslider->update();
+    return $this->sendResponse('Home Slider Updated Successfully.',Response::HTTP_OK);
+    
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\HomeSlider  $homeSlider
+     * @param  \App\Models\HomeSlider  $homeslider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HomeSlider $homeSlider)
-    {
-        //
+public function destroy(HomeSlider $homeslider){
+        
+        if (File::exists(public_path($homeslider->image))) {
+            unlink(public_path($homeslider->image));
+            }
+    
+        $homeslider->delete();
+        return $this->sendResponse('Home Slider Deleted Successfully.',Response::HTTP_OK);
     }
 }

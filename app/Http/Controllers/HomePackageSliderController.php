@@ -18,7 +18,7 @@ class HomePackageSliderController extends Controller
     {
 
         if($request->perPage){
-            $data['packages']= HomePackageSlider::orderBy('id', 'DESC')->Paginate($request->perPage);
+            $data['packages']= HomePackageSlider::orderBy('id', 'DESC')->with('user')->Paginate($request->perPage);
             }else{
             $data['packages']=HomePackageSlider::select('*', 'image as src')->get();
             }

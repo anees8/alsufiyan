@@ -47,7 +47,7 @@
                     <b-form-input
                       type="url"
                       v-model="video_url"
-                      placeholder="Enter your name"
+                      placeholder="Enter Video Url"
                     ></b-form-input>
 
                     <span v-if="errors.url" class="text-danger">{{ errors.url[0] }}</span>

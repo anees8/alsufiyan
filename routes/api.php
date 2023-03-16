@@ -43,6 +43,7 @@ Route::middleware('auth:api')->group(function () {
         Route::resource('videos', VideoController::class);
         Route::resource('contacts', ContactController::class);
         Route::resource('contactsubjects', ContactSubjectController::class);
+        Route::resource('homesliders', HomeSliderController::class);
 
     Route::get('/logout', [UsersController::class, 'logout']);
     

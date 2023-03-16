@@ -20,6 +20,8 @@
                 hide-header-close
                 no-close-on-backdrop
               >
+
+              
                 <form id="uploadForm" enctype="multipart/form-data">
                   <b-form-group label="Select Image Type">
                     <b-form-radio-group
@@ -30,7 +32,7 @@
                     ></b-form-radio-group>
                   </b-form-group>
 
-                  <div v-if="imageType == 1">
+                  <div v-if="imageType==1">
                     <input
                       type="file"
                       id="image"
@@ -50,7 +52,7 @@
                       placeholder="Enter your name"
                     ></b-form-input>
 
-                    <span v-if="errors" class="text-danger">{{ errors.url[0] }}</span>
+                    <span v-if="errors.url" class="text-danger">{{ errors.url[0] }}</span>
                   </div>
                   <b-img
                     v-if="previewImage"

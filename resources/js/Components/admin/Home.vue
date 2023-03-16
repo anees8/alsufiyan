@@ -1,142 +1,190 @@
 <template>
-    <b-row>
-      <b-card>
-        <b-col>
-          <b-row align-v="center">
-            <b-col><h5>Home Slider Full</h5></b-col>
-            <b-col>
-              <b-button
-                @click="modal = !modal"
-                class="float-end"
-                pill
-                variant="outline-dark"
-              >
-                <font-awesome-icon icon="plus" class="me-2" />Add Slider Image</b-button
-              >
+  <b-row>
+    <b-card>
+      <b-col>
+        <b-row align-v="center">
+          <b-col><h5>Image List</h5></b-col>
+          <b-col>
+            <b-button
+              @click="modal = !modal"
+              class="float-end"
+              pill
+              variant="outline-dark"
+            >
+              <font-awesome-icon icon="plus" class="me-2" />Add Image</b-button
+            >
+            <div>
               <b-modal
                 v-model="modal"
-                title="Add Slider Image"
+                title="Add Image"
                 hide-header-close
                 no-close-on-backdrop
               >
-                
-              <b-form-group
-          id="input-group-1"
-          label="Contact Subject Title:"
-          label-for="input-1"
-        >
-          <b-form-input
-            id="input-1"
-            v-model="subject.subject"
-            type="text"
-            placeholder="Enter Contact Subject Title"
-            required
-          ></b-form-input>
-          <b-form-invalid-feedback v-if="errors.subject" :state="errors.subject">
-                    {{ errors.subject[0] }}
-                  </b-form-invalid-feedback>
-        </b-form-group>
-  
-             
-  
+                <form id="uploadForm" enctype="multipart/form-data">
+                  <b-form-group label="Select Image Type">
+                    <b-form-radio-group
+                      id="radio-group-1"
+                      v-model="imageType"
+                      :options="imageTypes"
+                      @change="resetForm"
+                    ></b-form-radio-group>
+                  </b-form-group>
+
+                  <div v-if="imageType == 1">
+                    <input
+                      type="file"
+                      id="image"
+                      accept="image/*"
+                      class="form-control"
+                      v-on:change="onFileChange"
+                      :disabled="!loading ? false : true"
+                    />
+                    <span v-if="errors.image" class="text-danger">{{
+                      errors.image[0]
+                    }}</span>
+                  </div>
+                  <div v-else>
+                    <b-form-input
+                      type="url"
+                      v-model="image_url"
+                      placeholder="Enter your name"
+                    ></b-form-input>
+
+                    <span v-if="errors.url" class="text-danger">{{ errors.url[0] }}</span>
+                  </div>
+                  <div>
+                    <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+                <b-form-input
+                  id="input-2"
+                  v-model="content"
+                  placeholder="Enter Content"
+                  required
+                ></b-form-input>
+      </b-form-group>
+                  </div>
+                  <b-img
+                    v-if="previewImage"
+                    :src="previewImage"
+                    class="mt-2"
+                    style="height: auto; width: auto; max-height: 250px; max-width: 450px"
+                    rounded
+                  ></b-img>
+                </form>
+
                 <template #footer>
                   <div>
                     <button class="btn btn-outline-dark" @click="hideModel">Close</button>
                   </div>
                   <div>
-                    <button class="btn btn-outline-primary" @click="uploadData">
-                      {{ subject.id ? "Update Contact Subject" : "Add Contact Subject" }}
+                    <button class="btn btn-outline-primary" @click="uploadFile">
+                      {{ edit_id ? "Update Image" : "Add Image" }}
                     </button>
                   </div>
                 </template>
               </b-modal>
-              <div></div>
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col
-          ><b-table
-            striped
-            outlined
-            empty-filtered-text
-            caption-top
-            hover
-            footClone
-            :items="subjects"
-            :fields="fields"
-            :busy="isBusy"
-            responsive
-            show-empty
-          >
-            <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
-            <template #cell(actions)="data">
-              <b-button
-                class="rounded-circle p-2 me-2"
-                @click="editContactSubject(data.item.id)"
-                variant="outline-success"
-              >
-                <font-awesome-icon icon="pen" />
-              </b-button>
-  
-              <b-button
-                class="rounded-circle p-2 me-2"
-                @click="deleteContactSubject(data.item.id)"
-                variant="outline-danger"
-              >
-                <font-awesome-icon icon="fa-regular fa-trash-alt" />
-              </b-button>
-            </template> </b-table
-        ></b-col>
-        <b-row align-h="end" class="mt-5">
-          <b-col xl="1" lg="2" md="2" class="p-2">
-            <b-form-select
-              v-if="rows > 5"
-              v-model="perPage"
-              :options="options"
-              size="md"
-              v-on:change="setPerPage"
-              varient="dark"
-            ></b-form-select>
-          </b-col>
-          <b-col xl="5" lg="6" md="8" class="p-2">
-            <b-pagination
-              v-if="rows / perPage > 1"
-              v-on:click="getContactSubject"
-              v-model="currentPage"
-              :total-rows="rows"
-              :per-page="perPage"
-            ></b-pagination>
+            </div>
           </b-col>
         </b-row>
-      </b-card>
-    </b-row>
-  </template>
-  <script setup>
-  import { storeToRefs } from "pinia";
-  
-  import { useContactSubjectsStore } from "../../stores/admin/ContactComponents/contactsubjectStore.js";
-  const {
-    subjects,
-    subject,
-    fields,
-    options,
-    perPage,
-    currentPage,
-    modal,
-    rows,
-    errors,
-    isBusy,
-  } = storeToRefs(useContactSubjectsStore());
-  
-  const {
-    getContactSubject,
-    setPerPage,
-    dateTime,hideModel,resetForm,
-    editContactSubject,
-    deleteContactSubject,
-    uploadData
-  } = useContactSubjectsStore();
-  
-  getContactSubject();
-  </script>
-  
+      </b-col>
+      <b-col
+        ><b-table
+          striped
+          outlined
+          empty-filtered-text
+          caption-top
+          hover
+          footClone
+          :items="sliders"
+          :fields="fields"
+          :busy="isBusy"
+          responsive
+          show-empty
+        >
+          <template #cell(image)="data">
+            <b-img
+              :src="data.item.image"
+              style="width: auto height: auto; width: auto; max-height: 100px; max-width: 300px"
+              rounded
+            ></b-img>
+          </template>
+          <template #cell(username)="data">{{ data.item.user.name }}</template>
+          <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
+          <template #cell(actions)="data">
+            <b-button
+              class="rounded-circle p-2 me-2"
+              @click="editHomeSlider(data.item.id)"
+              variant="outline-success"
+            >
+              <font-awesome-icon icon="pen" />
+            </b-button>
+
+            <b-button
+              class="rounded-circle p-2 me-2"
+              @click="deleteHomeSlider(data.item.id)"
+              variant="outline-danger"
+            >
+              <font-awesome-icon icon="fa-regular fa-trash-alt" />
+            </b-button>
+          </template> </b-table
+      ></b-col>
+      <b-row align-h="end" class="mt-5">
+        <b-col xl="1" lg="2" md="2" class="p-2">
+          <b-form-select
+            v-if="rows > 5"
+            v-model="perPage"
+            :options="options"
+            size="md"
+            v-on:change="setPerPage"
+            varient="dark"
+          ></b-form-select>
+        </b-col>
+        <b-col xl="5" lg="6" md="8" class="p-2">
+          <b-pagination
+            v-if="rows / perPage > 1"
+            v-on:click="getHomesliders"
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+          ></b-pagination>
+        </b-col>
+      </b-row>
+    </b-card>
+  </b-row>
+</template>
+<script setup>
+import { storeToRefs } from "pinia";
+
+import { useAdminSliderStore } from "../../stores/admin/HomeComponents/sliderStore";
+const {
+  sliders,
+  fields,
+  options,
+  perPage,
+  currentPage,
+  modal,
+  rows,
+  isBusy,
+  previewImage,
+  imageTypes,
+  imageType,
+  image_url,
+  content,
+  loading,
+  edit_id,
+  errors,
+} = storeToRefs(useAdminSliderStore());
+
+const {
+  getHomesliders,
+  setPerPage,
+  dateTime,
+  onFileChange,
+  resetForm,
+  hideModel,
+  uploadFile,
+  editHomeSlider,
+  deleteHomeSlider,
+} = useAdminSliderStore();
+
+getHomesliders();
+</script>
