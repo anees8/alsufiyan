@@ -5,8 +5,8 @@
         <u></u>
       </h2>
       <b-row
-        ><b-col cols="12" class="col-md-3"
-          ><b-card class="shadow-lg">
+        ><b-col cols="12" class="my-2 col-lg-3 col-md-6  col-sm-12"
+          ><b-card class="shadow-lg h-100">
             <number
               :from="0"
               :to="inquiry"
@@ -18,8 +18,8 @@
             <hr class="mx-5" />
             <h5>Inquiry</h5>
           </b-card> </b-col
-        ><b-col cols="12" class="col-md-3"
-          ><b-card class="shadow-lg">
+        ><b-col cols="12" class=" my-2  col-lg-3 col-md-6   col-sm-12"
+          ><b-card class="shadow-lg h-100">
             <number
               :from="0"
               :to="satisfy"
@@ -30,8 +30,8 @@
             <hr class="mx-5" />
             <h5>satisfied customer</h5>
           </b-card></b-col
-        ><b-col cols="12" class="col-md-3"
-          ><b-card class="shadow-lg">
+        ><b-col cols="12" class=" my-2 col-lg-3 col-md-6  col-sm-12"
+          ><b-card class="shadow-lg h-100">
             <number
               :from="0"
               :to="team"
@@ -42,8 +42,8 @@
             <hr class="mx-5" />
             <h5>our team</h5>
           </b-card></b-col
-        ><b-col cols="12" class="col-md-3"
-          ><b-card class="shadow-lg">
+        ><b-col cols="12" class="my-2 col-lg-3 col-md-6  col-sm-12"
+          ><b-card class="shadow-lg h-100">
             <number
               :from="0"
               :to="serviceYear"

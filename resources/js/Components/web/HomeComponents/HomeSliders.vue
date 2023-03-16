@@ -17,6 +17,8 @@ import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { storeToRefs } from "pinia";
 import { useSliderStore } from "../../../stores/web/HomeComponents/sliderStore";
 const { sliders, itemsToShow } = storeToRefs(useSliderStore());
+const { getSliderImages } = useSliderStore();
+getSliderImages();
 </script>
 <style scoped>
 .home_carousel_img {

@@ -8,6 +8,8 @@ use App\Http\Controllers\ContactSubjectController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\HomeSliderController;
+use App\Http\Controllers\HomePackageSliderController;
 
 
 
@@ -40,7 +42,7 @@ Route::middleware('auth:api')->group(function () {
         Route::resource('images', ImageController::class);
         Route::resource('videos', VideoController::class);
         Route::resource('contacts', ContactController::class);
-        Route::resource('contactSubject', ContactSubjectController::class);
+        Route::resource('contactsubjects', ContactSubjectController::class);
 
     Route::get('/logout', [UsersController::class, 'logout']);
     
@@ -54,7 +56,8 @@ Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{post}', [PostController::class,'show']);
 Route::get('/images', [ImageController::class, 'index']);
 Route::get('/videos', [VideoController::class, 'index']);
-
+Route::get('/homesliders', [HomeSliderController::class, 'index']);
+Route::get('/homepackageslider', [HomePackageSliderController::class, 'index']);
 
 
     

@@ -20,7 +20,22 @@
               no-close-on-backdrop
             >
               
-             
+            <b-form-group
+        id="input-group-1"
+        label="Contact Subject Title:"
+        label-for="input-1"
+      >
+        <b-form-input
+          id="input-1"
+          v-model="subject.subject"
+          type="text"
+          placeholder="Enter Contact Subject Title"
+          required
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="errors.subject" :state="errors.subject">
+                  {{ errors.subject[0] }}
+                </b-form-invalid-feedback>
+      </b-form-group>
 
            
 
@@ -109,6 +124,7 @@ const {
   currentPage,
   modal,
   rows,
+  errors,
   isBusy,
 } = storeToRefs(useContactSubjectsStore());
 
@@ -118,6 +134,7 @@ const {
   dateTime,hideModel,resetForm,
   editContactSubject,
   deleteContactSubject,
+  uploadData
 } = useContactSubjectsStore();
 
 getContactSubject();

@@ -1,47 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\ContactSubject;
-
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
 
 
-class ContactSubjectController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
+class ContactSubjectController extends Controller{
+   
+    
+public function index(Request $request){
         if($request->perPage){
-        
-        $data['subject']= ContactSubject::Paginate($request->perPage);
-    }else{
 
-        $data['subject']=ContactSubject::select('id as value', 'subject as text')->get();
-    }
-        return $this->sendResponse($data, 'Subject return successfully.',Response::HTTP_OK);
-
-        
-    }
-
-
-
+        $data['subject']= ContactSubject::orderBy('id', 'DESC')->Paginate($request->perPage);
+        }else{
+        $data['subject']=ContactSubject::select('id as value', 'subject as text')->orderBy('id', 'DESC')->get();
+        }
+        return $this->sendResponse($data, 'Subject return successfully.',Response::HTTP_OK);    
+        }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+
+public function create(){
+    //
     }
 
     /**
@@ -50,10 +37,27 @@ class ContactSubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
+public function store(Request $request){
+        $validator = Validator::make($request->all(), [
+        'subject'=> 'bail|required|min:3|max:50',
+        ]);
+        if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+
+        $contactsubject = new ContactSubject;
+        if($request->has('subject')){
+        $contactsubject->subject = $request->subject;
+
+        }       
+        $contactsubject->save();
+
+        $success['contactsubject'] =  $contactsubject ;
+
+        return $this->sendResponse($success, 'Contact Subject Added Successfully.',Response::HTTP_CREATED);
+
+        }
 
     /**
      * Display the specified resource.
@@ -61,8 +65,7 @@ class ContactSubjectController extends Controller
      * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function show(ContactSubject $ContactSubject)
-    {
+public function show(ContactSubject $contactsubject){
         //
     }
 
@@ -72,8 +75,9 @@ class ContactSubjectController extends Controller
      * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function edit(ContactSubject $ContactSubject)
-    {
+
+
+public function edit(ContactSubject $contactsubject){
         //
     }
 
@@ -84,9 +88,22 @@ class ContactSubjectController extends Controller
      * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactSubject $ContactSubject)
-    {
-        //
+
+public function update(Request $request, ContactSubject $contactsubject){
+       
+        $validator = Validator::make($request->all(), [
+            'subject'=> 'bail|required|min:3|max:50',
+        ]);
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+
+
+        $contactsubject->subject = $request->subject;
+        $contactsubject->update();
+        return $this->sendResponse('Contact Subject Updated Successfully.',Response::HTTP_OK);
+
+
     }
 
     /**
@@ -95,8 +112,10 @@ class ContactSubjectController extends Controller
      * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactSubject $ContactSubject)
-    {
-        //
+
+public function destroy(ContactSubject $contactsubject){
+
+    $contactsubject->delete();
+    return $this->sendResponse('Contact Subject Deleted Successfully.',Response::HTTP_OK);
     }
 }

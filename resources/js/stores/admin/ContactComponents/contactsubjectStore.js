@@ -35,7 +35,7 @@ actions: {
     async getContactSubject() {
                 this.isBusy = true;
                 try {
-                let url = "contactSubject";
+                let url = "contactsubjects";
                 if (this.perPage) {
                 url += `?perPage=${this.perPage}`;
                 }
@@ -59,6 +59,58 @@ actions: {
                 }
     }, 
 
+    async uploadData() {
+    
+        if(!this.subject.id){
+           
+        const formData = new FormData();
+        if(this.subject.subject){
+        formData.append('subject',this.subject.subject);
+        }
+       
+        this.loading = true;
+    
+        try {
+        let url = "contactsubjects";
+        const response = await axios.post(url,formData);
+        
+        this.getContactSubject();
+        this.hideModel();
+        } catch (error) {
+         
+        if (error.response) {
+        this.errors = error.response.data.errors;
+        }
+        this.loading = false;
+        }
+         }else{
+           
+        this.loading = true;
+        try {
+           
+        let url = "contactsubjects/";
+        const formData = new FormData();
+        if(this.subject.subject){
+            formData.append('subject',this.subject.subject);
+        }
+    
+        formData.append('_method','put');
+       
+        const response = await axios.post(url+this.subject.id,formData);
+      
+        this.getContactSubject();
+        this.hideModel();
+
+        } catch (error) {
+        if (error.response) {
+        this.errors = error.response.data.errors;
+        }
+        this.loading = false;
+
+        }
+
+         }
+},
 
 
     dateTime(value) {
@@ -78,7 +130,10 @@ actions: {
     }
 
 
-    },  deleteImage(id){
+    }, 
+    
+    
+    deleteContactSubject(id){
         Swal.fire({
         title: 'Are you sure?',
         text:  "Do you want to Delete this Contact Subject : " + id,
@@ -91,10 +146,10 @@ actions: {
         }).then((result) => {
         if (result.isConfirmed) {
 
-        let url = "contactSubject/";
+        let url = "contactsubjects/";
 
         axios
-        .delete(url + id)
+        .delete(url+id)
         .then((res) => {
         this.getContactSubject();
         Swal.fire("Deleted!", "Your Contact Subject has been deleted.", "success");

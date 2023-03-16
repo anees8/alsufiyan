@@ -38,7 +38,7 @@
     <div class="container-fluid text-center">
       <a class="navbar-brand" href="#">
         <img class="mx-1" :src="logo" height="48" />
-        <img :src="slogo" height="48" />
+        <img :src="slogo" height="48" class="p-1" />
       </a>
 
       <button

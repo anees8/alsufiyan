@@ -39,7 +39,7 @@
             </div>
             <hr class="p-0 m-0" v-if="pack.price || pack.days" />
 
-            <p class="card-text pt-3" v-if="pack.desc">{{ pack.desc }}</p>
+            <p class="card-text pt-3" v-if="pack.description">{{ pack.description }}</p>
           </div>
         </div></slide
       >
@@ -57,4 +57,6 @@ import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { storeToRefs } from "pinia";
 import { usePackagesStore } from "../../../stores/web/HomeComponents/packagesStore";
 const { packages, breakpoints } = storeToRefs(usePackagesStore());
+const { getHomePackageSlider } = usePackagesStore();
+getHomePackageSlider();
 </script>

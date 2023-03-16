@@ -59,6 +59,14 @@ const menuTree = [
     icon: "house",
     name: "AdminHome",
     Permissions: 1,
+    children: [
+      // {
+      //   label: "Contact Subject",
+      //   icon: "s",
+      //   name: "AdminContactSubject",
+      //   Permissions: 1,
+      // },
+    ],
   },
   {
     label: "About",
@@ -86,16 +94,10 @@ const menuTree = [
   },
   {
     label: "Contact",
-    icon: "envelope",
-    Permissions: 1,
+    icon: "envelopes-bulk",
     name: "AdminContact",
-    children: [
-      {
-        label: "Contact List",
-        icon: "envelopes-bulk",
-        name: "AdminContact",
         Permissions: 1,
-      },
+    children: [
       {
         label: "Contact Subject",
         icon: "s",
