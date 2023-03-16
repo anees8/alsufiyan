@@ -103,8 +103,12 @@ state: () => ({
                 if(this.post.image){
                 formData.append('image',this.post.image);
                 }
+                if(this.post.title){
                 formData.append('title',this.post.title);
+                }
+                if(this.post.content){
                 formData.append('content',this.post.content);
+                }
     
                 let config={
                 header:{ "content-type": "multipart/form-data",
@@ -135,8 +139,12 @@ state: () => ({
                 if(this.post.image){
                     formData.append('image',this.post.image);
                     }
+                    if(this.post.title){
                     formData.append('title',this.post.title);
+                    }
+                    if(this.post.content){
                     formData.append('content',this.post.content);
+                    }
               
                 formData.append('_method','put');
                 let config={
@@ -188,7 +196,7 @@ state: () => ({
                     .delete(url + id)
                     .then((res) => {
                     this.getPosts();
-                    Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                    Swal.fire("Deleted!", "Your Blog Post has been deleted.", "success");
                     })
                     .catch((error) => {
                     this.errors = error.response.data.errors;

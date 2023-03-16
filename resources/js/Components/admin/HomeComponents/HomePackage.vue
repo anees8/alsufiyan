@@ -3,7 +3,7 @@
     <b-card>
       <b-col>
         <b-row align-v="center">
-          <b-col><h5>Image List</h5></b-col>
+          <b-col><h5>Home Package List</h5></b-col>
           <b-col>
             <b-button
               @click="modal = !modal"
@@ -11,12 +11,12 @@
               pill
               variant="outline-dark"
             >
-              <font-awesome-icon icon="plus" class="me-2" />Add Image</b-button
+              <font-awesome-icon icon="plus" class="me-2" />Add Home Package</b-button
             >
             <div>
               <b-modal
                 v-model="modal"
-                title="Add Image"
+                title="Add Home Package"
                 hide-header-close
                 no-close-on-backdrop
               >
@@ -24,13 +24,13 @@
                   <b-form-group label="Select Image Type">
                     <b-form-radio-group
                       id="radio-group-1"
-                      v-model="imageType"
+                      v-model="pack.imageType"
                       :options="imageTypes"
                       @change="resetForm"
                     ></b-form-radio-group>
                   </b-form-group>
 
-                  <div v-if="imageType == 1">
+                  <div v-if="pack.imageType == 1">
                     <input
                       type="file"
                       id="image"
@@ -46,25 +46,66 @@
                   <div v-else>
                     <b-form-input
                       type="url"
-                      v-model="image_url"
-                      placeholder="Enter your name"
+                      v-model="pack.image_url"
+                      placeholder="Enter Image Url"
                     ></b-form-input>
 
                     <span v-if="errors.url" class="text-danger">{{ errors.url[0] }}</span>
                   </div>
                   <div>
-                    <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+                    <b-form-group id="input-group-2" label="Title:" label-for="input-2">
                 <b-form-input
                   id="input-2"
-                  v-model="content"
-                  placeholder="Enter Content"
+                  v-model="pack.title"
+                  placeholder="Enter Title"
                   required
                 ></b-form-input>
+                <b-form-invalid-feedback v-if="errors.title" :state="errors.title">
+                  {{ errors.title[0] }}
+                </b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group
+                id="input-group-3"
+                label="Description::"
+                label-for="input-3"
+              >
+                <b-form-textarea
+                  id="textarea"
+                  v-model="pack.description"
+                  placeholder="Enter Description..."
+                  rows="6"
+                ></b-form-textarea>
+                <b-form-invalid-feedback v-if="errors.description" :state="errors.description">
+                  {{ errors.description[0] }}
+                </b-form-invalid-feedback>
+              </b-form-group>
+      <b-form-group id="input-group-2" label="Days:" label-for="input-2">
+                <b-form-input
+                  id="input-2"
+                  v-model="pack.days"
+                  placeholder="Enter Days (eg: 10 or 10-15 )"
+                  required
+                ></b-form-input>
+                <b-form-invalid-feedback v-if="errors.days" :state="errors.days">
+                  {{ errors.days[0] }}
+                </b-form-invalid-feedback>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Price:" label-for="input-2">
+                <b-form-input
+                  id="input-2"
+                  type="number"
+                  v-model="pack.price"
+                  placeholder="Enter Price"
+                  required
+                ></b-form-input>
+                <b-form-invalid-feedback v-if="errors.price" :state="errors.price">
+                  {{ errors.price[0] }}
+                </b-form-invalid-feedback>
       </b-form-group>
                   </div>
                   <b-img
-                    v-if="previewImage"
-                    :src="previewImage"
+                    v-if="pack.previewImage"
+                    :src="pack.previewImage"
                     class="mt-2"
                     style="height: auto; width: auto; max-height: 250px; max-width: 450px"
                     rounded
@@ -77,7 +118,7 @@
                   </div>
                   <div>
                     <button class="btn btn-outline-primary" @click="uploadFile">
-                      {{ edit_id ? "Update Image" : "Add Image" }}
+                      {{ pack.edit_id ? "Update Home Package" : "Add Home Package" }}
                     </button>
                   </div>
                 </template>
@@ -94,7 +135,7 @@
           caption-top
           hover
           footClone
-          :items="sliders"
+          :items="packages"
           :fields="fields"
           :busy="isBusy"
           responsive
@@ -112,7 +153,7 @@
           <template #cell(actions)="data">
             <b-button
               class="rounded-circle p-2 me-2"
-              @click="editHomeSlider(data.item.id)"
+              @click="editHomePackage(data.item.id)"
               variant="outline-success"
             >
               <font-awesome-icon icon="pen" />
@@ -120,7 +161,7 @@
 
             <b-button
               class="rounded-circle p-2 me-2"
-              @click="deleteHomeSlider(data.item.id)"
+              @click="deleteHomePackage(data.item.id)"
               variant="outline-danger"
             >
               <font-awesome-icon icon="fa-regular fa-trash-alt" />
@@ -141,7 +182,7 @@
         <b-col xl="5" lg="6" md="8" class="p-2">
           <b-pagination
             v-if="rows / perPage > 1"
-            v-on:click="getHomesliders"
+            v-on:click="getHomePackages"
             v-model="currentPage"
             :total-rows="rows"
             :per-page="perPage"
@@ -154,9 +195,9 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import { useAdminSliderStore } from "../../stores/admin/HomeComponents/sliderStore";
+import { useAdminPackageStore } from "../../../stores/admin/HomeComponents/packageStore";
 const {
-  sliders,
+  packages,
   fields,
   options,
   perPage,
@@ -164,27 +205,23 @@ const {
   modal,
   rows,
   isBusy,
-  previewImage,
   imageTypes,
-  imageType,
-  image_url,
-  content,
-  loading,
-  edit_id,
+  pack,  
+  loading,   
   errors,
-} = storeToRefs(useAdminSliderStore());
+} = storeToRefs(useAdminPackageStore());
 
 const {
-  getHomesliders,
+  getHomePackages,
   setPerPage,
   dateTime,
   onFileChange,
   resetForm,
   hideModel,
   uploadFile,
-  editHomeSlider,
-  deleteHomeSlider,
-} = useAdminSliderStore();
+  editHomePackage,
+  deleteHomePackage,
+} = useAdminPackageStore();
 
-getHomesliders();
+getHomePackages();
 </script>

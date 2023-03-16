@@ -44,7 +44,7 @@ Route::middleware('auth:api')->group(function () {
         Route::resource('contacts', ContactController::class);
         Route::resource('contactsubjects', ContactSubjectController::class);
         Route::resource('homesliders', HomeSliderController::class);
-
+        Route::resource('homepackagesliders', HomePackageSliderController::class);
     Route::get('/logout', [UsersController::class, 'logout']);
     
 });

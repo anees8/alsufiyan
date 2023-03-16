@@ -2,17 +2,20 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
 
-export const useAdminSliderStore = defineStore("adminsliderStore", {
+export const useAdminPackageStore = defineStore("adminpackageStore", {
 state: () => ({
                 fields: [
                 { key: "id", label: "ID" },
                 { key: "image", label: "Image" },
-                { key: "content", label: "Content" },
+                { key: "title"},
+                { key: "description"},
+                { key: "days"},
+                { key: "price"},
                 { key: "username", label: "Username" },
                 { key: "created_at", label: "Created Date" },
                 { key: "actions", label: "Action" },
                 ],
-                sliders: [],
+                packages: [],
                 perPage: 5,
                 currentPage: 1,
                 isBusy: false,
@@ -25,12 +28,15 @@ state: () => ({
                 ],   
                 loading:false,
                 modal: false,   
-                slider:{
+                pack:{
                     edit_id:null,
                     imageType:1,
                     image:null,
                     image_url:null,
-                    content:null,
+                    title:null,
+                    description:null,
+                    days:null,
+                    price:null,
                     previewImage: null,
                  },
               
@@ -42,10 +48,10 @@ state: () => ({
     }),
 
 actions: {
-    async getHomesliders() {
+    async getHomePackages() {
                 this.isBusy = true;
                 try {
-                let url = "homesliders";
+                let url = "homepackagesliders";
                 if (this.perPage) {
                 url += `?perPage=${this.perPage}`;
                 }
@@ -56,10 +62,10 @@ actions: {
                 }
                 const response = await axios.get(url);
               
-                this.sliders = response.data.data.sliders.data;
+                this.packages = response.data.data.packages.data;
 
-                this.currentPage = response.data.data.sliders.current_page;
-                this.rows = response.data.data.sliders.total;
+                this.currentPage = response.data.data.packages.current_page;
+                this.rows = response.data.data.packages.total;
 
                 this.isBusy = false;
                 } catch (error) {
@@ -72,19 +78,29 @@ actions: {
 
     async uploadFile() {
     
-            if(!this.slider.edit_id){
+            if(!this.pack.edit_id){
             const formData = new FormData();
             
             // formData.append('image', this.image);
-            if(this.slider.image){
-            formData.append('image',this.slider.image);
+            if(this.pack.image){
+            formData.append('image',this.pack.image);
             }
-            if(this.slider.image_url){
-                formData.append('url',this.slider.image_url);
+            if(this.pack.image_url){
+                formData.append('url',this.pack.image_url);
             }           
-            if(this.slider.content){
-                formData.append('content',this.slider.content);
+            if(this.pack.title){
+                formData.append('title',this.pack.title);
             }
+            if(this.pack.description){
+                formData.append('description',this.pack.description);
+            }
+            if(this.pack.price){
+                formData.append('price',this.pack.price);
+            }
+            if(this.pack.days){
+                formData.append('days',this.pack.days);
+            }
+            
             
             let config={
             header:{ "content-type": "multipart/form-data",
@@ -94,10 +110,10 @@ actions: {
             this.loading = true;
         
             try {
-            let url = "homesliders";
+            let url = "homepackagesliders";
             const response = await axios.post(url,formData,config);
-            this.slider.imageType=1;
-            this.getHomesliders();
+            this.pack.imageType=1;
+            this.getHomePackages();
             this.hideModel();
             } catch (error) {
              
@@ -109,26 +125,35 @@ actions: {
             }else{
             this.loading = true;
             try {
-            let url = "homesliders/";
+            let url = "homepackagesliders/";
             const formData = new FormData();
 
-            if(this.slider.image){
-            formData.append('image',this.slider.image);
+            if(this.pack.image){
+            formData.append('image',this.pack.image);
             }
-            if(this.slider.image_url){
-            formData.append('url',this.slider.image_url);
+            if(this.pack.image_url){
+            formData.append('url',this.pack.image_url);
             }  
-            if(this.slider.content){
-            formData.append('content',this.slider.content);
+            if(this.pack.title){
+            formData.append('title',this.pack.title);
+        }
+        if(this.pack.description){
+            formData.append('description',this.pack.description);
+        }
+        if(this.pack.price){
+            formData.append('price',this.pack.price);
+        }
+        if(this.pack.days){
+            formData.append('days',this.pack.days);
         }
             formData.append('_method','put');
             let config={
             header:{ 'Content-Type': 'multipart/form-data'},
             
             };
-            const response = await axios.post(url+this.slider.edit_id,formData,config);
-            this.slider.imageType=1;
-            this.getHomesliders();
+            const response = await axios.post(url+this.pack.edit_id,formData,config);
+            this.pack.imageType=1;
+            this.getHomePackages();
             this.hideModel();
 
             } catch (error) {
@@ -142,20 +167,23 @@ actions: {
             }
     },
 
-    editHomeSlider(id){
-        let slider =this.sliders.find(slider=>slider.id==id);
-        if(slider){
-        this.slider.edit_id=id;
-        this.slider.imageType=1;
-        this.slider.content=slider.content;
-        this.slider.previewImage=slider.image;
+    editHomePackage(id){
+        let packs =this.packages.find(packs=>packs.id==id);
+        if(packs){
+        this.pack.edit_id=id;
+        this.pack.imageType=1;
+        this.pack.title=packs.title;
+        this.pack.description=packs.description;
+        this.pack.days=packs.days;
+        this.pack.price=packs.price;
+        this.pack.previewImage=packs.image;
         this.modal = !this.modal;
     }
 
 
     },
 
-    deleteHomeSlider(id){
+    deleteHomePackage(id){
             Swal.fire({
             title: 'Are you sure?',
             text:  "Do you want to Delete this Image : " + id,
@@ -168,13 +196,13 @@ actions: {
             }).then((result) => {
             if (result.isConfirmed) {
 
-            let url = "homesliders/";
+            let url = "homepackagesliders/";
 
             axios
             .delete(url + id)
             .then((res) => {
-            this.getHomesliders();
-            Swal.fire("Deleted!", "Your Home Slider has been deleted.", "success");
+            this.getHomePackages();
+            Swal.fire("Deleted!", "Your Package Slider has been deleted.", "success");
             })
             .catch((error) => {
             this.errors = error.response.data.errors;
@@ -191,15 +219,15 @@ actions: {
     setPerPage(value) {
         this.perPage = value;
         this.currentPage = 1;
-        this.getHomesliders();
+        this.getHomePackages();
     },
 
     onFileChange: function (e) {
-            this.slider.image = e.target.files[0];            ;
+            this.pack.image = e.target.files[0];            ;
             const reader = new FileReader();
             reader.readAsDataURL(e.target.files[0]);
             reader.onload = () => {
-            this.slider.previewImage = reader.result;
+            this.pack.previewImage = reader.result;
             };
     },
 
@@ -212,21 +240,31 @@ actions: {
             }
         
             
-            this.slider.image=null;
-            if(!this.slider.edit_id){
-            this.slider.previewImage=null;
+            this.pack.image=null;
+            if(!this.pack.edit_id){
+            this.pack.previewImage=null;
+          
             }
-            this.slider.image_url=null;
-            this.slider.content=null;
+            this.pack.image_url=null;
+            
+            
             
             this.loading = false;
     },
 
     hideModel(){
         this.modal = !this.modal;
-        this.slider.previewImage=null;
-        this.slider.imageType=1;
-        this.slider.edit_id=null;
+        this.pack={
+            edit_id:null,
+            imageType:1,
+            image:null,
+            image_url:null,
+            title:null,
+            description:null,
+            days:null,
+            price:null,
+            previewImage: null,
+         },
         this.resetForm();
     },
     

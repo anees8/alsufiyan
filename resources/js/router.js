@@ -16,13 +16,14 @@ import Login from "./Components/admin/Login.vue";
 import Logout from "./Components/admin/Logout.vue";
 import Dashboard from "./Components/admin/Dashboard.vue";
 import AdminAbout from "./Components/admin/About.vue";
-import AdminHome from "./Components/admin/Home.vue";
+
 import AdminImages from "./Components/admin/Images.vue";
 import AdminVideos from "./Components/admin/Videos.vue";
 import AdminBlog from "./Components/admin/Blog.vue";
 import AdminContact from "./Components/admin/contact.vue";
 import AdminContactSubject  from "./Components/admin/ContactComponents/ContactSubject.vue";
-
+import AdminHomeSlider from "./Components/admin/HomeComponents/HomeSlider.vue";
+import AdminHomePackage from './Components/admin/HomeComponents/HomePackage.vue';
 
 const routes = [
     {
@@ -128,9 +129,9 @@ const routes = [
         },
     },
     {
-        path: "/admin/home",
-        name: "AdminHome",
-        component: AdminHome,
+        path: "/admin/home/slider",
+        name: "AdminHomeSlider",
+        component: AdminHomeSlider,
         meta: {
             requireAuth: true,
         },
@@ -176,6 +177,16 @@ const routes = [
             requireAuth: true,
         },
     },
+    {
+        path: "/admin/home/package",
+        name: "AdminHomePackage",
+        component: AdminHomePackage,
+        meta: {
+            requireAuth: true,
+        },
+    },
+
+    
     
 
     

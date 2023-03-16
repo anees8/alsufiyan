@@ -6,6 +6,10 @@ use App\Models\HomePackageSlider;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class HomePackageSliderController extends Controller
 {
@@ -44,16 +48,69 @@ class HomePackageSliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+           
+            'image' => 'bail|required_without:url|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'url'=> 'bail|required_without:image|url',
+            'title'=> 'bail|required|min:3|max:50',
+            'description'=> 'bail|required|min:10',
+            'price'=> 'numeric|digits_between:3,8',
+
+            
+        ]);
+    
+       
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+    
+        $homepackageslider = new HomePackageSlider;
+      
+        $homepackageslider->user_id = Auth::user()->id;
+        if ($request->has('image')) {
+        $imageName = time().'.'.$request->image->extension();  
+        $request->image->move(public_path('homepackage'), $imageName);
+        $homepackageslider->image = "/homepackage/".$imageName;
+        }
+    
+        if($request->has('url')){
+            $homepackageslider->image = $request->url;
+    
+        }
+        if($request->has('title')){
+            $homepackageslider->title = $request->title;
+    
+        }
+        if($request->has('description')){
+            $homepackageslider->description = $request->description;
+    
+        }
+        if($request->has('price')){
+            $homepackageslider->price = $request->price;
+    
+        }
+        if($request->has('days')){
+            $homepackageslider->days = $request->days;
+    
+        }
+    
+    
+       
+       
+        $homepackageslider->save();
+    
+        $success['homepackageslider'] =  $homepackageslider ;
+    
+        return $this->sendResponse($success, 'Home  Package Created Successfully.',Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\HomePackageSlider  $homePackageSlider
+     * @param  \App\Models\HomePackageSlider  $homepackageslider
      * @return \Illuminate\Http\Response
      */
-    public function show(HomePackageSlider $homePackageSlider)
+    public function show(HomePackageSlider $homepackageslider)
     {
         //
     }
@@ -61,10 +118,10 @@ class HomePackageSliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\HomePackageSlider  $homePackageSlider
+     * @param  \App\Models\HomePackageSlider  $homepackageslider
      * @return \Illuminate\Http\Response
      */
-    public function edit(HomePackageSlider $homePackageSlider)
+    public function edit(HomePackageSlider $homepackageslider)
     {
         //
     }
@@ -73,22 +130,74 @@ class HomePackageSliderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\HomePackageSlider  $homePackageSlider
+     * @param  \App\Models\HomePackageSlider  $homepackageslider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HomePackageSlider $homePackageSlider)
+    public function update(Request $request, HomePackageSlider $homepackageslider)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'image' => 'bail|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'url'=> 'bail|url',
+            'title'=> 'bail|required|min:3|max:50',
+            'description'=> 'bail|required|min:10',
+            'price'=> 'numeric|digits_between:3,8',
+
+        ]);
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+            }
+          
+            if ($request->has('image')) {
+            if (File::exists(public_path($homepackageslider->image))) {
+            unlink(public_path($homepackageslider->image));
+            }
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('homepackage'), $imageName);
+            $homepackageslider->image = "/homepackage/".$imageName;
+            }
+        
+            if($request->has('url')){
+                $homepackageslider->image = $request->url;
+        
+            }
+            if($request->has('title')){
+                $homepackageslider->title = $request->title;
+        
+            }
+            if($request->has('description')){
+                $homepackageslider->description = $request->description;
+        
+            }
+            if($request->has('price')){
+                $homepackageslider->price = $request->price;
+        
+            }
+            if($request->has('days')){
+                $homepackageslider->days = $request->days;
+        
+            }
+        
+            
+            $homepackageslider->update();
+            return $this->sendResponse('Home Package Slider Updated Successfully.',Response::HTTP_OK);
+            
+        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\HomePackageSlider  $homePackageSlider
+     * @param  \App\Models\HomePackageSlider  $homepackageslider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HomePackageSlider $homePackageSlider)
+    public function destroy(HomePackageSlider $homepackageslider)
     {
-        //
+        
+        if (File::exists(public_path($homepackageslider->image))) {
+            unlink(public_path($homepackageslider->image));
+            }
+    
+        $homepackageslider->delete();
+        return $this->sendResponse('Home Package Deleted Successfully.',Response::HTTP_OK);
     }
 }
