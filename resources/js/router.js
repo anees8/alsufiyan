@@ -53,7 +53,7 @@ const routes = [
         },
     },
     {
-        path: "/videos",
+        path: "/video",
         name: "Videos",
         component: Videos,
         meta: {

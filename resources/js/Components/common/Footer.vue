@@ -51,7 +51,7 @@
 
           <p>
             <a
-              v-for="(social_icon, index) in social_icons"
+              v-for="social_icon in social_icons"
               class="nav-link text-dark me-3 d-inline"
               :to="social_icon.url"
               target="_blank"

@@ -1,6 +1,6 @@
 <template>
   <carousel :items-to-show="itemsToShow" :autoplay="2000" :wrap-around="true">
-    <slide v-for="(slider, index) in sliders" :key="slider.id">
+    <slide v-for="(slider) in sliders" :key="slider.id">
       <img :src="slider.src" class="d-block w-100 home_carousel_img" alt="..." />
     </slide>
     <template #addons>

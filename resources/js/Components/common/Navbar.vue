@@ -8,25 +8,25 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item class="px-xl-3 px-md-2 py-2" :to="{ name: 'Home' }"
+        <b-nav-item class="px-xl-3 px-md-3 py-2" :to="{ name: 'Home' }"
           ><font-awesome-icon class="me-2" icon="home" />Home</b-nav-item
         >
-        <b-nav-item class="px-xl-3 px-md-2 py-2" :to="{ name: 'About' }"
+        <b-nav-item class="px-xl-3 px-md-3 py-2" :to="{ name: 'About' }"
           ><font-awesome-icon class="me-2" icon="address-card" />About</b-nav-item
         >
-        <b-nav-item class="px-xl-3 px-md-2 py-2" :to="{ name: 'blog' }"
+        <b-nav-item class="px-xl-3 px-md-3 py-2" :to="{ name: 'blog' }"
           ><font-awesome-icon class="me-2" icon="blog" />Blog</b-nav-item
         >
-        <b-nav-item class="px-xl-3 px-md-2 py-2" :to="{ name: 'gallery' }"
+        <b-nav-item class="px-xl-3 px-md-3 py-2" :to="{ name: 'gallery' }"
           ><font-awesome-icon class="me-2" icon="image" />Gallery</b-nav-item
         >
-        <b-nav-item class="px-xl-3 px-md-2 py-2" :to="{ name: 'Videos' }"
+        <b-nav-item class="px-xl-3 px-md-3 py-2" :to="{ name: 'Videos' }"
           ><font-awesome-icon class="me-2" icon="video" />Videos</b-nav-item
         >
-        <b-nav-item class="px-xl-3 px-md-2 py-2" :to="{ name: 'contact' }"
+        <b-nav-item class="px-xl-3 px-md-3 py-2" :to="{ name: 'contact' }"
           ><font-awesome-icon class="me-2" icon="envelope" />Contact</b-nav-item
         >
-        <b-nav-item class="px-xl-3 px-md-2 py-2" :to="{ name: 'Login' }"
+        <b-nav-item class="px-xl-3 px-md-3 py-2" :to="{ name: 'Login' }"
           >Login<font-awesome-icon class="ms-2" icon="arrow-right"
         /></b-nav-item>
       </b-navbar-nav>
@@ -35,7 +35,7 @@
   <nav
     class="navbar navbar-expand-lg fixed-top navbar-light bg-white justify-content-between p-0 m-0"
   >
-    <div class="container-fluid text-center">
+    <div class="container text-center">
       <a class="navbar-brand" href="#">
         <img class="mx-1" :src="logo" height="48" />
         <img :src="slogo" height="48" class="p-1" />
@@ -54,7 +54,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul
-          class="navbar-nav m-auto me-xl-5 me-md-2 mb-0 flex items-center justify-between text-center"
+          class="navbar-nav m-auto me-xl-5 me-md-1 mb-0 flex items-center justify-between text-center"
         >
           <li class="nav-item mx-0">
             <RouterLink
@@ -62,7 +62,7 @@
               exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
               :to="{ name: 'Home' }"
-              ><font-awesome-icon class="me-2" icon="home" />Home</RouterLink
+              ><font-awesome-icon class="me-2 me-md-1" icon="home" />Home</RouterLink
             >
           </li>
           <li class="nav-item mx-0">
@@ -71,7 +71,7 @@
               exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
               :to="{ name: 'About' }"
-              ><font-awesome-icon class="me-2" icon="address-card" />About</RouterLink
+              ><font-awesome-icon class="me-2 me-md-1" icon="address-card" />About</RouterLink
             >
           </li>
           <li class="nav-item mx-0">
@@ -80,7 +80,7 @@
               exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
               :to="{ name: 'blog' }"
-              ><font-awesome-icon class="me-2" icon="blog" />Blog</RouterLink
+              ><font-awesome-icon class="me-2 me-md-1" icon="blog" />Blog</RouterLink
             >
           </li>
           <li class="nav-item mx-0">
@@ -89,7 +89,7 @@
               exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
               :to="{ name: 'gallery' }"
-              ><font-awesome-icon class="me-2" icon="image" />Gallery</RouterLink
+              ><font-awesome-icon class="me-2 me-md-1" icon="image" />Gallery</RouterLink
             >
           </li>
           <li class="nav-item mx-0">
@@ -98,7 +98,7 @@
               exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
               :to="{ name: 'Videos' }"
-              ><font-awesome-icon class="me-2" icon="video" />Videos</RouterLink
+              ><font-awesome-icon class="me-2 me-md-1" icon="video" />Videos</RouterLink
             >
           </li>
           <li class="nav-item mx-0">
@@ -107,7 +107,7 @@
               exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark bg-light "
               :to="{ name: 'contact' }"
-              ><font-awesome-icon class="me-2" icon="envelope" />Contact</RouterLink
+              ><font-awesome-icon class="me-2 me-md-1" icon="envelope" />Contact</RouterLink
             >
           </li>
 
@@ -117,7 +117,7 @@
               exact
               active-class="active  border-bottom border-1  shadow-sm border-dark bg-light"
               :to="{ name: 'Login' }"
-              >Login<font-awesome-icon class="ms-2" icon="arrow-right"
+              >Login<font-awesome-icon class="ms-2 ms-md-1" icon="arrow-right"
             /></RouterLink>
           </li>
         </ul>
@@ -127,7 +127,7 @@
 </template>
 <style scoped>
 .navbar {
-  font-weight: 500;
+  font-weight:500;
 }
 </style>
 <script setup>

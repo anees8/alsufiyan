@@ -2,12 +2,13 @@
   <Loader v-if="loading" />
   <b-container v-else class="router_view_min py-5">
     <b-row>
-      <b-col sm="12" md="4" class="p-2" v-for="(video, index) in videos" :key="video.id">
+      <b-col sm="12" md="4" class="p-2" v-for="video in videos" :key="video.id">
         <iframe
           v-if="video.src.includes('https://www.youtube.com/')"
           height="350"
           class="w-100"
           :src="video.src"
+          :thumbnail="slogo"
           allowfullscreen
         >
         </iframe>

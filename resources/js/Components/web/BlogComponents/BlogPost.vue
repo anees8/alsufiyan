@@ -2,14 +2,16 @@
   <b-container class="py-5 router_view_min">
     <b-row>
       <Loader v-if="loading" class="col-12 col-lg-9 col-md-8" />
-      <b-col v-else cols="12" xl="9" lg="8" md="7">
+
+      <b-col v-else cols="12" xl="9" lg="8" md="12"  order="2" order-lg="1" >
         <b-row>
           <b-col
             v-for="(post, index) in posts"
             :key="index"
             cols="12"
-            xl="4"
+            xl="6"
             lg="6"
+            md="6"
             class="mb-4"
           >
             <div>
@@ -27,11 +29,11 @@
                 >
                   <b-card-title
                     style="
-                      height: 3.5rem;
+                      height: 3.6rem;
                       overflow: hidden;
                       text-overflow: ellipsis;
                       display: -webkit-box;
-                      -webkit-line-clamp: 2;
+                      -webkit-line-clamp:2;
                       -webkit-box-orient: vertical;
                     "
                   >
@@ -111,7 +113,7 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col cols="12" xl="3" lg="4" md="5">
+      <b-col cols="12" xl="3" lg="4" md="12"  order="1" order-md="1" class="mb-5 my-lg-0">
         <b-card>
           <b-form class="mt-3">
             <b-input-group label="Small">
@@ -130,6 +132,10 @@
           </b-form>
         </b-card>
       </b-col>
+      
+ 
+  
+  
     </b-row>
   </b-container>
 </template>
