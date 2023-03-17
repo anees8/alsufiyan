@@ -1,36 +1,23 @@
 <template>
-<b-container class="my-3">
-    <b-row >
+  
+<div>
+<!-- <b-container class="my-3">
+  
+    <b-row align-v="center">
+        <b-col cols="12" > <h2 class="fw-bolder text-dark text-center">OUR <u>TEAM</u></h2></b-col>
         <b-col cols="12" md="3" >
-            <b-card class="align-items-center">
-                <b-img   rounded="circle" v-bind="mainProps"></b-img>
+            <b-card >
+                        
+                <h3>Lorem ipsum</h3>
+            
             </b-card>
            
         </b-col>
-        <b-col cols="12" md="3">
-            <b-card class="align-items-center">
-                <b-img  rounded="circle" v-bind="mainProps"></b-img>
-            </b-card>
-           
-        </b-col>
-        <b-col cols="12" md="3">
-            <b-card class="align-items-center">
-                <b-img  rounded="circle" v-bind="mainProps"></b-img>
-            </b-card>
-           
-        </b-col>
-        <b-col cols="12" md="3">
-            <b-card class="align-items-center">
-                <b-img  rounded="circle" v-bind="mainProps"></b-img>
-            </b-card>
-           
-        </b-col>
+       
     </b-row>
-</b-container>
+</b-container>   -->
+
+</div>
 
 </template>
-<script setup>
-  
-    const mainProps= { src:"https://picsum.photos/125/125/?image=58",blank: true, blankColor: '#777', width: 75, height: 75, class: 'm1' }
-    
-</script>
+<script setup></script>

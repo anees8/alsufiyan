@@ -11,7 +11,7 @@ import VueAxios from "vue-axios";
 // import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
 
 
-import BootstrapVueNext from "bootstrap-vue-next";
+import  { BootstrapVueNext }  from "bootstrap-vue-next";
 import VueEasyLightbox from "vue-easy-lightbox";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue-next/dist/bootstrap-vue-next.css";
@@ -119,6 +119,7 @@ const pinia = createPinia();
 const app = createApp(App);
 app.use(VueAxios, axios);
 app.use(BootstrapVueNext);
+
 app.use(VueEasyLightbox);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.component("font-awesome-layers", FontAwesomeLayers);
