@@ -97,7 +97,7 @@ actions: {
             let url = "homesliders";
             const response = await axios.post(url,formData,config);
             this.slider.imageType=1;
-            this.getHomesliders();
+          
             this.hideModel();
             } catch (error) {
              
@@ -128,7 +128,7 @@ actions: {
             };
             const response = await axios.post(url+this.slider.edit_id,formData,config);
             this.slider.imageType=1;
-            this.getHomesliders();
+          
             this.hideModel();
 
             } catch (error) {
@@ -227,6 +227,7 @@ actions: {
         this.slider.previewImage=null;
         this.slider.imageType=1;
         this.slider.edit_id=null;
+        this.getHomesliders();
         this.resetForm();
     },
     

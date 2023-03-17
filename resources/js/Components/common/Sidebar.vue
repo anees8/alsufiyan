@@ -71,6 +71,12 @@ icon: "plane-departure",
 name: "AdminHomePackage",
 Permissions: 1,
 },
+{
+label: "Counter",
+icon: "0",
+name: "AdminHomeCounter",
+Permissions: 1,
+},
 ],
 },
 {

@@ -15,7 +15,8 @@
             >
             <b-modal
               v-model="modal"
-              title="Add Post"
+              :title="post.id ? 'Update Post' : 'Add Post'"
+            
               hide-header-close
               no-close-on-backdrop
             >

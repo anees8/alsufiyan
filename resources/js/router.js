@@ -24,6 +24,7 @@ import AdminContact from "./Components/admin/contact.vue";
 import AdminContactSubject  from "./Components/admin/ContactComponents/ContactSubject.vue";
 import AdminHomeSlider from "./Components/admin/HomeComponents/HomeSlider.vue";
 import AdminHomePackage from './Components/admin/HomeComponents/HomePackage.vue';
+import AdminHomeCounter from './Components/admin/HomeComponents/HomeCounter.vue';
 import AdminUsers from './Components/admin/Users.vue';
 
 
@@ -139,6 +140,16 @@ const routes = [
         },
     },
 
+    {
+        path: "/admin/home/counter",
+        name: "AdminHomeCounter",
+        component: AdminHomeCounter,
+        meta: {
+            requireAuth: true,
+        },
+    },
+
+    
 
     {
         path: "/admin/blog",

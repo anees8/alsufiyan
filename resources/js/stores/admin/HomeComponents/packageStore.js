@@ -113,7 +113,7 @@ actions: {
             let url = "homepackagesliders";
             const response = await axios.post(url,formData,config);
             this.pack.imageType=1;
-            this.getHomePackages();
+            
             this.hideModel();
             } catch (error) {
              
@@ -153,7 +153,7 @@ actions: {
             };
             const response = await axios.post(url+this.pack.edit_id,formData,config);
             this.pack.imageType=1;
-            this.getHomePackages();
+           
             this.hideModel();
 
             } catch (error) {
@@ -265,6 +265,7 @@ actions: {
             price:null,
             previewImage: null,
          },
+         this.getHomePackages();
         this.resetForm();
     },
     

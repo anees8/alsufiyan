@@ -16,7 +16,8 @@
               <div>
                 <b-modal
                   v-model="modal"
-                  title="Add Home Slider"
+                  :title="slider.edit_id ? 'Update Home Slider' : 'Add Home Slider'"
+                 
                   hide-header-close
                   no-close-on-backdrop
                 >

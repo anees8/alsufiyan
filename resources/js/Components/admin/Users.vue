@@ -16,7 +16,8 @@
             <div>
               <b-modal
                 v-model="modal"
-                title="Add User"
+                :title="user.id ? 'Update User' : 'Add User'"
+              
                 hide-header-close
                 no-close-on-backdrop
               >

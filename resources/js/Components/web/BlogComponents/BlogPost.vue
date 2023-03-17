@@ -142,7 +142,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import Loader from "../../common/loader.vue";
+import Loader from "../../common/Loader.vue";
 
 import { usePostsStore } from "../../../stores/web/postsStore.js";
 const {

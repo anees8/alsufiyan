@@ -45,7 +45,8 @@ import {
     faClock,
     faEnvelopesBulk,
     faPlaneDeparture,
-    faUsers
+    faUsers,
+    fa0
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faAddressBook,
@@ -65,7 +66,7 @@ import {
 } from "@fortawesome/vue-fontawesome";
 
 library.add(
-     faA, faB, faC, faD, faE, faF, faG, faH, faI, faJ, faK, faL, faM, faN, faO, faP, faQ, faR, faS, faT, faU, faV, faW, faX, faY, faZ,
+     faA, faB, faC, faD, faE, faF, faG, faH, faI, faJ, faK, faL, faM, faN, faO, faP, faQ, faR, faS, faT, faU, faV, faW, faX, faY, faZ,fa0,
     faArrowRight,
     faUsers,
     faPlaneDeparture,

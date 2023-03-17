@@ -14,9 +14,10 @@
               <font-awesome-icon icon="plus" class="me-2" />Add Video</b-button
             >
             <div>
+               {{ edit_id ? "Update Video" : "Add Video" }}
               <b-modal
                 v-model="modal"
-                title="Add Video"
+                :title="edit_id ? 'Update Video' : 'Add Video'"
                 hide-header-close
                 no-close-on-backdrop
               >

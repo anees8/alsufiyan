@@ -5,56 +5,34 @@
         <u></u>
       </h2>
       <b-row
-        ><b-col cols="12" class="my-2 col-lg-3 col-md-6  col-sm-12"
-          ><b-card class="shadow-lg h-100">
+        >
+          
+        
+        <b-col cols="12" class="my-2 col-lg-3 col-md-6  col-sm-12"
+        v-for="(count, index) in counters"
+        :key="index"
+          >  
+          <b-card class="shadow-lg h-100" >
+        
             <number
               :from="0"
-              :to="inquiry"
+              :to="count.counter"
               :duration="5"
               class="h1"
               easing="Power1.easeOut"
             />
 
             <hr class="mx-5" />
-            <h5>Inquiry</h5>
-          </b-card> </b-col
-        ><b-col cols="12" class=" my-2  col-lg-3 col-md-6   col-sm-12"
-          ><b-card class="shadow-lg h-100">
-            <number
-              :from="0"
-              :to="satisfy"
-              :duration="5"
-              class="h1"
-              easing="Power1.easeOut"
-            />
-            <hr class="mx-5" />
-            <h5>satisfied customer</h5>
-          </b-card></b-col
-        ><b-col cols="12" class=" my-2 col-lg-3 col-md-6  col-sm-12"
-          ><b-card class="shadow-lg h-100">
-            <number
-              :from="0"
-              :to="team"
-              :duration="5"
-              class="h1"
-              easing="Power1.easeOut"
-            />
-            <hr class="mx-5" />
-            <h5>our team</h5>
-          </b-card></b-col
-        ><b-col cols="12" class="my-2 col-lg-3 col-md-6  col-sm-12"
-          ><b-card class="shadow-lg h-100">
-            <number
-              :from="0"
-              :to="serviceYear"
-              :duration="5"
-              class="h1"
-              easing="Power1.easeOut"
-            />
-            <hr class="mx-5" />
-            <h5>years of service</h5>
-          </b-card></b-col
-        ></b-row
+            <h5>{{count.counter_name}}</h5>
+          </b-card>
+          
+          
+          
+           </b-col
+        >
+            
+        
+        </b-row 
       ></b-container
     >
   </b-container>
@@ -63,7 +41,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useCountersStore } from "../../../stores/web/HomeComponents/counterStore";
-const { inquiry, satisfy, team, serviceYear } = storeToRefs(useCountersStore());
-const { getExperiance } = useCountersStore();
-getExperiance();
+const { counters } = storeToRefs(useCountersStore());
+const {getCounter} = useCountersStore();
+getCounter();
 </script>

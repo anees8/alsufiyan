@@ -16,7 +16,8 @@
             <div>
               <b-modal
                 v-model="modal"
-                title="Add Image"
+                :title="edit_id ? 'Update Image' : 'Add Image'"
+               
                 hide-header-close
                 no-close-on-backdrop
               >

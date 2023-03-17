@@ -10,6 +10,8 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\HomePackageSliderController;
+use App\Http\Controllers\HomeCounterController;
+
 
 
 
@@ -46,12 +48,13 @@ Route::middleware('auth:api')->group(function () {
         Route::resource('contactsubjects', ContactSubjectController::class);
         Route::resource('homesliders', HomeSliderController::class);
         Route::resource('homepackagesliders', HomePackageSliderController::class);
+        Route::resource('homecounters', HomeCounterController::class);
     Route::get('/logout', [UsersController::class, 'logout']);
     
 });
 
 
-
+Route::get('/counters', [HomeCounterController::class, 'index']);
 Route::post('/contactForm', [ContactController::class, 'store']);
 Route::get('/contactSubject', [ContactSubjectController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index']);

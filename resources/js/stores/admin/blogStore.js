@@ -91,6 +91,7 @@ state: () => ({
             this.post={
             edit_id:null,
             },
+            this.getPosts();
             this.resetForm();
             },
 
@@ -121,7 +122,7 @@ state: () => ({
                 let url = "posts";
                 const response = await axios.post(url,formData,config);
                 
-                this.getPosts();
+              
                 this.hideModel();
                 } catch (error) {
                  
@@ -153,7 +154,7 @@ state: () => ({
                 };
                 const response = await axios.post(url+this.post.id,formData,config);
               
-                this.getPosts();
+               
                 this.hideModel();
     
                 } catch (error) {

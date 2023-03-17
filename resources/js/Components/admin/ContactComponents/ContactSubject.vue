@@ -15,7 +15,8 @@
             >
             <b-modal
               v-model="modal"
-              title="Add Contact Subject"
+              :title="subject.id ? 'Update Contact Subject' : 'Add Contact Subject'"
+            
               hide-header-close
               no-close-on-backdrop
             >

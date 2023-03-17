@@ -88,7 +88,7 @@ actions: {
             let url = "images";
             const response = await axios.post(url,formData,config);
             this.imageType=1;
-            this.getImages();
+           
             this.hideModel();
             } catch (error) {
              
@@ -116,7 +116,7 @@ actions: {
             };
             const response = await axios.post(url+this.edit_id,formData,config);
             this.imageType=1;
-            this.getImages();
+            
             this.hideModel();
 
             } catch (error) {
@@ -214,6 +214,7 @@ actions: {
         this.previewImage=null;
         this.imageType=1;
         this.edit_id=null;
+        this.getImages();
         this.resetForm();
     },
     

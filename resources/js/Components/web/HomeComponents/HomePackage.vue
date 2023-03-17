@@ -6,7 +6,7 @@
     </h2>
 
     <carousel :autoplay="3000" :wrap-around="true" :breakpoints="breakpoints">
-      <slide v-for="(pack, index) in packages" :key="pack.id">
+      <slide v-for="pack in packages" :key="pack.id">
         <div class="card m-1 h-100">
           <img :src="pack.src" class="card-img-top" style="height: 12.5rem" alt="..." />
           <div class="card-body pb-0">

@@ -117,7 +117,7 @@ actions: {
             },
             hideModel(){
             this.modal = !this.modal;
-
+             this.getUsers();
             this.resetForm();
             },
 
@@ -148,7 +148,7 @@ actions: {
                 try {
 
                 const response = await axios.post(url,formData,config);
-                this.getUsers();
+                
                 this.hideModel();
                 }catch (error) {
 
@@ -162,7 +162,7 @@ actions: {
                 formData.append('_method','put');
                 try {
                 const response = await axios.post(url+'/'+this.user.id,formData,config);
-                this.getUsers();
+               
                 this.hideModel();
                 }catch (error) {
 

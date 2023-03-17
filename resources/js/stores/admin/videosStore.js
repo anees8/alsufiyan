@@ -89,7 +89,7 @@ actions: {
             let url = "videos";
             const response = await axios.post(url,formData,config);
             this.videoType=1;
-            this.getVideos();
+           
             this.hideModel();
             } catch (error) {
              
@@ -117,7 +117,7 @@ actions: {
             };
             const response = await axios.post(url+this.edit_id,formData,config);
             this.videoType=1;
-            this.getVideos();
+           
             this.hideModel();
 
             } catch (error) {
@@ -215,6 +215,7 @@ actions: {
         this.previewVideo=null;
         this.videoType=1;
         this.edit_id=null;
+        this.getVideos();
         this.resetForm();
     },
     

@@ -16,7 +16,8 @@
             <div>
               <b-modal
                 v-model="modal"
-                title="Add Home Package"
+                :title="pack.edit_id ? 'Update Home Package' : 'Add Home Package'"
+              
                 hide-header-close
                 no-close-on-backdrop
               >
