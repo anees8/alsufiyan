@@ -150,6 +150,62 @@ class DatabaseSeeder extends Seeder
             \App\Models\Video::create($video);
             }
 
+
+
+            $HomeSliders= [ 
+              ["image" =>"/homeslider/1.jpg"],
+              ["image" =>"/homeslider/2.jpg"],
+              ["image" =>"/homeslider/3.jpg"],
+              ["image" =>"/homeslider/4.jpg"],
+                        
+       
+            ];
+            
+            foreach($HomeSliders as $HomeSlider){
+              \App\Models\HomeSlider::create($HomeSlider);
+              }
+
+              $pakages= [ 
+                ["title"=>"INTERNATIONAL TRAVELS","description"=>"Our Travel Forum is truly unique, made to satisfy every client","days"=>"15-20","price"=>"","image" =>"https://media.istockphoto.com/id/482206266/photo/kaaba-in-mecca.jpg?s=612x612&w=0&k=20&c=wwzNu3XMQpCRVdAcBbeerUGaew0Fk2nGPQkH98Wj474="],
+                ["title"=>"PASSPORT ASSISTANCE","description"=>"We have experienced and dedicated Passport Consultants.","days"=>"","price"=>"","image" =>"https://media.istockphoto.com/id/1409894360/photo/masjid-e-nabvi-saw.jpg?s=612x612&w=0&k=20&c=_a9WsTQeXJycpc_pOgDt8t_vQHRccRIQ-i1mGwQiqq8="],
+                ["title"=>"TRAVEL CONSULTANT","description"=>"We will help you spend your quality time with your loved ones in entire journey","days"=>"","price"=>"","image" =>"https://media.istockphoto.com/id/483447487/photo/view-of-burj-al-arab-hotel-from-the-jumeirah-beach.jpg?s=612x612&w=0&k=20&c=LcOGt0oNvIuJauuOxARnR74dbF7X89pwPrNavFl0rKs="],
+                ["title"=>"HAJJ","description"=>"Most Comfortable & satisfied service at very competitive price.","days"=>"45","price"=>"450000","image" =>"https://media.istockphoto.com/id/1129005214/photo/woman-at-the-airport.jpg?s=612x612&w=0&k=20&c=fCR5s7vuVwxvt8NCq2zzR9u08P_HBKguQ0lpjYrk370="],
+
+                ["title"=>"CORPORATE TOURS","description"=>"We will arrange corporate tours for your employees.","days"=>"","price"=>"","image" =>"https://media.istockphoto.com/id/1140828971/photo/different-world-directions-signpost.jpg?s=612x612&w=0&k=20&c=SV_SrRCtdpVCUfZFhNZQhuanyF89IGr5_dqwEf_gdKo="],
+                ["title"=>"UMRAH","description"=>"Guidance of Experts & Supervised under Ulama - Ikram.","days"=>"15-20","price"=>"95000","image" =>"https://media.istockphoto.com/id/1140618593/photo/aerial-view-of-sao-paulo-brazil-at-night.jpg?s=612x612&w=0&k=20&c=io-JGlcUbN7RhU3plNpYg6lFaJC-G31dT6wepqzocB8="],
+         
+              ];
+              
+              foreach($pakages as $pakage){
+                \App\Models\HomePackageSlider::create($pakage);
+                }
+
+
+                $counters= [ 
+                  ["counter_name" =>"INQUIRY","slug"=>"inquiry","counter"=>25],
+                  ["counter_name" =>"OUR TEAM","slug"=>"our_team","counter"=>10],
+                  ["counter_name" =>"SATISFIED CUSTOMER","slug"=>"satisfied_customer","counter"=>5],
+                  ["counter_name" =>"YEARS OF SERVICE","slug"=>"years_of_service","counter"=>15],           
+                ];
+                            
+                
+                foreach($counters as $counter){
+                  \App\Models\HomeCounter::create($counter);
+                  }
+
+                  $settings= [ 
+                    ["title" =>"Logo","slug"=>"logo","description"=>"/logo/logo.png"],
+                    ["title" =>"SLogo","slug"=>"slogo","description"=>"/logo/slogo2.png"],
+                    ["title" =>"Footer About","slug"=>"footer_about","description"=>"Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc."],
+                    
+                  ];
+                              
+                  
+                  
+                  foreach($settings as $setting){
+                    \App\Models\Setting::create($setting);
+                    }
+
           
             }
 }

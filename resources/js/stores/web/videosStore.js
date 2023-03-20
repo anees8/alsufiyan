@@ -42,12 +42,12 @@ export const useVideosStore = defineStore("videosStore", {
                 this.currentPage = response.data.data.videos.current_page;
                 this.rows = response.data.data.videos.total;
 
-                this.loading = false;
+                // this.loading = false;
             } catch (error) {
                 if (error.response) {
                     this.errors = error.response.data.errors;
                 }
-                this.loading = false;
+                // this.loading = false;
             }
         },
     },

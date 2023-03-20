@@ -51,12 +51,12 @@ export const useImagesStore = defineStore("imagesStore", {
                 this.currentPage = response.data.data.images.current_page;
                 this.rows = response.data.data.images.total;
 
-                this.loading = false;
+                // this.loading = false;
             } catch (error) {
                 if (error.response) {
                     this.errors = error.response.data.errors;
                 }
-                this.loading = false;
+                // this.loading = false;
             }
         },
     },

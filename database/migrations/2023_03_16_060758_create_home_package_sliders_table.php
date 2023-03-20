@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('price')->nullable();
             $table->unsignedBigInteger('user_id')->default(1);
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('status')->default(1);
             $table->timestamps();
         });
     }

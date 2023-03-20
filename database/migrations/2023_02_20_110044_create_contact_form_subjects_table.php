@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('contact_subjects', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
+            $table->unsignedBigInteger('status')->default(1);
             $table->timestamps();
         });
 

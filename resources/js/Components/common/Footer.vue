@@ -9,11 +9,23 @@
         <!-- Grid column -->
         <div class="col-md-6 col-lg-4 col-xl-4 mx-auto mb-4">
           <!-- Content -->
-          <h5 class="text-uppercase mb-4">
+          <h5 class="text-uppercase mb-4 d-flex" v-if="loading">
+          <b-skeleton type="avatar" class="mx-1"></b-skeleton>
+        <b-skeleton type="image" style="height:48px;width:135px" class="p-1"></b-skeleton >
+          </h5>
+          <h5 class="text-uppercase mb-4" v-else>
+
             <img class="ms-5" :src="logo" alt="" width="50" height="50" />
             <img :src="slogo" alt="" height="60" />
           </h5>
-          <p v-if="FooterAbout">
+          <p v-if="loading">
+            <b-skeleton animation="fade" width="100%"></b-skeleton>
+            <b-skeleton animation="fade" width="100%"></b-skeleton>
+            <b-skeleton animation="fade" width="90%"></b-skeleton>
+          
+          </p>
+
+          <p v-if="FooterAbout && !loading">
             {{ FooterAbout }}
           </p>
         </div>
@@ -51,7 +63,7 @@
 
           <p>
             <a
-              v-for="social_icon in social_icons"
+            v-for="(social_icon, index) in social_icons" :key="index"
               class="nav-link text-dark me-3 d-inline"
               :to="social_icon.url"
               target="_blank"
@@ -96,5 +108,5 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../stores/web/settingStore.js";
-const { logo, slogo, FooterAbout, social_icons } = storeToRefs(useSettingStore());
+const { logo, slogo, FooterAbout, social_icons,loading } = storeToRefs(useSettingStore());
 </script>

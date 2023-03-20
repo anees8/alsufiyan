@@ -7,6 +7,7 @@ export const usePackagesStore = defineStore("packagesStore", {
 
     state: () => ({
         packages:[],
+        loading:false,
           breakpoints: {
             // 700px and up
             480: {
@@ -33,7 +34,7 @@ export const usePackagesStore = defineStore("packagesStore", {
             let url = "homepackageslider";
             const response = await axios.get(url); 
             this.packages = response.data.data.packages;
-          
+            // this.loading = false;
             } catch (error) {
             }
             },

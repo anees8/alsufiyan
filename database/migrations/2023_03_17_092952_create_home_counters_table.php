@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('counter_name');
             $table->text('slug');
             $table->integer('counter');
+            $table->unsignedBigInteger('status')->default(1);
             $table->timestamps();
         });
     }

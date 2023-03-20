@@ -5,6 +5,7 @@ export const usePostStore = defineStore("postStore", {
     state: () => ({
         posts: [],
         limit:3,
+        loading:false,
     }),
 
         actions: {
@@ -22,6 +23,7 @@ export const usePostStore = defineStore("postStore", {
 
         const response = await axios.get(url);
         this.posts = response.data.data.posts.data;
+        // this.loading = false;
         } catch (error) {
         }
         },

@@ -1,6 +1,25 @@
 <template>
-  <Loader v-if="loading" />
 
+  <b-container class="router_view_min py-5" v-if="loading">
+    <b-row>
+      <div class="image-grid">
+        <div v-for="image  in 10" :key="image" class="image-container">
+          <b-skeleton type="image"   class="image img-fluid rounded shadow-lg hover-shadow"></b-skeleton>
+        </div>
+      </div>
+    </b-row>
+    <b-row align-h="end" class="mt-5">
+      <b-col lg="1" md="2" class="p-2">
+        <b-skeleton type="input"  ></b-skeleton>
+     
+       
+      </b-col>
+      <b-col lg="4" md="6" class="p-2">
+        <b-skeleton type="input"  ></b-skeleton>
+      </b-col>
+    </b-row>
+
+  </b-container>
   <b-container class="router_view_min py-5" v-else>
     <b-row>
       <div class="image-grid">
@@ -12,15 +31,6 @@
           />
         </div>
       </div>
-      <!-- <b-col sm="12" md="4" class="p-1" v-for="(image, index) in images" :key="image.id">
-        <img
-          :src="image.src"
-          alt=""
-          @click="show(index)"
-          class="thumbnail img-container img-fluid d-block rounded shadow-lg w-100 hover-shadow"
-          style="height: 30rem"
-        />
-      </b-col> -->
     </b-row>
     <vue-easy-lightbox
       :visible="visible"
@@ -55,7 +65,6 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import Loader from "../common/loader.vue";
 import { useImagesStore } from "../../stores/web/imagesStore.js";
 const {
   images,

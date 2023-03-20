@@ -1,5 +1,26 @@
 <template>
-  <Loader v-if="loading" />
+
+  <b-container  v-if="loading"   class="router_view_min py-5">
+    <b-row>
+      <b-col sm="12" md="4" class="p-2" v-for="video in 5" :key="video">
+        <b-skeleton type="video"  width="100%"
+         style="height:350px"></b-skeleton>
+
+        </b-col>
+
+</b-row>
+<b-row align-h="end" class="mt-5">
+      <b-col lg="1" md="2" class="p-2">
+        <b-skeleton type="input"  ></b-skeleton>
+     
+       
+      </b-col>
+      <b-col lg="4" md="6" class="p-2">
+        <b-skeleton type="input"  ></b-skeleton>
+      </b-col>
+    </b-row>
+  </b-container>
+
   <b-container v-else class="router_view_min py-5">
     <b-row>
       <b-col sm="12" md="4" class="p-2" v-for="video in videos" :key="video.id">
@@ -43,7 +64,6 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import Loader from "../common/loader.vue";
 import { useVideosStore } from "../../stores/web/videosStore.js";
 const { videos, options, perPage, limit, currentPage, loading, rows } = storeToRefs(
   useVideosStore()

@@ -8,6 +8,7 @@ export const useSliderStore = defineStore("sliderStore", {
     state: () => ({
         sliders: [],
           itemsToShow: 1,
+          loading:false,
        
           
         }),
@@ -19,7 +20,10 @@ export const useSliderStore = defineStore("sliderStore", {
             let url = "homesliders";
             const response = await axios.get(url); 
             this.sliders = response.data.data.sliders;
+            //  this.loading = false;
             } catch (error) {
+
+              // this.getSliderImages();
             }
             },
             },

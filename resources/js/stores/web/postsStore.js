@@ -59,12 +59,12 @@ export const usePostsStore = defineStore("postsStore", {
 
                 this.rows = response.data.data.posts.total;
 
-                this.loading = false;
+                // this.loading = false;
             } catch (error) {
                 if (error.response) {
                     this.errors = error.response.data.errors;
                 }
-                this.loading = false;
+                // this.loading = false;
             }
         },
         async getPost(id) {
@@ -73,7 +73,7 @@ export const usePostsStore = defineStore("postsStore", {
                 const response = await axios.get("posts/" + id);
 
                 this.post = response.data.data.post;
-                this.loading = false;
+                // this.loading = false;
             } catch (error) {
                 this.post = {};
                 router.push({ name: "blog" });
