@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('days')->nullable();
             $table->text('price')->nullable();
             $table->unsignedBigInteger('user_id')->default(1);
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('status')->default(1);
             $table->softDeletes();
             $table->timestamps();

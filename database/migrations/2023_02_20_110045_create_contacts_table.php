@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->bigInteger('phone');
             $table->unsignedBigInteger('subject_id');
-             $table->foreign('subject_id')->references('id')->on('contact_subjects');
+             $table->foreign('subject_id')->references('id')->on('contact_subjects')->constrained()->onUpdate('cascade')->onDelete('cascade');
              $table->unsignedBigInteger('status')->default(1);
            
             $table->text('message');
