@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('slug');
             $table->integer('counter');
             $table->unsignedBigInteger('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
