@@ -7,7 +7,7 @@
 	<link rel="icon" href="logo/logo.png">
 	
 	
-	{{-- <title>Al-Sufiyan | Haj and Umrah Service </title> --}}
+	<title>Al-Sufiyan | Haj and Umrah Service </title>
 	
 
 	<meta name="og:title" content="Al Sufiyan">
