@@ -4,9 +4,13 @@
 @click="smallMenu = !smallMenu"
 class="logo d-flex justify-content-between align-items-center"
 >
-<div class="d-flex">
+<div class="d-flex"  v-if="loading">
+<b-skeleton type="avatar"  width="50px"></b-skeleton>
+<b-skeleton type="image" height="50px" width="10rem" v-if="!smallMenu" ></b-skeleton>
+</div>
+<div class="d-flex" v-else>
 <img :src="logo" width="50" />
-<img v-if="!smallMenu" :src="slogo" height="50" />
+<img v-if="!smallMenu" :src="slogo" height="50" style="max-width:10rem" />
 </div>
 <div>
 <font-awesome-icon
@@ -37,7 +41,7 @@ import MenuItem from "./Menu/MenuItem.vue";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../stores/web/settingStore.js";
-const { logo, slogo } = storeToRefs(useSettingStore());
+const { logo, slogo,loading} = storeToRefs(useSettingStore());
 
 let smallMenu = ref(false);
 

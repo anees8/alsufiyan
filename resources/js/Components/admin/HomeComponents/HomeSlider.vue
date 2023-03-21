@@ -108,7 +108,7 @@
                 rounded
               ></b-img>
             </template>
-            <template #cell(username)="data">{{ data.item.user.name }}</template>
+            <template #cell(username)="data">{{ data.item.user?data.item.user.name:"" }}</template>
             <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
             <template #cell(actions)="data">
               <b-button

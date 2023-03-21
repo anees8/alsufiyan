@@ -41,6 +41,11 @@ Route::middleware('auth:api')->group(function () {
         return $request->user();
     });
     Route::resource('users', UsersController::class);
+    Route::get('users/restore/{user}', [UsersController::class, 'restore'])->withTrashed();
+    Route::get('users/forcedelete/{user}', [UsersController::class, 'forcedelete'])->withTrashed();
+
+
+    
         Route::resource('posts', PostController::class);
         Route::resource('images', ImageController::class);
         Route::resource('videos', VideoController::class);

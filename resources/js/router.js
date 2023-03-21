@@ -35,6 +35,7 @@ const routes = [
         component: Home,
         meta: {
             requireAuth: false,
+           
         },
     },
     {

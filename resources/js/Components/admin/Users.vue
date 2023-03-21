@@ -106,11 +106,30 @@
             </b-button>
 
             <b-button
+              v-if="!data.item.deleted_at"
+              class="rounded-circle p-2 me-2"
+              @click="recycleUser(data.item.id)"
+              variant="outline-secondary"
+            >
+              <font-awesome-icon icon="recycle" />
+            </b-button>
+
+            <b-button
+            v-if="data.item.deleted_at"
+              class="rounded-circle p-2 me-2"
+              @click="restoreUser(data.item.id)"
+              variant="outline-primary"
+            >
+            
+              <font-awesome-icon icon="arrow-rotate-left" />
+            </b-button>
+            <b-button
+             
               class="rounded-circle p-2 me-2"
               @click="deleteUser(data.item.id)"
               variant="outline-danger"
             >
-              <font-awesome-icon icon="fa-regular fa-trash-alt" />
+              <font-awesome-icon icon="fa-regular fa-trash-can" />
             </b-button>
             
             </template> </b-table
@@ -155,7 +174,7 @@
     isBusy,
   } = storeToRefs(useUsersStore());
   
-  const { getUsers, setPerPage, dateTime ,uploadData,editUser,deleteUser ,  resetForm,
+  const { getUsers, setPerPage, dateTime ,uploadData,editUser,recycleUser,deleteUser,restoreUser,resetForm,
   hideModel} = useUsersStore();
   
   getUsers();

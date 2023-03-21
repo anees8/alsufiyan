@@ -19,7 +19,15 @@ class UsersController extends Controller
 
      public function index(Request $request){
 
-        $data['users']= User::orderBy('id', 'DESC')->Paginate($request->perPage);
+
+        $users = User::orderBy('id', 'DESC');
+
+        if ($request->has('with_deleted')) {
+        $users = $users->withTrashed();
+        }
+
+        $data['users']=  $users->Paginate($request->perPage); 
+    
         return $this->sendResponse($data, 'Users return successfully.',Response::HTTP_OK);
      }
 
@@ -157,6 +165,18 @@ class UsersController extends Controller
     {
     
         $user->delete();
+        return $this->sendResponse('User Deleted Successfully.',Response::HTTP_OK);
+
+    }
+
+    public function restore(User $user){
+        $user->restore();
+        return $this->sendResponse('User Restore Successfully.',Response::HTTP_OK);
+    }
+
+    public function forcedelete(User $user){
+        
+        $user->forceDelete();
         return $this->sendResponse('User Deleted Successfully.',Response::HTTP_OK);
 
     }

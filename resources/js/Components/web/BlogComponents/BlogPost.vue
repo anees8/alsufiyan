@@ -19,8 +19,7 @@
 
 <b-skeleton animation="fade" type="image" style="height:250px" class="shadow-lg mb-1 w-100" card-img="top"></b-skeleton>
 
-<b-card-title    style="
-      height: 4.5rem;
+<b-card-title    style="height: 4.5rem;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -124,7 +123,7 @@
                       class="text-muted me-1 fs-6 fw-light"
                     />
                     <span class="text-muted text-capitalize fs-6 fw-light">
-                      {{ post.user.name }}</span
+                      {{  post.user?post.user.name:"" }}</span
                     >
                   </b-col>
                   <b-col cols="12" lg="6" md="6">

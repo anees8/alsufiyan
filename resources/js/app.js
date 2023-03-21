@@ -46,13 +46,17 @@ import {
     faEnvelopesBulk,
     faPlaneDeparture,
     faUsers,
-    fa0
-} from "@fortawesome/free-solid-svg-icons";
+    faRecycle,
+    fa0,
+    faArrowRotateLeft,
+    } from "@fortawesome/free-solid-svg-icons";
 import {
     faAddressBook,
+    faTrashCan,
     faUser,
     faComment,
     faTrashAlt,
+    
     faEnvelopeOpen
     
 } from "@fortawesome/free-regular-svg-icons";
@@ -66,6 +70,9 @@ import {
 } from "@fortawesome/vue-fontawesome";
 
 library.add(
+    faRecycle,
+    faArrowRotateLeft,
+    faTrashCan,
      faA, faB, faC, faD, faE, faF, faG, faH, faI, faJ, faK, faL, faM, faN, faO, faP, faQ, faR, faS, faT, faU, faV, faW, faX, faY, faZ,fa0,
     faArrowRight,
     faUsers,
@@ -74,8 +81,7 @@ library.add(
     faAddressCard,
     faEnvelope,
     faEnvelopeOpen,
-    faEnvelopesBulk,
-    
+    faEnvelopesBulk,    
     faPhone,
     faFacebookF,
     faWhatsapp,
@@ -112,10 +118,7 @@ axios.defaults.baseURL = "/api/";
 axios.defaults.headers.common["Authorization"] =
     "Bearer " + localStorage.getItem("token");
 
-   
-    
 const pinia = createPinia();
-
 const app = createApp(App);
 app.use(VueAxios, axios);
 app.use(BootstrapVueNext);
