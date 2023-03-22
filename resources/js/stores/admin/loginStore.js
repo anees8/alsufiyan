@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import router from "../../router.js";
 
+
 export const useLoginStore = defineStore("loginStore", {
     state: () => ({
         user: {
@@ -9,8 +10,10 @@ export const useLoginStore = defineStore("loginStore", {
             password: "",
         },       
         loading: false,
-
+        timer:300,
+        timeout:0,
         accessToken: localStorage.getItem("token"),
+        loginUser: localStorage.getItem("name"),
         errors: {},
       
     }),
@@ -25,7 +28,7 @@ export const useLoginStore = defineStore("loginStore", {
             this.loading = true;
             try {
                 const response = await axios.post("login", this.user);
-                this.setToken(response.data.data.token);
+                this.setToken(response.data.data);
                 if (response.data.data.token) {
                     axios.defaults.headers.common["Authorization"] =
                         "Bearer " + response.data.data.token;
@@ -48,9 +51,11 @@ export const useLoginStore = defineStore("loginStore", {
             }
         },
 
-        setToken: function (token) {
-            this.accessToken = token;
-            localStorage.setItem("token", token);
+        setToken: function (data) {
+            this.accessToken = data.token;
+            this.loginUser = data.user.name;
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("name", data.user.name);
             this.errors = {};
             this.user.email = null;
             this.user.password = null;
@@ -59,8 +64,10 @@ export const useLoginStore = defineStore("loginStore", {
         },
         removeToken: function () {
             this.logout();
+            this.loginUser=null;
             this.accessToken = null;
             localStorage.removeItem("token");
+            localStorage.removeItem("name");
             router.push({ name: "Login" });
         },
         resetForm: function () {
@@ -69,5 +76,25 @@ export const useLoginStore = defineStore("loginStore", {
             this.user.password = null;
             this.loading = false;
         },
+        startIdleTimer() {
+   
+
+      const resetTimer = () => {
+        this.timer = 300;  
+      };
+
+      window.addEventListener('mousemove', resetTimer);
+      window.addEventListener('keydown', resetTimer);
+      window.addEventListener('click', resetTimer);
+
+       setInterval(() => {
+        if(this.accessToken){
+        this.timer--;
+        if (this.timer <= this.timeout) {
+          router.push('/logout'); // redirect to login page
+        }
+    }
+      }, 1000);
+    }
     },
 });

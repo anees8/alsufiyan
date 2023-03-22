@@ -87,7 +87,19 @@
             >
           </li>
 
-          <li class="nav-item mx-0">
+          <li class="nav-item mx-0" v-if="loginUser">
+            <RouterLink
+              class="nav-link  text-dark"
+              exact
+              active-class="active  border-bottom border-1  shadow-sm border-dark bg-light"
+              :to="{ name: 'Login' }"
+              >
+              <button class="btn btn-outline-dark  rounded-circle p-2">
+          {{ loginUser.split(" ").map((n)=>n[0]).join("") }}
+          </button>
+        </RouterLink>
+          </li>
+          <li class="nav-item mx-0" v-else>
             <RouterLink
               class="nav-link px-xl-4 px-md-3 py-3 text-dark"
               exact
@@ -109,5 +121,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../stores/web/settingStore.js";
+import { useLoginStore } from "../../stores/admin/loginStore.js";
 const { logo, slogo,loading } = storeToRefs(useSettingStore());
+const { loginUser } = storeToRefs(useLoginStore());
 </script>
