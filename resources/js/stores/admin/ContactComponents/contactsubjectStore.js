@@ -36,11 +36,12 @@ actions: {
                 this.isBusy = true;
                 try {
                 let url = "contactsubjects";
+                url += `?with_deleted`;
                 if (this.perPage) {
-                url += `?perPage=${this.perPage}`;
+                url += `&perPage=${this.perPage}`;
                 }
                 if (this.currentPage > 1) {
-                url += `${this.perPage ? "&" : "?"}page=${
+                url += `&page=${
                 this.currentPage
                 }`;
                 }
@@ -132,27 +133,27 @@ actions: {
 
     }, 
     
-    
-    deleteContactSubject(id){
-        Swal.fire({
+
+deleteContactSubject(id){
+    Swal.fire({
         title: 'Are you sure?',
-        text:  "Do you want to Delete this Contact Subject : " + id,
+        text:  "Do you want to Delete Permanently this Contact Subject: " + id,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: "#d33",
         cancelButtonColor: "#3085d6",
-        confirmButtonText: 'Yes, delete',
+        confirmButtonText: 'Yes, Delete',
         cancelButtonText: 'No, cancel'
         }).then((result) => {
         if (result.isConfirmed) {
 
-        let url = "contactsubjects/";
+        let url = "contactsubjects/forcedelete/";
 
         axios
-        .delete(url+id)
+        .get(url + id)
         .then((res) => {
         this.getContactSubject();
-        Swal.fire("Deleted!", "Your Contact Subject has been deleted.", "success");
+        Swal.fire("Deleted!", "Contact Subject has been deleted.", "success");
         })
         .catch((error) => {
         this.errors = error.response.data.errors;
@@ -161,6 +162,64 @@ actions: {
         });
 
 },
+recycleContactSubject(id){
+    Swal.fire({
+        title: 'Are you sure?',
+        text:  "Do you want to Recycle this Contact Subject : " + id,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: "#6c757d",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: 'Yes, Recycle',
+        cancelButtonText: 'No, cancel'
+        }).then((result) => {
+        if (result.isConfirmed) {
+
+        let url = "contactsubjects/"; 
+
+        axios
+        .delete(url + id)
+        .then((res) => {
+        this.getContactSubject();
+        Swal.fire("Recycled!", "Contact Subject has been Recycled.", "success");
+        })
+        .catch((error) => {
+        this.errors = error.response.data.errors;
+        });
+        }
+        });
+
+
+
+},
+restoreContactSubject(id){
+    Swal.fire({
+        title: 'Are you sure?',
+        text:  "Do you want to Restore this Contact Subject : " + id,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: "#0d6efd",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: 'Yes, Restore',
+        cancelButtonText: 'No, cancel'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        let url = "contactsubjects/restore/";
+        axios
+        .get(url + id)
+        .then((res) => {
+        
+        this.getContactSubject();
+        Swal.fire("Restored", "Contact Subject has been Restored.", "success");
+        })
+        .catch((error) => {
+        this.errors = error.response.data.errors;
+        });
+        }
+        });
+
+},
+
 
 
         resetForm(){

@@ -41,11 +41,12 @@ actions: {
                 this.isBusy = true;
                 try {
                 let url = "videos";
+                url += `?with_deleted`;
                 if (this.perPage) {
-                url += `?perPage=${this.perPage}`;
+                url += `&perPage=${this.perPage}`;
                 }
                 if (this.currentPage > 1) {
-                url += `${this.perPage ? "&" : "?"}page=${
+                url += `&page=${
                 this.currentPage
                 }`;
                 }
@@ -144,25 +145,25 @@ actions: {
     },
 
     deleteVideo(id){
-            Swal.fire({
+        Swal.fire({
             title: 'Are you sure?',
-            text:  "Do you want to Delete this Video : " + id,
+            text:  "Do you want to Delete Permanently this Video : " + id,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
-            confirmButtonText: 'Yes, delete',
+            confirmButtonText: 'Yes, Delete',
             cancelButtonText: 'No, cancel'
             }).then((result) => {
             if (result.isConfirmed) {
 
-            let url = "videos/";
+            let url = "videos/forcedelete/";
 
             axios
-            .delete(url + id)
+            .get(url + id)
             .then((res) => {
             this.getVideos();
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            Swal.fire("Deleted!", "Video has been deleted.", "success");
             })
             .catch((error) => {
             this.errors = error.response.data.errors;
@@ -171,6 +172,64 @@ actions: {
             });
 
     },
+    recycleVideo(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text:  "Do you want to Recycle this Video : " + id,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#6c757d",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: 'Yes, Recycle',
+            cancelButtonText: 'No, cancel'
+            }).then((result) => {
+            if (result.isConfirmed) {
+
+            let url = "videos/"; 
+
+            axios
+            .delete(url + id)
+            .then((res) => {
+            this.getVideos();
+            Swal.fire("Recycled!", "Video has been Recycled.", "success");
+            })
+            .catch((error) => {
+            this.errors = error.response.data.errors;
+            });
+            }
+            });
+
+
+
+    },
+    restoreVideo(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text:  "Do you want to Restore this Video : " + id,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: "#0d6efd",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: 'Yes, Restore',
+            cancelButtonText: 'No, cancel'
+            }).then((result) => {
+            if (result.isConfirmed) {
+            let url = "videos/restore/";
+            axios
+            .get(url + id)
+            .then((res) => {
+            
+            this.getVideos();
+            Swal.fire("Restored", "Video has been Restored.", "success");
+            })
+            .catch((error) => {
+            this.errors = error.response.data.errors;
+            });
+            }
+            });
+
+    },
+
 
     dateTime(value) {
          return moment(value).format("D-MMM-Y");

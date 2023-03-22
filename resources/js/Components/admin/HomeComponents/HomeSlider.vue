@@ -110,22 +110,42 @@
             </template>
             <template #cell(username)="data">{{ data.item.user?data.item.user.name:"" }}</template>
             <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
-            <template #cell(actions)="data">
+            <template #cell(actions)="data"> 
               <b-button
-                class="rounded-circle p-2 me-2"
-                @click="editHomeSlider(data.item.id)"
-                variant="outline-success"
-              >
-                <font-awesome-icon icon="pen" />
-              </b-button>
-  
-              <b-button
-                class="rounded-circle p-2 me-2"
-                @click="deleteHomeSlider(data.item.id)"
-                variant="outline-danger"
-              >
-                <font-awesome-icon icon="fa-regular fa-trash-alt" />
-              </b-button>
+              class="rounded-circle p-2 me-2"
+              @click="editHomeSlider(data.item.id)"
+              variant="outline-success"
+            >
+              <font-awesome-icon icon="pen" />
+            </b-button>
+
+            <b-button
+              v-if="!data.item.deleted_at"
+              class="rounded-circle p-2 me-2"
+              @click="recycleHomeSlider(data.item.id)"
+              variant="outline-secondary"
+            >
+              <font-awesome-icon icon="recycle" />
+            </b-button>
+
+            <b-button
+            v-if="data.item.deleted_at"
+              class="rounded-circle p-2 me-2"
+              @click="restoreHomeSlider(data.item.id)"
+              variant="outline-primary"
+            >
+            
+              <font-awesome-icon icon="arrow-rotate-left" />
+            </b-button>
+            <b-button
+             
+              class="rounded-circle p-2 me-2"
+              @click="deleteHomeSlider(data.item.id)"
+              variant="outline-danger"
+            >
+              <font-awesome-icon icon="fa-regular fa-trash-can" />
+            </b-button>
+            
             </template> </b-table
         ></b-col>
         <b-row align-h="end" class="mt-5">
@@ -179,8 +199,11 @@
     resetForm,
     hideModel,
     uploadFile,
+
     editHomeSlider,
-    deleteHomeSlider,
+  recycleHomeSlider,
+  restoreHomeSlider,
+  deleteHomeSlider,
   } = useAdminSliderStore();
   
   getHomesliders();

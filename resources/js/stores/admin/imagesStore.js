@@ -41,11 +41,12 @@ actions: {
                 this.isBusy = true;
                 try {
                 let url = "images";
+                url += `?with_deleted`;
                 if (this.perPage) {
-                url += `?perPage=${this.perPage}`;
+                url += `&perPage=${this.perPage}`;
                 }
                 if (this.currentPage > 1) {
-                url += `${this.perPage ? "&" : "?"}page=${
+                url += `&page=${
                 this.currentPage
                 }`;
                 }
@@ -143,25 +144,82 @@ actions: {
     },
 
     deleteImage(id){
-            Swal.fire({
+        Swal.fire({
             title: 'Are you sure?',
-            text:  "Do you want to Delete this Image : " + id,
+            text:  "Do you want to Delete Permanently this Image : " + id,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
-            confirmButtonText: 'Yes, delete',
+            confirmButtonText: 'Yes, Delete',
             cancelButtonText: 'No, cancel'
             }).then((result) => {
             if (result.isConfirmed) {
 
-            let url = "images/";
+            let url = "images/forcedelete/";
+
+            axios
+            .get(url + id)
+            .then((res) => {
+            this.getImages();
+            Swal.fire("Deleted!", "Image has been deleted.", "success");
+            })
+            .catch((error) => {
+            this.errors = error.response.data.errors;
+            });
+            }
+            });
+
+    },
+    recycleImage(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text:  "Do you want to Recycle this Image : " + id,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#6c757d",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: 'Yes, Recycle',
+            cancelButtonText: 'No, cancel'
+            }).then((result) => {
+            if (result.isConfirmed) {
+
+            let url = "images/"; 
 
             axios
             .delete(url + id)
             .then((res) => {
             this.getImages();
-            Swal.fire("Deleted!", "Your Image has been deleted.", "success");
+            Swal.fire("Recycled!", "Image has been Recycled.", "success");
+            })
+            .catch((error) => {
+            this.errors = error.response.data.errors;
+            });
+            }
+            });
+
+
+
+    },
+    restoreImage(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text:  "Do you want to Restore this Image : " + id,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: "#0d6efd",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: 'Yes, Restore',
+            cancelButtonText: 'No, cancel'
+            }).then((result) => {
+            if (result.isConfirmed) {
+            let url = "images/restore/";
+            axios
+            .get(url + id)
+            .then((res) => {
+            
+            this.getImages();
+            Swal.fire("Restored", "Image has been Restored.", "success");
             })
             .catch((error) => {
             this.errors = error.response.data.errors;
@@ -171,6 +229,7 @@ actions: {
 
     },
 
+   
     dateTime(value) {
          return moment(value).format("D-MMM-Y");
     },

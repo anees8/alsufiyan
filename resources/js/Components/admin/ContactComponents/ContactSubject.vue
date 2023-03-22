@@ -70,8 +70,8 @@
           show-empty
         >
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
-          <template #cell(actions)="data">
-            <b-button
+          <template #cell(actions)="data"> 
+              <b-button
               class="rounded-circle p-2 me-2"
               @click="editContactSubject(data.item.id)"
               variant="outline-success"
@@ -80,13 +80,33 @@
             </b-button>
 
             <b-button
+              v-if="!data.item.deleted_at"
+              class="rounded-circle p-2 me-2"
+              @click="recycleContactSubject(data.item.id)"
+              variant="outline-secondary"
+            >
+              <font-awesome-icon icon="recycle" />
+            </b-button>
+
+            <b-button
+            v-if="data.item.deleted_at"
+              class="rounded-circle p-2 me-2"
+              @click="restoreContactSubject(data.item.id)"
+              variant="outline-primary"
+            >
+            
+              <font-awesome-icon icon="arrow-rotate-left" />
+            </b-button>
+            <b-button
+             
               class="rounded-circle p-2 me-2"
               @click="deleteContactSubject(data.item.id)"
               variant="outline-danger"
             >
-              <font-awesome-icon icon="fa-regular fa-trash-alt" />
+              <font-awesome-icon icon="fa-regular fa-trash-can" />
             </b-button>
-          </template> </b-table
+            
+            </template> </b-table
       ></b-col>
       <b-row align-h="end" class="mt-5">
         <b-col xl="1" lg="2" md="2" class="p-2">
@@ -134,6 +154,8 @@ const {
   setPerPage,
   dateTime,hideModel,resetForm,
   editContactSubject,
+  recycleContactSubject,
+  restoreContactSubject,
   deleteContactSubject,
   uploadData
 } = useContactSubjectsStore();
