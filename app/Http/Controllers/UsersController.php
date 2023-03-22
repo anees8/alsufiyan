@@ -165,7 +165,7 @@ class UsersController extends Controller
     {
     
         $user->delete();
-        return $this->sendResponse('User Deleted Successfully.',Response::HTTP_OK);
+        return $this->sendResponse('User Recycle Successfully.',Response::HTTP_OK);
 
     }
 

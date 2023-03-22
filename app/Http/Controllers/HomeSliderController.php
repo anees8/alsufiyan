@@ -16,11 +16,16 @@ class HomeSliderController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-public function index(Request $request)
-    {
-        
+public function index(Request $request){
+
     if($request->perPage){
-    $data['sliders']= HomeSlider::orderBy('id', 'DESC')->with('user')->Paginate($request->perPage);
+
+        $sliders = HomeSlider::orderBy('id', 'DESC')->with('user');
+        if ($request->has('with_deleted')) {
+        $sliders = $sliders->withTrashed();
+        }
+        $data['sliders']=  $sliders->Paginate($request->perPage); 
+
     }else{
     $data['sliders']=HomeSlider::select('*', 'image as src')->get();
     }
@@ -155,12 +160,21 @@ public function update(Request $request, HomeSlider $homeslider){
      * @return \Illuminate\Http\Response
      */
 public function destroy(HomeSlider $homeslider){
-        
-        if (File::exists(public_path($homeslider->image))) {
-            unlink(public_path($homeslider->image));
-            }
-    
         $homeslider->delete();
-        return $this->sendResponse('Home Slider Deleted Successfully.',Response::HTTP_OK);
+        return $this->sendResponse('Home Slider Recycle Successfully.',Response::HTTP_OK);
+    }
+
+public function restore(HomeSlider $homeslider){    
+        $homeslider->restore();
+        return $this->sendResponse('Home Slider Restore Successfully.',Response::HTTP_OK);
+    }
+
+public function forcedelete(HomeSlider $homeslider){
+        
+    if (File::exists(public_path($homeslider->image))) {
+    unlink(public_path($homeslider->image));
+    }
+    $homeslider->forceDelete();
+    return $this->sendResponse('Home Slider Deleted Successfully.',Response::HTTP_OK);
     }
 }

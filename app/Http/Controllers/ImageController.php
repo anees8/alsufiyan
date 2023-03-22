@@ -17,7 +17,11 @@ class ImageController extends Controller{
      */
 public function index(Request $request){
 
-        $data['images']= Image::select('*','image_url as src')->with('user')->orderBy('id', 'DESC')->Paginate($request->perPage);
+        $images = Image::select('*','image_url as src')->with('user')->orderBy('id', 'DESC');
+        if ($request->has('with_deleted')) {
+        $images = $images->withTrashed();
+        }
+        $data['images']=  $images->Paginate($request->perPage); 
         return $this->sendResponse($data, 'Images return successfully.',Response::HTTP_OK);
 
         }
@@ -139,11 +143,26 @@ public function update(Request $request,Image $image){
      */
 public function destroy(Image $image){
 
-        if (File::exists(public_path($image->image_url))) {
-        unlink(public_path($image->image_url));
-        }
-
     $image->delete();
+    return $this->sendResponse('Image Recycle Successfully.',Response::HTTP_OK);
+    }
+
+public function restore(Image $image){
+
+    $image->restore();
+    return $this->sendResponse('Image Restore Successfully.',Response::HTTP_OK);
+    }
+
+public function forcedelete(Image $image){
+    if (File::exists(public_path($image->image_url))) {
+    unlink(public_path($image->image_url));
+    }
+
+    $image->forceDelete();
     return $this->sendResponse('Image Deleted Successfully.',Response::HTTP_OK);
     }
+
+
+
+    
 }

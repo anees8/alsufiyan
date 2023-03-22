@@ -14,7 +14,14 @@ class ContactSubjectController extends Controller{
 public function index(Request $request){
         if($request->perPage){
 
-        $data['subject']= ContactSubject::orderBy('id', 'DESC')->Paginate($request->perPage);
+            $subject = ContactSubject::orderBy('id', 'DESC');
+
+        if ($request->has('with_deleted')) {
+        $subject = $subject->withTrashed();
+        }
+
+        $data['subject']=  $subject->Paginate($request->perPage); 
+
         }else{
         $data['subject']=ContactSubject::select('id as value', 'subject as text')->orderBy('id', 'DESC')->get();
         }
@@ -114,8 +121,19 @@ public function update(Request $request, ContactSubject $contactsubject){
      */
 
 public function destroy(ContactSubject $contactsubject){
-
     $contactsubject->delete();
-    return $this->sendResponse('Contact Subject Deleted Successfully.',Response::HTTP_OK);
+    return $this->sendResponse('Contact Subject Recycle  Successfully.',Response::HTTP_OK);
+    }
+    
+public function restore(ContactSubject $contactsubject){
+        $contactsubject->restore();
+        return $this->sendResponse('Contact Subject Restore Successfully.',Response::HTTP_OK);
+    }
+
+public function forcedelete(ContactSubject $contactsubject){
+        
+        $contactsubject->forceDelete();
+        return $this->sendResponse('Contact Subject Deleted Successfully.',Response::HTTP_OK);
+
     }
 }

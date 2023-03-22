@@ -16,11 +16,13 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        
-        $data['videos']= Video::select('*','video_url as src')->with('user')->orderBy('id', 'DESC')->Paginate($request->perPage);    
+public function index(Request $request){
 
+        $videos = Video::select('*','video_url as src')->with('user')->orderBy('id', 'DESC');
+        if ($request->has('with_deleted')) {
+        $videos = $videos->withTrashed();
+        }
+        $data['videos']=  $videos->Paginate($request->perPage); 
         return $this->sendResponse($data, 'Videos return successfully.',Response::HTTP_OK);
     }
 
@@ -29,7 +31,7 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+public function create()
     {
         //
     }
@@ -40,7 +42,7 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+public function store(Request $request)
     {
         
         $validator = Validator::make($request->all(), [
@@ -84,7 +86,7 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function show(Video $video)
+public function show(Video $video)
     {
         //
     }
@@ -95,7 +97,7 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function edit(Video $video)
+public function edit(Video $video)
     {
         //
     }
@@ -107,7 +109,7 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Video $video)
+public function update(Request $request, Video $video)
     {
         
         $validator = Validator::make($request->all(), [
@@ -145,12 +147,21 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
 public function destroy(Video $video){
-        
-        if (File::exists(public_path($video->video_url))) {
-            unlink(public_path($video->video_url));
-            }
-    
-        $video->delete();
-        return $this->sendResponse('Video Deleted Successfully.',Response::HTTP_OK);
+    $video->delete();
+    return $this->sendResponse('Video Recycle Successfully.',Response::HTTP_OK);
     }
+
+public function restore(Video $video){
+    $video->restore();
+    return $this->sendResponse('Video Restore Successfully.',Response::HTTP_OK);
+    }
+
+public function forcedelete(Video $video){
+    if (File::exists(public_path($video->video_url))) {
+    unlink(public_path($video->video_url));
+    }
+    $video->forceDelete();
+    return $this->sendResponse('Video Deleted Successfully.',Response::HTTP_OK);
+    }
+
 }

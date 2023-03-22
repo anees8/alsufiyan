@@ -18,11 +18,14 @@ class HomePackageSliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+public function index(Request $request){
 
         if($request->perPage){
-            $data['packages']= HomePackageSlider::orderBy('id', 'DESC')->with('user')->Paginate($request->perPage);
+            $packages = HomePackageSlider::orderBy('id', 'DESC')->with('user');
+            if ($request->has('with_deleted')) {
+            $packages = $packages->withTrashed();
+            }
+            $data['packages']=  $packages->Paginate($request->perPage); 
             }else{
             $data['packages']=HomePackageSlider::select('*', 'image as src')->get();
             }
@@ -35,7 +38,7 @@ class HomePackageSliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+public function create()
     {
         //
     }
@@ -46,7 +49,7 @@ class HomePackageSliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
            
@@ -110,7 +113,7 @@ class HomePackageSliderController extends Controller
      * @param  \App\Models\HomePackageSlider  $homepackageslider
      * @return \Illuminate\Http\Response
      */
-    public function show(HomePackageSlider $homepackageslider)
+public function show(HomePackageSlider $homepackageslider)
     {
         //
     }
@@ -121,7 +124,7 @@ class HomePackageSliderController extends Controller
      * @param  \App\Models\HomePackageSlider  $homepackageslider
      * @return \Illuminate\Http\Response
      */
-    public function edit(HomePackageSlider $homepackageslider)
+public function edit(HomePackageSlider $homepackageslider)
     {
         //
     }
@@ -133,7 +136,7 @@ class HomePackageSliderController extends Controller
      * @param  \App\Models\HomePackageSlider  $homepackageslider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HomePackageSlider $homepackageslider)
+public function update(Request $request, HomePackageSlider $homepackageslider)
     {
         $validator = Validator::make($request->all(), [
             'image' => 'bail|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -190,14 +193,23 @@ class HomePackageSliderController extends Controller
      * @param  \App\Models\HomePackageSlider  $homepackageslider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HomePackageSlider $homepackageslider)
-    {
+public function destroy(HomePackageSlider $homepackageslider){
+    $homepackageslider->delete();
+    return $this->sendResponse('Home Package Recycle Successfully.',Response::HTTP_OK);
+ }
+
+public function restore(HomePackageSlider $homepackageslider){
+    $homepackageslider->restore();
+    return $this->sendResponse('Home Package Restore Successfully.',Response::HTTP_OK);
+ }
+
+public function forcedelete(HomePackageSlider $homepackageslider){
         
         if (File::exists(public_path($homepackageslider->image))) {
             unlink(public_path($homepackageslider->image));
             }
     
-        $homepackageslider->delete();
+        $homepackageslider->forceDelete();
         return $this->sendResponse('Home Package Deleted Successfully.',Response::HTTP_OK);
     }
 }

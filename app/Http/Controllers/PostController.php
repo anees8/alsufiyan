@@ -18,10 +18,19 @@ class PostController extends Controller
      */
 public function index(Request $request){
        
-        $data['posts']= Post::with('user')->orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->where('title', 'like', '%'.$request->search.'%')->orwhere('content', 'like', '%'.$request->search.'%')->Paginate($request->perPage);
+
+        $posts = Post::with('user')->orderBy('created_at', 'DESC')->orderBy('id', 'DESC')->where('title', 'like', '%'.$request->search.'%')->orwhere('content', 'like', '%'.$request->search.'%');
+
+
+        if ($request->has('with_deleted')) {
+        $posts = $posts->withTrashed();
+        }
+
+        $data['posts']=  $posts->Paginate($request->perPage); 
+
         return $this->sendResponse($data, 'Posts return successfully.',Response::HTTP_OK);
 
-    }
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -145,13 +154,26 @@ public function index(Request $request){
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
-    {
-        
-        if (File::exists(public_path($post->attachment))) {
-            unlink(public_path($post->attachment));
-            }
-    
+    {    
         $post->delete();
-        return $this->sendResponse('Post Deleted Successfully.',Response::HTTP_OK);
+        return $this->sendResponse('Post Recycle Successfully.',Response::HTTP_OK);
     }
+
+
+    public function restore(Post $post){
+        $post->restore();
+        return $this->sendResponse('Post Restore Successfully.',Response::HTTP_OK);
+    }
+
+public function forcedelete(Post $post){
+        if (File::exists(public_path($post->attachment))) {
+        unlink(public_path($post->attachment));
+        }
+        $post->forceDelete();
+        return $this->sendResponse('Post Deleted Successfully.',Response::HTTP_OK);
+
+        }
+
+
+
 }

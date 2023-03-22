@@ -8,7 +8,7 @@ state: () => ({
         { key: "id", label: "ID" },
         { key: "title", label: "Title" ,thStyle: { width: "15%" }},
         { key: "attachment", label: "Image" ,thStyle: { width: "10%" }},
-        { key: "content", label: "Description",thStyle: { width: "50%" } },
+        { key: "content", label: "Description",thStyle: { width: "48%" } },
         { key: "username", label: "Username" },
         { key: "created_at", label: "Created Date" },
         { key: "actions", label: "Action" },
@@ -39,11 +39,12 @@ state: () => ({
             this.isBusy = true;
             try {
             let url = "posts";
+            url += `?with_deleted`;
             if (this.perPage) {
-            url += `?perPage=${this.perPage}`;
+            url += `&perPage=${this.perPage}`;
             }
             if (this.currentPage > 1) {
-            url += `${this.perPage ? "&" : "?"}page=${
+            url += `&page=${
             this.currentPage
             }`;
             }
@@ -181,32 +182,88 @@ state: () => ({
             deletePost(id){
                 Swal.fire({
                     title: 'Are you sure?',
-                    text:  "Do you want to Delete this Post : " + id,
+                    text:  "Do you want to Delete Permanently this Post : " + id,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: "#d33",
                     cancelButtonColor: "#3085d6",
-                    confirmButtonText: 'Yes, delete',
+                    confirmButtonText: 'Yes, Delete',
                     cancelButtonText: 'No, cancel'
                     }).then((result) => {
                     if (result.isConfirmed) {
         
-                    let url = "posts/";
+                    let url = "posts/forcedelete/";
         
                     axios
-                    .delete(url + id)
+                    .get(url + id)
                     .then((res) => {
                     this.getPosts();
-                    Swal.fire("Deleted!", "Your Blog Post has been deleted.", "success");
+                    Swal.fire("Deleted!", "Post has been deleted.", "success");
                     })
                     .catch((error) => {
                     this.errors = error.response.data.errors;
                     });
                     }
                     });
-
-            }
-
+        
+            },
+            recyclePost(id){
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text:  "Do you want to Recycle this Post : " + id,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: "#6c757d",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: 'Yes, Recycle',
+                    cancelButtonText: 'No, cancel'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+        
+                    let url = "posts/"; 
+        
+                    axios
+                    .delete(url + id)
+                    .then((res) => {
+                    this.getPosts();
+                    Swal.fire("Recycled!", "Post has been Recycled.", "success");
+                    })
+                    .catch((error) => {
+                    this.errors = error.response.data.errors;
+                    });
+                    }
+                    });
+        
+        
+        
+            },
+            restorePost(id){
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text:  "Do you want to Restore this Post : " + id,
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: "#0d6efd",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: 'Yes, Restore',
+                    cancelButtonText: 'No, cancel'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                    let url = "posts/restore/";
+                    axios
+                    .get(url + id)
+                    .then((res) => {
+                    
+                    this.getPosts();
+                    Swal.fire("Restored", "Post has been Restored.", "success");
+                    })
+                    .catch((error) => {
+                    this.errors = error.response.data.errors;
+                    });
+                    }
+                    });
+        
+            },
 
 
             },

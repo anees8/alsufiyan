@@ -115,11 +115,30 @@
             </b-button>
 
             <b-button
+              v-if="!data.item.deleted_at"
+              class="rounded-circle p-2 me-2"
+              @click="recyclePost(data.item.id)"
+              variant="outline-secondary"
+            >
+              <font-awesome-icon icon="recycle" />
+            </b-button>
+
+            <b-button
+            v-if="data.item.deleted_at"
+              class="rounded-circle p-2 me-2"
+              @click="restorePost(data.item.id)"
+              variant="outline-primary"
+            >
+            
+              <font-awesome-icon icon="arrow-rotate-left" />
+            </b-button>
+            <b-button
+             
               class="rounded-circle p-2 me-2"
               @click="deletePost(data.item.id)"
               variant="outline-danger"
             >
-              <font-awesome-icon icon="fa-regular fa-trash-alt" />
+              <font-awesome-icon icon="fa-regular fa-trash-can" />
             </b-button>
           </template> </b-table
       ></b-col>
@@ -173,6 +192,8 @@ const {
   resetForm,
   editPost,
   deletePost,
+  recyclePost,
+  restorePost,
   onFileChange,
   uploadData,
 } = useAdminBlogsStore();
