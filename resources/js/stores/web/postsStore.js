@@ -37,7 +37,7 @@ export const usePostsStore = defineStore("postsStore", {
         async getPosts() {
             this.loading = true;
             try {
-                let url = "posts";
+                let url = "post";
                 if (this.perPage) {
                     url += `?perPage=${this.perPage}`;
                 }
@@ -70,7 +70,7 @@ export const usePostsStore = defineStore("postsStore", {
         async getPost(id) {
             this.loading = true;
             try {
-                const response = await axios.get("posts/" + id);
+                const response = await axios.get("post/" + id);
 
                 this.post = response.data.data.post;
                 // this.loading = false;

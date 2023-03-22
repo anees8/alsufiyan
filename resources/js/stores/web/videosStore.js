@@ -28,7 +28,7 @@ export const useVideosStore = defineStore("videosStore", {
         async getVideos() {
             this.loading = true;
             try {
-                let url = "videos";
+                let url = "video";
                 if (this.perPage) {
                     url += `?perPage=${this.perPage}`;
                 }

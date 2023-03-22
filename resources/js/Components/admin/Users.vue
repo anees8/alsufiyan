@@ -98,6 +98,7 @@
             <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
             <template #cell(actions)="data"> 
               <b-button
+             
               class="rounded-circle p-2 me-2"
               @click="editUser(data.item.id)"
               variant="outline-success"
@@ -176,6 +177,8 @@
   
   const { getUsers, setPerPage, dateTime ,uploadData,editUser,recycleUser,deleteUser,restoreUser,resetForm,
   hideModel} = useUsersStore();
+  
+
   
   getUsers();
   </script>

@@ -24,7 +24,7 @@ this.visible = false;
 async getImages() {
 this.loading = true;
 try {
-let url = "images";
+let url = "image";
 if (this.perPage) {
 url += `?perPage=${this.perPage}`;
 }

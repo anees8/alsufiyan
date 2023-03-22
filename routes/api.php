@@ -77,20 +77,20 @@ Route::middleware('auth:api')->group(function () {
 });
 
 
-Route::get('/counters', [HomeCounterController::class, 'index']);
+Route::get('/counter', [HomeCounterController::class, 'index']);
 
 Route::post('/contactForm', [ContactController::class, 'store']);
 
 Route::get('/contactSubject', [ContactSubjectController::class, 'index']);
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{post}', [PostController::class,'show']);
+Route::get('/post', [PostController::class, 'index']);
+Route::get('/post/{post}', [PostController::class,'show']);
 
-Route::get('/images', [ImageController::class, 'index']);
+Route::get('/image', [ImageController::class, 'index']);
 
-Route::get('/videos', [VideoController::class, 'index']);
+Route::get('/video', [VideoController::class, 'index']);
 
-Route::get('/homesliders', [HomeSliderController::class, 'index']);
+Route::get('/homeslider', [HomeSliderController::class, 'index']);
 
 Route::get('/homepackageslider', [HomePackageSliderController::class, 'index']);
 

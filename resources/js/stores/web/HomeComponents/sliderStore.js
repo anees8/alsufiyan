@@ -17,7 +17,7 @@ export const useSliderStore = defineStore("sliderStore", {
           async getSliderImages() {
             this.loading = true;
             try {
-            let url = "homesliders";
+            let url = "homeslider";
             const response = await axios.get(url); 
             this.sliders = response.data.data.sliders;
             //  this.loading = false;

@@ -13,6 +13,7 @@ state: () => ({
                 ],
                 users: [],
                 user:{},
+                pluck:null,
                 perPage: 5,
                 currentPage: 1,
                 isBusy: false,

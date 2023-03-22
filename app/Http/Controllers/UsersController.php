@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
+use Carbon\Carbon;
 
 
 class UsersController extends Controller
@@ -19,15 +20,15 @@ class UsersController extends Controller
 
      public function index(Request $request){
 
-
+        
         $users = User::orderBy('id', 'DESC');
 
         if ($request->has('with_deleted')) {
         $users = $users->withTrashed();
         }
-
+     
         $data['users']=  $users->Paginate($request->perPage); 
-    
+        $data['pluck']= User::pluck('name');
         return $this->sendResponse($data, 'Users return successfully.',Response::HTTP_OK);
      }
 
@@ -48,7 +49,8 @@ class UsersController extends Controller
 
         $data['token'] = $data['user']->createToken('Alsufiyan')->accessToken;
 
-       
+        
+        $data['expires_in'] = Carbon::now()->addMinutes(config('auth.token_expiration'))->timestamp;// token expiration time in minutes
         
         $data['token_type'] ='Bearer';
     
@@ -70,9 +72,8 @@ class UsersController extends Controller
 
     public function logout(Request $request){
 
-        
-        $request->user()->token()->revoke();
-    
+        $request->user()->token()->delete();
+        // $request->user()->token()->revoke();
         return $this->sendResponse('User Successfully logged out.',Response::HTTP_OK);
        
 
@@ -138,6 +139,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
+        $this->authorizeForUser($request->user('api'), 'update', User::class);
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',

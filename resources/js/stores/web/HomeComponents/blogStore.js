@@ -16,7 +16,7 @@ export const usePostStore = defineStore("postStore", {
         async getPosts() {
         this.loading = true;
         try {
-        let url = "posts";
+        let url = "post";
         if (this.limit) {
             url += `?perPage=${this.limit}`;
         }
