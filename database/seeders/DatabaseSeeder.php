@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -205,6 +206,92 @@ class DatabaseSeeder extends Seeder
                   foreach($settings as $setting){
                     \App\Models\Setting::create($setting);
                     }
+
+                    
+                    DB::table('permissions')->insert(
+                      array([
+                        'id'    => 1,
+                        'name'  => 'Users List',
+                        'slug'  => 'users_view',
+                      ],
+                      [
+                        'id'    => 2,
+                        'name'  => 'Users Edit',
+                        'slug'  => 'users_edit',
+                      
+                      ],
+                      [
+                        'id'    => 3,
+                        'name'  => 'Users Delete',
+                        'slug'  => 'users_delete',
+                      
+                      ],
+                      [
+                        'id'    => 4,
+                        'name'  => 'Users Add',
+                        'slug'  => 'users_add',
+                      
+                      ],
+                      [
+                        'id'    => 5,
+                        'name'  => 'Users Restore',
+                        'slug'  => 'users_restore',
+                      
+                      ],
+                      [
+                        'id'    => 6,
+                        'name'  => 'Users Force Delete',
+                        'slug'  => 'users_forceDelete',
+                      
+                      ],
+
+                      ) );
+
+
+                      DB::table('roles')->insert(
+                        array([
+                            'id'    => 1,
+                            'name'  => 'Super Admin',
+                            'slug' => 'super_admin',
+                        ]) );
+                        DB::table('role_user')->insert(
+                          array(
+                              'role_id' => 1,
+                              'user_id' => 1,
+                          )
+                      );
+
+                  
+
+                  DB::table('roles_permissions')->insert(
+                    array(
+                      [
+                        'role_id' => 1,
+                        'permission_id' => 1,
+                        
+                      ],
+                      [
+                        'role_id'       => 1,
+                        'permission_id' => 2,
+                      ],
+                      [
+                        'role_id'       => 1,
+                        'permission_id' => 3,
+                      ],
+                      [
+                        'role_id'       => 1,
+                        'permission_id' => 4,
+                      ],
+                      [
+                        'role_id'       => 1,
+                        'permission_id' => 5,
+                      ],
+                      [
+                        'role_id'       => 1,
+                        'permission_id' => 6,
+                      ],
+                      
+                      ) );                             
 
           
             }

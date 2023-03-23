@@ -13,8 +13,12 @@ export const useLoginStore = defineStore("loginStore", {
         timer:300,
         timeout:0,
         accessToken: localStorage.getItem("token"),
-        loginUser: localStorage.getItem("name"),
+        loginUser:null,
+        logo:null,
+        slogo:null,
+        permissions:null,
         errors: {},
+        PageLoad:true,
       
     }),
 
@@ -23,7 +27,9 @@ export const useLoginStore = defineStore("loginStore", {
     },
     mutations: {},
     actions: {
-        
+        pageLoaded(){
+            this.PageLoad=false;
+        },
         async login() {
             this.loading = true;
             try {
@@ -66,6 +72,10 @@ export const useLoginStore = defineStore("loginStore", {
             this.logout();
             this.loginUser=null;
             this.accessToken = null;
+            this.loginUser=null;
+            this.logo=null;
+            this.slogo=null;
+            this.permissions=null;
             localStorage.removeItem("token");
             localStorage.removeItem("name");
             router.push({ name: "Login" });
@@ -77,24 +87,47 @@ export const useLoginStore = defineStore("loginStore", {
             this.loading = false;
         },
         startIdleTimer() {
-   
-
-      const resetTimer = () => {
+        const resetTimer = () => {
         this.timer = 300;  
-      };
+        };
 
-      window.addEventListener('mousemove', resetTimer);
-      window.addEventListener('keydown', resetTimer);
-      window.addEventListener('click', resetTimer);
+        window.addEventListener('mousemove', resetTimer);
+        window.addEventListener('keydown', resetTimer);
+        window.addEventListener('click', resetTimer);
 
-       setInterval(() => {
+        setInterval(() => {
         if(this.accessToken){
         this.timer--;
         if (this.timer <= this.timeout) {
-          router.push('/logout'); // redirect to login page
+        router.push('/logout'); // redirect to login page
         }
-    }
-      }, 1000);
-    }
+        }
+        }, 1000);
+        },
+        async refreshUserPermissions() {
+            if(this.getAccessToken){
+            try {
+                const response = await axios.get("getAuthUser");
+             
+                 this.loginUser=response.data.data.username;
+                this.logo=response.data.data.logo;
+                this.slogo=response.data.data.slogo;
+                this.permissions=response.data.data.permissions;
+
+
+            } catch (error) {
+                this.loginUser=null;
+                this.logo=null;
+                this.slogo=null;
+                this.permissions=null;
+
+                if (error.response.data.errors) {
+                    this.errors = error.response.data.errors;
+                }
+            }
+        
+        }
+        }
+        
     },
 });

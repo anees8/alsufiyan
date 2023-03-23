@@ -35,11 +35,11 @@ use App\Http\Controllers\HomeCounterController;
 Route::post('/login', [UsersController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-
+    Route::get('getAuthUser', [UsersController::class, 'getAuthUser']);
     Route::get('/user', function (Request $request) {
     return $request->user();
     });
-
+    
     Route::resource('users', UsersController::class);
     Route::get('users/restore/{user}', [UsersController::class, 'restore'])->withTrashed();
     Route::get('users/forcedelete/{user}', [UsersController::class, 'forcedelete'])->withTrashed();

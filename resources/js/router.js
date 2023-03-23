@@ -5,6 +5,9 @@ import { useLoginStore } from "@/stores/admin/loginStore.js";
 import Home from "./Components/web/Home.vue";
 import About from "./Components/web/About.vue";
 import NotFound from "./Components/web/NotFound.vue";
+import NotAuthorize from "./Components/web/NotAuthorize.vue";
+
+
 import Contact from "./Components/web/Contact.vue";
 import Gallery from "./Components/web/Gallery.vue";
 import Videos from "./Components/web/Videos.vue";
@@ -92,13 +95,21 @@ const routes = [
         },
     },
     {
+        path: "/unautharize",
+        name: "NotAuthorize",
+        component: NotAuthorize,
+        meta: {
+            requireAuth: false,
+        },
+    },
+    {
         path: "/:catchAll(.*)",
         name: "NotFound",
         component: NotFound,
         meta: {
             requireAuth: false,
         },
-    },
+    },    
     // Admin Router Link
     {
         path: "/login",
@@ -226,8 +237,12 @@ const router = createRouter({
 });
 
 
+
+
 router.beforeEach((to, from, next) => {
-    const { getAccessToken } = useLoginStore();
+    
+    const { getAccessToken,refreshUserPermissions } = useLoginStore();
+    refreshUserPermissions();
     if (to.meta.requireAuth && getAccessToken === null) {
         next({ name: "Login" });
     }
@@ -236,6 +251,7 @@ router.beforeEach((to, from, next) => {
         !to.meta.requireAuth &&
         getAccessToken !== null
     ) {
+       
         next({ name: "Dashboard" });
     }
     next();

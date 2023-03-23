@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 Use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Role;
+
 
 
 class User extends Authenticatable
@@ -47,4 +49,19 @@ class User extends Authenticatable
 
     public $timestamps = true;
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('slug', $role);
+        }
+        return !!$role->intersect($this->roles)->count();
+    }
+
+ 
 }

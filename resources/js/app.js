@@ -8,6 +8,26 @@ import router from "./router";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
+axios.interceptors.response.use((response) => {
+
+    return response;
+  }, (error) => {
+    if (error.response && error.response.data) {
+        if (error.response.status === 401) {
+            router.push({ name: 'Login' }); 
+          }
+          if (error.response.status === 404) {
+            router.push({"name":"NotFound"});
+          }
+          if (error.response.status === 403) {
+          
+            router.push({"name":"NotAuthorize"});
+          }
+  
+   
+    }
+  
+  });
 // import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
 
 
@@ -114,9 +134,12 @@ import Swal from 'sweetalert2';
 window.Swal=Swal;
   
 axios.defaults.baseURL = "/api/";
-
 axios.defaults.headers.common["Authorization"] =
     "Bearer " + localStorage.getItem("token");
+
+
+ 
+
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -136,3 +159,4 @@ app.use(VueNumber);
 
 // app.use(VueReCaptcha, { siteKey: '6LenSowkAAAAADTvKcDRW33ZtVkpr-I2vLVlbP3B' });
 app.mount("#app");
+

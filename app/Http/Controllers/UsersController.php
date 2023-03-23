@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
 use Carbon\Carbon;
@@ -19,16 +20,13 @@ class UsersController extends Controller
      */
 
      public function index(Request $request){
-
-        
+       
         $users = User::orderBy('id', 'DESC');
-
+        $this->authorizeForUser($request->user('api'), 'view', User::class);
         if ($request->has('with_deleted')) {
         $users = $users->withTrashed();
         }
-     
         $data['users']=  $users->Paginate($request->perPage); 
-        $data['pluck']= User::pluck('name');
         return $this->sendResponse($data, 'Users return successfully.',Response::HTTP_OK);
      }
 
@@ -53,6 +51,7 @@ class UsersController extends Controller
         $data['expires_in'] = Carbon::now()->addMinutes(config('auth.token_expiration'))->timestamp;// token expiration time in minutes
         
         $data['token_type'] ='Bearer';
+        
     
         return $this->sendResponse($data, 'Login Successfully.',Response::HTTP_OK);
         }
@@ -87,6 +86,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->authorizeForUser($request->user('api'), 'create', User::class);
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
@@ -165,23 +166,37 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
-    
+        $this->authorizeForUser($request->user('api'), 'delete', User::class);
         $user->delete();
         return $this->sendResponse('User Recycle Successfully.',Response::HTTP_OK);
 
     }
 
-    public function restore(User $user){
+    public function restore(Request $request, User $user){
+        $this->authorizeForUser($request->user('api'), 'restore', User::class);
+
         $user->restore();
         return $this->sendResponse('User Restore Successfully.',Response::HTTP_OK);
     }
 
-    public function forcedelete(User $user){
-        
+    public function forcedelete(Request $request, User $user){
+        $this->authorizeForUser($request->user('api'), 'forceDelete', User::class);
+            
         $user->forceDelete();
         return $this->sendResponse('User Deleted Successfully.',Response::HTTP_OK);
+
+    }
+
+    public function getAuthUser(Request $request)
+    {
+        
+        $data['username'] = Auth::user()->name;
+        $data['logo'] = Setting::where('slug','=','logo')->pluck('description')->first();
+        $data['slogo'] = Setting::where('slug','=','slogo')->pluck('description')->first();
+        $data['permissions']= Auth::user()->roles()->first()->permissions->pluck('slug');
+        return $this->sendResponse($data, 'Users Authentication return successfully.',Response::HTTP_OK);
 
     }
 }

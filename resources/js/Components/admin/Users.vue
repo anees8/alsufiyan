@@ -97,8 +97,9 @@
             
             <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
             <template #cell(actions)="data"> 
+              <!--  -->
               <b-button
-             
+              v-if="permissions.includes('users_edit')"
               class="rounded-circle p-2 me-2"
               @click="editUser(data.item.id)"
               variant="outline-success"
@@ -107,7 +108,8 @@
             </b-button>
 
             <b-button
-              v-if="!data.item.deleted_at"
+            
+              v-if="!data.item.deleted_at && permissions.includes('users_delete')"
               class="rounded-circle p-2 me-2"
               @click="recycleUser(data.item.id)"
               variant="outline-secondary"
@@ -116,7 +118,7 @@
             </b-button>
 
             <b-button
-            v-if="data.item.deleted_at"
+            v-if="data.item.deleted_at && permissions.includes('users_restore')"
               class="rounded-circle p-2 me-2"
               @click="restoreUser(data.item.id)"
               variant="outline-primary"
@@ -125,9 +127,9 @@
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
-             
+             v-if="permissions.includes('users_forceDelete')"
               class="rounded-circle p-2 me-2"
-              @click="deleteUser(data.item.id)"
+              @click="deleteUser(data.item.id) "
               variant="outline-danger"
             >
               <font-awesome-icon icon="fa-regular fa-trash-can" />
@@ -161,8 +163,8 @@
   </template>
   <script setup>
   import { storeToRefs } from "pinia";
-  
   import { useUsersStore } from "../../stores/admin/usersStore.js";
+  import { useLoginStore } from "../../stores/admin/loginStore.js";
   const {
     users,
     user,
@@ -175,6 +177,9 @@
     isBusy,
   } = storeToRefs(useUsersStore());
   
+  const {
+   permissions
+  } = storeToRefs(useLoginStore());
   const { getUsers, setPerPage, dateTime ,uploadData,editUser,recycleUser,deleteUser,restoreUser,resetForm,
   hideModel} = useUsersStore();
   

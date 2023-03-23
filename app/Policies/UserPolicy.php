@@ -3,6 +3,8 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\Permission;
+
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -29,7 +31,10 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'users_view')->first();
+        
+        return $user->hasRole($permission->roles);
+        return true;
     }
 
     /**
@@ -40,7 +45,8 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'users_add')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -52,8 +58,10 @@ class UserPolicy
      */
     public function update(User $user)
     {
+        $permission = Permission::where('slug', 'users_edit')->first();
+        return $user->hasRole($permission->roles);
       
-        return false;
+        
     }
 
     /**
@@ -65,7 +73,8 @@ class UserPolicy
      */
     public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'users_delete')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -77,7 +86,9 @@ class UserPolicy
      */
     public function restore(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'users_restore')->first();
+        return $user->hasRole($permission->roles);
+       
     }
 
     /**
@@ -89,6 +100,7 @@ class UserPolicy
      */
     public function forceDelete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'users_forceDelete')->first();
+        return $user->hasRole($permission->roles);
     }
 }
