@@ -1,10 +1,25 @@
 <template>
-  <div class="d-flex align-items-center justify-content-center vh-100 background-404">
-    <h1 class="display-1 fw-bold text-white">403</h1>
-  </div>
+  <b-col
+    class="bg-dark vh-100 text-white d-flex align-items-center justify-content-center flex-column"
+  >
+    <h1>403</h1>
+    <div>
+      <b-button
+        v-if="accessToken"
+        :to="{ name: 'Dashboard' }"
+        class="me-3"
+        variant="light"
+        ><font-awesome-icon class="me-2 me-md-1" icon="gauge" />Dashboard</b-button
+      >
+      <b-button :to="{ name: 'Home' }" variant="light"
+        ><font-awesome-icon class="me-2 me-md-1" icon="home" />Home</b-button
+      >
+    </div>
+  </b-col>
 </template>
-<style scoped>
-.background-404 {
-  background-color: #567189;
-}
-</style>
+<style scoped></style>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useLoginStore } from "../../stores/admin/loginStore.js";
+const { accessToken } = storeToRefs(useLoginStore());
+</script>

@@ -1,20 +1,20 @@
 <template>
-
   <nav
     class="navbar navbar-expand-lg fixed-top navbar-light bg-white justify-content-between p-0 m-0"
   >
     <div class="container text-center">
-        <a class="navbar-brand d-flex" v-if="loading">
-          <b-skeleton type="avatar" class="mx-1"></b-skeleton>
-        <b-skeleton type="image" style="height:48px;width:135px" class="p-1"></b-skeleton >
-        
-        </a>
-        
-      <a v-else class="navbar-brand" href="#">
+      <a class="navbar-brand d-flex" v-if="loading">
+        <b-skeleton type="avatar" class="mx-1"></b-skeleton>
+        <b-skeleton
+          type="image"
+          style="height: 48px; width: 135px"
+          class="p-1"
+        ></b-skeleton>
+      </a>
 
-        
+      <a v-else class="navbar-brand" href="#">
         <img class="mx-1" :src="logo" height="48" />
-        <img :src="slogo" height="48" style="max-width:135px" class="p-1" />
+        <img :src="slogo" height="48" style="max-width: 135px" class="p-1" />
       </a>
 
       <button
@@ -47,7 +47,10 @@
               exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark  bg-light "
               :to="{ name: 'About' }"
-              ><font-awesome-icon class="me-2 me-md-1" icon="address-card" />About</RouterLink
+              ><font-awesome-icon
+                class="me-2 me-md-1"
+                icon="address-card"
+              />About</RouterLink
             >
           </li>
           <li class="nav-item mx-0">
@@ -83,21 +86,31 @@
               exact
               active-class="active  border-bottom border-1   shadow-sm  border-dark bg-light "
               :to="{ name: 'contact' }"
-              ><font-awesome-icon class="me-2 me-md-1" icon="envelope" />Contact</RouterLink
+              ><font-awesome-icon
+                class="me-2 me-md-1"
+                icon="envelope"
+              />Contact</RouterLink
             >
           </li>
 
           <li class="nav-item mx-0" v-if="loginUser">
             <RouterLink
-              class="nav-link  text-dark"
+              class="nav-link text-dark"
               exact
               active-class="active  border-bottom border-1  shadow-sm border-dark bg-light"
               :to="{ name: 'Login' }"
-              >
-              <button class="btn btn-outline-dark  rounded-circle p-2">
-          {{ loginUser.split(" ").map((n)=>n[0]).join("") }}
-          </button>
-        </RouterLink>
+            >
+              <button class="btn btn-dark rounded p-2">
+                {{ loginUser.charAt(0) }}
+                <font-awesome-icon class="me-2 me-md-1" icon="gauge" />
+                <!-- {{
+                  loginUser
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")
+                }} -->
+              </button>
+            </RouterLink>
           </li>
           <li class="nav-item mx-0" v-else>
             <RouterLink
@@ -115,13 +128,13 @@
 </template>
 <style scoped>
 .navbar {
-  font-weight:500;
+  font-weight: 500;
 }
 </style>
 <script setup>
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../stores/web/settingStore.js";
 import { useLoginStore } from "../../stores/admin/loginStore.js";
-const { logo, slogo,loading } = storeToRefs(useSettingStore());
+const { logo, slogo, loading } = storeToRefs(useSettingStore());
 const { loginUser } = storeToRefs(useLoginStore());
 </script>

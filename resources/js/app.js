@@ -38,6 +38,7 @@ import "bootstrap-vue-next/dist/bootstrap-vue-next.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  
     faA, faB, faC, faD, faE, faF, faG, faH, faI, faJ, faK, faL, faM, faN, faO, faP, faQ, faR, faS, faT, faU, faV, faW, faX, faY, faZ,
     faArrowRight,
     faArrowLeft,
