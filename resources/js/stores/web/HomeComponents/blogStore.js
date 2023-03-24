@@ -23,7 +23,9 @@ export const usePostStore = defineStore("postStore", {
 
         const response = await axios.get(url);
         this.posts = response.data.data.posts.data;
-        this.loading = false;
+        setTimeout(() => {
+            this.loading = false;
+          }, 300); // set timeout to 1 second
         } catch (error) {
         }
         },

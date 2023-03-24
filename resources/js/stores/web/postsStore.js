@@ -59,7 +59,9 @@ export const usePostsStore = defineStore("postsStore", {
 
                 this.rows = response.data.data.posts.total;
 
-                this.loading = false;
+                setTimeout(() => {
+                    this.loading = false;
+                  }, 300); // set timeout to 1 second
             } catch (error) {
                 if (error.response) {
                     this.errors = error.response.data.errors;

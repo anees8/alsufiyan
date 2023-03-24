@@ -34,7 +34,9 @@ export const usePackagesStore = defineStore("packagesStore", {
             let url = "homepackageslider";
             const response = await axios.get(url); 
             this.packages = response.data.data.packages;
-            this.loading = false;
+            setTimeout(() => {
+              this.loading = false;
+            }, 300); // set timeout to 1 second
             } catch (error) {
             }
             },

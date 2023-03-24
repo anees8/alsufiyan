@@ -20,7 +20,9 @@ export const useSliderStore = defineStore("sliderStore", {
             let url = "homeslider";
             const response = await axios.get(url); 
             this.sliders = response.data.data.sliders;
-             this.loading = false;
+            setTimeout(() => {
+              this.loading = false;
+            }, 300); // set timeout to 1 second
             } catch (error) {
 
               // this.getSliderImages();

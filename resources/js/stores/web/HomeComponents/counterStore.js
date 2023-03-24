@@ -22,7 +22,9 @@ try {
 let url = "counter";
 const response = await axios.get(url);
 this.counters = response.data.data.counter;
-this.loading = false;
+setTimeout(() => {
+    this.loading = false;
+  }, 300); // set timeout to 1 second
 } catch (error) {
 }
 },
