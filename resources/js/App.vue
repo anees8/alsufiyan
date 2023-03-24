@@ -1,95 +1,118 @@
 <template>
-  <div class="bg-light">
-    <Navbar
-      v-if="
-        ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
-          $route.name
-        )
-      "
-    />
+  <div v-if="Loading">
+    <div class="bg-light">
+      <Navbar
+        v-if="
+          [
+            'Home',
+            'About',
+            'gallery',
+            'blog',
+            'PostDetail',
+            'contact',
+            'Videos',
+          ].includes($route.name)
+        "
+      />
 
-    <div
-      class="sidebar"
-      v-if="
-        ![
-          'Home',
-          'About',
-          'gallery',
-          'blog',
-          'PostDetail',
-          'contact',
-          'Videos',
-          'Login',
-          'NotFound',
-          'Logout',
-          'NotAuthorize',
-        ].includes($route.name)
-      "
-    >
-      <Sidebar />
+      <div
+        class="sidebar"
+        v-if="
+          ![
+            'Home',
+            'About',
+            'gallery',
+            'blog',
+            'PostDetail',
+            'contact',
+            'Videos',
+            'Login',
+            'NotFound',
+            'Logout',
+            'NotAuthorize',
+          ].includes($route.name)
+        "
+      >
+        <Sidebar />
 
-      <div class="content">
-        <Header />
-        <RouterView class="m-3" />
+        <div class="content">
+          <Header />
+          <RouterView class="m-3" />
+        </div>
       </div>
+
+      <div
+        class="mh-100"
+        v-if="
+          [
+            'Home',
+            'About',
+            'gallery',
+            'blog',
+            'PostDetail',
+            'contact',
+            'Videos',
+          ].includes($route.name)
+        "
+      >
+        <a class="nav-link" href="https://wa.me/9876543210?text=[Hi]" target="_blank"
+          ><font-awesome-icon
+            class="whatsapp text-success me-4 h1 position-fixed end-0"
+            style="z-index: 1; bottom: 80px"
+            icon="fa-brands fa-whatsapp"
+            size="xl"
+        /></a>
+      </div>
+
+      <RouterView
+        v-if="
+          [
+            'Home',
+            'About',
+            'gallery',
+            'blog',
+            'PostDetail',
+            'contact',
+            'Videos',
+            'Login',
+            'NotFound',
+            'NotAuthorize',
+            'Logout',
+          ].includes($route.name)
+        "
+      />
     </div>
 
-    <div
-      class="mh-100"
+    <Footer
       v-if="
         ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
           $route.name
         )
-      "
-    >
-      <a class="nav-link" href="https://wa.me/9876543210?text=[Hi]" target="_blank"
-        ><font-awesome-icon
-          class="whatsapp text-success me-4 h1 position-fixed end-0"
-          style="z-index: 1; bottom: 80px"
-          icon="fa-brands fa-whatsapp"
-          size="xl"
-      /></a>
-    </div>
-
-    <RouterView
-      v-if="
-        [
-          'Home',
-          'About',
-          'gallery',
-          'blog',
-          'PostDetail',
-          'contact',
-          'Videos',
-          'Login',
-          'NotFound',
-          'NotAuthorize',
-          'Logout',
-        ].includes($route.name)
       "
     />
   </div>
-
-  <Footer
-    v-if="
-      ['Home', 'About', 'gallery', 'blog', 'PostDetail', 'contact', 'Videos'].includes(
-        $route.name
-      )
-    "
-  />
+  <div v-else>
+    <Loader />
+  </div>
 </template>
 <script setup>
-import { onBeforeMount } from "vue";
+import { ref, onBeforeMount } from "vue";
 import Navbar from "@/Components/common/Navbar.vue";
+import Loader from "@/Components/common/HomeLoader.vue";
 import Header from "@/Components/common/Header.vue";
 import Sidebar from "@/Components/common/Sidebar.vue";
 import Footer from "@/Components/common/Footer.vue";
 import { useLoginStore } from "./stores/admin/loginStore";
 const { startIdleTimer, refreshUserPermissions } = useLoginStore();
 
+const Loading = ref(false);
 startIdleTimer();
 onBeforeMount(() => {
   refreshUserPermissions();
+
+  setTimeout(() => {
+    Loading.value = true;
+  }, 1000); // set timeout to 1 second
 });
 </script>
 <style>
