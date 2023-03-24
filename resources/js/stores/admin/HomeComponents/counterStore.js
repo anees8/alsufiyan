@@ -21,7 +21,7 @@ return diffYears;
 async getCounter() {
 this.loading = true;
 try {
-let url = "counters";
+let url = "homecounters";
 const response = await axios.get(url);
 this.counters = response.data.data.counter;
 } catch (error) {
@@ -46,7 +46,7 @@ async updateCounter(){
             };
             const formData = new FormData();
             if(this.counter.id){
-            formData.append('counter',this.counter.counter);
+            formData.append('counters',this.counter.counter);
         }
             formData.append('_method','put');
             let url = "homecounters/";
@@ -61,9 +61,7 @@ async updateCounter(){
             }
         this.loading = false;
         }
-
 }
-
 },
 
 

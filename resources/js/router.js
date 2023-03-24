@@ -81,7 +81,7 @@ const routes = [
     },    
     // Admin Router Link
     {
-        path: "/login",
+        path: "/admin/login",
         name: "Login",
         component: ()=>import('./Components/admin/Login.vue'),
         meta: {
@@ -89,7 +89,7 @@ const routes = [
         },
     },
     {
-        path: "/dashboard",
+        path: "/admin/dashboard",
         name: "Dashboard",
         component: ()=>import('./Components/admin/Dashboard.vue'),
         meta: {
@@ -97,7 +97,7 @@ const routes = [
         },
     },
     {
-        path: "/logout",
+        path: "/admin/logout",
         name: "Logout",
         component: ()=>import('./Components/admin/Logout.vue'),
         meta: {
