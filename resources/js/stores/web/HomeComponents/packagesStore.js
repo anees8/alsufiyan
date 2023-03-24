@@ -34,7 +34,7 @@ export const usePackagesStore = defineStore("packagesStore", {
             let url = "homepackageslider";
             const response = await axios.get(url); 
             this.packages = response.data.data.packages;
-            // this.loading = false;
+            this.loading = false;
             } catch (error) {
             }
             },

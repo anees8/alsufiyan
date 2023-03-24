@@ -22,7 +22,7 @@ try {
 let url = "counters";
 const response = await axios.get(url);
 this.counters = response.data.data.counter;
-// this.loading = false;
+this.loading = false;
 } catch (error) {
 }
 },

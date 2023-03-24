@@ -31,7 +31,7 @@ url += `?perPage=${this.perPage}`;
 
 const response = await axios.get(url);
 this.images = response.data.data.images.data;
-// this.loading = false;
+this.loading = false;
 
 } catch (error) {
 }

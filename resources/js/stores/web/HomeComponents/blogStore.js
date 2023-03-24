@@ -23,7 +23,7 @@ export const usePostStore = defineStore("postStore", {
 
         const response = await axios.get(url);
         this.posts = response.data.data.posts.data;
-        // this.loading = false;
+        this.loading = false;
         } catch (error) {
         }
         },

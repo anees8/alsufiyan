@@ -59,7 +59,7 @@ export const usePostsStore = defineStore("postsStore", {
 
                 this.rows = response.data.data.posts.total;
 
-                // this.loading = false;
+                this.loading = false;
             } catch (error) {
                 if (error.response) {
                     this.errors = error.response.data.errors;

@@ -1,50 +1,19 @@
 import { createWebHistory, createRouter } from "vue-router";
 import { useLoginStore } from "@/stores/admin/loginStore.js";
 
-// webpage
-import Home from "./Components/web/Home.vue";
-import About from "./Components/web/About.vue";
-import NotFound from "./Components/web/NotFound.vue";
-import NotAuthorize from "./Components/web/NotAuthorize.vue";
-
-
-import Contact from "./Components/web/Contact.vue";
-import Gallery from "./Components/web/Gallery.vue";
-import Videos from "./Components/web/Videos.vue";
-import blog from "./Components/web/Blog.vue";
-import PostDetail from "./Components/web/BlogComponents/PostDetail.vue";
-
-// Dashboard
-import Login from "./Components/admin/Login.vue";
-import Logout from "./Components/admin/Logout.vue";
-import Dashboard from "./Components/admin/Dashboard.vue";
-import AdminAbout from "./Components/admin/About.vue";
-
-import AdminImages from "./Components/admin/Images.vue";
-import AdminVideos from "./Components/admin/Videos.vue";
-import AdminBlog from "./Components/admin/Blog.vue";
-import AdminContact from "./Components/admin/contact.vue";
-import AdminContactSubject  from "./Components/admin/ContactComponents/ContactSubject.vue";
-import AdminHomeSlider from "./Components/admin/HomeComponents/HomeSlider.vue";
-import AdminHomePackage from './Components/admin/HomeComponents/HomePackage.vue';
-import AdminHomeCounter from './Components/admin/HomeComponents/HomeCounter.vue';
-import AdminUsers from './Components/admin/Users.vue';
-
-
 const routes = [
     {
         path: "/",
         name: "Home",
-        component: Home,
+        component: ()=>import('./Components/web/Home.vue'),
         meta: {
-            requireAuth: false,
-           
+            requireAuth: false,    
         },
     },
     {
         path: "/aboutus",
         name: "About",
-        component: About,
+           component: ()=>import('./Components/web/About.vue'),
         meta: {
             requireAuth: false,
         },
@@ -52,7 +21,7 @@ const routes = [
     {
         path: "/images",
         name: "gallery",
-        component: Gallery,
+        component: ()=>import('./Components/web/Gallery.vue'),
         meta: {
             requireAuth: false,
         },
@@ -60,7 +29,7 @@ const routes = [
     {
         path: "/video",
         name: "Videos",
-        component: Videos,
+        component: ()=>import('./Components/web/Videos.vue'),
         meta: {
             requireAuth: false,
         },
@@ -69,7 +38,7 @@ const routes = [
     {
         path: "/blog",
         name: "blog",
-        component: blog,
+        component: ()=>import('./Components/web/Blog.vue'),
         meta: {
             requireAuth: false,
         },
@@ -78,7 +47,7 @@ const routes = [
     {
         path: "/post/:id",
         name: "PostDetail",
-        component: PostDetail,
+        component: ()=>import('./Components/web/BlogComponents/PostDetail.vue'),
         props: (route) => ({
             id: Number(route.params.id),
         }),
@@ -89,7 +58,7 @@ const routes = [
     {
         path: "/contact",
         name: "contact",
-        component: Contact,
+        component: ()=>import('./Components/web/Contact.vue'),
         meta: {
             requireAuth: false,
         },
@@ -97,7 +66,7 @@ const routes = [
     {
         path: "/unautharize",
         name: "NotAuthorize",
-        component: NotAuthorize,
+        component: ()=>import('./Components/web/NotAuthorize.vue'),
         meta: {
             requireAuth: false,
         },
@@ -105,7 +74,7 @@ const routes = [
     {
         path: "/:catchAll(.*)",
         name: "NotFound",
-        component: NotFound,
+        component: ()=>import('./Components/web/NotFound.vue'),
         meta: {
             requireAuth: false,
         },
@@ -114,7 +83,7 @@ const routes = [
     {
         path: "/login",
         name: "Login",
-        component: Login,
+        component: ()=>import('./Components/admin/Login.vue'),
         meta: {
             requireAuth: false,
         },
@@ -122,7 +91,7 @@ const routes = [
     {
         path: "/dashboard",
         name: "Dashboard",
-        component: Dashboard,
+        component: ()=>import('./Components/admin/Dashboard.vue'),
         meta: {
             requireAuth: true,
         },
@@ -130,7 +99,7 @@ const routes = [
     {
         path: "/logout",
         name: "Logout",
-        component: Logout,
+        component: ()=>import('./Components/admin/Logout.vue'),
         meta: {
             requireAuth: true,
         },
@@ -138,7 +107,7 @@ const routes = [
     {
         path: "/admin/about",
         name: "AdminAbout",
-        component: AdminAbout,
+        component: ()=>import('./Components/admin/About.vue'),
         meta: {
             requireAuth: true,
         },
@@ -146,27 +115,23 @@ const routes = [
     {
         path: "/admin/home/slider",
         name: "AdminHomeSlider",
-        component: AdminHomeSlider,
+        component: ()=>import('./Components/admin/HomeComponents/HomeSlider.vue'),
         meta: {
             requireAuth: true,
         },
     },
-
     {
         path: "/admin/home/counter",
         name: "AdminHomeCounter",
-        component: AdminHomeCounter,
+        component: ()=>import('./Components/admin/HomeComponents/HomeCounter.vue'),
         meta: {
             requireAuth: true,
         },
     },
-
-    
-
     {
         path: "/admin/blog",
         name: "AdminBlog",
-        component: AdminBlog,
+        component: ()=>import('./Components/admin/Blog.vue'),
         meta: {
             requireAuth: true,
         },
@@ -174,17 +139,15 @@ const routes = [
     {
         path: "/admin/users",
         name: "AdminUsers",
-        component: AdminUsers,
+        component: ()=>import('./Components/admin/Users.vue'),
         meta: {
             requireAuth: true,
         },
-    },
-    
-    
+    },    
     {
         path: "/admin/image",
         name: "AdminImage",
-        component: AdminImages,
+        component: ()=>import('./Components/admin/Images.vue'),
         meta: {
             requireAuth: true,
         },
@@ -192,14 +155,14 @@ const routes = [
     {
         path: "/admin/video",
         name: "AdminVideo",
-        component: AdminVideos,
+        component: ()=>import('./Components/admin/Videos.vue'),
         meta: {
             requireAuth: true,
         },
     },{
         path: "/admin/contact",
         name: "AdminContact",
-        component: AdminContact,
+        component: ()=>import('./Components/admin/contact.vue'),
         meta: {
             requireAuth: true,
         },
@@ -207,7 +170,7 @@ const routes = [
     {
         path: "/admin/contact/subject",
         name: "AdminContactSubject",
-        component: AdminContactSubject,
+        component: ()=>import('./Components/admin/ContactComponents/ContactSubject.vue'),
         meta: {
             requireAuth: true,
         },
@@ -215,16 +178,11 @@ const routes = [
     {
         path: "/admin/home/package",
         name: "AdminHomePackage",
-        component: AdminHomePackage,
+        component: ()=>import('./Components/admin/HomeComponents/HomePackage.vue'),
         meta: {
             requireAuth: true,
         },
-    },
-
-    
-    
-
-    
+    },  
 ];
 
 const router = createRouter({
