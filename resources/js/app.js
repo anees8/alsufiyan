@@ -140,24 +140,16 @@ axios.defaults.headers.common["Authorization"] =
 
 
  
-
-
-const pinia = createPinia();
 const app = createApp(App);
 app.use(VueAxios, axios);
 app.use(BootstrapVueNext);
-
 app.use(VueEasyLightbox);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.component("font-awesome-layers", FontAwesomeLayers);
 app.component("font-awesome-layer-text", FontAwesomeLayersText);
-app.use(pinia);
-
+app.use(createPinia());
 app.use(router);
 app.use(VueNumber);
-
-
-
 // app.use(VueReCaptcha, { siteKey: '6LenSowkAAAAADTvKcDRW33ZtVkpr-I2vLVlbP3B' });
 app.mount("#app");
 
