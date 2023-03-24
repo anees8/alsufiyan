@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
-import {ref} from 'vue';
+import router from "../../router.js";
 export const useAdminVideosStore = defineStore("adminvideosStore", {
 state: () => ({
                 fields: [
@@ -57,12 +57,24 @@ actions: {
                 this.currentPage = response.data.data.videos.current_page;
                 this.rows = response.data.data.videos.total;
 
-                this.isBusy = false;
+               
+                setTimeout(() => {
+                    this.isBusy = false;
+                  }, 300); // set timeout to 1 second
                 } catch (error) {
+                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
+                                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
                 if (error.response) {
                 this.errors = error.response.data.errors;
                 }
-                this.isBusy = false;
+                }
+                }
+                
+                
                 }
     }, 
 

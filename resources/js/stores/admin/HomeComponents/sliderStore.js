@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
+import router from "../../../router.js";
 
 export const useAdminSliderStore = defineStore("adminsliderStore", {
 state: () => ({
@@ -64,8 +65,12 @@ actions: {
 
                 this.isBusy = false;
                 } catch (error) {
+                                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
                 if (error.response) {
                 this.errors = error.response.data.errors;
+                }
                 }
                 this.isBusy = false;
                 }

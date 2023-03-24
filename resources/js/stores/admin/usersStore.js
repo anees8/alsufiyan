@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
+import router from "../../router.js";
 
 export const useUsersStore = defineStore("usersStore", {
 state: () => ({
@@ -52,8 +53,13 @@ actions: {
 
                 this.isBusy = false;
                 } catch (error) {
+              
+                            if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
                 if (error.response) {
                 this.errors = error.response.data.errors;
+                }
                 }
                 this.isBusy = false;
                 }
@@ -177,7 +183,7 @@ actions: {
             this.resetForm();
             },
 
-            async uploadData (){
+async uploadData (){
             const formData = new FormData();
             let config={
             header:{ "content-type": "multipart/form-data",
@@ -208,8 +214,12 @@ actions: {
                 this.hideModel();
                 }catch (error) {
 
+                                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
                 if (error.response) {
                 this.errors = error.response.data.errors;
+                }
                 }
                 this.loading = false;
                 }
@@ -222,10 +232,17 @@ actions: {
                 this.hideModel();
                 }catch (error) {
 
+                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
+                                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
                 if (error.response) {
                 this.errors = error.response.data.errors;
                 }
-                this.loading = false;
+                }
+                }
                 }
 
                 }

@@ -1,6 +1,7 @@
 <template>
   <div class="menu-item" :class="{ expanded: expanded }">
     <RouterLink
+      v-if="name"
       v-show="Permissions"
       class="nav-link text-dark"
       data-bs-toggle="tooltip"
@@ -25,7 +26,31 @@
         </div>
       </div>
     </RouterLink>
+    <li
+      v-else
+      v-show="Permissions"
+      class="nav-link text-dark"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      v-bind:title="label"
+      v-on:click="togggleMenu()"
+    >
+      <div class="label d-flex align-items-center justify-content-between">
+        <div>
+          <font-awesome-icon class="me-4" v-if="icon && !smallMenu" :icon="icon" />
+          <font-awesome-icon v-if="icon && smallMenu" :icon="icon" class="ms-2" />
 
+          <span v-if="showLabel">{{ label }} </span>
+        </div>
+        <div v-if="data ? data.length > 0 : false" class="right">
+          <font-awesome-icon
+            class="ms-2"
+            :class="{ 'fa-rotate-180 ': expanded }"
+            icon="chevron-down"
+          />
+        </div>
+      </div>
+    </li>
     <div
       v-show="showChildren"
       class="items-container"

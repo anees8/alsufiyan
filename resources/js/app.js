@@ -8,26 +8,10 @@ import router from "./router";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
-axios.interceptors.response.use((response) => {
 
-    return response;
-  }, (error) => {
-    if (error.response && error.response.data) {
-        if (error.response.status === 401) {
-            router.push({ name: 'Login' }); 
-          }
-          if (error.response.status === 404) {
-            router.push({"name":"NotFound"});
-          }
-          if (error.response.status === 403) {
+  
           
-            router.push({"name":"NotAuthorize"});
-          }
-  
-   
-    }
-  
-  });
+
 // import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
 
 

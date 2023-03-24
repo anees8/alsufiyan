@@ -1,10 +1,10 @@
 <template>
-    <b-row>
-      <b-card>
-        <b-col>
-          <b-row align-v="center">
-            <b-col><h5>Users List</h5></b-col>
-            <b-col>
+  <b-row>
+    <b-card>
+      <b-col>
+        <b-row align-v="center">
+          <b-col><h5>Users List</h5></b-col>
+          <b-col>
             <b-button
               @click="modal = !modal"
               class="float-end"
@@ -17,56 +17,75 @@
               <b-modal
                 v-model="modal"
                 :title="user.id ? 'Update User' : 'Add User'"
-              
                 hide-header-close
                 no-close-on-backdrop
               >
+                <b-form-group
+                  id="input-group-1"
+                  label="Email address:"
+                  label-for="input-1"
+                  description="We'll never share your email with anyone else."
+                >
+                  <b-form-input
+                    id="input-1"
+                    v-model="user.email"
+                    type="email"
+                    placeholder="Enter email"
+                    required
+                  ></b-form-input>
+                  <b-form-invalid-feedback v-if="errors.email" :state="errors.email">
+                    {{ errors.email[0] }}
+                  </b-form-invalid-feedback>
+                </b-form-group>
 
-           
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          id="input-1"
-          v-model="user.email"
-          type="email"
-          placeholder="Enter email"
-          required
-        ></b-form-input>
-      </b-form-group>
+                <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+                  <b-form-input
+                    id="input-2"
+                    v-model="user.name"
+                    placeholder="Enter name"
+                    required
+                  ></b-form-input>
+                  <b-form-invalid-feedback v-if="errors.name" :state="errors.name">
+                    {{ errors.name[0] }}
+                  </b-form-invalid-feedback>
+                </b-form-group>
 
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="user.name"
-          placeholder="Enter name"
-          required
-        ></b-form-input>
-      </b-form-group>
+                <b-form-group id="input-group-3" label="Password:" label-for="input-3">
+                  <b-form-input
+                    id="input-3"
+                    type="password"
+                    v-model="user.password"
+                    placeholder="Enter  Password"
+                    required
+                  ></b-form-input>
+                  <b-form-invalid-feedback
+                    v-if="errors.password"
+                    :state="errors.password"
+                  >
+                    {{ errors.password[0] }}
+                  </b-form-invalid-feedback>
+                </b-form-group>
+                <b-form-group
+                  id="input-group-4"
+                  label="Confirm Password:"
+                  label-for="input-4"
+                >
+                  <b-form-input
+                    id="input-4"
+                    type="password"
+                    v-model="user.password_confirmation"
+                    placeholder="Enter Confirm Password"
+                    required
+                  ></b-form-input>
+                  <b-form-invalid-feedback
+                    v-if="errors.password_confirmation"
+                    :state="errors.password_confirmation"
+                  >
+                    {{ errors.password_confirmation[0] }}
+                  </b-form-invalid-feedback>
+                </b-form-group>
 
-      <b-form-group id="input-group-3" label="Password:" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          type="password"
-          v-model="user.password"
-          placeholder="Enter  Password"
-          required
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-4" label="Confirm Password:" label-for="input-4">
-        <b-form-input
-          id="input-4"
-          type="password"
-          v-model="user.password_confirmation"
-          placeholder="Enter Confirm Password"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <template #footer>
+                <template #footer>
                   <div>
                     <button class="btn btn-outline-dark" @click="hideModel">Close</button>
                   </div>
@@ -76,29 +95,29 @@
                     </button>
                   </div>
                 </template>
-
-</b-modal></div></b-col>
-          </b-row>
-        </b-col>
-        <b-col
-          ><b-table
-            striped
-            outlined
-            empty-filtered-text
-            caption-top
-            hover
-            footClone
-            :items="users"
-            :fields="fields"
-            :busy="isBusy"
-            responsive
-            show-empty
+              </b-modal>
+            </div></b-col
           >
-            
-            <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
-            <template #cell(actions)="data"> 
-              <!--  -->
-              <b-button
+        </b-row>
+      </b-col>
+      <b-col
+        ><b-table
+          striped
+          outlined
+          empty-filtered-text
+          caption-top
+          hover
+          footClone
+          :items="users"
+          :fields="fields"
+          :busy="isBusy"
+          responsive
+          show-empty
+        >
+          <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
+          <template #cell(actions)="data">
+            <!--  -->
+            <b-button
               v-if="permissions.includes('users_edit')"
               class="rounded-circle p-2 me-2"
               @click="editUser(data.item.id)"
@@ -108,7 +127,6 @@
             </b-button>
 
             <b-button
-            
               v-if="!data.item.deleted_at && permissions.includes('users_delete')"
               class="rounded-circle p-2 me-2"
               @click="recycleUser(data.item.id)"
@@ -118,73 +136,77 @@
             </b-button>
 
             <b-button
-            v-if="data.item.deleted_at && permissions.includes('users_restore')"
+              v-if="data.item.deleted_at && permissions.includes('users_restore')"
               class="rounded-circle p-2 me-2"
               @click="restoreUser(data.item.id)"
               variant="outline-primary"
             >
-            
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
-             v-if="permissions.includes('users_forceDelete')"
+              v-if="permissions.includes('users_forceDelete')"
               class="rounded-circle p-2 me-2"
-              @click="deleteUser(data.item.id) "
+              @click="deleteUser(data.item.id)"
               variant="outline-danger"
             >
               <font-awesome-icon icon="fa-regular fa-trash-can" />
             </b-button>
-            
-            </template> </b-table
-        ></b-col>
-        <b-row align-h="end" class="mt-5">
-          <b-col xl="1" lg="2" md="2" class="p-2">
-            <b-form-select
-              v-if="rows > 5"
-              v-model="perPage"
-              :options="options"
-              size="md"
-              v-on:change="setPerPage"
-              varient="dark"
-            ></b-form-select>
-          </b-col>
-          <b-col xl="5" lg="6" md="8" class="p-2">
-            <b-pagination
-              v-if="rows / perPage > 1"
-              v-on:click="getUsers"
-              v-model="currentPage"
-              :total-rows="rows"
-              :per-page="perPage"
-            ></b-pagination>
-          </b-col>
-        </b-row>
-      </b-card>
-    </b-row>
-  </template>
-  <script setup>
-  import { storeToRefs } from "pinia";
-  import { useUsersStore } from "../../stores/admin/usersStore.js";
-  import { useLoginStore } from "../../stores/admin/loginStore.js";
-  const {
-    users,
-    user,
-    fields,
-    options,
-    perPage,
-    currentPage,
-    modal, 
-    rows,
-    isBusy,
-  } = storeToRefs(useUsersStore());
-  
-  const {
-   permissions
-  } = storeToRefs(useLoginStore());
-  const { getUsers, setPerPage, dateTime ,uploadData,editUser,recycleUser,deleteUser,restoreUser,resetForm,
-  hideModel} = useUsersStore();
-  
+          </template> </b-table
+      ></b-col>
+      <b-row align-h="end" class="mt-5">
+        <b-col xl="1" lg="2" md="2" class="p-2">
+          <b-form-select
+            v-if="rows > 5"
+            v-model="perPage"
+            :options="options"
+            size="md"
+            v-on:change="setPerPage"
+            varient="dark"
+          ></b-form-select>
+        </b-col>
+        <b-col xl="5" lg="6" md="8" class="p-2">
+          <b-pagination
+            v-if="rows / perPage > 1"
+            v-on:click="getUsers"
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+          ></b-pagination>
+        </b-col>
+      </b-row>
+    </b-card>
+  </b-row>
+</template>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useUsersStore } from "../../stores/admin/usersStore.js";
+import { useLoginStore } from "../../stores/admin/loginStore.js";
+const {
+  users,
+  user,
+  fields,
+  options,
+  perPage,
+  currentPage,
+  modal,
+  rows,
+  isBusy,
+  errors,
+} = storeToRefs(useUsersStore());
 
-  
-  getUsers();
-  </script>
-  
+const { permissions } = storeToRefs(useLoginStore());
+const {
+  getUsers,
+  setPerPage,
+  dateTime,
+  uploadData,
+  editUser,
+  recycleUser,
+  deleteUser,
+  restoreUser,
+  resetForm,
+  hideModel,
+} = useUsersStore();
+
+getUsers();
+</script>

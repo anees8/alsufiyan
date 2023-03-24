@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
+import router from "../../router.js";
 
 export const useAdminBlogsStore = defineStore("adminblogsStore", {
 state: () => ({
@@ -56,9 +57,13 @@ state: () => ({
 
             this.isBusy = false;
             } catch (error) {
-            if (error.response) {
-            this.errors = error.response.data.errors;
-            }
+                if (error.response.status === 403) {
+                    router.push({"name":"NotAuthorize"});
+                    }else if(error.response.status === 400){
+                    if (error.response) {
+                    this.errors = error.response.data.errors;
+                    }
+                    }
             this.isBusy = false;
             }
             }, 
@@ -127,8 +132,12 @@ state: () => ({
                 this.hideModel();
                 } catch (error) {
                  
+                                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
                 if (error.response) {
                 this.errors = error.response.data.errors;
+                }
                 }
                 this.loading = false;
                 }
@@ -159,8 +168,12 @@ state: () => ({
                 this.hideModel();
     
                 } catch (error) {
+                                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
                 if (error.response) {
                 this.errors = error.response.data.errors;
+                }
                 }
                 this.loading = false;
     

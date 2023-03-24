@@ -51,8 +51,16 @@ export const useLoginStore = defineStore("loginStore", {
             try {
                 const response = await axios.get("logout");
             } catch (error) {
+                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
+                                if (error.response.status === 403) {
+                router.push({"name":"NotAuthorize"});
+                }else if(error.response.status === 400){
                 if (error.response) {
-                    this.errors = error.response.data.errors;
+                this.errors = error.response.data.errors;
+                }
+                }
                 }
             }
         },
@@ -99,7 +107,7 @@ export const useLoginStore = defineStore("loginStore", {
         if(this.accessToken){
         this.timer--;
         if (this.timer <= this.timeout) {
-        router.push('/logout'); // redirect to login page
+        router.push('admin/logout'); // redirect to login page
         }
         }
         }, 1000);

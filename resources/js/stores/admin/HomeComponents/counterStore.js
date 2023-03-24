@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-
+import router from "../../../router.js";
 
 export const useAdminCountersStore = defineStore("admincountersStore", {
 
@@ -25,6 +25,13 @@ let url = "homecounters";
 const response = await axios.get(url);
 this.counters = response.data.data.counter;
 } catch (error) {
+    if (error.response.status === 403) {
+        router.push({"name":"NotAuthorize"});
+        }else if(error.response.status === 400){
+        if (error.response) {
+        this.errors = error.response.data.errors;
+        }
+        }
 }
 },
 editHomeCounter(id){
@@ -56,9 +63,13 @@ async updateCounter(){
             this.hideModel();
             } catch (error) {
 
-            if (error.response) {
-            this.errors = error.response.data.errors;
-            }
+                if (error.response.status === 403) {
+                    router.push({"name":"NotAuthorize"});
+                    }else if(error.response.status === 400){
+                    if (error.response) {
+                    this.errors = error.response.data.errors;
+                    }
+                    }
         this.loading = false;
         }
 }
