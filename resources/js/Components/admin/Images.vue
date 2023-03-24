@@ -17,12 +17,9 @@
               <b-modal
                 v-model="modal"
                 :title="edit_id ? 'Update Image' : 'Add Image'"
-               
                 hide-header-close
                 no-close-on-backdrop
               >
-
-              
                 <form id="uploadForm" enctype="multipart/form-data">
                   <b-form-group label="Select Image Type">
                     <b-form-radio-group
@@ -33,7 +30,7 @@
                     ></b-form-radio-group>
                   </b-form-group>
 
-                  <div v-if="imageType==1">
+                  <div v-if="imageType == 1">
                     <input
                       type="file"
                       id="image"
@@ -61,6 +58,7 @@
                     class="mt-2"
                     style="height: auto; width: auto; max-height: 250px; max-width: 450px"
                     rounded
+                    loading="lazy"
                   ></b-img>
                 </form>
 
@@ -95,15 +93,18 @@
         >
           <template #cell(image)="data">
             <b-img
+              loading="lazy"
               :src="data.item.src"
               style="width: auto height: auto; width: auto; max-height: 100px; max-width: 300px"
               rounded
             ></b-img>
           </template>
-          <template #cell(username)="data">{{ data.item.user?data.item.user.name:"" }}</template>
+          <template #cell(username)="data">{{
+            data.item.user ? data.item.user.name : ""
+          }}</template>
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
-          <template #cell(actions)="data"> 
-              <b-button
+          <template #cell(actions)="data">
+            <b-button
               class="rounded-circle p-2 me-2"
               @click="editImage(data.item.id)"
               variant="outline-success"
@@ -121,24 +122,21 @@
             </b-button>
 
             <b-button
-            v-if="data.item.deleted_at"
+              v-if="data.item.deleted_at"
               class="rounded-circle p-2 me-2"
               @click="restoreImage(data.item.id)"
               variant="outline-primary"
             >
-            
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
-             
               class="rounded-circle p-2 me-2"
               @click="deleteImage(data.item.id)"
               variant="outline-danger"
             >
               <font-awesome-icon icon="fa-regular fa-trash-can" />
             </b-button>
-            
-            </template> </b-table
+          </template> </b-table
       ></b-col>
       <b-row align-h="end" class="mt-5">
         <b-col xl="1" lg="2" md="2" class="p-2">

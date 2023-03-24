@@ -1,39 +1,50 @@
 <template>
-<aside class="bg-light" :class="{ 'small-menu': smallMenu }">
-<div
-@click="smallMenu = !smallMenu"
-class="logo d-flex justify-content-between align-items-center"
->
-<div class="d-flex"  v-if="loading">
-<b-skeleton type="avatar"  width="50px"></b-skeleton>
-<b-skeleton type="image" height="50px" width="10rem" v-if="!smallMenu" ></b-skeleton>
-</div>
-<div class="d-flex" v-else>
-<img :src="logo" width="50" />
-<img v-if="!smallMenu" :src="slogo" height="50" style="max-width:10rem" />
-</div>
-<div>
-<font-awesome-icon
-class="text-dark ms-1"
-icon="chevron-left"
-:class="{ 'fa-rotate-180 ': smallMenu }"
-/>
-</div>
-</div>
+  <aside class="bg-light" :class="{ 'small-menu': smallMenu }">
+    <div
+      @click="smallMenu = !smallMenu"
+      class="logo d-flex justify-content-between align-items-center"
+    >
+      <div class="d-flex" v-if="loading">
+        <b-skeleton type="avatar" width="50px"></b-skeleton>
+        <b-skeleton
+          type="image"
+          height="50px"
+          width="10rem"
+          v-if="!smallMenu"
+        ></b-skeleton>
+      </div>
+      <div class="d-flex" v-else>
+        <img loading="lazy" :src="logo" width="50" />
+        <img
+          loading="lazy"
+          v-if="!smallMenu"
+          :src="slogo"
+          height="50"
+          style="max-width: 10rem"
+        />
+      </div>
+      <div>
+        <font-awesome-icon
+          class="text-dark ms-1"
+          icon="chevron-left"
+          :class="{ 'fa-rotate-180 ': smallMenu }"
+        />
+      </div>
+    </div>
 
-<hr class="m-0" />
-<MenuItem
-v-for="(item, index) in menuTree"
-:key="index"
-:label="item.label"
-:icon="item.icon"
-:name="item.name"
-:depth="0"
-:Permissions="item.Permissions"
-:data="item.children"
-:smallMenu="smallMenu"
-></MenuItem>
-</aside>
+    <hr class="m-0" />
+    <MenuItem
+      v-for="(item, index) in menuTree"
+      :key="index"
+      :label="item.label"
+      :icon="item.icon"
+      :name="item.name"
+      :depth="0"
+      :Permissions="item.Permissions"
+      :data="item.children"
+      :smallMenu="smallMenu"
+    ></MenuItem>
+  </aside>
 </template>
 <script setup>
 import { onMounted } from "vue";
@@ -41,125 +52,125 @@ import MenuItem from "./Menu/MenuItem.vue";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../stores/web/settingStore.js";
-const { logo, slogo,loading} = storeToRefs(useSettingStore());
+const { logo, slogo, loading } = storeToRefs(useSettingStore());
 
 let smallMenu = ref(false);
 
 const menuTree = [
-{
-label: "Web",
-icon: "globe",
-name: "Home",
-Permissions: 1,
-},
-{
-label: "Dashboard",
-icon: "gauge",
-name: "Dashboard",
-Permissions: 1,
-},
-{
-label: "Home",
-icon: "house",
-Permissions: 1,
-children: [
-{
-label: "Slider",
-icon: "house",
-name: "AdminHomeSlider",
-Permissions: 1,
-},
-{
-label: "Package",
-icon: "plane-departure",
-name: "AdminHomePackage",
-Permissions: 1,
-},
-{
-label: "Counter",
-icon: "0",
-name: "AdminHomeCounter",
-Permissions: 1,
-},
-],
-},
-{
-label: "About",
-icon: "address-card",
-name: "AdminAbout",
-Permissions: 1,
-},
-{
-label: "Users",
-icon: "users",
-name: "AdminUsers",
-Permissions: 1,
-},
-{
-label: "Blog",
-icon: "blog",
-name: "AdminBlog",
-Permissions: 1,
-},
-{
-label: "Images",
-icon: "image",
-name: "AdminImage",
-Permissions: 1,
-},
-{
-label: "Videos",
-icon: "video",
-name: "AdminVideo",
-Permissions: 1,
-},
-{
-label: "Contact",
-icon: "envelopes-bulk",
-Permissions: 1,
-children: [
-{
-label: "Contact",
-icon: "envelopes-bulk",
-name: "AdminContact",
-Permissions: 1,
-},
-{
-label: "Subject",
-icon: "s",
-name: "AdminContactSubject",
-Permissions: 1,
-},
-],
-},
-{
-label: "Logout",
-icon: "right-from-bracket",
-name: "Logout",
-Permissions: 1,
-},
+  {
+    label: "Web",
+    icon: "globe",
+    name: "Home",
+    Permissions: 1,
+  },
+  {
+    label: "Dashboard",
+    icon: "gauge",
+    name: "Dashboard",
+    Permissions: 1,
+  },
+  {
+    label: "Home",
+    icon: "house",
+    Permissions: 1,
+    children: [
+      {
+        label: "Slider",
+        icon: "house",
+        name: "AdminHomeSlider",
+        Permissions: 1,
+      },
+      {
+        label: "Package",
+        icon: "plane-departure",
+        name: "AdminHomePackage",
+        Permissions: 1,
+      },
+      {
+        label: "Counter",
+        icon: "0",
+        name: "AdminHomeCounter",
+        Permissions: 1,
+      },
+    ],
+  },
+  {
+    label: "About",
+    icon: "address-card",
+    name: "AdminAbout",
+    Permissions: 1,
+  },
+  {
+    label: "Users",
+    icon: "users",
+    name: "AdminUsers",
+    Permissions: 1,
+  },
+  {
+    label: "Blog",
+    icon: "blog",
+    name: "AdminBlog",
+    Permissions: 1,
+  },
+  {
+    label: "Images",
+    icon: "image",
+    name: "AdminImage",
+    Permissions: 1,
+  },
+  {
+    label: "Videos",
+    icon: "video",
+    name: "AdminVideo",
+    Permissions: 1,
+  },
+  {
+    label: "Contact",
+    icon: "envelopes-bulk",
+    Permissions: 1,
+    children: [
+      {
+        label: "Contact",
+        icon: "envelopes-bulk",
+        name: "AdminContact",
+        Permissions: 1,
+      },
+      {
+        label: "Subject",
+        icon: "s",
+        name: "AdminContactSubject",
+        Permissions: 1,
+      },
+    ],
+  },
+  {
+    label: "Logout",
+    icon: "right-from-bracket",
+    name: "Logout",
+    Permissions: 1,
+  },
 ];
 </script>
 <style lang="scss" scoped>
 aside {
-min-height: 100vh;
+  min-height: 100vh;
 
-width: 16rem;
-transition: all 0.3s ease;
+  width: 16rem;
+  transition: all 0.3s ease;
 
-.logo {
-height: 4rem;
-padding: 1rem;
-}
+  .logo {
+    height: 4rem;
+    padding: 1rem;
+  }
 
-&.small-menu {
-transition: all 0.3s ease;
-.logo {
-width: 5rem;
-height: 4rem;
-}
-overflow: inherit;
-width: 5rem;
-}
+  &.small-menu {
+    transition: all 0.3s ease;
+    .logo {
+      width: 5rem;
+      height: 4rem;
+    }
+    overflow: inherit;
+    width: 5rem;
+  }
 }
 </style>

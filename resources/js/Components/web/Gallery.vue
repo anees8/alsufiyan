@@ -1,30 +1,30 @@
 <template>
-
   <b-container class="router_view_min py-5" v-if="loading">
     <b-row>
       <div class="image-grid">
-        <div v-for="image  in 10" :key="image" class="image-container">
-          <b-skeleton type="image"   class="image img-fluid rounded shadow-lg hover-shadow"></b-skeleton>
+        <div v-for="image in 10" :key="image" class="image-container">
+          <b-skeleton
+            type="image"
+            class="image img-fluid rounded shadow-lg hover-shadow"
+          ></b-skeleton>
         </div>
       </div>
     </b-row>
     <b-row align-h="end" class="mt-5">
       <b-col lg="1" md="2" class="p-2">
-        <b-skeleton type="input"  ></b-skeleton>
-     
-       
+        <b-skeleton type="input"></b-skeleton>
       </b-col>
       <b-col lg="4" md="6" class="p-2">
-        <b-skeleton type="input"  ></b-skeleton>
+        <b-skeleton type="input"></b-skeleton>
       </b-col>
     </b-row>
-
   </b-container>
   <b-container class="router_view_min py-5" v-else>
     <b-row>
       <div class="image-grid">
         <div v-for="(image, index) in images" :key="index" class="image-container">
-          <img
+          <b-img
+            loading="lazy"
             :src="image.src"
             @click="show(index)"
             class="image img-fluid rounded shadow-lg hover-shadow"

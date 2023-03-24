@@ -16,7 +16,6 @@
             <b-modal
               v-model="modal"
               :title="post.id ? 'Update Post' : 'Add Post'"
-            
               hide-header-close
               no-close-on-backdrop
             >
@@ -40,6 +39,7 @@
                   v-on:change="onFileChange"
                 />
                 <b-img
+                  loading="lazy"
                   v-if="post.previewImage"
                   :src="post.previewImage"
                   class="mt-2"
@@ -98,12 +98,15 @@
         >
           <template #cell(attachment)="data">
             <b-img
+              loading="lazy"
               :src="data.item.attachment"
               style="width: auto height: auto; width: auto; max-height: 100px; max-width: 300px"
               rounded
             ></b-img>
           </template>
-          <template #cell(username)="data">{{ data.item.user?data.item.user.name:"" }}</template>
+          <template #cell(username)="data">{{
+            data.item.user ? data.item.user.name : ""
+          }}</template>
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
           <template #cell(actions)="data">
             <b-button
@@ -124,16 +127,14 @@
             </b-button>
 
             <b-button
-            v-if="data.item.deleted_at"
+              v-if="data.item.deleted_at"
               class="rounded-circle p-2 me-2"
               @click="restorePost(data.item.id)"
               variant="outline-primary"
             >
-            
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
-             
               class="rounded-circle p-2 me-2"
               @click="deletePost(data.item.id)"
               variant="outline-danger"

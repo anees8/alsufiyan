@@ -19,7 +19,7 @@ return diffYears;
 async getCounter() {
 this.loading = true;
 try {
-let url = "counters";
+let url = "counter";
 const response = await axios.get(url);
 this.counters = response.data.data.counter;
 this.loading = false;

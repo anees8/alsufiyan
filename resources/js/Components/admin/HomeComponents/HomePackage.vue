@@ -17,7 +17,6 @@
               <b-modal
                 v-model="modal"
                 :title="pack.edit_id ? 'Update Home Package' : 'Add Home Package'"
-              
                 hide-header-close
                 no-close-on-backdrop
               >
@@ -55,56 +54,60 @@
                   </div>
                   <div>
                     <b-form-group id="input-group-2" label="Title:" label-for="input-2">
-                <b-form-input
-                  id="input-2"
-                  v-model="pack.title"
-                  placeholder="Enter Title"
-                  required
-                ></b-form-input>
-                <b-form-invalid-feedback v-if="errors.title" :state="errors.title">
-                  {{ errors.title[0] }}
-                </b-form-invalid-feedback>
-      </b-form-group>
-      <b-form-group
-                id="input-group-3"
-                label="Description::"
-                label-for="input-3"
-              >
-                <b-form-textarea
-                  id="textarea"
-                  v-model="pack.description"
-                  placeholder="Enter Description..."
-                  rows="6"
-                ></b-form-textarea>
-                <b-form-invalid-feedback v-if="errors.description" :state="errors.description">
-                  {{ errors.description[0] }}
-                </b-form-invalid-feedback>
-              </b-form-group>
-      <b-form-group id="input-group-2" label="Days:" label-for="input-2">
-                <b-form-input
-                  id="input-2"
-                  v-model="pack.days"
-                  placeholder="Enter Days (eg: 10 or 10-15 )"
-                  required
-                ></b-form-input>
-                <b-form-invalid-feedback v-if="errors.days" :state="errors.days">
-                  {{ errors.days[0] }}
-                </b-form-invalid-feedback>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Price:" label-for="input-2">
-                <b-form-input
-                  id="input-2"
-                  type="number"
-                  v-model="pack.price"
-                  placeholder="Enter Price"
-                  required
-                ></b-form-input>
-                <b-form-invalid-feedback v-if="errors.price" :state="errors.price">
-                  {{ errors.price[0] }}
-                </b-form-invalid-feedback>
-      </b-form-group>
+                      <b-form-input
+                        id="input-2"
+                        v-model="pack.title"
+                        placeholder="Enter Title"
+                        required
+                      ></b-form-input>
+                      <b-form-invalid-feedback v-if="errors.title" :state="errors.title">
+                        {{ errors.title[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                    <b-form-group
+                      id="input-group-3"
+                      label="Description::"
+                      label-for="input-3"
+                    >
+                      <b-form-textarea
+                        id="textarea"
+                        v-model="pack.description"
+                        placeholder="Enter Description..."
+                        rows="6"
+                      ></b-form-textarea>
+                      <b-form-invalid-feedback
+                        v-if="errors.description"
+                        :state="errors.description"
+                      >
+                        {{ errors.description[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                    <b-form-group id="input-group-2" label="Days:" label-for="input-2">
+                      <b-form-input
+                        id="input-2"
+                        v-model="pack.days"
+                        placeholder="Enter Days (eg: 10 or 10-15 )"
+                        required
+                      ></b-form-input>
+                      <b-form-invalid-feedback v-if="errors.days" :state="errors.days">
+                        {{ errors.days[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                    <b-form-group id="input-group-2" label="Price:" label-for="input-2">
+                      <b-form-input
+                        id="input-2"
+                        type="number"
+                        v-model="pack.price"
+                        placeholder="Enter Price"
+                        required
+                      ></b-form-input>
+                      <b-form-invalid-feedback v-if="errors.price" :state="errors.price">
+                        {{ errors.price[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
                   </div>
                   <b-img
+                    loading="lazy"
                     v-if="pack.previewImage"
                     :src="pack.previewImage"
                     class="mt-2"
@@ -144,15 +147,18 @@
         >
           <template #cell(image)="data">
             <b-img
+              loading="lazy"
               :src="data.item.image"
               style="width: auto height: auto; width: auto; max-height: 100px; max-width: 300px"
               rounded
             ></b-img>
           </template>
-          <template #cell(username)="data">{{ data.item.user?data.item.user.name:""}}</template>
+          <template #cell(username)="data">{{
+            data.item.user ? data.item.user.name : ""
+          }}</template>
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
-          <template #cell(actions)="data"> 
-              <b-button
+          <template #cell(actions)="data">
+            <b-button
               class="rounded-circle p-2 me-2"
               @click="editHomePackage(data.item.id)"
               variant="outline-success"
@@ -170,24 +176,21 @@
             </b-button>
 
             <b-button
-            v-if="data.item.deleted_at"
+              v-if="data.item.deleted_at"
               class="rounded-circle p-2 me-2"
               @click="restoreHomePackage(data.item.id)"
               variant="outline-primary"
             >
-            
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
-             
               class="rounded-circle p-2 me-2"
               @click="deleteHomePackage(data.item.id)"
               variant="outline-danger"
             >
               <font-awesome-icon icon="fa-regular fa-trash-can" />
             </b-button>
-            
-            </template> </b-table
+          </template> </b-table
       ></b-col>
       <b-row align-h="end" class="mt-5">
         <b-col xl="1" lg="2" md="2" class="p-2">
@@ -227,8 +230,8 @@ const {
   rows,
   isBusy,
   imageTypes,
-  pack,  
-  loading,   
+  pack,
+  loading,
   errors,
 } = storeToRefs(useAdminPackageStore());
 
