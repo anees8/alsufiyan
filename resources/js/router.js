@@ -191,28 +191,21 @@ const router = createRouter({
         return { top: 0 };
     },
     history: createWebHistory(),
-    routes,
-});
+    routes: routes
+  });
 
 
-
-
-router.beforeEach((to, from, next) => {
-    
-    const { getAccessToken,refreshUserPermissions } = useLoginStore();
+  router.beforeEach((to, from, next) => {
+    const { getAccessToken, refreshUserPermissions } = useLoginStore();
     refreshUserPermissions();
-    if (to.meta.requireAuth && getAccessToken === null) {
+
+    if (to.meta.requireAuth && getAccessToken === null) {   
         next({ name: "Login" });
-    }
-    if (
-        to.name === "Login" &&
-        !to.meta.requireAuth &&
-        getAccessToken !== null
-    ) {
-       
+    } else if (to.name === "Login" && !to.meta.requireAuth && getAccessToken !== null) {       
         next({ name: "Dashboard" });
+    } else {
+        next();
     }
-    next();
 });
 
 
