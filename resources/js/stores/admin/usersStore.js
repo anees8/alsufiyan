@@ -171,8 +171,6 @@ actions: {
 
             resetForm(){
             this.errors = {};
-
-
             this.user={};
             this.loading = false;
             },

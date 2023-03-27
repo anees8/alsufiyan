@@ -22,6 +22,8 @@ export const useRolesStore = defineStore("rolesStore", {
             ],   
         badgeVarients:["primary","secondary","success","info","dark"],
       errors: {},
+      role:{},
+      modal: false, 
     }),
 
     actions: {
@@ -56,6 +58,11 @@ export const useRolesStore = defineStore("rolesStore", {
             }
             }, 
 
+
+            editRoles(id){
+                this.role =this.roles.find(role=>role.id==id);
+                this.modal = !this.modal;
+            },
             deleteRoles(id){
                 Swal.fire({
                     title: 'Are you sure?',
@@ -85,11 +92,85 @@ export const useRolesStore = defineStore("rolesStore", {
         
             },
 
+            async  uploadData(){
+
+                const formData = new FormData();
+                let config={
+                header:{ "content-type": "multipart/form-data",
+                },
+                };
+
+
+                this.loading = true;
+                let url = "roles";
+
+                if(this.role.name){
+                formData.append('role',this.role.name);
+                }
+                if(!this.role.id){
+
+                    try {
+
+                        const response = await axios.post(url,formData,config);
+                        if(this.role.name){
+                        formData.append('name',this.role.name);
+                        }
+
+                        
+                        this.hideModel();
+                        }catch (error) {
+
+                        if (error.response.status === 403) {
+                        router.push({"name":"NotAuthorize"});
+                        }else if(error.response.status === 400){
+                        if (error.response) {
+                        this.errors = error.response.data.errors;
+                        }
+                        }
+                        this.loading = false;
+                        }
+
+
+                }else{
+                    formData.append('_method','put');
+                    try {
+                    const response = await axios.post(url+'/'+this.role.id,formData,config);
+                   
+                    this.hideModel();
+                    }catch (error) {
+    
+                    if (error.response.status === 403) {
+                    router.push({"name":"NotAuthorize"});
+                    }else if(error.response.status === 400){
+                                    if (error.response.status === 403) {
+                    router.push({"name":"NotAuthorize"});
+                    }else if(error.response.status === 400){
+                    if (error.response) {
+                    this.errors = error.response.data.errors;
+                    }
+                    }
+                    }
+                    }
+
+
+                }
+
+            },
             setPerPage(value) {
                 this.perPage = value;
                 this.currentPage = 1;
-                this.getUsers();
+                this.getRolesPermission();
                 },
+                hideModel(){
+                    this.modal = !this.modal;
+                     this.getRolesPermission();
+                    this.resetForm();
+                    },
+                    resetForm(){
+                    this.errors = {};
+                    this.role={};
+                    this.loading = false;
+                        },
 
 
     },

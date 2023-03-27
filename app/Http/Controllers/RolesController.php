@@ -7,6 +7,7 @@ use App\Models\Role;
 
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
+use Str;    
 
 class RolesController extends Controller
 {
@@ -40,7 +41,25 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'role'=> 'bail|required|min:3|max:15',
+            ]);
+            if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+            }
+    
+            $role = new Role;
+            if($request->has('role')){
+            $role->name =ucfirst($request->role);
+            $role->slug =Str::slug($request->role,'_');
+            }       
+            $role->save();
+    
+            $success['role'] =  $role ;
+    
+            return $this->sendResponse($success, 'Role Added Successfully.',Response::HTTP_CREATED);
+        
     }
 
     /**
