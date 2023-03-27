@@ -107,7 +107,7 @@ export const useLoginStore = defineStore("loginStore", {
         if(this.accessToken){
         this.timer--;
         if (this.timer <= this.timeout) {
-        router.push('admin/logout'); // redirect to login page
+        router.push({name: 'Logout'}); // redirect to login page
         }
         }
         }, 1000);

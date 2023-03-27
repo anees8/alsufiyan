@@ -2,7 +2,7 @@
   <div class="menu-item" :class="{ expanded: expanded }">
     <RouterLink
       v-if="name"
-      v-show="Permissions"
+      v-show="userLogin.permissions.includes(Permissions)"
       class="nav-link text-dark"
       data-bs-toggle="tooltip"
       data-bs-placement="top"
@@ -26,9 +26,10 @@
         </div>
       </div>
     </RouterLink>
+
     <li
       v-else
-      v-show="Permissions"
+      v-show="Permissions.split(',').some((p) => userLogin.permissions.includes(p))"
       class="nav-link text-dark"
       data-bs-toggle="tooltip"
       data-bs-placement="top"
@@ -72,14 +73,22 @@
     </div>
   </div>
 </template>
+
 <script>
+import { useLoginStore } from "../../../stores/admin/loginStore";
+
 export default {
   name: "menu-item",
+  setup: () => {
+    return {
+      userLogin: useLoginStore(),
+    };
+  },
   data: () => ({ showChildren: false, expanded: false, containerHeight: 0 }),
 
   props: {
     label: { type: String, required: true },
-    Permissions: { type: Number, required: true },
+    Permissions: { type: String },
     icon: { type: String },
     depth: { type: Number, required: true },
     name: { type: String },
