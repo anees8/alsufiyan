@@ -106,7 +106,7 @@ const menuTree = [
     Permissions: "users_view,users_edit",
     children: [
       {
-        label: "Users",
+        label: "Users List",
         icon: "users",
         name: "AdminUsers",
         Permissions: "users_view",

@@ -11,6 +11,8 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\HomePackageSliderController;
 use App\Http\Controllers\HomeCounterController;
+use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\RolesController;
 
 
 
@@ -70,7 +72,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('homepackagesliders/restore/{homepackageslider}', [HomePackageSliderController::class, 'restore'])->withTrashed();
     Route::get('homepackagesliders/forcedelete/{homepackageslider}', [HomePackageSliderController::class, 'forcedelete'])->withTrashed();
 
-    
+    Route::resource('permissions', PermissionsController::class);
+    Route::resource('roles', RolesController::class);
+
     Route::resource('homecounters', HomeCounterController::class);
     Route::get('/logout', [UsersController::class, 'logout']);
 
