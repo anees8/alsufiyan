@@ -123,6 +123,7 @@ export const useLoginStore = defineStore("loginStore", {
                 this.permissions=response.data.data.permissions;
 
 
+
             } catch (error) {
                 this.loginUser=null;
                 this.logo=null;

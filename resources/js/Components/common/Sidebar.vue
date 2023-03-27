@@ -76,7 +76,7 @@ const menuTree = [
     children: [
       {
         label: "Slider",
-        icon: "house",
+        icon: "panorama",
         name: "AdminHomeSlider",
         Permissions: "users_view",
       },
@@ -103,9 +103,23 @@ const menuTree = [
   {
     label: "Users",
     icon: "users",
-    name: "AdminUsers",
-    Permissions: "users_view",
+    Permissions: "users_view,users_edit",
+    children: [
+      {
+        label: "Users",
+        icon: "users",
+        name: "AdminUsers",
+        Permissions: "users_view",
+      },
+      {
+        label: "Roles & Permission",
+        icon: "users-gear",
+        name: "AdminUserRoles",
+        Permissions: "users_view",
+      },
+    ],
   },
+
   {
     label: "Blog",
     icon: "blog",

@@ -82,7 +82,10 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col
+      <b-col v-if="isBusy">
+        <b-skeleton-table :rows="perPage" :columns="fields"></b-skeleton-table>
+      </b-col>
+      <b-col v-else
         ><b-table
           striped
           outlined

@@ -14,7 +14,7 @@
               <font-awesome-icon icon="plus" class="me-2" />Add Video</b-button
             >
             <div>
-               {{ edit_id ? "Update Video" : "Add Video" }}
+              {{ edit_id ? "Update Video" : "Add Video" }}
               <b-modal
                 v-model="modal"
                 :title="edit_id ? 'Update Video' : 'Add Video'"
@@ -94,8 +94,10 @@
           </b-col>
         </b-row>
       </b-col>
-
-      <b-col
+      <b-col v-if="isBusy">
+        <b-skeleton-table :rows="perPage" :columns="fields"></b-skeleton-table>
+      </b-col>
+      <b-col v-else
         ><b-table
           striped
           outlined
@@ -127,10 +129,12 @@
               <source :src="data.item.src" />
             </video>
           </template>
-          <template #cell(username)="data">{{ data.item.user?data.item.user.name:"" }}</template>
+          <template #cell(username)="data">{{
+            data.item.user ? data.item.user.name : ""
+          }}</template>
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
-          <template #cell(actions)="data"> 
-              <b-button
+          <template #cell(actions)="data">
+            <b-button
               class="rounded-circle p-2 me-2"
               @click="editVideo(data.item.id)"
               variant="outline-success"
@@ -148,24 +152,21 @@
             </b-button>
 
             <b-button
-            v-if="data.item.deleted_at"
+              v-if="data.item.deleted_at"
               class="rounded-circle p-2 me-2"
               @click="restoreVideo(data.item.id)"
               variant="outline-primary"
             >
-            
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
-             
               class="rounded-circle p-2 me-2"
               @click="deleteVideo(data.item.id)"
               variant="outline-danger"
             >
               <font-awesome-icon icon="fa-regular fa-trash-can" />
             </b-button>
-            
-            </template> </b-table
+          </template> </b-table
       ></b-col>
       <b-row align-h="end" class="mt-5">
         <b-col xl="1" lg="2" md="2" class="p-2">

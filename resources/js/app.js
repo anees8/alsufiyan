@@ -54,14 +54,17 @@ import {
     faRecycle,
     fa0,
     faArrowRotateLeft,
+    
+    faUsersGear,
+    faPanorama,
     } from "@fortawesome/free-solid-svg-icons";
 import {
+    
     faAddressBook,
     faTrashCan,
     faUser,
     faComment,
     faTrashAlt,
-    
     faEnvelopeOpen
     
 } from "@fortawesome/free-regular-svg-icons";
@@ -75,6 +78,8 @@ import {
 } from "@fortawesome/vue-fontawesome";
 
 library.add(
+    faPanorama,
+    faUsersGear,
     faRecycle,
     faArrowRotateLeft,
     faTrashCan,

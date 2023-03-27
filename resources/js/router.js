@@ -143,6 +143,14 @@ const routes = [
         meta: {
             requireAuth: true,
         },
+    },  
+    {
+        path: "/admin/users/roles",
+        name: "AdminUserRoles",
+        component: ()=>import('./Components/admin/UsersComponents/Roles.vue'),
+        meta: {
+            requireAuth: true,
+        },
     },    
     {
         path: "/admin/image",

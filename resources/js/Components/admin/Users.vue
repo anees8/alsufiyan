@@ -100,8 +100,11 @@
           >
         </b-row>
       </b-col>
-      <b-col
-        ><b-table
+      <b-col v-if="isBusy">
+        <b-skeleton-table :rows="perPage" :columns="fields"></b-skeleton-table>
+      </b-col>
+      <b-col v-else>
+        <b-table
           striped
           outlined
           empty-filtered-text
@@ -153,6 +156,7 @@
             </b-button>
           </template> </b-table
       ></b-col>
+
       <b-row align-h="end" class="mt-5">
         <b-col xl="1" lg="2" md="2" class="p-2">
           <b-form-select

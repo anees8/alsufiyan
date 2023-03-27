@@ -16,29 +16,25 @@
             <b-modal
               v-model="modal"
               :title="subject.id ? 'Update Contact Subject' : 'Add Contact Subject'"
-            
               hide-header-close
               no-close-on-backdrop
             >
-              
-            <b-form-group
-        id="input-group-1"
-        label="Contact Subject Title:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="subject.subject"
-          type="text"
-          placeholder="Enter Contact Subject Title"
-          required
-        ></b-form-input>
-        <b-form-invalid-feedback v-if="errors.subject" :state="errors.subject">
+              <b-form-group
+                id="input-group-1"
+                label="Contact Subject Title:"
+                label-for="input-1"
+              >
+                <b-form-input
+                  id="input-1"
+                  v-model="subject.subject"
+                  type="text"
+                  placeholder="Enter Contact Subject Title"
+                  required
+                ></b-form-input>
+                <b-form-invalid-feedback v-if="errors.subject" :state="errors.subject">
                   {{ errors.subject[0] }}
                 </b-form-invalid-feedback>
-      </b-form-group>
-
-           
+              </b-form-group>
 
               <template #footer>
                 <div>
@@ -55,7 +51,10 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col
+      <b-col v-if="isBusy">
+        <b-skeleton-table :rows="perPage" :columns="fields"></b-skeleton-table>
+      </b-col>
+      <b-col v-else
         ><b-table
           striped
           outlined
@@ -70,8 +69,8 @@
           show-empty
         >
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
-          <template #cell(actions)="data"> 
-              <b-button
+          <template #cell(actions)="data">
+            <b-button
               class="rounded-circle p-2 me-2"
               @click="editContactSubject(data.item.id)"
               variant="outline-success"
@@ -89,24 +88,21 @@
             </b-button>
 
             <b-button
-            v-if="data.item.deleted_at"
+              v-if="data.item.deleted_at"
               class="rounded-circle p-2 me-2"
               @click="restoreContactSubject(data.item.id)"
               variant="outline-primary"
             >
-            
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
-             
               class="rounded-circle p-2 me-2"
               @click="deleteContactSubject(data.item.id)"
               variant="outline-danger"
             >
               <font-awesome-icon icon="fa-regular fa-trash-can" />
             </b-button>
-            
-            </template> </b-table
+          </template> </b-table
       ></b-col>
       <b-row align-h="end" class="mt-5">
         <b-col xl="1" lg="2" md="2" class="p-2">
@@ -152,12 +148,14 @@ const {
 const {
   getContactSubject,
   setPerPage,
-  dateTime,hideModel,resetForm,
+  dateTime,
+  hideModel,
+  resetForm,
   editContactSubject,
   recycleContactSubject,
   restoreContactSubject,
   deleteContactSubject,
-  uploadData
+  uploadData,
 } = useContactSubjectsStore();
 
 getContactSubject();
