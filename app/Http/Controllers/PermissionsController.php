@@ -17,6 +17,8 @@ class PermissionsController extends Controller
      */
     public function index(Request $request)
     {
+        $data['permissions']=Permission::select('*','id as value','name as text')->get();
+        return $this->sendResponse($data, 'Permissions return successfully.',Response::HTTP_OK);
            
     }
 

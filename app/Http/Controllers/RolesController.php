@@ -68,9 +68,10 @@ class RolesController extends Controller
      * @param  int  Role $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
-    {
-        //
+    public function show(Role $role){
+
+     $data['role']=$role->load('permissions');
+     return $this->sendResponse($data, 'Role return successfully.',Response::HTTP_OK);
     }
 
     /**
@@ -81,7 +82,7 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        
     }
 
     /**
@@ -93,7 +94,15 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+      
+
+        if($request->has('role_name')){
+        $role->name =ucfirst($request->role_name);
+        $role->slug =Str::slug($request->role_name,'_');
+        }       
+        $role->permissions()->sync(explode(',',$request->permission));
+        $role->update();
+        return $this->sendResponse('Role Updated Successfully.',Response::HTTP_OK);
     }
 
     /**

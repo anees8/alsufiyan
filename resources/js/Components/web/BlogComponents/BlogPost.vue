@@ -1,8 +1,7 @@
 <template>
   <b-container class="py-5 router_view_min">
     <b-row>
-      
-      <b-col v-if="loading" cols="12" xl="9" lg="8" md="12"  order="2" order-lg="1" >
+      <b-col v-if="loading" cols="12" xl="9" lg="8" md="12" order="2" order-lg="1">
         <b-row>
           <b-col
             v-for="post in 5"
@@ -14,72 +13,71 @@
             class="mb-4"
           >
             <div>
-
               <b-card img-top>
+                <b-skeleton
+                  animation="fade"
+                  type="image"
+                  style="height: 250px"
+                  class="shadow-lg mb-1 w-100"
+                  card-img="top"
+                ></b-skeleton>
 
-<b-skeleton animation="fade" type="image" style="height:250px" class="shadow-lg mb-1 w-100" card-img="top"></b-skeleton>
+                <b-card-title
+                  style="
+                    height: 4.5rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                  "
+                >
+                  <b-skeleton animation="fade" type="h1" class="my-1"></b-skeleton>
+                  <b-skeleton animation="fade" type="h1" width="80%"></b-skeleton>
+                </b-card-title>
 
-<b-card-title    style="height: 4.5rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    ">
-  <b-skeleton animation="fade" type="h1" class="my-1"></b-skeleton>
-  <b-skeleton animation="fade" type="h1"  width="80%" ></b-skeleton>
-  </b-card-title>
-
-
-<b-row class="align-items-center">
-  <b-col cols="12" lg="6" md="6" class="d-flex">
-    <b-skeleton type="icon" width="20%" class="me-3"></b-skeleton>
-    <b-skeleton type="h2"   width="70%"></b-skeleton>
-  
-  </b-col>
-  <b-col cols="12" lg="6" md="6" class="d-flex">
-    <b-skeleton type="icon"  width="20%" class="me-3"></b-skeleton>
-    <b-skeleton type="h2"   width="70%"></b-skeleton>
-    </b-col
-  >
-</b-row>
-<b-card-text
-  style="
-    height: 5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  "
-  class="mt-3"
->
-<b-skeleton animation="fade" width="100%"></b-skeleton>
-<b-skeleton animation="fade" width="95%"></b-skeleton>
-<b-skeleton animation="fade" width="90%"></b-skeleton>
-<b-skeleton animation="fade" width="85%"></b-skeleton>
-</b-card-text>
-<b-skeleton type="button" class="float-end"></b-skeleton>
-
-</b-card>
-          
+                <b-row class="align-items-center">
+                  <b-col cols="12" lg="6" md="6" class="d-flex">
+                    <b-skeleton type="icon" width="20%" class="me-3"></b-skeleton>
+                    <b-skeleton type="h2" width="70%"></b-skeleton>
+                  </b-col>
+                  <b-col cols="12" lg="6" md="6" class="d-flex">
+                    <b-skeleton type="icon" width="20%" class="me-3"></b-skeleton>
+                    <b-skeleton type="h2" width="70%"></b-skeleton>
+                  </b-col>
+                </b-row>
+                <b-card-text
+                  style="
+                    height: 5rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                  "
+                  class="mt-3"
+                >
+                  <b-skeleton animation="fade" width="100%"></b-skeleton>
+                  <b-skeleton animation="fade" width="95%"></b-skeleton>
+                  <b-skeleton animation="fade" width="90%"></b-skeleton>
+                  <b-skeleton animation="fade" width="85%"></b-skeleton>
+                </b-card-text>
+                <b-skeleton type="button" class="float-end"></b-skeleton>
+              </b-card>
             </div>
           </b-col>
         </b-row>
         <b-row align-h="center" class="mt-5">
           <b-col xl="1" lg="2" md="3" class="p-2">
-        <b-skeleton type="input"  ></b-skeleton>
-     
-       
+            <b-skeleton type="input"></b-skeleton>
+          </b-col>
+          <b-col xl="10" lg="10" md="9" class="p-2">
+            <b-skeleton type="input" width="30%"></b-skeleton>
+          </b-col>
+        </b-row>
       </b-col>
-      <b-col xl="10" lg="10" md="9" class="p-2">
-        <b-skeleton type="input"  width="30%"></b-skeleton>
-      </b-col>
-    </b-row>
-    
-      </b-col>
-  
-      <b-col v-else cols="12" xl="9" lg="8" md="12"  order="2" order-lg="1" >
+
+      <b-col v-else cols="12" xl="9" lg="8" md="12" order="2" order-lg="1">
         <b-row>
           <b-col
             v-for="(post, index) in posts"
@@ -109,7 +107,7 @@
                       overflow: hidden;
                       text-overflow: ellipsis;
                       display: -webkit-box;
-                      -webkit-line-clamp:2;
+                      -webkit-line-clamp: 2;
                       -webkit-box-orient: vertical;
                     "
                   >
@@ -123,7 +121,7 @@
                       class="text-muted me-1 fs-6 fw-light"
                     />
                     <span class="text-muted text-capitalize fs-6 fw-light">
-                      {{  post.user?post.user.name:"" }}</span
+                      {{ post.user ? post.user.name : "" }}</span
                     >
                   </b-col>
                   <b-col cols="12" lg="6" md="6">
@@ -157,9 +155,7 @@
 
                 <router-link
                   class="btn btn-outline-dark float-end"
-                  v-bind:to="{
-                    path: '/post/' + `${post.id}`,
-                  }"
+                  v-bind:to="{ name: 'PostDetail', params: { id: post.id } }"
                   >Read More<font-awesome-icon class="ms-2" icon="arrow-right"
                 /></router-link>
               </b-card>
@@ -189,7 +185,7 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col cols="12" xl="3" lg="4" md="12"  order="1" order-md="1" class="mb-5 my-lg-0">
+      <b-col cols="12" xl="3" lg="4" md="12" order="1" order-md="1" class="mb-5 my-lg-0">
         <b-card>
           <b-form class="mt-3">
             <b-input-group label="Small">
@@ -208,16 +204,11 @@
           </b-form>
         </b-card>
       </b-col>
-      
- 
-  
-  
     </b-row>
   </b-container>
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
-
 
 import { usePostsStore } from "../../../stores/web/postsStore.js";
 const {

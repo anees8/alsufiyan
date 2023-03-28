@@ -153,6 +153,17 @@ const routes = [
         },
     },    
     {
+        path: "/admin/users/roles/:id",
+        name: "AdminUserRolesEdit",
+        component: ()=>import('./Components/admin/UsersComponents/RolesComponents/EditRole.vue'),
+        props: (route) => ({
+            id: Number(route.params.id),
+        }),
+        meta: {
+            requireAuth: true,
+        },
+    },    
+    {
         path: "/admin/image",
         name: "AdminImage",
         component: ()=>import('./Components/admin/Images.vue'),
