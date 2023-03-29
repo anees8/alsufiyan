@@ -14,7 +14,7 @@ class HomeCounterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $data['counter']= HomeCounter::orderBy('id', 'ASC')->limit(4)->get();

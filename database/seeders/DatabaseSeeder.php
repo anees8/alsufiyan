@@ -216,91 +216,184 @@ class DatabaseSeeder extends Seeder
                       ],
                       [
                         'id'    => 2,
-                        'name'  => 'Users Edit',
-                        'slug'  => 'users_edit',
+                        'name'  => 'User Edit',
+                        'slug'  => 'user_edit',
                       
                       ],
                       [
                         'id'    => 3,
-                        'name'  => 'Users Delete',
-                        'slug'  => 'users_delete',
+                        'name'  => 'User Delete',
+                        'slug'  => 'user_delete',
                       
                       ],
                       [
                         'id'    => 4,
-                        'name'  => 'Users Add',
-                        'slug'  => 'users_add',
+                        'name'  => 'User Add',
+                        'slug'  => 'user_add',
                       
                       ],
                       [
                         'id'    => 5,
-                        'name'  => 'Users Restore',
-                        'slug'  => 'users_restore',
+                        'name'  => 'User Restore',
+                        'slug'  => 'user_restore',
                       
                       ],
                       [
                         'id'    => 6,
-                        'name'  => 'Users Force Delete',
-                        'slug'  => 'users_forceDelete',
+                        'name'  => 'User Force Delete',
+                        'slug'  => 'user_forceDelete',
+                      
+                      ],
+
+                      [
+                        'id'    => 7,
+                        'name'  => 'Videos List',
+                        'slug'  => 'videos_view',
+                      
+                      ],
+
+                      [
+                        'id'    => 8,
+                        'name'  => 'Video Edit',
+                        'slug'  => 'video_edit',
                       
                       ],
                       [
-                        'id'    => 7,
+                        'id'    => 9,
+                        'name'  => 'Video Delete',
+                        'slug'  => 'video_delete',
+                      
+                      ],
+                      [
+                        'id'    => 10,
+                        'name'  => 'Video Add',
+                        'slug'  => 'video_add',
+                      
+                      ],
+                      [
+                        'id'    => 11,
+                        'name'  => 'Video Restore',
+                        'slug'  => 'video_restore',
+                      
+                      ],
+                      [
+                        'id'    => 12,
+                        'name'  => 'Video Force Delete',
+                        'slug'  => 'video_forceDelete',
+                      
+                      ],
+                      [
+                        'id'    => 13,
                         'name'  => 'Images List',
                         'slug'  => 'images_view',
                       
                       ],
                       [
-                        'id'    => 8,
-                        'name'  => 'Videos List',
-                        'slug'  => 'videos_view',
+                        'id'    => 14,
+                        'name'  => 'Image Edit',
+                        'slug'  => 'image_edit',
                       
                       ],
                       [
-                        'id'    => 9,
+                        'id'    => 15,
+                        'name'  => 'Image Delete',
+                        'slug'  => 'image_delete',
+                      
+                      ],
+                      [
+                        'id'    => 16,
+                        'name'  => 'Image Add',
+                        'slug'  => 'image_add',
+                      
+                      ],
+                      [
+                        'id'    => 17,
+                        'name'  => 'Image Restore',
+                        'slug'  => 'image_restore',
+                      
+                      ],
+                      [
+                        'id'    => 18,
+                        'name'  => 'Image Force Delete',
+                        'slug'  => 'image_forceDelete',
+                      
+                      ],
+                      [
+                        'id'    => 19,
                         'name'  => 'Blogs List',
                         'slug'  => 'blogs_view',
                       
                       ],
                       [
-                        'id'    => 10,
-                        'name'  => 'Slide List',
+                        'id'    => 20,
+                        'name'  => 'Blog Edit',
+                        'slug'  => 'blog_edit',
+                      
+                      ],
+                      [
+                        'id'    => 21,
+                        'name'  => 'Blog Delete',
+                        'slug'  => 'blog_delete',
+                      
+                      ],
+                      [
+                        'id'    => 22,
+                        'name'  => 'Blog Add',
+                        'slug'  => 'blog_add',
+                      
+                      ],
+                      [
+                        'id'    => 23,
+                        'name'  => 'Blog Restore',
+                        'slug'  => 'blog_restore',
+                      
+                      ],
+                      [
+                        'id'    => 24,
+                        'name'  => 'Blog Force Delete',
+                        'slug'  => 'blog_forceDelete',
+                      
+                      ],
+                      
+                      [
+                        'id'    => 25,
+                        'name'  => 'Sliders List',
                         'slug'  => 'home_slider_view',
                       
                       ],
                       [
-                        'id'    => 11,
-                        'name'  => 'Package List',
+                        'id'    => 26,
+                        'name'  => 'Packages List',
                         'slug'  => 'home_package_slider_view',
                       
                       ],
                       [
-                        'id'    => 12,
-                        'name'  => 'Counter List',
+                        'id'    => 27,
+                        'name'  => 'Counters List',
                         'slug'  => 'home_counter_view',
                       
                       ],
                       [
-                        'id'    => 13,
+                        'id'    => 28,
                         'name'  => 'Contacts List',
                         'slug'  => 'contacts_view',
                       
                       ],
                       [
-                        'id'    => 14,
-                        'name'  => 'Contact Subject List',
+                        'id'    => 29,
+                        'name'  => 'Contacts Subject List',
                         'slug'  => 'contact_subject_view',
                       
                       ],
                       [
-                        'id'    => 15,
+                        'id'    => 30,
                         'name'  => 'Roles List',
                         'slug'  => 'role_view',
                       
                       ],
 
                       [
-                        'id'    => 16,
+                        'id'    => 31,
                         'name'  => 'Permissions List',
                         'slug'  => 'permission_view',
                       
@@ -359,7 +452,7 @@ class DatabaseSeeder extends Seeder
                       ],
                       [
                         'role_id'       => 1,
-                        'permission_id' => 16,
+                        'permission_id' => 30,
                       ],
                       
                       ) );                             

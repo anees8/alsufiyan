@@ -189,9 +189,8 @@ class UsersController extends Controller
 
     }
 
-    public function getAuthUser(Request $request)
-    {
-        
+    public function getAuthUser(Request $request){
+ 
         $data['username'] = Auth::user()->name;
         $data['logo'] = Setting::where('slug','=','logo')->pluck('description')->first();
         $data['slogo'] = Setting::where('slug','=','slogo')->pluck('description')->first();

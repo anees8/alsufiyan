@@ -45,7 +45,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        $permission = Permission::where('slug', 'users_add')->first();
+        $permission = Permission::where('slug', 'user_add')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -58,7 +58,7 @@ class UserPolicy
      */
     public function update(User $user)
     {
-        $permission = Permission::where('slug', 'users_edit')->first();
+        $permission = Permission::where('slug', 'user_edit')->first();
         return $user->hasRole($permission->roles);
       
         
@@ -73,7 +73,7 @@ class UserPolicy
      */
     public function delete(User $user)
     {
-        $permission = Permission::where('slug', 'users_delete')->first();
+        $permission = Permission::where('slug', 'user_delete')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -86,7 +86,7 @@ class UserPolicy
      */
     public function restore(User $user)
     {
-        $permission = Permission::where('slug', 'users_restore')->first();
+        $permission = Permission::where('slug', 'user_restore')->first();
         return $user->hasRole($permission->roles);
        
     }
@@ -100,7 +100,7 @@ class UserPolicy
      */
     public function forceDelete(User $user)
     {
-        $permission = Permission::where('slug', 'users_forceDelete')->first();
+        $permission = Permission::where('slug', 'user_forceDelete')->first();
         return $user->hasRole($permission->roles);
     }
 }

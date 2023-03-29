@@ -6,6 +6,7 @@
           <b-col><h5>Blogs List</h5></b-col>
           <b-col>
             <b-button
+              v-if="permissions.includes('blog_add')"
               @click="modal = !modal"
               class="float-end"
               pill
@@ -113,6 +114,7 @@
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
           <template #cell(actions)="data">
             <b-button
+              v-if="permissions.includes('blog_edit')"
               class="rounded-circle p-2 me-2"
               @click="editPost(data.item.id)"
               variant="outline-success"
@@ -121,7 +123,7 @@
             </b-button>
 
             <b-button
-              v-if="!data.item.deleted_at"
+              v-if="!data.item.deleted_at && permissions.includes('blog_delete')"
               class="rounded-circle p-2 me-2"
               @click="recyclePost(data.item.id)"
               variant="outline-secondary"
@@ -130,7 +132,7 @@
             </b-button>
 
             <b-button
-              v-if="data.item.deleted_at"
+              v-if="data.item.deleted_at && permissions.includes('blog_restore')"
               class="rounded-circle p-2 me-2"
               @click="restorePost(data.item.id)"
               variant="outline-primary"
@@ -138,6 +140,7 @@
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
+              v-if="permissions.includes('blog_forceDelete')"
               class="rounded-circle p-2 me-2"
               @click="deletePost(data.item.id)"
               variant="outline-danger"
@@ -172,7 +175,7 @@
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
-
+import { useLoginStore } from "../../stores/admin/loginStore.js";
 import { useAdminBlogsStore } from "../../stores/admin/blogStore";
 
 const {
@@ -201,7 +204,7 @@ const {
   onFileChange,
   uploadData,
 } = useAdminBlogsStore();
-
+const { permissions } = storeToRefs(useLoginStore());
 getPosts();
 resetForm();
 </script>

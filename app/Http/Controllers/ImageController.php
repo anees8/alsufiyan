@@ -45,6 +45,7 @@ public function create(){
      */
 public function store(Request $request){
      
+    $this->authorizeForUser($request->user('api'), 'create', Image::class);
         $validator = Validator::make($request->all(), [
            
             'image' => 'bail|required_without:url|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -109,6 +110,7 @@ public function edit(Image $image){
      * @return \Illuminate\Http\Response
      */
 public function update(Request $request,Image $image){  
+    $this->authorizeForUser($request->user('api'), 'update', Image::class);
         $validator = Validator::make($request->all(), [
             'image' => 'bail|required_without:url|image|mimes:jpeg,png,jpg,gif|max:2048',
             'url'=> 'bail|required_without:image|url',
@@ -144,18 +146,20 @@ public function update(Request $request,Image $image){
      * @return \Illuminate\Http\Response
      */
 public function destroy(Image $image){
-
+    $this->authorizeForUser($request->user('api'), 'delete', Image::class);
     $image->delete();
     return $this->sendResponse('Image Recycle Successfully.',Response::HTTP_OK);
     }
 
 public function restore(Image $image){
 
+    $this->authorizeForUser($request->user('api'), 'restore', Image::class);
     $image->restore();
     return $this->sendResponse('Image Restore Successfully.',Response::HTTP_OK);
     }
 
 public function forcedelete(Image $image){
+    $this->authorizeForUser($request->user('api'), 'forceDelete', Image::class);
     if (File::exists(public_path($image->image_url))) {
     unlink(public_path($image->image_url));
     }

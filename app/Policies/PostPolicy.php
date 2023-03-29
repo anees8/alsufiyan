@@ -45,7 +45,8 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'blog_add')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -55,9 +56,10 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Post $post)
+    public function update(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'blog_edit')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -67,9 +69,10 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Post $post)
+    public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'post_delete')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -79,9 +82,10 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Post $post)
+    public function restore(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'post_restore')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -91,8 +95,9 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Post $post)
+    public function forceDelete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'post_forceDelete')->first();
+        return $user->hasRole($permission->roles);
     }
 }

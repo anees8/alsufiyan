@@ -48,7 +48,7 @@ public function create()
      */
 public function store(Request $request)
     {
-        
+        $this->authorizeForUser($request->user('api'), 'create', Video::class);
         $validator = Validator::make($request->all(), [
            
             'video' => 'bail|required_without:url|mimes:mp4,mov,ogg|max:20000',
@@ -116,6 +116,8 @@ public function edit(Video $video)
 public function update(Request $request, Video $video)
     {
         
+        $this->authorizeForUser($request->user('api'), 'update', Video::class);
+
         $validator = Validator::make($request->all(), [
             'video' => 'bail|required_without:url|mimes:mp4,mov,ogg|max:20000',
             'url'=> 'bail|required_without:video|url',
@@ -151,16 +153,19 @@ public function update(Request $request, Video $video)
      * @return \Illuminate\Http\Response
      */
 public function destroy(Video $video){
+    $this->authorizeForUser($request->user('api'), 'delete', Video::class);
     $video->delete();
     return $this->sendResponse('Video Recycle Successfully.',Response::HTTP_OK);
     }
 
 public function restore(Video $video){
+    $this->authorizeForUser($request->user('api'), 'restore', Video::class);
     $video->restore();
     return $this->sendResponse('Video Restore Successfully.',Response::HTTP_OK);
     }
 
 public function forcedelete(Video $video){
+    $this->authorizeForUser($request->user('api'), 'forceDelete', Video::class);
     if (File::exists(public_path($video->video_url))) {
     unlink(public_path($video->video_url));
     }

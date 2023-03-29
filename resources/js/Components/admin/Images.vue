@@ -6,6 +6,7 @@
           <b-col><h5>Image List</h5></b-col>
           <b-col>
             <b-button
+              v-if="permissions.includes('image_add')"
               @click="modal = !modal"
               class="float-end"
               pill
@@ -108,6 +109,7 @@
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
           <template #cell(actions)="data">
             <b-button
+              v-if="permissions.includes('image_edit')"
               class="rounded-circle p-2 me-2"
               @click="editImage(data.item.id)"
               variant="outline-success"
@@ -116,7 +118,7 @@
             </b-button>
 
             <b-button
-              v-if="!data.item.deleted_at"
+              v-if="!data.item.deleted_at && permissions.includes('image_delete')"
               class="rounded-circle p-2 me-2"
               @click="recycleImage(data.item.id)"
               variant="outline-secondary"
@@ -125,7 +127,7 @@
             </b-button>
 
             <b-button
-              v-if="data.item.deleted_at"
+              v-if="data.item.deleted_at && permissions.includes('image_restore')"
               class="rounded-circle p-2 me-2"
               @click="restoreImage(data.item.id)"
               variant="outline-primary"
@@ -133,6 +135,7 @@
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
+              v-if="permissions.includes('image_forceDelete')"
               class="rounded-circle p-2 me-2"
               @click="deleteImage(data.item.id)"
               variant="outline-danger"
@@ -167,6 +170,7 @@
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
+import { useLoginStore } from "../../stores/admin/loginStore.js";
 
 import { useAdminImagesStore } from "../../stores/admin/imagesStore.js";
 const {
@@ -201,5 +205,6 @@ const {
   deleteImage,
 } = useAdminImagesStore();
 
+const { permissions } = storeToRefs(useLoginStore());
 getImages();
 </script>

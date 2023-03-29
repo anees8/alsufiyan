@@ -32,7 +32,7 @@ class VideoPolicy
     public function view(User $user)
     {
        
-        $permission = Permission::where('slug', 'video_view')->first();
+        $permission = Permission::where('slug', 'videos_view')->first();
         
         return $user->hasRole($permission->roles);
     }
@@ -45,7 +45,8 @@ class VideoPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'video_add')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -55,9 +56,10 @@ class VideoPolicy
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Video $video)
+    public function update(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'video_edit')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -67,9 +69,10 @@ class VideoPolicy
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Video $video)
+    public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'video_delete')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -79,9 +82,10 @@ class VideoPolicy
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Video $video)
+    public function restore(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'video_restore')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -91,8 +95,9 @@ class VideoPolicy
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Video $video)
+    public function forceDelete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'video_forceDelete')->first();
+        return $user->hasRole($permission->roles);
     }
 }

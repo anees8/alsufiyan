@@ -6,6 +6,7 @@
           <b-col><h5>Videos List</h5></b-col>
           <b-col>
             <b-button
+              v-if="permissions.includes('video_add')"
               @click="modal = !modal"
               class="float-end"
               pill
@@ -14,7 +15,6 @@
               <font-awesome-icon icon="plus" class="me-2" />Add Video</b-button
             >
             <div>
-              {{ edit_id ? "Update Video" : "Add Video" }}
               <b-modal
                 v-model="modal"
                 :title="edit_id ? 'Update Video' : 'Add Video'"
@@ -94,6 +94,7 @@
           </b-col>
         </b-row>
       </b-col>
+
       <b-col v-if="isBusy">
         <b-skeleton-table :rows="perPage" :columns="fields"></b-skeleton-table>
       </b-col>
@@ -135,6 +136,7 @@
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
           <template #cell(actions)="data">
             <b-button
+              v-if="permissions.includes('video_edit')"
               class="rounded-circle p-2 me-2"
               @click="editVideo(data.item.id)"
               variant="outline-success"
@@ -143,7 +145,7 @@
             </b-button>
 
             <b-button
-              v-if="!data.item.deleted_at"
+              v-if="!data.item.deleted_at && permissions.includes('video_delete')"
               class="rounded-circle p-2 me-2"
               @click="recycleVideo(data.item.id)"
               variant="outline-secondary"
@@ -152,7 +154,7 @@
             </b-button>
 
             <b-button
-              v-if="data.item.deleted_at"
+              v-if="data.item.deleted_at && permissions.includes('video_restore')"
               class="rounded-circle p-2 me-2"
               @click="restoreVideo(data.item.id)"
               variant="outline-primary"
@@ -160,6 +162,7 @@
               <font-awesome-icon icon="arrow-rotate-left" />
             </b-button>
             <b-button
+              v-if="permissions.includes('video_forceDelete')"
               class="rounded-circle p-2 me-2"
               @click="deleteVideo(data.item.id)"
               variant="outline-danger"
@@ -194,7 +197,7 @@
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
-
+import { useLoginStore } from "../../stores/admin/loginStore.js";
 import { useAdminVideosStore } from "../../stores/admin/videosStore.js";
 const {
   videos,
@@ -227,6 +230,7 @@ const {
   restoreVideo,
   deleteVideo,
 } = useAdminVideosStore();
+const { permissions } = storeToRefs(useLoginStore());
 
 getVideos();
 resetForm;

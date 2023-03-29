@@ -51,6 +51,7 @@ public function index(Request $request){
      */
     public function store(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'create', Post::class);
         
         $validator = Validator::make($request->all(), [
             'title'=>'bail|required|min:10',
@@ -94,6 +95,7 @@ public function index(Request $request){
      */
     public function show(Post  $post)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Post::class);
      
         $data['post']=$post->load('user');
      return $this->sendResponse($data, 'Post return successfully.',Response::HTTP_OK);
@@ -118,6 +120,8 @@ public function index(Request $request){
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post){
+        $this->authorizeForUser($request->user('api'), 'update', Post::class);
+
         $validator = Validator::make($request->all(), [
             'title'=>'bail|required|min:10',
             'content'=>'bail|required|min:30',
@@ -156,17 +160,20 @@ public function index(Request $request){
      */
     public function destroy(Post $post)
     {    
+        $this->authorizeForUser($request->user('api'), 'delete', Post::class);
         $post->delete();
         return $this->sendResponse('Post Recycle Successfully.',Response::HTTP_OK);
     }
 
 
     public function restore(Post $post){
+        $this->authorizeForUser($request->user('api'), 'restore', Post::class);
         $post->restore();
         return $this->sendResponse('Post Restore Successfully.',Response::HTTP_OK);
     }
 
 public function forcedelete(Post $post){
+    $this->authorizeForUser($request->user('api'), 'forceDelete', Post::class);
         if (File::exists(public_path($post->attachment))) {
         unlink(public_path($post->attachment));
         }

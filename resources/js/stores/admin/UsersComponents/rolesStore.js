@@ -26,7 +26,6 @@ export const useRolesStore = defineStore("rolesStore", {
             "secondary",
             "success",
             "info",
-            "light",
             "danger",
             "warning",
             "dark",
