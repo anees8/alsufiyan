@@ -57,6 +57,9 @@ state: () => ({
 
             this.isBusy = false;
             } catch (error) {
+                setTimeout(() => {
+                    this.message = {};
+                }, 5000);
                 if (error.response) {
                 if (error.response.status === 403) {
                     router.push({"name":"NotAuthorize"});

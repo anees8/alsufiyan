@@ -27,7 +27,8 @@ permissions:[],
 loading:false,
 selected: [],
 allSelected: false,
-indeterminate: false
+indeterminate: false,
+errors: { }, 
 
 }),
 
@@ -63,6 +64,10 @@ this.errors = error.response.data.errors;
 }
 }
 this.isBusy = false;
+setTimeout(() => {
+    this.errors = {};
+}, 5000);
+
 }
 }, 
 async getRole(id) {
@@ -154,14 +159,19 @@ try {
 const response = await axios.post(url,formData,config);
 router.push({"name":"AdminUserRoles"});
 }catch (error) {
+
 if(error.response){
 if (error.response.status === 403) {
 router.push({"name":"NotAuthorize"});
 }else if(error.response.status === 400){
-
 this.errors = error.response.data.errors;
 
 }
+setTimeout(() => {
+    this.errors = {};
+}, 5000);
+
+
 }
 this.loading = false;
 }
@@ -172,7 +182,7 @@ const response = await axios.post(url+'/'+this.role.id,formData,config);
 
 router.push({"name":"AdminUserRoles"});
 }catch (error) {
-
+console.log(error);
 if(error.response){
 if (error.response.status === 403) {
 router.push({"name":"NotAuthorize"});
@@ -184,6 +194,10 @@ router.push({"name":"NotAuthorize"});
 this.errors = error.response.data.errors;
 
 }
+setTimeout(() => {
+    this.errors = {};
+}, 5000);
+
 }
 }
 }

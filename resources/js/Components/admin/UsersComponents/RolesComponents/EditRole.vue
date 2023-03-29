@@ -18,6 +18,7 @@
           </b-breadcrumb>
         </b-col>
       </b-row>
+
       <b-form @submit="onPermissionSubmit">
         <b-form-group id="input-group-1" label="Role Name:" label-for="input-1">
           <b-form-input
@@ -25,8 +26,10 @@
             v-model="role.name"
             type="text"
             placeholder="Enter Role Name"
-            required
           ></b-form-input>
+          <b-form-invalid-feedback v-if="errors.role_name" :state="errors.role_name">
+            {{ errors.role_name[0] }}
+          </b-form-invalid-feedback>
         </b-form-group>
 
         <b-form-group>
@@ -54,8 +57,11 @@
             ></b-form-checkbox-group>
           </template>
         </b-form-group>
+        <b-form-invalid-feedback v-if="errors.permissions" :state="errors.permissions">
+          {{ errors.permissions[0] }}
+        </b-form-invalid-feedback>
 
-        <b-button type="submit" variant="outline-primary">Permission Update</b-button>
+        <b-button type="submit" variant="dark">Permission Update</b-button>
       </b-form>
     </b-card></b-row
   >
@@ -69,14 +75,9 @@ const props = defineProps({
   id: Number,
 });
 
-const {
-  role,
-  permissions,
-  selected,
-  allSelected,
-  indeterminate,
-  badgeVarients,
-} = storeToRefs(useRolesStore());
+const { role, permissions, selected, allSelected, indeterminate, errors } = storeToRefs(
+  useRolesStore()
+);
 const {
   getRole,
   getallPermission,

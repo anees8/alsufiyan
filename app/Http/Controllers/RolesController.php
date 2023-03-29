@@ -129,6 +129,7 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
+        $role->permissions()->detach();
         $role->delete();
         return $this->sendResponse('Role deleted Successfully.',Response::HTTP_OK);
     }
