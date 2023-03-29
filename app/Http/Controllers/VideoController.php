@@ -9,6 +9,7 @@ use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
+
 class VideoController extends Controller
 {
     /**
@@ -18,8 +19,11 @@ class VideoController extends Controller
      */
 public function index(Request $request){
 
+
+       
         $videos = Video::select('*','video_url as src')->with('user')->orderBy('id', 'DESC');
-        if ($request->has('with_deleted')) {
+        if ($request->has('with_deleted')){
+            $this->authorizeForUser($request->user('api'), 'view', Video::class);
         $videos = $videos->withTrashed();
         }
         $data['videos']=  $videos->Paginate($request->perPage); 

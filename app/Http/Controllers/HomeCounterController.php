@@ -18,6 +18,9 @@ class HomeCounterController extends Controller
     {
 
         $data['counter']= HomeCounter::orderBy('id', 'ASC')->limit(4)->get();
+        if ($request->has('permission')) {
+        $this->authorizeForUser($request->user('api'), 'view', HomeCounter::class);
+        }
         return $this->sendResponse($data, 'Home Counter return successfully.',Response::HTTP_OK);    
     }
 

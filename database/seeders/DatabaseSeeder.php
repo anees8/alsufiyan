@@ -244,6 +244,69 @@ class DatabaseSeeder extends Seeder
                         'slug'  => 'users_forceDelete',
                       
                       ],
+                      [
+                        'id'    => 7,
+                        'name'  => 'Images List',
+                        'slug'  => 'images_view',
+                      
+                      ],
+                      [
+                        'id'    => 8,
+                        'name'  => 'Videos List',
+                        'slug'  => 'videos_view',
+                      
+                      ],
+                      [
+                        'id'    => 9,
+                        'name'  => 'Blogs List',
+                        'slug'  => 'blogs_view',
+                      
+                      ],
+                      [
+                        'id'    => 10,
+                        'name'  => 'Slide List',
+                        'slug'  => 'home_slider_view',
+                      
+                      ],
+                      [
+                        'id'    => 11,
+                        'name'  => 'Package List',
+                        'slug'  => 'home_package_slider_view',
+                      
+                      ],
+                      [
+                        'id'    => 12,
+                        'name'  => 'Counter List',
+                        'slug'  => 'home_counter_view',
+                      
+                      ],
+                      [
+                        'id'    => 13,
+                        'name'  => 'Contacts List',
+                        'slug'  => 'contacts_view',
+                      
+                      ],
+                      [
+                        'id'    => 14,
+                        'name'  => 'Contact Subject List',
+                        'slug'  => 'contact_subject_view',
+                      
+                      ],
+                      [
+                        'id'    => 15,
+                        'name'  => 'Roles List',
+                        'slug'  => 'role_view',
+                      
+                      ],
+
+                      [
+                        'id'    => 16,
+                        'name'  => 'Permissions List',
+                        'slug'  => 'permission_view',
+                      
+                      ],
+
+
 
                       ) );
 
@@ -289,6 +352,14 @@ class DatabaseSeeder extends Seeder
                       [
                         'role_id'       => 1,
                         'permission_id' => 6,
+                      ],
+                      [
+                        'role_id'       => 1,
+                        'permission_id' => 15,
+                      ],
+                      [
+                        'role_id'       => 1,
+                        'permission_id' => 16,
                       ],
                       
                       ) );                             

@@ -72,25 +72,25 @@ const menuTree = [
   {
     label: "Home",
     icon: "house",
-    Permissions: "users_view,users_edit",
+    Permissions: "home_slider_view,home_package_slider_view,home_counter_view",
     children: [
       {
         label: "Slider",
         icon: "panorama",
         name: "AdminHomeSlider",
-        Permissions: "users_view",
+        Permissions: "home_slider_view",
       },
       {
         label: "Package",
         icon: "plane-departure",
         name: "AdminHomePackage",
-        Permissions: "users_view",
+        Permissions: "home_package_slider_view",
       },
       {
         label: "Counter",
         icon: "0",
         name: "AdminHomeCounter",
-        Permissions: "users_view",
+        Permissions: "home_counter_view",
       },
     ],
   },
@@ -103,7 +103,7 @@ const menuTree = [
   {
     label: "Users",
     icon: "users",
-    Permissions: "users_view,users_edit",
+    Permissions: "users_view,role_view",
     children: [
       {
         label: "Users List",
@@ -115,7 +115,7 @@ const menuTree = [
         label: "Roles & Permission",
         icon: "users-gear",
         name: "AdminUserRoles",
-        Permissions: "users_view",
+        Permissions: "role_view",
       },
     ],
   },
@@ -124,36 +124,36 @@ const menuTree = [
     label: "Blog",
     icon: "blog",
     name: "AdminBlog",
-    Permissions: "users_view",
+    Permissions: "blogs_view",
   },
   {
     label: "Images",
     icon: "image",
     name: "AdminImage",
-    Permissions: "users_view",
+    Permissions: "images_view",
   },
   {
     label: "Videos",
     icon: "video",
     name: "AdminVideo",
-    Permissions: "users_view",
+    Permissions: "videos_view",
   },
   {
     label: "Contact",
     icon: "envelopes-bulk",
-    Permissions: "users_view",
+    Permissions: "contacts_view,contact_subject_view",
     children: [
       {
         label: "Contact",
         icon: "envelopes-bulk",
         name: "AdminContact",
-        Permissions: "users_view",
+        Permissions: "contacts_view",
       },
       {
         label: "Subject",
         icon: "s",
         name: "AdminContactSubject",
-        Permissions: "users_view",
+        Permissions: "contact_subject_view",
       },
     ],
   },

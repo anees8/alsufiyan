@@ -19,6 +19,8 @@ public function index(Request $request){
 
         $images = Image::select('*','image_url as src')->with('user')->orderBy('id', 'DESC');
         if ($request->has('with_deleted')) {
+           
+            $this->authorizeForUser($request->user('api'), 'view', Image::class);
         $images = $images->withTrashed();
         }
         $data['images']=  $images->Paginate($request->perPage); 

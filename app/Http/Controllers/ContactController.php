@@ -24,7 +24,12 @@ class ContactController extends Controller
     public function index(Request $request)
     {
 
+        if ($request->has('permission')) {
+            $this->authorizeForUser($request->user('api'), 'view', Contact::class);
+        }
         $data['contacts']= Contact::with('subject')->orderBy('id', 'DESC')->Paginate($request->perPage);
+      
+
         return $this->sendResponse($data, 'Contacts return successfully.',Response::HTTP_OK);
     }
 

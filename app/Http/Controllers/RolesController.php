@@ -18,6 +18,7 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Role::class);
         $roles = Role::with('permissions');       
         $data['roles']=  $roles->Paginate($request->perPage); 
         return $this->sendResponse($data, 'Roles return successfully.',Response::HTTP_OK);

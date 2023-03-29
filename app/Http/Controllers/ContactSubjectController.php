@@ -17,6 +17,8 @@ public function index(Request $request){
             $subject = ContactSubject::orderBy('id', 'DESC');
 
         if ($request->has('with_deleted')) {
+            $this->authorizeForUser($request->user('api'), 'view', ContactSubject::class);
+            
         $subject = $subject->withTrashed();
         }
 

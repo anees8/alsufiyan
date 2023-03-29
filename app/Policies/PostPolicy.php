@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Contact;
+use App\Models\Post;
 use App\Models\User;
-use App\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\Permission;
 
-class ContactPolicy
+class PostPolicy
 {
     use HandlesAuthorization;
 
@@ -26,14 +26,15 @@ class ContactPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user)
     {
-        $permission = Permission::where('slug', 'contacts_view')->first();
+        $permission = Permission::where('slug','blogs_view')->first();
         
         return $user->hasRole($permission->roles);
+        
     }
 
     /**
@@ -51,10 +52,10 @@ class ContactPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Contact $contact)
+    public function update(User $user, Post $post)
     {
         //
     }
@@ -63,10 +64,10 @@ class ContactPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Contact $contact)
+    public function delete(User $user, Post $post)
     {
         //
     }
@@ -75,10 +76,10 @@ class ContactPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Contact $contact)
+    public function restore(User $user, Post $post)
     {
         //
     }
@@ -87,10 +88,10 @@ class ContactPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Contact $contact)
+    public function forceDelete(User $user, Post $post)
     {
         //
     }

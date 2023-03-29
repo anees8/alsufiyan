@@ -22,6 +22,7 @@ public function index(Request $request){
 
         $sliders = HomeSlider::orderBy('id', 'DESC')->with('user');
         if ($request->has('with_deleted')) {
+            $this->authorizeForUser($request->user('api'), 'view', HomeSlider::class);
         $sliders = $sliders->withTrashed();
         }
         $data['sliders']=  $sliders->Paginate($request->perPage); 

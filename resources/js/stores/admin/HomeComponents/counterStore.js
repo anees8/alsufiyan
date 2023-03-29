@@ -19,6 +19,7 @@ export const useAdminCountersStore = defineStore("admincountersStore", {
             this.loading = true;
             try {
                 let url = "homecounters";
+                 url += `?permission`;
                 const response = await axios.get(url);
                 this.counters = response.data.data.counter;
             } catch (error) {

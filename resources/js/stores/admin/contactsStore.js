@@ -35,13 +35,12 @@ export const useContactsStore = defineStore("contactsStore", {
             this.isBusy = true;
             try {
                 let url = "contacts";
+                url += `?permission`;
                 if (this.perPage) {
-                    url += `?perPage=${this.perPage}`;
+                    url += `&perPage=${this.perPage}`;
                 }
                 if (this.currentPage > 1) {
-                    url += `${this.perPage ? "&" : "?"}page=${
-                        this.currentPage
-                    }`;
+                    url += `&page=${this.currentPage}`;
                 }
                 const response = await axios.get(url);
                 this.contacts = response.data.data.contacts.data;

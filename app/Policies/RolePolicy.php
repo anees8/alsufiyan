@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Contact;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ContactPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -26,12 +26,12 @@ class ContactPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user)
     {
-        $permission = Permission::where('slug', 'contacts_view')->first();
+        $permission = Permission::where('slug', 'role_view')->first();
         
         return $user->hasRole($permission->roles);
     }
@@ -51,10 +51,10 @@ class ContactPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Contact $contact)
+    public function update(User $user, Role $role)
     {
         //
     }
@@ -63,10 +63,10 @@ class ContactPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Contact $contact)
+    public function delete(User $user, Role $role)
     {
         //
     }
@@ -75,10 +75,10 @@ class ContactPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Contact $contact)
+    public function restore(User $user, Role $role)
     {
         //
     }
@@ -87,10 +87,10 @@ class ContactPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Contact $contact)
+    public function forceDelete(User $user, Role $role)
     {
         //
     }

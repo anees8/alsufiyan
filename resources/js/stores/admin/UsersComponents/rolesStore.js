@@ -6,9 +6,9 @@ export const useRolesStore = defineStore("rolesStore", {
     state: () => ({
         fields: [
             { key: "id" },
-            { key: "name" },
+            { key: "name", thStyle: { width: "10%" } },
             { key: "permissions" },
-            { key: "actions" },
+            { key: "actions", thStyle: { width: "8%" } },
         ],
         roles: [],
         perPage: 5,

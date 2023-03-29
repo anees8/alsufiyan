@@ -23,6 +23,7 @@ public function index(Request $request){
         if($request->perPage){
             $packages = HomePackageSlider::orderBy('id', 'DESC')->with('user');
             if ($request->has('with_deleted')) {
+                $this->authorizeForUser($request->user('api'), 'view', HomePackageSlider::class);
             $packages = $packages->withTrashed();
             }
             $data['packages']=  $packages->Paginate($request->perPage); 
