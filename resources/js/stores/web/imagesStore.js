@@ -53,7 +53,7 @@ export const useImagesStore = defineStore("imagesStore", {
 
                 setTimeout(() => {
                     this.loading = false;
-                  }, 300); // set timeout to 1 second
+                }, 300); // set timeout to 1 second
             } catch (error) {
                 if (error.response) {
                     this.errors = error.response.data.errors;

@@ -4,30 +4,29 @@ import moment from "moment";
 export const usePostStore = defineStore("postStore", {
     state: () => ({
         posts: [],
-        limit:3,
-        loading:false,
+        limit: 3,
+        loading: false,
     }),
 
-        actions: {
+    actions: {
         dateTime(value) {
-        return moment(value).format("MMM D, Y");
+            return moment(value).format("MMM D, Y");
         },
 
         async getPosts() {
-        this.loading = true;
-        try {
-        let url = "post";
-        if (this.limit) {
-            url += `?perPage=${this.limit}`;
-        }
+            this.loading = true;
+            try {
+                let url = "post";
+                if (this.limit) {
+                    url += `?perPage=${this.limit}`;
+                }
 
-        const response = await axios.get(url);
-        this.posts = response.data.data.posts.data;
-        setTimeout(() => {
-            this.loading = false;
-          }, 300); // set timeout to 1 second
-        } catch (error) {
-        }
+                const response = await axios.get(url);
+                this.posts = response.data.data.posts.data;
+                setTimeout(() => {
+                    this.loading = false;
+                }, 300); // set timeout to 1 second
+            } catch (error) {}
         },
-        },
+    },
 });

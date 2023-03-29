@@ -5,7 +5,7 @@ export const useSettingStore = defineStore("settingStore", {
     state: () => ({
         logo: "/logo/logo.png",
         slogo: "/logo/slogo2.png",
-        loading:false,
+        loading: false,
         FooterAbout:
             " Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc.",
         social_icons: [

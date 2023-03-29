@@ -2,24 +2,22 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import router from "../../router.js";
 
-
 export const useLoginStore = defineStore("loginStore", {
     state: () => ({
         user: {
             email: "",
             password: "",
-        },       
+        },
         loading: false,
-        timer:300,
-        timeout:0,
+        timer: 300,
+        timeout: 0,
         accessToken: localStorage.getItem("token"),
-        loginUser:null,
-        logo:null,
-        slogo:null,
-        permissions:null,
+        loginUser: null,
+        logo: null,
+        slogo: null,
+        permissions: null,
         errors: {},
-        PageLoad:true,
-      
+        PageLoad: true,
     }),
 
     getters: {
@@ -27,8 +25,8 @@ export const useLoginStore = defineStore("loginStore", {
     },
     mutations: {},
     actions: {
-        pageLoaded(){
-            this.PageLoad=false;
+        pageLoaded() {
+            this.PageLoad = false;
         },
         async login() {
             this.loading = true;
@@ -52,16 +50,18 @@ export const useLoginStore = defineStore("loginStore", {
                 const response = await axios.get("logout");
             } catch (error) {
                 if (error.response) {
-                if (error.response.status === 403) {
-                router.push({"name":"NotAuthorize"});
-                }else if(error.response.status === 400){
-                                if (error.response.status === 403) {
-                router.push({"name":"NotAuthorize"});
-                }else if(error.response.status === 400){
-               
-                this.errors = error.response.data.errors;
-                }
-                }
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                            this.errors = error.response.data.errors;
+                        }
+                    }
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
                 }
             }
         },
@@ -79,12 +79,12 @@ export const useLoginStore = defineStore("loginStore", {
         },
         removeToken: function () {
             this.logout();
-            this.loginUser=null;
+            this.loginUser = null;
             this.accessToken = null;
-            this.loginUser=null;
-            this.logo=null;
-            this.slogo=null;
-            this.permissions=null;
+            this.loginUser = null;
+            this.logo = null;
+            this.slogo = null;
+            this.permissions = null;
             localStorage.removeItem("token");
             localStorage.removeItem("name");
             router.push({ name: "Login" });
@@ -96,48 +96,46 @@ export const useLoginStore = defineStore("loginStore", {
             this.loading = false;
         },
         startIdleTimer() {
-        const resetTimer = () => {
-        this.timer = 300;  
-        };
+            const resetTimer = () => {
+                this.timer = 300;
+            };
 
-        window.addEventListener('mousemove', resetTimer);
-        window.addEventListener('keydown', resetTimer);
-        window.addEventListener('click', resetTimer);
+            window.addEventListener("mousemove", resetTimer);
+            window.addEventListener("keydown", resetTimer);
+            window.addEventListener("click", resetTimer);
 
-        setInterval(() => {
-        if(this.accessToken){
-        this.timer--;
-        if (this.timer <= this.timeout) {
-        router.push({name: 'Logout'}); // redirect to login page
-        }
-        }
-        }, 1000);
+            setInterval(() => {
+                if (this.accessToken) {
+                    this.timer--;
+                    if (this.timer <= this.timeout) {
+                        router.push({ name: "Logout" }); // redirect to login page
+                    }
+                }
+            }, 1000);
         },
         async refreshUserPermissions() {
-            if(this.getAccessToken){
-            try {
-                const response = await axios.get("getAuthUser");
-             
-                 this.loginUser=response.data.data.username;
-                this.logo=response.data.data.logo;
-                this.slogo=response.data.data.slogo;
-                this.permissions=response.data.data.permissions;
+            if (this.getAccessToken) {
+                try {
+                    const response = await axios.get("getAuthUser");
 
+                    this.loginUser = response.data.data.username;
+                    this.logo = response.data.data.logo;
+                    this.slogo = response.data.data.slogo;
+                    this.permissions = response.data.data.permissions;
+                } catch (error) {
+                    this.loginUser = null;
+                    this.logo = null;
+                    this.slogo = null;
+                    this.permissions = null;
 
-
-            } catch (error) {
-                this.loginUser=null;
-                this.logo=null;
-                this.slogo=null;
-                this.permissions=null;
-
-                if (error.response.data.errors) {
-                    this.errors = error.response.data.errors;
+                    if (error.response.data.errors) {
+                        this.errors = error.response.data.errors;
+                    }
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
                 }
             }
-        
-        }
-        }
-        
+        },
     },
 });
