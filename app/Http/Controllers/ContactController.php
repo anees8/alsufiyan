@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactFormEmail;
+use App\Mail\ContactReceiptFormEmail;
 use App\Models\Contact;
 use App\Models\ContactSubject;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ContactFormEmail;
-use App\Mail\ContactReceiptFormEmail;
-
+use Symfony\Component\HttpFoundation\Response;
 use Validator;
 
 class ContactController extends Controller
@@ -27,10 +24,9 @@ class ContactController extends Controller
         if ($request->has('permission')) {
             $this->authorizeForUser($request->user('api'), 'view', Contact::class);
         }
-        $data['contacts']= Contact::with('subject')->orderBy('id', 'DESC')->Paginate($request->perPage);
-      
+        $data['contacts'] = Contact::with('subject')->orderBy('id', 'DESC')->Paginate($request->perPage);
 
-        return $this->sendResponse($data, 'Contacts return successfully.',Response::HTTP_OK);
+        return $this->sendResponse($data, 'Contacts return successfully.', Response::HTTP_OK);
     }
 
     /**
@@ -40,7 +36,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'create', Contact::class);
     }
 
     /**
@@ -49,41 +45,40 @@ class ContactController extends Controller
      * @param  \App\Http\Requests\StoreContactRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){           
+    public function store(Request $request)
+    {
+        $this->authorizeForUser($request->user('api'), 'create', Contact::class);
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email:rfc,dns',
             'phone' => 'required|digits:10',
-            'subject_id'=> 'required|max:255',
+            'subject_id' => 'required|max:255',
             'message' => 'required',
-            
-           
+
         ]);
-   
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);
         }
         $request_all = $request->all();
         Contact::create($request_all);
 
-        $email="meeranjianees1@gmail.com";
+        $email = "meeranjianees1@gmail.com";
 
-        $ContactForm=[
-           'name' =>   $request->name, 
-            'email' =>  $request->email, 
-            'phone' =>  $request->phone, 
+        $ContactForm = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
             'subject' => ContactSubject::find($request->subject_id)
-            ->subject,
-            'message' =>  $request->message,
-            'company' =>  config('app.name'),
+                ->subject,
+            'message' => $request->message,
+            'company' => config('app.name'),
         ];
-
 
         Mail::to($email)->send(new ContactFormEmail($ContactForm));
         Mail::to($ContactForm['email'])->send(new ContactReceiptFormEmail($ContactForm));
 
-
-        return $this->sendResponse([],'Thanks for Contacting with Us.',Response::HTTP_CREATED);
+        return $this->sendResponse([], 'Thanks for Contacting with Us.', Response::HTTP_CREATED);
     }
 
     /**
@@ -94,7 +89,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'update', Contact::class);
     }
 
     /**
@@ -105,7 +100,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'update', Contact::class);
     }
 
     /**
@@ -117,7 +112,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'update', Contact::class);
     }
 
     /**
@@ -128,6 +123,26 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'delete', Contact::class);
+        $contact->delete();
+
+        return $this->sendResponse('Contact  Recycle Successfully.', Response::HTTP_OK);
+    }
+
+    public function restore(Contact $contact)
+    {
+
+        $this->authorizeForUser($request->user('api'), 'restore', Contact::class);
+        $contact->restore();
+        return $this->sendResponse('Contact  Restored Successfully.', Response::HTTP_OK);
+    }
+
+    public function forcedelete(Contact $contact)
+    {
+        $this->authorizeForUser($request->user('api'), 'forcedelete', Contact::class);
+
+        $contact->forceDelete();
+        return $this->sendResponse('Contact  Deleted Successfully.', Response::HTTP_OK);
+
     }
 }

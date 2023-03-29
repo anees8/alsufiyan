@@ -3,9 +3,8 @@
 namespace App\Policies;
 
 use App\Models\ContactSubject;
-use App\Models\User;
 use App\Models\Permission;
-
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ContactSubjectPolicy
@@ -33,7 +32,7 @@ class ContactSubjectPolicy
     public function view(User $user)
     {
         $permission = Permission::where('slug', 'contact_subject_view')->first();
-        
+
         return $user->hasRole($permission->roles);
     }
 
@@ -45,7 +44,10 @@ class ContactSubjectPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_subject_add')->first();
+
+        return $user->hasRole($permission->roles);
+
     }
 
     /**
@@ -55,9 +57,11 @@ class ContactSubjectPolicy
      * @param  \App\Models\ContactSubject  $contactSubject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, ContactSubject $contactSubject)
+    public function update(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_subject_edit')->first();
+
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -67,9 +71,11 @@ class ContactSubjectPolicy
      * @param  \App\Models\ContactSubject  $contactSubject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, ContactSubject $contactSubject)
+    public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_subject_delete')->first();
+
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -79,9 +85,11 @@ class ContactSubjectPolicy
      * @param  \App\Models\ContactSubject  $contactSubject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, ContactSubject $contactSubject)
+    public function restore(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_subject_restore')->first();
+
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -91,8 +99,10 @@ class ContactSubjectPolicy
      * @param  \App\Models\ContactSubject  $contactSubject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, ContactSubject $contactSubject)
+    public function forceDelete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_subject_forceDelete')->first();
+
+        return $user->hasRole($permission->roles);
     }
 }

@@ -44,7 +44,9 @@ class HomePackageSliderPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_package_slider_add')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -54,9 +56,11 @@ class HomePackageSliderPolicy
      * @param  \App\Models\HomePackageSlider  $homePackageSlider
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, HomePackageSlider $homePackageSlider)
+    public function update(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_package_slider_edit')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -66,9 +70,11 @@ class HomePackageSliderPolicy
      * @param  \App\Models\HomePackageSlider  $homePackageSlider
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, HomePackageSlider $homePackageSlider)
+    public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_package_slider_delete')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -78,9 +84,11 @@ class HomePackageSliderPolicy
      * @param  \App\Models\HomePackageSlider  $homePackageSlider
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, HomePackageSlider $homePackageSlider)
+    public function restore(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_package_slider_restore')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -90,8 +98,10 @@ class HomePackageSliderPolicy
      * @param  \App\Models\HomePackageSlider  $homePackageSlider
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, HomePackageSlider $homePackageSlider)
+    public function forceDelete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_package_slider_forceDelete')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 }

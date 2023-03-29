@@ -44,7 +44,9 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'role_add')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -54,9 +56,11 @@ class RolePolicy
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Role $role)
+    public function update(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'role_edit')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -66,9 +70,11 @@ class RolePolicy
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'role_delete')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -78,9 +84,11 @@ class RolePolicy
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Role $role)
+    public function restore(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'role_restore')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -90,8 +98,10 @@ class RolePolicy
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Role $role)
+    public function forceDelete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'role_forceDelete')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 }

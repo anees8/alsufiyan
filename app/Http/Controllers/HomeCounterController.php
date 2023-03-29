@@ -17,11 +17,11 @@ class HomeCounterController extends Controller
     public function index(Request $request)
     {
 
-        $data['counter']= HomeCounter::orderBy('id', 'ASC')->limit(4)->get();
+        $data['counter'] = HomeCounter::orderBy('id', 'ASC')->limit(4)->get();
         if ($request->has('permission')) {
-        $this->authorizeForUser($request->user('api'), 'view', HomeCounter::class);
+            $this->authorizeForUser($request->user('api'), 'view', HomeCounter::class);
         }
-        return $this->sendResponse($data, 'Home Counter return successfully.',Response::HTTP_OK);    
+        return $this->sendResponse($data, 'Home Counter return successfully.', Response::HTTP_OK);
     }
 
     /**
@@ -31,6 +31,7 @@ class HomeCounterController extends Controller
      */
     public function create()
     {
+        $this->authorizeForUser($request->user('api'), 'create', HomeCounter::class);
         //
     }
 
@@ -42,6 +43,7 @@ class HomeCounterController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'create', HomeCounter::class);
         //
     }
 
@@ -54,6 +56,7 @@ class HomeCounterController extends Controller
     public function show(HomeCounter $homecounter)
     {
         //
+        $this->authorizeForUser($request->user('api'), 'update', HomeCounter::class);
     }
 
     /**
@@ -65,6 +68,7 @@ class HomeCounterController extends Controller
     public function edit(HomeCounter $homecounter)
     {
         //
+        $this->authorizeForUser($request->user('api'), 'update', HomeCounter::class);
     }
 
     /**
@@ -76,20 +80,19 @@ class HomeCounterController extends Controller
      */
     public function update(Request $request, HomeCounter $homecounter)
     {
-       
+        $this->authorizeForUser($request->user('api'), 'update', HomeCounter::class);
         $validator = Validator::make($request->all(), [
-           
-            'counter'=> 'required|numeric|min:1',            
+
+            'counter' => 'required|numeric|min:1',
         ]);
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);
         }
-     
-       
-         $homecounter->counter=$request->counter;
-        
+
+        $homecounter->counter = $request->counter;
+
         $homecounter->update();
-        return $this->sendResponse('Home Counter Updated Successfully.',Response::HTTP_OK);
+        return $this->sendResponse('Home Counter Updated Successfully.', Response::HTTP_OK);
 
     }
 
@@ -99,8 +102,25 @@ class HomeCounterController extends Controller
      * @param  \App\Models\HomeCounter  $homecounter
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(HomeCounter $homecounter)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'delete', HomeCounter::class);
+        $homecounter->delete();
+        return $this->sendResponse('Contact Counter Recycle  Successfully.', Response::HTTP_OK);
+    }
+
+    public function restore(HomeCounter $homecounter)
+    {
+        $this->authorizeForUser($request->user('api'), 'restore', HomeCounter::class);
+        $homecounter->restore();
+        return $this->sendResponse('Contact Counter Restore Successfully.', Response::HTTP_OK);
+    }
+
+    public function forcedelete(HomeCounter $homecounter)
+    {
+        $this->authorizeForUser($request->user('api'), 'forceDelete', HomeCounter::class);
+        $homecounter->forceDelete();
+        return $this->sendResponse('Contact Counter Deleted Successfully.', Response::HTTP_OK);
     }
 }

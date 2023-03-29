@@ -44,7 +44,9 @@ class HomeCounterPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_counter_add')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -54,9 +56,11 @@ class HomeCounterPolicy
      * @param  \App\Models\HomeCounter  $homeCounter
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, HomeCounter $homeCounter)
+    public function update(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_counter_edit')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -66,9 +70,11 @@ class HomeCounterPolicy
      * @param  \App\Models\HomeCounter  $homeCounter
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, HomeCounter $homeCounter)
+    public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_counter_delete')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -78,9 +84,11 @@ class HomeCounterPolicy
      * @param  \App\Models\HomeCounter  $homeCounter
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, HomeCounter $homeCounter)
+    public function restore(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_counter_restore')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -90,8 +98,10 @@ class HomeCounterPolicy
      * @param  \App\Models\HomeCounter  $homeCounter
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, HomeCounter $homeCounter)
+    public function forceDelete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_counter_forceDelete')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 }

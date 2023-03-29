@@ -359,43 +359,249 @@ class DatabaseSeeder extends Seeder
                         'id'    => 25,
                         'name'  => 'Sliders List',
                         'slug'  => 'home_slider_view',
-                      
                       ],
+
                       [
                         'id'    => 26,
+                        'name'  => 'Slider Add',
+                        'slug'  => 'home_slider_add',
+                      ],
+                      [
+                        'id'    => 27,
+                        'name'  => 'Slider Edit',
+                        'slug'  => 'home_slider_edit',
+                      ],
+                      [
+                        'id'    => 28,
+                        'name'  => 'Slider Delete',
+                        'slug'  => 'home_slider_delete',
+                      ],
+                      [
+                        'id'    => 29,
+                        'name'  => 'Slider Restore',
+                        'slug'  => 'home_slider_restore',
+                      ],
+                      [
+                        'id'    => 30,
+                        'name'  => 'Slider Force Delete',
+                        'slug'  => 'home_slider_forceDelete',
+                      ],
+
+                      [
+                        'id'    => 31,
                         'name'  => 'Packages List',
                         'slug'  => 'home_package_slider_view',
                       
                       ],
                       [
-                        'id'    => 27,
+                        'id'    => 32,
+                        'name'  => 'Package Add',
+                        'slug'  => 'home_package_slider_add',
+                      
+                      ],
+                      [
+                        'id'    => 33,
+                        'name'  => 'Package Edit',
+                        'slug'  => 'home_package_slider_edit',
+                      
+                      ],
+                      [
+                        'id'    => 34,
+                        'name'  => 'Package Delete',
+                        'slug'  => 'home_package_slider_delete',
+                      
+                      ],
+                      [
+                        'id'    => 35,
+                        'name'  => 'Package Restore',
+                        'slug'  => 'home_package_slider_restore',
+                      
+                      ],
+                      [
+                        'id'    => 36,
+                        'name'  => 'Package Force Delete',
+                        'slug'  => 'home_package_slider_forceDelete',
+                      
+                      ],
+                      [
+                        'id'    => 37,
                         'name'  => 'Counters List',
                         'slug'  => 'home_counter_view',
                       
                       ],
                       [
-                        'id'    => 28,
+                        'id'    => 38,
+                        'name'  => 'Counter Add',
+                        'slug'  => 'home_counter_add',
+                      
+                      ],
+                      [
+                        'id'    => 39,
+                        'name'  => 'Counter Edit',
+                        'slug'  => 'home_counter_edit',
+                      
+                      ],
+                      [
+                        'id'    => 40,
+                        'name'  => 'Counter Delete',
+                        'slug'  => 'home_counter_delete',
+                      
+                      ],
+                      [
+                        'id'    => 41,
+                        'name'  => 'Counter Restore',
+                        'slug'  => 'home_counter_restore',
+                      
+                      ],
+                      [
+                        'id'    => 42,
+                        'name'  => 'Counter Force Delete',
+                        'slug'  => 'home_counter_forceDelete',
+                      
+                      ],
+                      [
+                        'id'    => 43,
                         'name'  => 'Contacts List',
                         'slug'  => 'contacts_view',
                       
                       ],
                       [
-                        'id'    => 29,
+                        'id'    => 44,
+                        'name'  => 'Contact Add',
+                        'slug'  => 'contacts_add',
+                      
+                      ],
+                      [
+                        'id'    => 45,
+                        'name'  => 'Contact Edit',
+                        'slug'  => 'contacts_edit',
+                      
+                      ],
+                      [
+                        'id'    => 46,
+                        'name'  => 'Contact Delete',
+                        'slug'  => 'contacts_delete',
+                      
+                      ],
+                      [
+                        'id'    => 47,
+                        'name'  => 'Contact Restore',
+                        'slug'  => 'contacts_restore',
+                      
+                      ],
+                      [
+                        'id'    => 48,
+                        'name'  => 'Contact Force Delete',
+                        'slug'  => 'contacts_forceDelete',
+                      
+                      ],
+                      [
+                        'id'    => 49,
                         'name'  => 'Contacts Subject List',
                         'slug'  => 'contact_subject_view',
                       
                       ],
                       [
-                        'id'    => 30,
+                        'id'    => 50,
+                        'name'  => 'Contacts Subject Add',
+                        'slug'  => 'contact_subject_add',
+                      
+                      ],
+                      [
+                        'id'    => 51,
+                        'name'  => 'Contacts Subject Edit',
+                        'slug'  => 'contact_subject_edit',
+                      
+                      ],
+                      [
+                        'id'    => 52,
+                        'name'  => 'Contacts Subject Delete',
+                        'slug'  => 'contact_subject_delete',
+                      
+                      ],
+                      [
+                        'id'    => 53,
+                        'name'  => 'Contacts Subject Restore',
+                        'slug'  => 'contact_subject_restore',
+                      
+                      ],
+                      [
+                        'id'    => 54,
+                        'name'  => 'Contacts Subject Force Delete',
+                        'slug'  => 'contact_subject_forceDelete',
+                      
+                      ],
+                      [
+                        'id'    => 55,
                         'name'  => 'Roles List',
                         'slug'  => 'role_view',
                       
                       ],
+                      [
+                        'id'    => 56,
+                        'name'  => 'Roles Add',
+                        'slug'  => 'role_add',
+                      
+                      ],
+                      [
+                        'id'    => 57,
+                        'name'  => 'Roles Edit',
+                        'slug'  => 'role_edit',
+                      
+                      ],
+                      [
+                        'id'    => 58,
+                        'name'  => 'Roles Delete',
+                        'slug'  => 'role_delete',
+                      
+                      ],
+                      [
+                        'id'    => 59,
+                        'name'  => 'Roles Restore',
+                        'slug'  => 'role_restore',
+                      
+                      ],
+                      [
+                        'id'    => 60,
+                        'name'  => 'Roles Force Delete',
+                        'slug'  => 'role_forceDelete',
+                      
+                      ],
 
                       [
-                        'id'    => 31,
+                        'id'    => 61,
                         'name'  => 'Permissions List',
                         'slug'  => 'permission_view',
+                      
+                      ],
+                      [
+                        'id'    => 62,
+                        'name'  => 'Permissions Add',
+                        'slug'  => 'permission_add',
+                      
+                      ],
+                      [
+                        'id'    => 63,
+                        'name'  => 'Permissions Edit',
+                        'slug'  => 'permission_edit',
+                      
+                      ],
+                      [
+                        'id'    => 64,
+                        'name'  => 'Permissions Delete',
+                        'slug'  => 'permission_delete',
+                      
+                      ],
+                      [
+                        'id'    => 65,
+                        'name'  => 'Permissions Restore',
+                        'slug'  => 'permission_restore',
+                      
+                      ],
+                      [
+                        'id'    => 66,
+                        'name'  => 'Permissions Force Delete',
+                        'slug'  => 'permission_forceDelete',
                       
                       ],
 
@@ -418,45 +624,13 @@ class DatabaseSeeder extends Seeder
                       );
 
                   
+                  for ($i = 1; $i <= 66; $i++) {
+                  DB::table('roles_permissions')->insert([
+                  'role_id' => 1,
+                  'permission_id' => $i,
+                  ]);                             
+                  }
 
-                  DB::table('roles_permissions')->insert(
-                    array(
-                      [
-                        'role_id' => 1,
-                        'permission_id' => 1,
-                        
-                      ],
-                      [
-                        'role_id'       => 1,
-                        'permission_id' => 2,
-                      ],
-                      [
-                        'role_id'       => 1,
-                        'permission_id' => 3,
-                      ],
-                      [
-                        'role_id'       => 1,
-                        'permission_id' => 4,
-                      ],
-                      [
-                        'role_id'       => 1,
-                        'permission_id' => 5,
-                      ],
-                      [
-                        'role_id'       => 1,
-                        'permission_id' => 6,
-                      ],
-                      [
-                        'role_id'       => 1,
-                        'permission_id' => 15,
-                      ],
-                      [
-                        'role_id'       => 1,
-                        'permission_id' => 30,
-                      ],
-                      
-                      ) );                             
 
-          
-            }
+                }
 }

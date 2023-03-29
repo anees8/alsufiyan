@@ -1,34 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\ContactSubject;
+
 use App\Models\Contact;
+use App\Models\ContactSubject;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
 
+class ContactSubjectController extends Controller
+{
 
-class ContactSubjectController extends Controller{
-   
-    
-public function index(Request $request){
-        if($request->perPage){
+    public function index(Request $request)
+    {
+        if ($request->perPage) {
 
             $subject = ContactSubject::orderBy('id', 'DESC');
 
-        if ($request->has('with_deleted')) {
-            $this->authorizeForUser($request->user('api'), 'view', ContactSubject::class);
-            
-        $subject = $subject->withTrashed();
-        }
+            if ($request->has('with_deleted')) {
+                $this->authorizeForUser($request->user('api'), 'view', ContactSubject::class);
 
-        $data['subject']=  $subject->Paginate($request->perPage); 
+                $subject = $subject->withTrashed();
+            }
 
-        }else{
-        $data['subject']=ContactSubject::select('id as value', 'subject as text')->orderBy('id', 'DESC')->get();
+            $data['subject'] = $subject->Paginate($request->perPage);
+        } else {
+            $data['subject'] = ContactSubject::select('id as value', 'subject as text')->orderBy('id', 'DESC')->get();
         }
-        return $this->sendResponse($data, 'Subject return successfully.',Response::HTTP_OK);    
-        }
+        return $this->sendResponse($data, 'Subject return successfully.', Response::HTTP_OK);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -36,8 +36,11 @@ public function index(Request $request){
      * @return \Illuminate\Http\Response
      */
 
-public function create(){
-    //
+    public function create()
+    {
+
+        $this->authorizeForUser($request->user('api'), 'create', ContactSubject::class);
+        //
     }
 
     /**
@@ -47,26 +50,26 @@ public function create(){
      * @return \Illuminate\Http\Response
      */
 
-public function store(Request $request){
+    public function store(Request $request)
+    {
+        $this->authorizeForUser($request->user('api'), 'create', ContactSubject::class);
         $validator = Validator::make($request->all(), [
-        'subject'=> 'bail|required|min:3|max:50',
+            'subject' => 'bail|required|min:3|max:50',
         ]);
-        if($validator->fails()){
-        return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);
         }
 
         $contactsubject = new ContactSubject;
-        if($request->has('subject')){
-        $contactsubject->subject = $request->subject;
-
-        }       
+        if ($request->has('subject')) {
+            $contactsubject->subject = $request->subject;
+        }
         $contactsubject->save();
 
-        $success['contactsubject'] =  $contactsubject ;
+        $success['contactsubject'] = $contactsubject;
 
-        return $this->sendResponse($success, 'Contact Subject Added Successfully.',Response::HTTP_CREATED);
-
-        }
+        return $this->sendResponse($success, 'Contact Subject Added Successfully.', Response::HTTP_CREATED);
+    }
 
     /**
      * Display the specified resource.
@@ -74,8 +77,9 @@ public function store(Request $request){
      * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-public function show(ContactSubject $contactsubject){
-        //
+    public function show(ContactSubject $contactsubject)
+    {
+        $this->authorizeForUser($request->user('api'), 'update', ContactSubject::class);
     }
 
     /**
@@ -85,9 +89,9 @@ public function show(ContactSubject $contactsubject){
      * @return \Illuminate\Http\Response
      */
 
-
-public function edit(ContactSubject $contactsubject){
-        //
+    public function edit(ContactSubject $contactsubject)
+    {
+        $this->authorizeForUser($request->user('api'), 'update', ContactSubject::class);
     }
 
     /**
@@ -98,21 +102,20 @@ public function edit(ContactSubject $contactsubject){
      * @return \Illuminate\Http\Response
      */
 
-public function update(Request $request, ContactSubject $contactsubject){
-       
-        $validator = Validator::make($request->all(), [
-            'subject'=> 'bail|required|min:3|max:50',
-        ]);
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
-        }
+    public function update(Request $request, ContactSubject $contactsubject)
+    {
+        $this->authorizeForUser($request->user('api'), 'update', ContactSubject::class);
 
+        $validator = Validator::make($request->all(), [
+            'subject' => 'bail|required|min:3|max:50',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
 
         $contactsubject->subject = $request->subject;
         $contactsubject->update();
-        return $this->sendResponse('Contact Subject Updated Successfully.',Response::HTTP_OK);
-
-
+        return $this->sendResponse('Contact Subject Updated Successfully.', Response::HTTP_OK);
     }
 
     /**
@@ -122,20 +125,24 @@ public function update(Request $request, ContactSubject $contactsubject){
      * @return \Illuminate\Http\Response
      */
 
-public function destroy(ContactSubject $contactsubject){
-    $contactsubject->delete();
-    return $this->sendResponse('Contact Subject Recycle  Successfully.',Response::HTTP_OK);
+    public function destroy(ContactSubject $contactsubject)
+    {
+        $this->authorizeForUser($request->user('api'), 'delete', ContactSubject::class);
+        $contactsubject->delete();
+        return $this->sendResponse('Contact Subject Recycle  Successfully.', Response::HTTP_OK);
     }
-    
-public function restore(ContactSubject $contactsubject){
+
+    public function restore(ContactSubject $contactsubject)
+    {
+        $this->authorizeForUser($request->user('api'), 'restore', ContactSubject::class);
         $contactsubject->restore();
-        return $this->sendResponse('Contact Subject Restore Successfully.',Response::HTTP_OK);
+        return $this->sendResponse('Contact Subject Restore Successfully.', Response::HTTP_OK);
     }
 
-public function forcedelete(ContactSubject $contactsubject){
-        
+    public function forcedelete(ContactSubject $contactsubject)
+    {
+        $this->authorizeForUser($request->user('api'), 'forceDelete', ContactSubject::class);
         $contactsubject->forceDelete();
-        return $this->sendResponse('Contact Subject Deleted Successfully.',Response::HTTP_OK);
-
+        return $this->sendResponse('Contact Subject Deleted Successfully.', Response::HTTP_OK);
     }
 }

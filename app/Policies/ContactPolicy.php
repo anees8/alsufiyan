@@ -44,7 +44,8 @@ class ContactPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_add')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -54,9 +55,11 @@ class ContactPolicy
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Contact $contact)
+    public function update(User $user)
     {
-        //
+        
+        $permission = Permission::where('slug', 'contact_edit')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -66,9 +69,10 @@ class ContactPolicy
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Contact $contact)
+    public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_delete')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -78,9 +82,10 @@ class ContactPolicy
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Contact $contact)
+    public function restore(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_restore')->first();
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -90,8 +95,9 @@ class ContactPolicy
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Contact $contact)
+    public function forceDelete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'contact_forceDelete')->first();
+        return $user->hasRole($permission->roles);
     }
 }

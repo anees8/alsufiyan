@@ -41,6 +41,7 @@ public function index(Request $request){
      */
 public function create()
     {
+        $this->authorizeForUser($request->user('api'), 'create', HomePackageSlider::class);
         //
     }
 
@@ -52,6 +53,8 @@ public function create()
      */
 public function store(Request $request)
     {
+
+        $this->authorizeForUser($request->user('api'), 'create', HomePackageSlider::class);
         $validator = Validator::make($request->all(), [
            
             'image' => 'bail|required_without:url|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -116,6 +119,7 @@ public function store(Request $request)
      */
 public function show(HomePackageSlider $homepackageslider)
     {
+        $this->authorizeForUser($request->user('api'), 'update', HomePackageSlider::class);
         //
     }
 
@@ -127,6 +131,7 @@ public function show(HomePackageSlider $homepackageslider)
      */
 public function edit(HomePackageSlider $homepackageslider)
     {
+        $this->authorizeForUser($request->user('api'), 'update', HomePackageSlider::class);
         //
     }
 
@@ -139,6 +144,7 @@ public function edit(HomePackageSlider $homepackageslider)
      */
 public function update(Request $request, HomePackageSlider $homepackageslider)
     {
+        $this->authorizeForUser($request->user('api'), 'update', HomePackageSlider::class);
         $validator = Validator::make($request->all(), [
             'image' => 'bail|image|mimes:jpeg,png,jpg,gif|max:2048',
             'url'=> 'bail|url',
@@ -195,17 +201,20 @@ public function update(Request $request, HomePackageSlider $homepackageslider)
      * @return \Illuminate\Http\Response
      */
 public function destroy(HomePackageSlider $homepackageslider){
+    $this->authorizeForUser($request->user('api'), 'delete', HomePackageSlider::class);
     $homepackageslider->delete();
     return $this->sendResponse('Home Package Recycle Successfully.',Response::HTTP_OK);
  }
 
 public function restore(HomePackageSlider $homepackageslider){
+    $this->authorizeForUser($request->user('api'), 'restore', HomePackageSlider::class);
+
     $homepackageslider->restore();
     return $this->sendResponse('Home Package Restore Successfully.',Response::HTTP_OK);
  }
 
 public function forcedelete(HomePackageSlider $homepackageslider){
-        
+    $this->authorizeForUser($request->user('api'), 'forceDelete', HomePackageSlider::class);
         if (File::exists(public_path($homepackageslider->image))) {
             unlink(public_path($homepackageslider->image));
             }
