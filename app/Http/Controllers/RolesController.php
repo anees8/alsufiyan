@@ -32,6 +32,7 @@ class RolesController extends Controller
     public function create()
     {
         //
+        $this->authorizeForUser($request->user('api'),'create', Role::class);
     }
 
     /**
@@ -42,6 +43,8 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->authorizeForUser($request->user('api'),'create', Role::class);
 
         $validator = Validator::make($request->all(), [
             'role_name'=>'bail|required|min:3|max:15',
@@ -77,6 +80,7 @@ class RolesController extends Controller
      */
     public function show(Role $role){
 
+     $this->authorizeForUser($request->user('api'),'view', Role::class);
      $data['role']=$role->load('permissions');
      return $this->sendResponse($data, 'Role return successfully.',Response::HTTP_OK);
     }
@@ -89,6 +93,7 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
+        $this->authorizeForUser($request->user('api'),'update', Role::class);
         
     }
 
@@ -102,6 +107,7 @@ class RolesController extends Controller
     public function update(Request $request, Role $role)
     {
       
+        $this->authorizeForUser($request->user('api'),'update', Role::class);
         $validator = Validator::make($request->all(), [
             'role_name'=>'bail|required|min:3|max:15',
             'permission.*'=>'bail|required|numeric',
@@ -130,6 +136,7 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
+        $this->authorizeForUser($request->user('api'),'delete', Role::class);
         $role->permissions()->detach();
         $role->delete();
         return $this->sendResponse('Role deleted Successfully.',Response::HTTP_OK);

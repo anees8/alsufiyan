@@ -56,7 +56,7 @@ class HomeCounterController extends Controller
     public function show(HomeCounter $homecounter)
     {
         //
-        $this->authorizeForUser($request->user('api'), 'update', HomeCounter::class);
+        $this->authorizeForUser($request->user('api'), 'view', HomeCounter::class);
     }
 
     /**

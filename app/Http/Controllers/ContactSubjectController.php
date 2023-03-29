@@ -79,7 +79,7 @@ class ContactSubjectController extends Controller
      */
     public function show(ContactSubject $contactsubject)
     {
-        $this->authorizeForUser($request->user('api'), 'update', ContactSubject::class);
+        $this->authorizeForUser($request->user('api'), 'view', ContactSubject::class);
     }
 
     /**

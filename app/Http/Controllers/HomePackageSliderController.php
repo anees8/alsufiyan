@@ -119,7 +119,7 @@ public function store(Request $request)
      */
 public function show(HomePackageSlider $homepackageslider)
     {
-        $this->authorizeForUser($request->user('api'), 'update', HomePackageSlider::class);
+        $this->authorizeForUser($request->user('api'), 'view', HomePackageSlider::class);
         //
     }
 

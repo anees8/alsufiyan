@@ -101,7 +101,7 @@ public function store(Request $request){
 public function show(HomeSlider $homeslider)
     {
         //
-        $this->authorizeForUser($request->user('api'), 'update', HomeSlider::class);
+        $this->authorizeForUser($request->user('api'), 'view', HomeSlider::class);
     }
 
     /**
