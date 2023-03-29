@@ -80,7 +80,7 @@ class RolesController extends Controller
      */
     public function show(Role $role){
 
-     $this->authorizeForUser($request->user('api'),'view', Role::class);
+     
      $data['role']=$role->load('permissions');
      return $this->sendResponse($data, 'Role return successfully.',Response::HTTP_OK);
     }
