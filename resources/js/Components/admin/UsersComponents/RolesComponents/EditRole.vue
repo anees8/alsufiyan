@@ -1,6 +1,23 @@
 <template>
   <b-row>
     <b-card>
+      <b-row>
+        <b-col cols="12" class="d-flex mb-3">
+          <router-link class="nav-link" @click="$router.go(-1)" to=""
+            ><font-awesome-icon icon="fa-solid fa-arrow-left" class="me-2"
+          /></router-link>
+
+          <b-breadcrumb class="ms-2">
+            <b-breadcrumb-item class="nav-link" :to="{ name: 'Dashboard' }">
+              Home</b-breadcrumb-item
+            >
+            <b-breadcrumb-item class="nav-link" :to="{ name: 'AdminUserRoles' }">
+              Roles</b-breadcrumb-item
+            >
+            <b-breadcrumb-item active>Role Details</b-breadcrumb-item>
+          </b-breadcrumb>
+        </b-col>
+      </b-row>
       <b-form @submit="onPermissionSubmit">
         <b-form-group id="input-group-1" label="Role Name:" label-for="input-1">
           <b-form-input
@@ -28,15 +45,16 @@
 
           <template v-slot="{ ariaDescribedby }">
             <b-form-checkbox-group
-              id="flavors"
+              id="permission"
               v-model="selected"
               :options="permissions"
               :aria-describedby="ariaDescribedby"
-              name="flavors"
+              name="permission"
               switches
             ></b-form-checkbox-group>
           </template>
         </b-form-group>
+
         <b-button type="submit" variant="outline-primary">Permission Update</b-button>
       </b-form>
     </b-card></b-row
@@ -51,13 +69,23 @@ const props = defineProps({
   id: Number,
 });
 
-const { role, permissions, selected, allSelected, indeterminate } = storeToRefs(
-  useRolesStore()
-);
-const { getRole, getallPermission, toggleAll, onPermissionSubmit } = useRolesStore();
+const {
+  role,
+  permissions,
+  selected,
+  allSelected,
+  indeterminate,
+  badgeVarients,
+} = storeToRefs(useRolesStore());
+const {
+  getRole,
+  getallPermission,
+  toggleAll,
+  onPermissionSubmit,
+  resetRole,
+} = useRolesStore();
 getallPermission();
-getRole(props.id);
-
+props.id ? getRole(props.id) : resetRole();
 watch(selected, (newValue, oldValue) => {
   if (newValue.length === 0) {
     roleStore.indeterminate = false;

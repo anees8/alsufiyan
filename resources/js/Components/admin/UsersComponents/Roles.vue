@@ -5,9 +5,17 @@
         <b-row align-v="center">
           <b-col><h5>Roles List</h5></b-col>
           <b-col>
-            <b-button class="float-end" pill variant="outline-dark">
-              <font-awesome-icon icon="plus" class="me-2" />Add Role</b-button
+            <router-link
+              class="btn btn-outline-dark rounded-pill float-end"
+              v-bind:to="{ name: 'AdminUserRolesEdit' }"
+              pill
             >
+              <font-awesome-icon icon="plus" class="me-2" />Add Role</router-link
+            >
+
+            <!-- <b-button class="float-end" pill variant="outline-dark">
+              <font-awesome-icon icon="plus" class="me-2" />Add Role</b-button
+            > -->
           </b-col>
         </b-row>
       </b-col>

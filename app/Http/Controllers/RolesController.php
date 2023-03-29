@@ -43,20 +43,26 @@ class RolesController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'role'=> 'bail|required|min:3|max:15',
-            ]);
-            if($validator->fails()){
+            'role_name'=>'bail|required|min:3|max:15',
+            'permission.*'=>'bail|required|numeric',
+        
+        ]);
+
+       
+        if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
-            }
+        }
+
     
-            $role = new Role;
-            if($request->has('role')){
-            $role->name =ucfirst($request->role);
-            $role->slug =Str::slug($request->role,'_');
-            }       
-            $role->save();
-    
-            $success['role'] =  $role ;
+                $role = new Role;
+                if($request->has('role_name')){
+                $role->name =ucfirst($request->role_name);
+                $role->slug =Str::slug($request->role_name,'_');
+                }                
+                $role->save();
+                $role->permissions()->attach($request->permission);
+
+                $success['role'] =  $role ;
     
             return $this->sendResponse($success, 'Role Added Successfully.',Response::HTTP_CREATED);
         
@@ -95,13 +101,23 @@ class RolesController extends Controller
     public function update(Request $request, Role $role)
     {
       
+        $validator = Validator::make($request->all(), [
+            'role_name'=>'bail|required|min:3|max:15',
+            'permission.*'=>'bail|required|numeric',
+        
+        ]);
+
+       
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
 
         if($request->has('role_name')){
         $role->name =ucfirst($request->role_name);
         $role->slug =Str::slug($request->role_name,'_');
-        }       
-        $role->permissions()->sync(explode(',',$request->permission));
+        }            
         $role->update();
+        $role->permissions()->sync($request->permission);
         return $this->sendResponse('Role Updated Successfully.',Response::HTTP_OK);
     }
 

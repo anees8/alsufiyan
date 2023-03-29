@@ -153,7 +153,7 @@ const routes = [
         },
     },    
     {
-        path: "/admin/users/roles/:id",
+        path: "/admin/users/role/:id?",
         name: "AdminUserRolesEdit",
         component: ()=>import('./Components/admin/UsersComponents/RolesComponents/EditRole.vue'),
         props: (route) => ({
