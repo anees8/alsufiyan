@@ -2,12 +2,12 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import router from "../../../router.js";
 
-export const useRolesStore = defineStore("rolesStore", {
+export const useUsersRolesStore = defineStore("usersroleStore", {
     state: () => ({
         fields: [
             { key: "id" },
             { key: "name", thStyle: { width: "10%" } },
-            { key: "permissions" },
+            { key: "users" },
             { key: "actions", thStyle: { width: "8%" } },
         ],
         roles: [],
@@ -31,7 +31,7 @@ export const useRolesStore = defineStore("rolesStore", {
             // "dark",
         ],
         role: {},
-        permissions: [],
+        users: [],
         loading: false,
         selected: [],
         allSelected: false,
@@ -41,14 +41,14 @@ export const useRolesStore = defineStore("rolesStore", {
 
     actions: {
         toggleAll(checked) {
-            this.selected = checked ? this.permissions.map((a) => a.value) : [];
+            this.selected = checked ? this.users.map((a) => a.value) : [];
         },
         async getRolesPermission() {
             this.isBusy = true;
             try {
                 let url = "roles";
 
-                url += `?permissions`;
+                url += `?users`;
                 if (this.perPage) {
                     url += `&perPage=${this.perPage}`;
                 }
@@ -81,24 +81,22 @@ export const useRolesStore = defineStore("rolesStore", {
             try {
                 const response = await axios.get("roles/" + id);
                 this.role = response.data.data.role;
-                this.selected = response.data.data.role.permissions.map(
+                this.selected = response.data.data.role.users.map(
                     (a) => a.id
                 );
             } catch (error) {
                 this.role = {};
-                router.push({ name: "AdminRolesPermissions" });
+                router.push({ name: "AdminRolesUsers" });
             }
         },
 
-        async getallPermission() {
+        async getallUsers() {
             try {
-                let url = "permissions";
-
-                    
+                let url = "users";
+                    url += '?role_users';
                 const response = await axios.get(url);
-
-                this.permissions = response.data.data.permissions;
-              
+                this.users = response.data.data.users;
+                
             } catch (error) {
                 if (error.response.status === 403) {
                     router.push({ name: "NotAuthorize" });
@@ -141,7 +139,7 @@ export const useRolesStore = defineStore("rolesStore", {
             });
         },
 
-        async onPermissionSubmit() {
+        async onUsersSubmit() {
             const formData = new FormData();
             let config = {
                 header: {
@@ -156,14 +154,14 @@ export const useRolesStore = defineStore("rolesStore", {
             }
             if (this.selected) {
                 Object.keys(this.selected).forEach((e) => {
-                    formData.append(`permission[${e}]`, this.selected[e]);
+                    formData.append(`user[${e}]`, this.selected[e]);
                 });
             }
 
             if (!this.role.id) {
                 try {
                     const response = await axios.post(url, formData, config);
-                    router.push({ name: "AdminRolesPermissions" });
+                    router.push({ name: "AdminRolesUsers" });
                 } catch (error) {
                     if (error.response) {
                         if (error.response.status === 403) {
@@ -185,7 +183,7 @@ export const useRolesStore = defineStore("rolesStore", {
                         formData,
                         config
                     );
-                    router.push({ name: "AdminRolesPermissions" });
+                    router.push({ name: "AdminRolesUsers" });
 
                    
                 } catch (error) {

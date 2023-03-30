@@ -21,12 +21,23 @@ class UsersController extends Controller
 
      public function index(Request $request){
        
-        $users = User::orderBy('id', 'DESC');
+     
         $this->authorizeForUser($request->user('api'), 'view', User::class);
-        if ($request->has('with_deleted')) {
-        $users = $users->withTrashed();
-        }
-        $data['users']=  $users->Paginate($request->perPage); 
+
+            if($request->has('role_users')){
+                $data['users']= User::select('*','id as value','name as text')->get();
+        
+
+            }else{
+            $users = User::orderBy('id', 'DESC');
+            if ($request->has('with_deleted')) {
+            $users = $users->with('roles')->withTrashed();
+            }
+            $data['users']=  $users->Paginate($request->perPage); 
+
+
+            }
+
         return $this->sendResponse($data, 'Users return successfully.',Response::HTTP_OK);
      }
 
@@ -114,7 +125,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Request $request, User $user)
     {
         //
     }
@@ -125,7 +136,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
       
 

@@ -3,11 +3,11 @@
     <b-card>
       <b-col>
         <b-row align-v="center">
-          <b-col><h5>Roles & Permissions List</h5></b-col>
+          <b-col><h5>Roles & Users List</h5></b-col>
           <b-col>
             <router-link
               class="btn btn-outline-dark rounded-pill float-end"
-              v-bind:to="{ name: 'AdminRolesPermissionsEdit' }"
+              v-bind:to="{ name: 'AdminRolesUserEdit' }"
               pill
             >
               <font-awesome-icon icon="plus" class="me-2" />Add Role</router-link
@@ -35,24 +35,21 @@
           responsive
           show-empty
         >
-          <template #cell(permissions)="data">
+          <template #cell(users)="data">
             <b-badge
-              v-for="(permission, index) in data.item.permissions"
+              v-for="(users, index) in data.item.users"
               :key="index"
               pill
               :variant="badgeVarients[Math.floor(Math.random() * badgeVarients.length)]"
               class="me-2"
-              >{{ permission.slug }}</b-badge
+              >{{ users.name }}</b-badge
             >
           </template>
 
           <template #cell(actions)="data">
             <router-link
               class="btn btn-outline-success rounded-circle p-2 me-2"
-              v-bind:to="{
-                name: 'AdminRolesPermissionsEdit',
-                params: { id: data.item.id },
-              }"
+              v-bind:to="{ name: 'AdminRolesUserEdit', params: { id: data.item.id } }"
               ><font-awesome-icon icon="pen"
             /></router-link>
 
@@ -92,10 +89,10 @@
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
-import { useRolesStore } from "../../../stores/admin/UsersComponents/rolesStore.js";
+import { useUsersRolesStore } from "../../../stores/admin/UsersComponents/usersroleStore.js";
 const { roles, fields, isBusy, perPage, currentPage, rows, badgeVarients } = storeToRefs(
-  useRolesStore()
+  useUsersRolesStore()
 );
-const { getRolesPermission, setPerPage, deleteRoles } = useRolesStore();
+const { getRolesPermission, setPerPage, deleteRoles } = useUsersRolesStore();
 getRolesPermission();
 </script>

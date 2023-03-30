@@ -119,6 +119,16 @@
           show-empty
         >
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
+
+          <template #cell(roles)="data">
+            <b-badge
+              v-for="(roles, index) in data.item.roles"
+              :key="index"
+              pill
+              class="me-2"
+              >{{ roles.name }}</b-badge
+            >
+          </template>
           <template #cell(actions)="data">
             <!--  -->
             <b-button
@@ -209,7 +219,7 @@ const {
   recycleUser,
   deleteUser,
   restoreUser,
-  resetForm,
+
   hideModel,
 } = useUsersStore();
 

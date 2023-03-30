@@ -38,7 +38,7 @@ public function index(Request $request){
      *
      * @return \Illuminate\Http\Response
      */
-public function create()
+public function create(Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'create', HomeSlider::class);
         //
@@ -98,7 +98,7 @@ public function store(Request $request){
      * @param  \App\Models\HomeSlider  $homeslider
      * @return \Illuminate\Http\Response
      */
-public function show(HomeSlider $homeslider)
+public function show(Request $request, HomeSlider $homeslider)
     {
         //
         $this->authorizeForUser($request->user('api'), 'view', HomeSlider::class);
@@ -110,7 +110,7 @@ public function show(HomeSlider $homeslider)
      * @param  \App\Models\HomeSlider  $homeslider
      * @return \Illuminate\Http\Response
      */
-public function edit(HomeSlider $homeslider)
+public function edit(Request $request, HomeSlider $homeslider)
     {
         $this->authorizeForUser($request->user('api'), 'update', HomeSlider::class);
         //
@@ -166,19 +166,19 @@ public function update(Request $request, HomeSlider $homeslider){
      * @param  \App\Models\HomeSlider  $homeslider
      * @return \Illuminate\Http\Response
      */
-public function destroy(HomeSlider $homeslider){
+public function destroy(Request $request, HomeSlider $homeslider){
     $this->authorizeForUser($request->user('api'), 'delete', HomeSlider::class);
         $homeslider->delete();
         return $this->sendResponse('Home Slider Recycle Successfully.',Response::HTTP_OK);
     }
 
-public function restore(HomeSlider $homeslider){  
+public function restore(Request $request, HomeSlider $homeslider){  
     $this->authorizeForUser($request->user('api'), 'restore', HomeSlider::class);  
         $homeslider->restore();
         return $this->sendResponse('Home Slider Restore Successfully.',Response::HTTP_OK);
     }
 
-public function forcedelete(HomeSlider $homeslider){
+public function forcedelete(Request $request, HomeSlider $homeslider){
     $this->authorizeForUser($request->user('api'), 'forceDelete', HomeSlider::class);
         
     if (File::exists(public_path($homeslider->image))) {

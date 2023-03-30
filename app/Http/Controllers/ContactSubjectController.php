@@ -36,7 +36,7 @@ class ContactSubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function create()
+    public function create(Request $request)
     {
 
         $this->authorizeForUser($request->user('api'), 'create', ContactSubject::class);
@@ -77,7 +77,7 @@ class ContactSubjectController extends Controller
      * @param  \App\Models\ContactSubject  $ContactSubject
      * @return \Illuminate\Http\Response
      */
-    public function show(ContactSubject $contactsubject)
+    public function show(Request $request, ContactSubject $contactsubject)
     {
         $this->authorizeForUser($request->user('api'), 'view', ContactSubject::class);
     }
@@ -89,7 +89,7 @@ class ContactSubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit(ContactSubject $contactsubject)
+    public function edit(Request $request, ContactSubject $contactsubject)
     {
         $this->authorizeForUser($request->user('api'), 'update', ContactSubject::class);
     }
@@ -125,21 +125,21 @@ class ContactSubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(ContactSubject $contactsubject)
+    public function destroy(Request $request, ContactSubject $contactsubject)
     {
         $this->authorizeForUser($request->user('api'), 'delete', ContactSubject::class);
         $contactsubject->delete();
         return $this->sendResponse('Contact Subject Recycle  Successfully.', Response::HTTP_OK);
     }
 
-    public function restore(ContactSubject $contactsubject)
+    public function restore(Request $request, ContactSubject $contactsubject)
     {
         $this->authorizeForUser($request->user('api'), 'restore', ContactSubject::class);
         $contactsubject->restore();
         return $this->sendResponse('Contact Subject Restore Successfully.', Response::HTTP_OK);
     }
 
-    public function forcedelete(ContactSubject $contactsubject)
+    public function forcedelete(Request $request, ContactSubject $contactsubject)
     {
         $this->authorizeForUser($request->user('api'), 'forceDelete', ContactSubject::class);
         $contactsubject->forceDelete();

@@ -34,7 +34,7 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'create', Contact::class);
     }
@@ -87,7 +87,7 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact)
+    public function show(Request $request, Contact $contact)
     {
         $this->authorizeForUser($request->user('api'), 'view', Contact::class);
     }
@@ -98,7 +98,7 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contact $contact)
+    public function edit(Request $request, Contact $contact)
     {
         $this->authorizeForUser($request->user('api'), 'update', Contact::class);
     }
@@ -121,7 +121,7 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy(Request $request, Contact $contact)
     {
         $this->authorizeForUser($request->user('api'), 'delete', Contact::class);
         $contact->delete();
@@ -129,7 +129,7 @@ class ContactController extends Controller
         return $this->sendResponse('Contact  Recycle Successfully.', Response::HTTP_OK);
     }
 
-    public function restore(Contact $contact)
+    public function restore(Request $request, Contact $contact)
     {
 
         $this->authorizeForUser($request->user('api'), 'restore', Contact::class);
@@ -137,7 +137,7 @@ class ContactController extends Controller
         return $this->sendResponse('Contact  Restored Successfully.', Response::HTTP_OK);
     }
 
-    public function forcedelete(Contact $contact)
+    public function forcedelete(Request $request, Contact $contact)
     {
         $this->authorizeForUser($request->user('api'), 'forcedelete', Contact::class);
 

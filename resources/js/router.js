@@ -145,16 +145,33 @@ const routes = [
         },
     },  
     {
-        path: "/admin/users/roles",
-        name: "AdminUserRoles",
+        path: "/admin/roles/users",
+        name: "AdminRolesUsers",
+        component: ()=>import('./Components/admin/UsersComponents/UserRoles.vue'),
+        meta: {
+            requireAuth: true,
+        },
+    }, 
+    {
+        path: "/admin/roles/permissions",
+        name: "AdminRolesPermissions",
         component: ()=>import('./Components/admin/UsersComponents/Roles.vue'),
+        meta: {
+            requireAuth: true,
+        },
+    },  
+    
+    {
+        path: "/admin/users/permissions",
+        name: "AdminUsersPermissions",
+        component: ()=>import('./Components/admin/UsersComponents/Permissions.vue'),
         meta: {
             requireAuth: true,
         },
     },    
     {
-        path: "/admin/users/role/:id?",
-        name: "AdminUserRolesEdit",
+        path: "/admin/roles/permission/:id?",
+        name: "AdminRolesPermissionsEdit",
         component: ()=>import('./Components/admin/UsersComponents/RolesComponents/EditRole.vue'),
         props: (route) => ({
             id: Number(route.params.id),
@@ -163,6 +180,17 @@ const routes = [
             requireAuth: true,
         },
     },    
+    {
+        path: "/admin/roles/user/:id?",
+        name: "AdminRolesUserEdit",
+        component: ()=>import('./Components/admin/UsersComponents/RolesComponents/EditRoleUser.vue'),
+        props: (route) => ({
+            id: Number(route.params.id),
+        }),
+        meta: {
+            requireAuth: true,
+        },
+    },  
     {
         path: "/admin/image",
         name: "AdminImage",

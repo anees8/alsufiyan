@@ -18,9 +18,25 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
+      
         $this->authorizeForUser($request->user('api'), 'view', Role::class);
-        $roles = Role::with('permissions');       
-        $data['roles']=  $roles->Paginate($request->perPage); 
+
+
+        if($request->has('permissions')){
+
+            $roles = Role::with('permissions');       
+            $data['roles']=  $roles->Paginate($request->perPage); 
+
+        }else if($request->has('users')){
+            $roles = Role::with('users');       
+            $data['roles']=  $roles->Paginate($request->perPage); 
+
+        }else{
+            $data['roles']=Role::select('*','id as value','name as text')->get();
+        }
+
+
+
         return $this->sendResponse($data, 'Roles return successfully.',Response::HTTP_OK);
     }
 
@@ -29,7 +45,7 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
         $this->authorizeForUser($request->user('api'),'create', Role::class);
@@ -47,7 +63,7 @@ class RolesController extends Controller
         $this->authorizeForUser($request->user('api'),'create', Role::class);
 
         $validator = Validator::make($request->all(), [
-            'role_name'=>'bail|required|min:3|max:15',
+            'role_name'=>'bail|required|min:3|max:255',
             'permission.*'=>'bail|required|numeric',
         
         ]);
@@ -64,7 +80,14 @@ class RolesController extends Controller
                 $role->slug =Str::slug($request->role_name,'_');
                 }                
                 $role->save();
+                if($request->has('permission')){
                 $role->permissions()->attach($request->permission);
+                }
+
+                if($request->has('user')){
+                    $role->users()->attach($request->user);
+                    }
+    
 
                 $success['role'] =  $role ;
     
@@ -78,10 +101,10 @@ class RolesController extends Controller
      * @param  int  Role $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role){
+    public function show(Request $request, Role $role){
 
      
-     $data['role']=$role->load('permissions');
+     $data['role']=$role->load('permissions','users');
      return $this->sendResponse($data, 'Role return successfully.',Response::HTTP_OK);
     }
 
@@ -91,7 +114,7 @@ class RolesController extends Controller
      * @param  int  Role $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Request $request, Role $role)
     {
         $this->authorizeForUser($request->user('api'),'update', Role::class);
         
@@ -109,7 +132,7 @@ class RolesController extends Controller
       
         $this->authorizeForUser($request->user('api'),'update', Role::class);
         $validator = Validator::make($request->all(), [
-            'role_name'=>'bail|required|min:3|max:15',
+            'role_name'=>'bail|required|min:3|max:255',
             'permission.*'=>'bail|required|numeric',
         
         ]);
@@ -124,7 +147,15 @@ class RolesController extends Controller
         $role->slug =Str::slug($request->role_name,'_');
         }            
         $role->update();
+
+
+        if($request->has('permission')){
         $role->permissions()->sync($request->permission);
+        }
+
+        if($request->has('user')){
+        $role->users()->sync($request->user);
+        }
         return $this->sendResponse('Role Updated Successfully.',Response::HTTP_OK);
     }
 
@@ -134,7 +165,7 @@ class RolesController extends Controller
      * @param  int  Role $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Request $request,Role $role)
     {
         $this->authorizeForUser($request->user('api'),'delete', Role::class);
         $role->permissions()->detach();

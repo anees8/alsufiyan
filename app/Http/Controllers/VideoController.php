@@ -35,7 +35,7 @@ public function index(Request $request){
      *
      * @return \Illuminate\Http\Response
      */
-public function create()
+public function create(Request $request)
     {
         //
     }
@@ -90,7 +90,7 @@ public function store(Request $request)
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-public function show(Video $video)
+public function show(Request $request, Video $video)
     {
         //
     }
@@ -101,7 +101,7 @@ public function show(Video $video)
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-public function edit(Video $video)
+public function edit(Request $request, Video $video)
     {
         //
     }
@@ -152,19 +152,19 @@ public function update(Request $request, Video $video)
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-public function destroy(Video $video){
+public function destroy(Request $request, Video $video){
     $this->authorizeForUser($request->user('api'), 'delete', Video::class);
     $video->delete();
     return $this->sendResponse('Video Recycle Successfully.',Response::HTTP_OK);
     }
 
-public function restore(Video $video){
+public function restore(Request $request, Video $video){
     $this->authorizeForUser($request->user('api'), 'restore', Video::class);
     $video->restore();
     return $this->sendResponse('Video Restore Successfully.',Response::HTTP_OK);
     }
 
-public function forcedelete(Video $video){
+public function forcedelete(Request $request, Video $video){
     $this->authorizeForUser($request->user('api'), 'forceDelete', Video::class);
     if (File::exists(public_path($video->video_url))) {
     unlink(public_path($video->video_url));

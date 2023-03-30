@@ -29,7 +29,7 @@ class HomeCounterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'create', HomeCounter::class);
         //
@@ -53,7 +53,7 @@ class HomeCounterController extends Controller
      * @param  \App\Models\HomeCounter  $homecounter
      * @return \Illuminate\Http\Response
      */
-    public function show(HomeCounter $homecounter)
+    public function show(Request $request, HomeCounter $homecounter)
     {
         //
         $this->authorizeForUser($request->user('api'), 'view', HomeCounter::class);
@@ -65,7 +65,7 @@ class HomeCounterController extends Controller
      * @param  \App\Models\HomeCounter  $homecounter
      * @return \Illuminate\Http\Response
      */
-    public function edit(HomeCounter $homecounter)
+    public function edit(Request $request, HomeCounter $homecounter)
     {
         //
         $this->authorizeForUser($request->user('api'), 'update', HomeCounter::class);
@@ -103,21 +103,21 @@ class HomeCounterController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(HomeCounter $homecounter)
+    public function destroy(Request $request, HomeCounter $homecounter)
     {
         $this->authorizeForUser($request->user('api'), 'delete', HomeCounter::class);
         $homecounter->delete();
         return $this->sendResponse('Contact Counter Recycle  Successfully.', Response::HTTP_OK);
     }
 
-    public function restore(HomeCounter $homecounter)
+    public function restore(Request $request, HomeCounter $homecounter)
     {
         $this->authorizeForUser($request->user('api'), 'restore', HomeCounter::class);
         $homecounter->restore();
         return $this->sendResponse('Contact Counter Restore Successfully.', Response::HTTP_OK);
     }
 
-    public function forcedelete(HomeCounter $homecounter)
+    public function forcedelete(Request $request, HomeCounter $homecounter)
     {
         $this->authorizeForUser($request->user('api'), 'forceDelete', HomeCounter::class);
         $homecounter->forceDelete();

@@ -57,6 +57,8 @@ import {
     
     faUsersGear,
     faPanorama,
+    faUserShield,
+    faFingerprint,
     } from "@fortawesome/free-solid-svg-icons";
 import {
     
@@ -78,6 +80,8 @@ import {
 } from "@fortawesome/vue-fontawesome";
 
 library.add(
+    faUserShield,
+    faFingerprint,
     faPanorama,
     faUsersGear,
     faRecycle,

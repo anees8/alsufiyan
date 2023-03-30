@@ -33,7 +33,8 @@ public function index(Request $request){
      *
      * @return \Illuminate\Http\Response
      */
-public function create(){
+public function create(Request $request){
+    $this->authorizeForUser($request->user('api'), 'store', Image::class);
         //
     }
 
@@ -88,7 +89,7 @@ public function store(Request $request){
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-public function show(Image $image){
+public function show(Request $request, Image $image){
         //
     }
 
@@ -98,7 +99,7 @@ public function show(Image $image){
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-public function edit(Image $image){
+public function edit(Request $request, Image $image){
         //
     }
 
@@ -145,20 +146,20 @@ public function update(Request $request,Image $image){
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-public function destroy(Image $image){
+public function destroy(Request $request, Image $image){
     $this->authorizeForUser($request->user('api'), 'delete', Image::class);
     $image->delete();
     return $this->sendResponse('Image Recycle Successfully.',Response::HTTP_OK);
     }
 
-public function restore(Image $image){
+public function restore(Request $request, Image $image){
 
     $this->authorizeForUser($request->user('api'), 'restore', Image::class);
     $image->restore();
     return $this->sendResponse('Image Restore Successfully.',Response::HTTP_OK);
     }
 
-public function forcedelete(Image $image){
+public function forcedelete(Request $request, Image $image){
     $this->authorizeForUser($request->user('api'), 'forceDelete', Image::class);
     if (File::exists(public_path($image->image_url))) {
     unlink(public_path($image->image_url));

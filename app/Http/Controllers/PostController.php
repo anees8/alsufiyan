@@ -38,7 +38,7 @@ public function index(Request $request){
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -93,7 +93,7 @@ public function index(Request $request){
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post  $post)
+    public function show(Request $request, Post  $post)
     {
         $this->authorizeForUser($request->user('api'), 'view', Post::class);
      
@@ -107,7 +107,7 @@ public function index(Request $request){
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Request $request, Post $post)
     {
         //
     }
@@ -158,7 +158,7 @@ public function index(Request $request){
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {    
         $this->authorizeForUser($request->user('api'), 'delete', Post::class);
         $post->delete();
@@ -166,13 +166,13 @@ public function index(Request $request){
     }
 
 
-    public function restore(Post $post){
+    public function restore(Request $request, Post $post){
         $this->authorizeForUser($request->user('api'), 'restore', Post::class);
         $post->restore();
         return $this->sendResponse('Post Restore Successfully.',Response::HTTP_OK);
     }
 
-public function forcedelete(Post $post){
+public function forcedelete(Request $request, Post $post){
     $this->authorizeForUser($request->user('api'), 'forceDelete', Post::class);
         if (File::exists(public_path($post->attachment))) {
         unlink(public_path($post->attachment));
