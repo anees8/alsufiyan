@@ -1,6 +1,6 @@
 <template>
   <div v-if="Loading">
-    <div class="bg-light">
+    <div class="bodybackground">
       <Navbar
         v-if="
           [

@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import router from "../../../router.js";
+import { useLoginStore } from "../loginStore.js";
 
+const {  refreshUserPermissions } = useLoginStore();
 export const useRolesStore = defineStore("rolesStore", {
     state: () => ({
         fields: [
@@ -206,6 +208,8 @@ export const useRolesStore = defineStore("rolesStore", {
                     }
                 }
             }
+            refreshUserPermissions();
+
         },
         resetRole() {
             this.role = {};

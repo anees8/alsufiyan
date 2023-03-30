@@ -22,5 +22,10 @@ export const useSettingStore = defineStore("settingStore", {
         ],
     }),
 
-    actions: {},
+    actions: {
+
+      
+
+
+    },
 });

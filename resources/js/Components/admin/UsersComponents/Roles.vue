@@ -6,6 +6,9 @@
           <b-col><h5>Roles & Permissions List</h5></b-col>
           <b-col>
             <router-link
+              v-if="
+                permissions.includes('role_add') && permissions.includes('permission_add')
+              "
               class="btn btn-outline-dark rounded-pill float-end"
               v-bind:to="{ name: 'AdminRolesPermissionsEdit' }"
               pill
@@ -48,6 +51,10 @@
 
           <template #cell(actions)="data">
             <router-link
+              v-if="
+                permissions.includes('permission_edit') &&
+                permissions.includes('role_edit')
+              "
               class="btn btn-outline-success rounded-circle p-2 me-2"
               v-bind:to="{
                 name: 'AdminRolesPermissionsEdit',
@@ -57,6 +64,10 @@
             /></router-link>
 
             <b-button
+              v-if="
+                permissions.includes('permission_delete') &&
+                permissions.includes('role_delete')
+              "
               class="rounded-circle p-2 me-2"
               @click="deleteRoles(data.item.id)"
               variant="outline-danger"
@@ -93,9 +104,11 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useRolesStore } from "../../../stores/admin/UsersComponents/rolesStore.js";
+import { useLoginStore } from "../../../stores/admin/loginStore";
 const { roles, fields, isBusy, perPage, currentPage, rows, badgeVarients } = storeToRefs(
   useRolesStore()
 );
+const { permissions } = storeToRefs(useLoginStore());
 const { getRolesPermission, setPerPage, deleteRoles } = useRolesStore();
 getRolesPermission();
 </script>

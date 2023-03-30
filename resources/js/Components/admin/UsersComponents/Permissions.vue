@@ -6,7 +6,9 @@
           <b-col><h5>Permissions List</h5></b-col>
           <b-col>
             <b-button
-              v-if="permissions.includes('permission_add')"
+              v-if="
+                permissions.includes('permission_add') && permissions.includes('role_add')
+              "
               @click="
                 modal = !modal;
                 getallRoles();
@@ -119,7 +121,10 @@
           <template #cell(actions)="data">
             <!--  -->
             <b-button
-              v-if="permissions.includes('permission_edit')"
+              v-if="
+                permissions.includes('permission_edit') &&
+                permissions.includes('role_edit')
+              "
               class="rounded-circle p-2 me-2"
               @click="editPermission(data.item.id)"
               variant="outline-success"
@@ -127,7 +132,10 @@
               <font-awesome-icon icon="pen" />
             </b-button>
             <b-button
-              v-if="permissions.includes('permission_delete')"
+              v-if="
+                permissions.includes('permission_delete') &&
+                permissions.includes('role_delete')
+              "
               class="rounded-circle p-2 me-2"
               @click="deletePermission(data.item.id)"
               variant="outline-danger"
