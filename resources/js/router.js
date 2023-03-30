@@ -105,6 +105,14 @@ const routes = [
         },
     },
     {
+        path: "/admin/setting",
+        name: "Setting",
+        component: ()=>import('./Components/admin/Setting.vue'),
+        meta: {
+            requireAuth: true,
+        },
+    },
+    {
         path: "/admin/about",
         name: "AdminAbout",
         component: ()=>import('./Components/admin/About.vue'),

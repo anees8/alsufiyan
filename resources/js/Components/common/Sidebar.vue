@@ -170,6 +170,12 @@ const menuTree = [
     ],
   },
   {
+    label: "Settings",
+    icon: "gear",
+    name: "Setting",
+    Permissions: "users_list",
+  },
+  {
     label: "Logout",
     icon: "right-from-bracket",
     name: "Logout",
