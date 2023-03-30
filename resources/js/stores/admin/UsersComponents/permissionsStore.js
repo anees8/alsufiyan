@@ -16,7 +16,7 @@ export const usePermissionsStore = defineStore("permissionsStore", {
         allpermissions: [],
         permission: {},
         roles:[],
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         isBusy: false,
         rows: null,

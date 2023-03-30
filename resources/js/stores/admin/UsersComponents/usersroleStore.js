@@ -11,7 +11,7 @@ export const useUsersRolesStore = defineStore("usersroleStore", {
             { key: "actions", thStyle: { width: "8%" } },
         ],
         roles: [],
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         isBusy: false,
         rows: null,
