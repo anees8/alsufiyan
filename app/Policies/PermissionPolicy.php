@@ -30,7 +30,7 @@ class PermissionPolicy
      */
     public function view(User $user)
     {
-        $permission = Permission::where('slug', 'permission_view')->first();
+        $permission = Permission::where('slug', 'permission_list')->first();
         
         return $user->hasRole($permission->roles);
     }

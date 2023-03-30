@@ -31,7 +31,7 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        $permission = Permission::where('slug', 'users_view')->first();
+        $permission = Permission::where('slug', 'users_list')->first();
         
         return $user->hasRole($permission->roles);
         

@@ -31,7 +31,7 @@ class HomeSliderPolicy
      */
     public function view(User $user)
     {
-        $permission = Permission::where('slug', 'home_slider_view')->first();
+        $permission = Permission::where('slug', 'home_slider_list')->first();
         
         return $user->hasRole($permission->roles);
     }

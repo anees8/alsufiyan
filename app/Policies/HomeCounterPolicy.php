@@ -31,7 +31,7 @@ class HomeCounterPolicy
      */
     public function view(User $user)
     {
-        $permission = Permission::where('slug', 'home_counter_view')->first();
+        $permission = Permission::where('slug', 'home_counter_list')->first();
         
         return $user->hasRole($permission->roles);
     }

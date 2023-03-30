@@ -31,7 +31,7 @@ class ContactSubjectPolicy
      */
     public function view(User $user)
     {
-        $permission = Permission::where('slug', 'contact_subject_view')->first();
+        $permission = Permission::where('slug', 'contact_subject_list')->first();
 
         return $user->hasRole($permission->roles);
     }

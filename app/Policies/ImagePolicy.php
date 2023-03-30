@@ -31,7 +31,7 @@ class ImagePolicy
      */
     public function view(User $user)
     {
-        $permission = Permission::where('slug','images_view')->first();
+        $permission = Permission::where('slug','images_list')->first();
         
         return $user->hasRole($permission->roles);
     }

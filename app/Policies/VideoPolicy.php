@@ -32,7 +32,7 @@ class VideoPolicy
     public function view(User $user)
     {
        
-        $permission = Permission::where('slug', 'videos_view')->first();
+        $permission = Permission::where('slug', 'videos_list')->first();
         
         return $user->hasRole($permission->roles);
     }

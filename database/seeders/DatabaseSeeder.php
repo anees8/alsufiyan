@@ -248,7 +248,7 @@ class DatabaseSeeder extends Seeder
                       array([
                         'id'    => 1,
                         'name'  => 'Users List',
-                        'slug'  => 'users_view',
+                        'slug'  => 'users_list',
                         // 'permissiongroup_id'=>1,
                       ],
                       [
@@ -290,7 +290,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 7,
                         'name'  => 'Videos List',
-                        'slug'  => 'videos_view',
+                        'slug'  => 'videos_list',
                         // 'permissiongroup_id'=>2,
                       
                       ],
@@ -333,7 +333,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 13,
                         'name'  => 'Images List',
-                        'slug'  => 'images_view',
+                        'slug'  => 'images_list',
                         // 'permissiongroup_id'=>3,
                       
                       ],
@@ -375,7 +375,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 19,
                         'name'  => 'Blogs List',
-                        'slug'  => 'blogs_view',
+                        'slug'  => 'blogs_list',
                         // 'permissiongroup_id'=>4,
                       
                       ],
@@ -418,7 +418,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 25,
                         'name'  => 'Sliders List',
-                        'slug'  => 'home_slider_view',
+                        'slug'  => 'home_slider_list',
                         // 'permissiongroup_id'=>5,
                       ],
 
@@ -456,7 +456,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 31,
                         'name'  => 'Packages List',
-                        'slug'  => 'home_package_slider_view',
+                        'slug'  => 'home_package_slider_list',
                         // 'permissiongroup_id'=>6,
                       
                       ],
@@ -493,7 +493,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 37,
                         'name'  => 'Counters List',
-                        'slug'  => 'home_counter_view',
+                        'slug'  => 'home_counter_list',
                         // 'permissiongroup_id'=>7,
                       ],
                       [
@@ -529,7 +529,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 43,
                         'name'  => 'Contacts List',
-                        'slug'  => 'contacts_view',
+                        'slug'  => 'contacts_list',
                             // 'permissiongroup_id'=>8,
                       ],
                       [
@@ -565,7 +565,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 49,
                         'name'  => 'Contacts Subject List',
-                        'slug'  => 'contact_subject_view',
+                        'slug'  => 'contact_subject_list',
                             // 'permissiongroup_id'=>9,
                       ],
                       [
@@ -601,7 +601,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 55,
                         'name'  => 'Roles List',
-                        'slug'  => 'role_view',
+                        'slug'  => 'role_list',
                       // 'permissiongroup_id'=>10,
                       ],
                       [
@@ -639,7 +639,7 @@ class DatabaseSeeder extends Seeder
                       [
                         'id'    => 61,
                         'name'  => 'Permissions List',
-                        'slug'  => 'permission_view',
+                        'slug'  => 'permission_list',
                       // 'permissiongroup_id'=>11,
                       ],
                       [
