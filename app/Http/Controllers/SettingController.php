@@ -14,7 +14,12 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+       
+       
+     $data['settings']=Setting::get();
+
+
+        return $this->sendResponse($data, 'settings  return successfully.',Response::HTTP_OK);
     }
 
     /**

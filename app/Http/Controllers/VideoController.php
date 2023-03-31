@@ -69,8 +69,15 @@ public function store(Request $request)
         $video->video_url = "/Videos/".$videoName;
         }
 
-        if($request->has('url')){
-            $video->video_url = $request->url;
+         if($request->has('url')){
+
+        if(str_contains($request->url,'https://youtu.be/')){
+        $video->video_url =  str_replace("https://youtu.be/","https://www.youtube.com/embed/",$request->url);
+
+        }elseif(str_contains($request->url,'https://www.youtube.com/embed/')){
+
+        $video->video_url = $request->url;
+        }          
 
         }
 

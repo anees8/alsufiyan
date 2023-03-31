@@ -106,7 +106,6 @@
       </b-col>
       <b-col v-else>
         <b-table
-          striped
           outlined
           empty-filtered-text
           caption-top

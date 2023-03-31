@@ -10,7 +10,7 @@ export const usePermissionsStore = defineStore("permissionsStore", {
             { key: "name" },
             { key: "slug" },
             { key: "roles" },
-            { key: "created_at", label: "Created Date" },
+            
             { key: "actions", label: "Action" },
         ],
         allpermissions: [],
