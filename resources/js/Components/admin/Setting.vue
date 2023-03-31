@@ -101,6 +101,12 @@
                           placeholder="Enter Company Alternate Phone"
                         ></b-form-input
                       ></b-input-group>
+                      <b-form-invalid-feedback
+                        v-if="errors.CompanyAlternatePhone"
+                        :state="errors.CompanyAlternatePhone"
+                      >
+                        {{ errors.CompanyAlternatePhone[0] }}
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
 
@@ -122,6 +128,12 @@
                           placeholder="Enter Your Facebook link"
                         ></b-form-input>
                       </b-input-group>
+                      <b-form-invalid-feedback
+                        v-if="errors.facebook"
+                        :state="errors.facebook"
+                      >
+                        {{ errors.facebook[0] }}
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                   <b-col col="12" lg="6">
@@ -142,6 +154,12 @@
                           placeholder="Enter Your whatsapp link"
                         ></b-form-input>
                       </b-input-group>
+                      <b-form-invalid-feedback
+                        v-if="errors.whatsapp"
+                        :state="errors.whatsapp"
+                      >
+                        {{ errors.whatsapp[0] }}
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                   <b-col col="12" lg="6">
@@ -162,6 +180,12 @@
                           placeholder="Enter Your Youtube link"
                         ></b-form-input>
                       </b-input-group>
+                      <b-form-invalid-feedback
+                        v-if="errors.youtube"
+                        :state="errors.youtube"
+                      >
+                        {{ errors.youtube[0] }}
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                   <b-col col="12" lg="6">
@@ -182,6 +206,12 @@
                           placeholder="Enter CopyRight"
                         ></b-form-input>
                       </b-input-group>
+                      <b-form-invalid-feedback
+                        v-if="errors.copyright"
+                        :state="errors.copyright"
+                      >
+                        {{ errors.copyright[0] }}
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                   <b-col cols="12" md="6">
@@ -193,6 +223,9 @@
                         class="form-control"
                         v-on:change="onFileChange"
                       />
+                      <b-form-invalid-feedback v-if="errors.logo" :state="errors.logo">
+                        {{ errors.logo[0] }}
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                   <b-col cols="12" lg="6">
@@ -213,7 +246,11 @@
                         accept="image/*"
                         class="form-control"
                         v-on:change="onFileChange"
-                    /></b-form-group>
+                      />
+                      <b-form-invalid-feedback v-if="errors.slogo" :state="errors.slogo">
+                        {{ errors.slogo[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
                   </b-col>
                   <b-col cols="12" lg="6">
                     <b-img
@@ -233,6 +270,12 @@
                         placeholder="Enter Footer About..."
                         rows="3"
                       ></b-form-textarea>
+                      <b-form-invalid-feedback
+                        v-if="errors.footer"
+                        :state="errors.footer"
+                      >
+                        {{ errors.footer[0] }}
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                   <b-col cols="12" lg="6">
@@ -243,6 +286,12 @@
                         placeholder="Enter Company Adress..."
                         rows="3"
                       ></b-form-textarea>
+                      <b-form-invalid-feedback
+                        v-if="errors.CompanyAdress"
+                        :state="errors.CompanyAdress"
+                      >
+                        {{ errors.CompanyAdress[0] }}
+                      </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
                 </b-row>

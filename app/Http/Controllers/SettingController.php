@@ -82,7 +82,17 @@ class SettingController extends Controller
 
             'CompanyName'=>'required|min:3|max:25',
             'email' => 'required|email',
-            'CompanyPhone'=> 'required|min:10|max:15',     
+            'CompanyPhone'=> 'required|min:10|max:15',   
+            'CompanyAlternatePhone'=> 'required|min:10|max:15',   
+            'CompanyAdress'=>'required|min:10',
+            'slogo'=>'required',
+            'logo'=>'required',
+            'facebook'=>'required',
+            'youtube'=>'required',
+            'whatsapp'=>'required',
+            'footer'=>'required',
+            'copyright'=>'required',           
+            
         ]);
    
         if($validator->fails()){

@@ -103,6 +103,9 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                 formData.append("CompanyAdress", this.settings.CompanyAdress);
             }
 
+            if (this.settings.logo) {
+                formData.append("logo", this.settings.logo);
+            }
             if (this.settings.slogo) {
                 formData.append("slogo", this.settings.slogo);
             }
