@@ -6,7 +6,8 @@ import router from "../../router.js";
 export const useAdminBlogsStore = defineStore("adminblogsStore", {
     state: () => ({
         fields: [
-            { key: "id", label: "ID" },
+            { key: "id", label: "ID",sortable: true,
+            sortBy: "id",   },
             { key: "title", label: "Title", thStyle: { width: "15%" } },
             { key: "attachment", label: "Image", thStyle: { width: "10%" } },
             { key: "content", label: "Description", thStyle: { width: "48%" } },

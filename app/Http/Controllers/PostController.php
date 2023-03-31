@@ -23,7 +23,7 @@ public function index(Request $request){
 
 
         if ($request->has('with_deleted')) {
-            $this->authorizeForUser($request->user('api'), 'view', Post::class);
+         $this->authorizeForUser($request->user('api'), 'view', Post::class);
         $posts = $posts->withTrashed();
         }
 
