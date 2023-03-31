@@ -5,10 +5,10 @@ import router from "../../../router.js";
 export const useUsersRolesStore = defineStore("usersroleStore", {
     state: () => ({
         fields: [
-            { key: "id" },
-            { key: "name", thStyle: { width: "10%" } },
-            { key: "users" },
-            { key: "actions", thStyle: { width: "8%" } },
+            { key: "id" , label: "ID"},
+            { key: "name", label: "Name", thStyle: { width: "10%" } },
+            { key: "users" , label: "Users"},
+            { key: "actions", label: "Actions", thStyle: { width: "8%" } },
         ],
         roles: [],
         perPage: 10,

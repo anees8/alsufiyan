@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import router from "../../router.js";
 
 export const useAdminSettingStore = defineStore("adminsettingStore", {
     state: () => ({
@@ -8,7 +9,7 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
         slogo: "/logo/slogo2.png",
         previewslogo:null,
         loading: false,
-        FooterAbout:" Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc.",
+        footer_about:" Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc.",
         social_icons: [
             {
                 icon: "fa-brands fa-facebook-f",
@@ -21,6 +22,7 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                 iconclass: "text-success",
             },
         ],
+        errors:[]
     }),
 
     actions: {
@@ -40,17 +42,79 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
             };
         },
         async getSettings() {
-            this.isBusy = true;
+           
+            try {
+                let url = "settings";
+             
+                const response = await axios.get(url);
+                  this.logo=response.data.data.logo;
+                  this.previewlogo=response.data.data.logo;
+                  this.slogo=response.data.data.slogo;
+                  this.previewslogo=response.data.data.slogo;
+                  this.footer_about=response.data.data.footer_about;
 
-            let url = "settings";
+
+            } catch (error) {
+                if (error.response) {
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                        this.errors = error.response.data.errors;
+                    }
+                }
+                this.isBusy = false;
+                setTimeout(() => {
+                    this.errors = {};
+                }, 5000);
+            }
            
           
 
 
         },
-        onSettingChange(){
+      async  onSettingChange(){
           
+            const formData = new FormData();
+            let config = {
+                header: {
+                    "content-type": "multipart/form-data",
+                },
+            };
+
+            let url = "settings";
+
+                if(this.logo){
+                formData.append("logo", this.logo);
+                }
+                if(this.slogo){
+                formData.append("slogo", this.slogo);
+                }
+
+                if(this.footer_about){
+                formData.append("footer_about", this.footer_about);
+                }
+
          
+            try {
+                const response = await axios.post(
+                    url,
+                    formData,
+                    config
+                );
+               
+            } catch (error) {
+                if (error.response) {
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                        this.errors = error.response.data.errors;
+                    }
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
+                }
+                this.loading = false;
+            }
 
         }
 

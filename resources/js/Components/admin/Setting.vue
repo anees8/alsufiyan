@@ -2,7 +2,7 @@
   <div>
     <b-container fluid>
       <b-row>
-        <b-col cols="12">
+        <b-col cols="12" md="6">
           <b-card header="General">
             <b-form @submit="onSettingChange">
               <b-container fluid>
@@ -48,7 +48,7 @@
                   <b-form-group label="Footer About" class="mb-0">
                     <b-form-textarea
                       id="textarea"
-                      v-model="FooterAbout"
+                      v-model="footer_about"
                       placeholder="Enter Footer About..."
                       rows="3"
                       max-rows="6"
@@ -74,7 +74,7 @@ const {
   slogo,
   previewlogo,
   previewslogo,
-  FooterAbout,
+  footer_about,
   loading,
   errors,
 } = storeToRefs(useAdminSettingStore());

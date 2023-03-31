@@ -37,6 +37,7 @@
           :busy="isBusy"
           responsive
           show-empty
+          footClone
         >
           <template #cell(permissions)="data">
             <b-badge

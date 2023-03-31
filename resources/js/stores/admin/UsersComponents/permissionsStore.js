@@ -7,9 +7,9 @@ export const usePermissionsStore = defineStore("permissionsStore", {
     state: () => ({
         fields: [
             { key: "id", label: "ID" },
-            { key: "name" },
-            { key: "slug" },
-            { key: "roles" },
+            { key: "name" , label: "Name" },
+            { key: "slug", label: "Slug"  },
+            { key: "roles" , label: "Roles" },
             
             { key: "actions", label: "Action" },
         ],

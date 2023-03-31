@@ -90,7 +90,6 @@
         ><b-table
           striped
           outlined
-          empty-filtered-text
           caption-top
           hover
           footClone
