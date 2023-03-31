@@ -60,6 +60,10 @@ import {
     faUserShield,
     faFingerprint,
     faGear,
+    faBriefcase,
+    faMobileScreen,
+    faCopyright,
+    faMapLocationDot,
     } from "@fortawesome/free-solid-svg-icons";
 import {
     
@@ -72,7 +76,7 @@ import {
     
 } from "@fortawesome/free-regular-svg-icons";
 
-import { faFacebookF, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faWhatsapp ,faYoutube} from "@fortawesome/free-brands-svg-icons";
 
 import {
     FontAwesomeIcon,
@@ -81,7 +85,10 @@ import {
 } from "@fortawesome/vue-fontawesome";
 
 library.add(
-    faGear,
+    faGear,faYoutube,
+    faCopyright,
+    faMapLocationDot,
+    faBriefcase,faMobileScreen,
     faUserShield,
     faFingerprint,
     faPanorama,

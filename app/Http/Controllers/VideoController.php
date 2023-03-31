@@ -63,7 +63,7 @@ public function store(Request $request)
         $video = new Video;
       
         $video->user_id = Auth::user()->id;
-        if ($request->has('video')) {
+        if ($request->file('video')) {
         $videoName = time().'.'.$request->video->extension();  
         $request->video->move(public_path('Videos'), $videoName);
         $video->video_url = "/Videos/".$videoName;
@@ -133,7 +133,7 @@ public function update(Request $request, Video $video)
         return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
         
-        if ($request->has('video')) {
+        if ($request->file('video')) {
         if (File::exists(public_path($video->video_url))) {
         unlink(public_path($video->video_url));
         }

@@ -61,7 +61,7 @@ public function store(Request $request){
         $image = new Image;
       
         $image->user_id = Auth::user()->id;
-        if ($request->has('image')) {
+        if ($request->file('image')) {
         $imageName = time().'.'.$request->image->extension();  
         $request->image->move(public_path('gallery'), $imageName);
         $image->image_url = "/gallery/".$imageName;
@@ -120,7 +120,7 @@ public function update(Request $request,Image $image){
         return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
       
-        if ($request->has('image')) {
+        if ($request->file('image')) {
         if (File::exists(public_path($image->image_url))) {
         unlink(public_path($image->image_url));
         }

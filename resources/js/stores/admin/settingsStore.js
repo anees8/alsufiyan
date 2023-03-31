@@ -4,12 +4,16 @@ import router from "../../router.js";
 
 export const useAdminSettingStore = defineStore("adminsettingStore", {
     state: () => ({
-        logo: "/logo/logo.png",
+        settings:{
+            logo: "/logo/logo.png",
+            slogo: "/logo/slogo2.png",
+            footer:" Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc.",
+        },
+    
         previewlogo:null,
-        slogo: "/logo/slogo2.png",
         previewslogo:null,
         loading: false,
-        footer_about:" Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc.",
+      
         social_icons: [
             {
                 icon: "fa-brands fa-facebook-f",
@@ -33,10 +37,10 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
             reader.readAsDataURL(e.target.files[0]);
             reader.onload = () => {
             if(e.target.id=='logo'){
-            this.logo=e.target.files[0];
+            this.settings.logo=e.target.files[0];
             this.previewlogo= reader.result;
             }else if(e.target.id=='slogo'){
-             this.slogo=e.target.files[0];
+             this.settings.slogo=e.target.files[0];
             this.previewslogo = reader.result;
             }
             };
@@ -47,11 +51,10 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                 let url = "settings";
              
                 const response = await axios.get(url);
-                  this.logo=response.data.data.logo;
-                  this.previewlogo=response.data.data.logo;
-                  this.slogo=response.data.data.slogo;
-                  this.previewslogo=response.data.data.slogo;
-                  this.footer_about=response.data.data.footer_about;
+
+                this.settings=response.data.data.settings;
+                this.previewlogo= response.data.data.settings.logo;
+                this.previewslogo= response.data.data.settings.slogo;
 
 
             } catch (error) {
@@ -82,22 +85,48 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
             };
 
             let url = "settings";
+           
+          
+            if (this.settings.email) {
+                formData.append("email", this.settings.email);
+            }
+            if (this.settings.CompanyName) {
+                formData.append("CompanyName", this.settings.CompanyName);
+            }
+            if (this.settings.CompanyPhone) {
+                formData.append("CompanyPhone", this.settings.CompanyPhone);
+            }
+            if (this.settings.CompanyAlternatePhone) {
+                formData.append("CompanyAlternatePhone", this.settings.CompanyAlternatePhone);
+            }
+            if (this.settings.CompanyAdress) {
+                formData.append("CompanyAdress", this.settings.CompanyAdress);
+            }
 
-                if(this.logo){
-                formData.append("logo", this.logo);
-                }
-                if(this.slogo){
-                formData.append("slogo", this.slogo);
-                }
+            if (this.settings.slogo) {
+                formData.append("slogo", this.settings.slogo);
+            }
+            if (this.settings.facebook) {
+                formData.append("facebook", this.settings.facebook);
+            }
+            if (this.settings.youtube) {
+                formData.append("youtube", this.settings.youtube);
+            }
 
-                if(this.footer_about){
-                formData.append("footer_about", this.footer_about);
-                }
-
+            if (this.settings.whatsapp) {
+                formData.append("whatsapp", this.settings.whatsapp);
+            }
+            if (this.settings.footer) {
+                formData.append("footer", this.settings.footer);
+            }
+            if (this.settings.copyright) {
+                formData.append("copyright", this.settings.copyright);
+            }
          
             try {
+                formData.append("_method", "put");
                 const response = await axios.post(
-                    url,
+                    url +'/'+ this.settings.id,
                     formData,
                     config
                 );

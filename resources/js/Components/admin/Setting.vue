@@ -2,31 +2,220 @@
   <div>
     <b-container fluid>
       <b-row>
-        <b-col cols="12" md="6">
+        <b-col>
           <b-card header="General">
             <b-form @submit="onSettingChange">
               <b-container fluid>
-                <b-row class="mb-3">
-                  <b-col>
+                <b-row>
+                  <b-col col="12" lg="6">
+                    <b-form-group
+                      id="input-group-2"
+                      label="Company Name:"
+                      label-for="input-2"
+                    >
+                      <b-input-group class="mt-3">
+                        <template #prepend>
+                          <b-input-group-text
+                            ><font-awesome-icon icon="briefcase" />
+                          </b-input-group-text>
+                        </template>
+                        <b-form-input
+                          id="input-2"
+                          v-model="settings.CompanyName"
+                          placeholder="Enter Company name"
+                        ></b-form-input>
+                      </b-input-group>
+                      <b-form-invalid-feedback
+                        v-if="errors.CompanyName"
+                        :state="errors.CompanyName"
+                      >
+                        {{ errors.CompanyName[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
+                  <b-col col="12" lg="6">
+                    <b-form-group
+                      id="input-group-1"
+                      label="Email address:"
+                      label-for="input-1"
+                    >
+                      <b-input-group class="mt-3">
+                        <template #prepend>
+                          <b-input-group-text
+                            ><font-awesome-icon icon="at" />
+                          </b-input-group-text>
+                        </template>
+                        <b-form-input
+                          id="input-1"
+                          v-model="settings.email"
+                          type="email"
+                          placeholder="Enter email"
+                        ></b-form-input
+                      ></b-input-group>
+                      <b-form-invalid-feedback v-if="errors.email" :state="errors.email">
+                        {{ errors.email[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
+                  <b-col col="12" lg="6">
+                    <b-form-group
+                      id="input-group-2"
+                      label="Phone Number:"
+                      label-for="input-2"
+                    >
+                      <b-input-group class="mt-3">
+                        <template #prepend>
+                          <b-input-group-text
+                            ><font-awesome-icon icon="mobile-screen" />
+                          </b-input-group-text>
+                        </template>
+                        <b-form-input
+                          id="input-2"
+                          v-model="settings.CompanyPhone"
+                          placeholder="Enter Company Phone"
+                        ></b-form-input>
+                      </b-input-group>
+                      <b-form-invalid-feedback
+                        v-if="errors.CompanyPhone"
+                        :state="errors.CompanyPhone"
+                      >
+                        {{ errors.CompanyPhone[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
+                  <b-col col="12" lg="6">
+                    <b-form-group
+                      id="input-group-2"
+                      label="Alternate Phone Number:"
+                      label-for="input-2"
+                    >
+                      <b-input-group class="mt-3">
+                        <template #prepend>
+                          <b-input-group-text
+                            ><font-awesome-icon icon="mobile-screen" />
+                          </b-input-group-text>
+                        </template>
+                        <b-form-input
+                          id="input-2"
+                          v-model="settings.CompanyAlternatePhone"
+                          placeholder="Enter Company Alternate Phone"
+                        ></b-form-input
+                      ></b-input-group>
+                    </b-form-group>
+                  </b-col>
+
+                  <b-col col="12" lg="6">
+                    <b-form-group
+                      id="input-group-2"
+                      label="Facebook Link:"
+                      label-for="input-2"
+                    >
+                      <b-input-group class="mt-3">
+                        <template #prepend>
+                          <b-input-group-text
+                            ><font-awesome-icon icon="fa-brands fa-facebook-f" />
+                          </b-input-group-text>
+                        </template>
+                        <b-form-input
+                          id="input-2"
+                          v-model="settings.facebook"
+                          placeholder="Enter Your Facebook link"
+                        ></b-form-input>
+                      </b-input-group>
+                    </b-form-group>
+                  </b-col>
+                  <b-col col="12" lg="6">
+                    <b-form-group
+                      id="input-group-2"
+                      label="Whatsapp Link:"
+                      label-for="input-2"
+                    >
+                      <b-input-group class="mt-3">
+                        <template #prepend>
+                          <b-input-group-text
+                            ><font-awesome-icon icon="fa-brands fa-whatsapp" />
+                          </b-input-group-text>
+                        </template>
+                        <b-form-input
+                          id="input-2"
+                          v-model="settings.whatsapp"
+                          placeholder="Enter Your whatsapp link"
+                        ></b-form-input>
+                      </b-input-group>
+                    </b-form-group>
+                  </b-col>
+                  <b-col col="12" lg="6">
+                    <b-form-group
+                      id="input-group-2"
+                      label="Youtube Channel Link:"
+                      label-for="input-2"
+                    >
+                      <b-input-group class="mt-3">
+                        <template #prepend>
+                          <b-input-group-text
+                            ><font-awesome-icon icon="fa-brands fa-youtube" />
+                          </b-input-group-text>
+                        </template>
+                        <b-form-input
+                          id="input-2"
+                          v-model="settings.youtube"
+                          placeholder="Enter Your Youtube link"
+                        ></b-form-input>
+                      </b-input-group>
+                    </b-form-group>
+                  </b-col>
+                  <b-col col="12" lg="6">
+                    <b-form-group
+                      id="input-group-2"
+                      label="Copyright:"
+                      label-for="input-2"
+                    >
+                      <b-input-group class="mt-3">
+                        <template #prepend>
+                          <b-input-group-text
+                            ><font-awesome-icon icon="copyright" />
+                          </b-input-group-text>
+                        </template>
+                        <b-form-input
+                          id="input-2"
+                          v-model="settings.copyright"
+                          placeholder="Enter CopyRight"
+                        ></b-form-input>
+                      </b-input-group>
+                    </b-form-group>
+                  </b-col>
+                  <b-col cols="12" md="6">
+                    <b-form-group label="ICON" class="mb-0">
+                      <input
+                        type="file"
+                        id="logo"
+                        accept="image/*"
+                        class="form-control"
+                        v-on:change="onFileChange"
+                      />
+                    </b-form-group>
+                  </b-col>
+                  <b-col cols="12" lg="6">
                     <b-img
                       start
                       v-bind="{ width: 75, height: 75, class: 'm1' }"
                       rounded="circle"
                       :src="previewlogo"
                       alt="Center image"
-                    ></b-img> </b-col
-                  ><b-col>
-                    <input
-                      type="file"
-                      id="logo"
-                      accept="image/*"
-                      class="form-control"
-                      v-on:change="onFileChange"
-                    />
+                    ></b-img>
                   </b-col>
-                </b-row>
-                <b-row class="mb-3">
-                  <b-col>
+
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="LOGO" class="mb-0">
+                      <input
+                        id="slogo"
+                        type="file"
+                        accept="image/*"
+                        class="form-control"
+                        v-on:change="onFileChange"
+                    /></b-form-group>
+                  </b-col>
+                  <b-col cols="12" lg="6">
                     <b-img
                       start
                       v-bind="{ height: 75, class: 'm1' }"
@@ -35,28 +224,30 @@
                       alt="Center image"
                     ></b-img>
                   </b-col>
-                  <b-col>
-                    <input
-                      id="slogo"
-                      type="file"
-                      accept="image/*"
-                      class="form-control"
-                      v-on:change="onFileChange"
-                  /></b-col>
-                </b-row>
-                <b-row class="mb-3">
-                  <b-form-group label="Footer About" class="mb-0">
-                    <b-form-textarea
-                      id="textarea"
-                      v-model="footer_about"
-                      placeholder="Enter Footer About..."
-                      rows="3"
-                      max-rows="6"
-                    ></b-form-textarea>
-                  </b-form-group>
+
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="Footer About" class="mb-0">
+                      <b-form-textarea
+                        id="textarea"
+                        v-model="settings.footer"
+                        placeholder="Enter Footer About..."
+                        rows="3"
+                      ></b-form-textarea>
+                    </b-form-group>
+                  </b-col>
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="Company Address" class="mb-0">
+                      <b-form-textarea
+                        id="textarea"
+                        v-model="settings.CompanyAdress"
+                        placeholder="Enter Company Adress..."
+                        rows="3"
+                      ></b-form-textarea>
+                    </b-form-group>
+                  </b-col>
                 </b-row>
               </b-container>
-              <b-button type="submit" variant="primary">Submit</b-button>
+              <b-button type="submit" variant="dark">Update</b-button>
             </b-form>
           </b-card>
         </b-col>
@@ -69,15 +260,9 @@ import { storeToRefs } from "pinia";
 import { useLoginStore } from "../../stores/admin/loginStore.js";
 
 import { useAdminSettingStore } from "../../stores/admin/settingsStore";
-const {
-  logo,
-  slogo,
-  previewlogo,
-  previewslogo,
-  footer_about,
-  loading,
-  errors,
-} = storeToRefs(useAdminSettingStore());
+const { settings, previewlogo, previewslogo, loading, errors } = storeToRefs(
+  useAdminSettingStore()
+);
 
 const { onFileChange, getSettings, onSettingChange } = useAdminSettingStore();
 

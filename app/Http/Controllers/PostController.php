@@ -71,7 +71,7 @@ public function index(Request $request){
         $post->title = $request->title;
         $post->content = $request->content;
         $post->user_id = Auth::user()->id;
-        if ($request->has('image')) {
+        if ($request->file('image')) {
         $imageName = time().'.'.$request->image->extension();  
         $request->image->move(public_path('posts'), $imageName);
         $post->attachment = "/posts/".$imageName;
@@ -133,7 +133,7 @@ public function index(Request $request){
             return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
 
-        if ($request->has('image')) {
+        if ($request->file('image')) {
             if (File::exists(public_path($post->attachment))) {
             unlink(public_path($post->attachment));
             }

@@ -107,6 +107,10 @@
               rounded
             ></b-img>
           </template>
+          <template #cell(content)="data">{{
+            data.value.substring(0, 300) + "..."
+          }}</template>
+
           <template #cell(username)="data">{{
             data.item.user ? data.item.user.name : ""
           }}</template>

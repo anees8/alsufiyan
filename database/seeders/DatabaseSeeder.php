@@ -195,14 +195,28 @@ class DatabaseSeeder extends Seeder
                   }
 
                   $settings= [ 
-                    ["title" =>"Logo","slug"=>"logo","description"=>"/logo/logo.png"],
-                    ["title" =>"SLogo","slug"=>"slogo","description"=>"/logo/slogo2.png"],
-                    ["title" =>"Footer About","slug"=>"footer_about","description"=>"Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc."],
+                    ["email" =>"info@example.com",
+
+                    "CompanyName"=>"Testing",
+
+                    "logo"=>"/logo/logo.png",
+
+                    "slogo"=>"/logo/slogo.png",
+                    "facebook"=>"https://www.facebook.com/ColanInfotechTeam/",
+                    "youtube"=>"https://www.youtube.com/@al-sufiyaninternationaltou8181",
+                    "whatsapp"=>"https://wa.me/9876543210?text=[Hi]",
+
+                    "footer"=>"Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc.",
+                    "CompanyAdress"=>"123 Main St, Anytown USA 12345",
+                    "CompanyPhone"=>"+91 9876543210",
+                    "CompanyAlternatePhone"=>"+91 9876543210",
+
+                    ]
                     
                   ];
                               
                   
-                  
+  
                   foreach($settings as $setting){
                     \App\Models\Setting::create($setting);
                     }

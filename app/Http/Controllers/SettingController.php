@@ -6,7 +6,8 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
@@ -19,10 +20,7 @@ class SettingController extends Controller
     {
        
        
-        $data['logo'] = Setting::where('slug','=','logo')->pluck('description')->first();
-        $data['slogo'] = Setting::where('slug','=','slogo')->pluck('description')->first();
-        $data['footer_about'] = Setting::where('slug','=','footer_about')->pluck('description')->first();
-      
+        $data['settings'] = Setting::first();
 
         return $this->sendResponse($data, 'settings  return successfully.',Response::HTTP_OK);
     }
@@ -79,7 +77,42 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
-        //
+        
+        $validator = Validator::make($request->all(), [
+
+            'CompanyName'=>'required|min:3|max:25',
+            'email' => 'required|email',
+            'CompanyPhone'=> 'required|min:10|max:15',     
+        ]);
+   
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+
+
+
+            if ($request->file('logo')) {
+            if (File::exists(public_path($setting->logo))) {
+            unlink(public_path($setting->logo));
+            }
+            $logoName = time().'.'.$request->logo->extension();  
+            $request->logo->move(public_path('logo'), $logoName);
+            $setting->logo = "/logo/".$logoName;
+            }
+
+
+            if ($request->file('slogo')) {
+            if (File::exists(public_path($setting->slogo))) {
+            unlink(public_path($setting->slogo));
+            }
+            $slogoName = time().'.'.$request->slogo->extension();  
+            $request->slogo->move(public_path('logo'), $slogoName);
+            $setting->slogo = "/logo/".$slogoName;
+            }
+
+        $setting->update();
+        return $this->sendResponse('Settings Updated Successfully.',Response::HTTP_OK);
+
     }
 
     /**

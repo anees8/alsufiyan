@@ -15,10 +15,18 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->text('slug');
-            $table->text('description');
-            $table->unsignedBigInteger('status')->default(1);
+            $table->text('email');
+            $table->text('CompanyName');
+            $table->text('CompanyPhone');
+            $table->text('CompanyAlternatePhone');
+            $table->text('CompanyAdress');
+            $table->text('logo');
+            $table->text('slogo');
+            $table->text('facebook');
+            $table->text('youtube');
+            $table->text('whatsapp');
+            $table->text('footer');
+            $table->text('copyright')->default("Proudly Developed & Maintained by MEERANJI TECHNOLOGY");
             $table->softDeletes();
             $table->timestamps();
         });

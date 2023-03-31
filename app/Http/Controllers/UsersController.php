@@ -203,8 +203,8 @@ class UsersController extends Controller
     public function getAuthUser(Request $request){
  
         $data['username'] = Auth::user()->name;
-        $data['logo'] = Setting::where('slug','=','logo')->pluck('description')->first();
-        $data['slogo'] = Setting::where('slug','=','slogo')->pluck('description')->first();
+        $data['logo'] = Setting::pluck('logo')->first();
+        $data['slogo'] = Setting::pluck('slogo')->first();
         $data['permissions']= Auth::user()->roles()->first()->permissions->pluck('slug');
         return $this->sendResponse($data, 'Users Authentication return successfully.',Response::HTTP_OK);
 

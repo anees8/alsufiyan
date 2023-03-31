@@ -74,7 +74,7 @@ public function store(Request $request)
         $homepackageslider = new HomePackageSlider;
       
         $homepackageslider->user_id = Auth::user()->id;
-        if ($request->has('image')) {
+        if ($request->file('image')) {
         $imageName = time().'.'.$request->image->extension();  
         $request->image->move(public_path('homepackage'), $imageName);
         $homepackageslider->image = "/homepackage/".$imageName;
@@ -157,7 +157,7 @@ public function update(Request $request, HomePackageSlider $homepackageslider)
             return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
             }
           
-            if ($request->has('image')) {
+            if ($request->file('image')) {
             if (File::exists(public_path($homepackageslider->image))) {
             unlink(public_path($homepackageslider->image));
             }
