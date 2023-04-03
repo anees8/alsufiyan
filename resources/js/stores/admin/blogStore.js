@@ -62,13 +62,15 @@ export const useAdminBlogsStore = defineStore("adminblogsStore", {
                     if (error.response.status === 403) {
                         router.push({ name: "NotAuthorize" });
                     } else if (error.response.status === 400) {
-                        this.errors = error.response.data.errors;
+                            this.errors = error.response.data.errors;
                     }
                 }
                 this.isBusy = false;
+              
                 setTimeout(() => {
                     this.errors = {};
                 }, 5000);
+               
             }
         },
 
@@ -129,14 +131,16 @@ export const useAdminBlogsStore = defineStore("adminblogsStore", {
 
                     this.hideModel();
                 } catch (error) {
+
                     if (error.response) {
                         if (error.response.status === 403) {
                             router.push({ name: "NotAuthorize" });
                         } else if (error.response.status === 400) {
-                            this.errors = error.response.data.errors;
+                                this.errors = error.response.data.errors;
                         }
                     }
                     this.loading = false;
+                  
                     setTimeout(() => {
                         this.errors = {};
                     }, 5000);
@@ -172,10 +176,11 @@ export const useAdminBlogsStore = defineStore("adminblogsStore", {
                         if (error.response.status === 403) {
                             router.push({ name: "NotAuthorize" });
                         } else if (error.response.status === 400) {
-                            this.errors = error.response.data.errors;
+                                this.errors = error.response.data.errors;
                         }
                     }
                     this.loading = false;
+                  
                     setTimeout(() => {
                         this.errors = {};
                     }, 5000);
@@ -216,7 +221,15 @@ export const useAdminBlogsStore = defineStore("adminblogsStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);
@@ -249,7 +262,15 @@ export const useAdminBlogsStore = defineStore("adminblogsStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);
@@ -281,7 +302,15 @@ export const useAdminBlogsStore = defineStore("adminblogsStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);

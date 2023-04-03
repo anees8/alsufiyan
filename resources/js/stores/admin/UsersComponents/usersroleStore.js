@@ -63,14 +63,14 @@ export const useUsersRolesStore = defineStore("usersroleStore", {
                 this.isBusy = false;
             } catch (error) {
                 if (error.response) {
-                if (error.response.status === 403) {
-                    router.push({ name: "NotAuthorize" });
-                } else if (error.response.status === 400) {
-                    
-                        this.errors = error.response.data.errors;
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                            this.errors = error.response.data.errors;
                     }
                 }
                 this.isBusy = false;
+              
                 setTimeout(() => {
                     this.errors = {};
                 }, 5000);
@@ -98,13 +98,18 @@ export const useUsersRolesStore = defineStore("usersroleStore", {
                 this.users = response.data.data.users;
                 
             } catch (error) {
-                if (error.response.status === 403) {
-                    router.push({ name: "NotAuthorize" });
-                } else if (error.response.status === 400) {
-                    if (error.response) {
-                        this.errors = error.response.data.errors;
+                if (error.response) {
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                            this.errors = error.response.data.errors;
                     }
                 }
+                this.loading = false;
+              
+                setTimeout(() => {
+                    this.errors = {};
+                }, 5000);
             }
         },
 
@@ -133,7 +138,20 @@ export const useUsersRolesStore = defineStore("usersroleStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
+                            setTimeout(() => {
+                                this.errors = {};
+                            }, 5000);
+                          
                         });
                 }
             });
@@ -163,17 +181,21 @@ export const useUsersRolesStore = defineStore("usersroleStore", {
                     const response = await axios.post(url, formData, config);
                     router.push({ name: "AdminRolesUsers" });
                 } catch (error) {
+                    
                     if (error.response) {
                         if (error.response.status === 403) {
                             router.push({ name: "NotAuthorize" });
                         } else if (error.response.status === 400) {
-                            this.errors = error.response.data.errors;
+                                this.errors = error.response.data.errors;
                         }
-                        setTimeout(() => {
-                            this.errors = {};
-                        }, 5000);
                     }
                     this.loading = false;
+                  
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
+                  
+                  
                 }
             } else {
                 formData.append("_method", "put");
@@ -187,21 +209,20 @@ export const useUsersRolesStore = defineStore("usersroleStore", {
 
                    
                 } catch (error) {
-                    console.log(error);
+                
                     if (error.response) {
                         if (error.response.status === 403) {
                             router.push({ name: "NotAuthorize" });
                         } else if (error.response.status === 400) {
-                            if (error.response.status === 403) {
-                                router.push({ name: "NotAuthorize" });
-                            } else if (error.response.status === 400) {
                                 this.errors = error.response.data.errors;
-                            }
-                            setTimeout(() => {
-                                this.errors = {};
-                            }, 5000);
                         }
                     }
+                    this.loading = false;
+                  
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
+                  
                 }
             }
         },

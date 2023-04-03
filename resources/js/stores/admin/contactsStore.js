@@ -50,14 +50,15 @@ export const useContactsStore = defineStore("contactsStore", {
 
                 this.isBusy = false;
             } catch (error) {
-                if (error.response) {
+                             if (error.response) {
                     if (error.response.status === 403) {
                         router.push({ name: "NotAuthorize" });
                     } else if (error.response.status === 400) {
-                        this.errors = error.response.data.errors;
+                            this.errors = error.response.data.errors;
                     }
                 }
                 this.isBusy = false;
+              
                 setTimeout(() => {
                     this.errors = {};
                 }, 5000);

@@ -39,9 +39,16 @@ export const useLoginStore = defineStore("loginStore", {
                 }
             } catch (error) {
                 if (error.response) {
-                    this.errors = error.response.data.errors;
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                            this.errors = error.response.data.errors;
+                    }
                 }
                 this.loading = false;
+                setTimeout(() => {
+                    this.errors = {};
+                }, 5000);
             }
         },
         async logout() {
@@ -49,20 +56,22 @@ export const useLoginStore = defineStore("loginStore", {
             try {
                 const response = await axios.get("logout");
             } catch (error) {
+
+
                 if (error.response) {
                     if (error.response.status === 403) {
                         router.push({ name: "NotAuthorize" });
                     } else if (error.response.status === 400) {
-                        if (error.response.status === 403) {
-                            router.push({ name: "NotAuthorize" });
-                        } else if (error.response.status === 400) {
                             this.errors = error.response.data.errors;
-                        }
                     }
-                    setTimeout(() => {
-                        this.errors = {};
-                    }, 5000);
                 }
+                this.loading = false;
+                setTimeout(() => {
+                    this.errors = {};
+                }, 5000);
+
+                
+              
             }
         },
 
@@ -128,12 +137,19 @@ export const useLoginStore = defineStore("loginStore", {
                     this.slogo = null;
                     this.permissions = null;
 
-                    if (error.response.data.errors) {
-                        this.errors = error.response.data.errors;
+                    if (error.response) {
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                                this.errors = error.response.data.errors;
+                        }
                     }
+                    this.loading = false;
                     setTimeout(() => {
                         this.errors = {};
                     }, 5000);
+
+                   
                 }
             }
         },

@@ -65,14 +65,14 @@ export const useRolesStore = defineStore("rolesStore", {
                 this.isBusy = false;
             } catch (error) {
                 if (error.response) {
-                if (error.response.status === 403) {
-                    router.push({ name: "NotAuthorize" });
-                } else if (error.response.status === 400) {
-                    
-                        this.errors = error.response.data.errors;
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                            this.errors = error.response.data.errors;
                     }
                 }
                 this.isBusy = false;
+              
                 setTimeout(() => {
                     this.errors = {};
                 }, 5000);
@@ -102,13 +102,18 @@ export const useRolesStore = defineStore("rolesStore", {
                 this.permissions = response.data.data.permissions;
               
             } catch (error) {
-                if (error.response.status === 403) {
-                    router.push({ name: "NotAuthorize" });
-                } else if (error.response.status === 400) {
-                    if (error.response) {
-                        this.errors = error.response.data.errors;
+                if (error.response) {
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                            this.errors = error.response.data.errors;
                     }
                 }
+                this.loading = false;
+              
+                setTimeout(() => {
+                    this.errors = {};
+                }, 5000);
             }
         },
 
@@ -137,7 +142,19 @@ export const useRolesStore = defineStore("rolesStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
+                            setTimeout(() => {
+                                this.errors = {};
+                            }, 5000);
+                          
                         });
                 }
             });
@@ -171,13 +188,14 @@ export const useRolesStore = defineStore("rolesStore", {
                         if (error.response.status === 403) {
                             router.push({ name: "NotAuthorize" });
                         } else if (error.response.status === 400) {
-                            this.errors = error.response.data.errors;
+                                this.errors = error.response.data.errors;
                         }
-                        setTimeout(() => {
-                            this.errors = {};
-                        }, 5000);
                     }
                     this.loading = false;
+                  
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
                 }
             } else {
                 formData.append("_method", "put");
@@ -191,21 +209,18 @@ export const useRolesStore = defineStore("rolesStore", {
 
                    
                 } catch (error) {
-                    console.log(error);
                     if (error.response) {
                         if (error.response.status === 403) {
                             router.push({ name: "NotAuthorize" });
                         } else if (error.response.status === 400) {
-                            if (error.response.status === 403) {
-                                router.push({ name: "NotAuthorize" });
-                            } else if (error.response.status === 400) {
                                 this.errors = error.response.data.errors;
-                            }
-                            setTimeout(() => {
-                                this.errors = {};
-                            }, 5000);
                         }
                     }
+                    this.loading = false;
+                  
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
                 }
             }
             refreshUserPermissions();

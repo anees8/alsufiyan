@@ -61,13 +61,16 @@ export const useAdminImagesStore = defineStore("adminimagesStore", {
                     if (error.response.status === 403) {
                         router.push({ name: "NotAuthorize" });
                     } else if (error.response.status === 400) {
-                        this.errors = error.response.data.errors;
+                            this.errors = error.response.data.errors;
                     }
                 }
+                this.loading = false;
                 this.isBusy = false;
                 setTimeout(() => {
                     this.errors = {};
                 }, 5000);
+
+            
             }
         },
 
@@ -96,12 +99,18 @@ export const useAdminImagesStore = defineStore("adminimagesStore", {
                     this.hideModel();
                 } catch (error) {
                     if (error.response) {
-                        this.errors = error.response.data.errors;
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                                this.errors = error.response.data.errors;
+                        }
                     }
                     this.loading = false;
+                  
                     setTimeout(() => {
                         this.errors = {};
                     }, 5000);
+    
                 }
             } else {
                 this.loading = true;
@@ -129,9 +138,14 @@ export const useAdminImagesStore = defineStore("adminimagesStore", {
                     this.hideModel();
                 } catch (error) {
                     if (error.response) {
-                        this.errors = error.response.data.errors;
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                                this.errors = error.response.data.errors;
+                        }
                     }
                     this.loading = false;
+                  
                     setTimeout(() => {
                         this.errors = {};
                     }, 5000);
@@ -174,7 +188,15 @@ export const useAdminImagesStore = defineStore("adminimagesStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);
@@ -207,7 +229,15 @@ export const useAdminImagesStore = defineStore("adminimagesStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);
@@ -239,7 +269,15 @@ export const useAdminImagesStore = defineStore("adminimagesStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);

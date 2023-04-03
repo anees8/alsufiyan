@@ -63,17 +63,20 @@ export const useAdminSliderStore = defineStore("adminsliderStore", {
 
                 this.isBusy = false;
             } catch (error) {
-                if (error.response.status === 403) {
-                    router.push({ name: "NotAuthorize" });
-                } else if (error.response.status === 400) {
-                    if (error.response) {
-                        this.errors = error.response.data.errors;
+             
+                if (error.response) {
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                            this.errors = error.response.data.errors;
                     }
                 }
                 this.isBusy = false;
+              
                 setTimeout(() => {
                     this.errors = {};
                 }, 5000);
+              
             }
         },
 
@@ -104,10 +107,16 @@ export const useAdminSliderStore = defineStore("adminsliderStore", {
 
                     this.hideModel();
                 } catch (error) {
+
                     if (error.response) {
-                        this.errors = error.response.data.errors;
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                                this.errors = error.response.data.errors;
+                        }
                     }
                     this.loading = false;
+                  
                     setTimeout(() => {
                         this.errors = {};
                     }, 5000);
@@ -141,9 +150,14 @@ export const useAdminSliderStore = defineStore("adminsliderStore", {
                     this.hideModel();
                 } catch (error) {
                     if (error.response) {
-                        this.errors = error.response.data.errors;
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                                this.errors = error.response.data.errors;
+                        }
                     }
                     this.loading = false;
+                  
                     setTimeout(() => {
                         this.errors = {};
                     }, 5000);
@@ -189,7 +203,15 @@ export const useAdminSliderStore = defineStore("adminsliderStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);
@@ -222,7 +244,15 @@ export const useAdminSliderStore = defineStore("adminsliderStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);
@@ -254,7 +284,15 @@ export const useAdminSliderStore = defineStore("adminsliderStore", {
                             );
                         })
                         .catch((error) => {
-                            this.errors = error.response.data.errors;
+                            if (error.response) {
+                                if (error.response.status === 403) {
+                                    router.push({ name: "NotAuthorize" });
+                                } else if (error.response.status === 400) {
+                                        this.errors = error.response.data.errors;
+                                }
+                            }
+                            this.loading = false;
+                          
                             setTimeout(() => {
                                 this.errors = {};
                             }, 5000);
