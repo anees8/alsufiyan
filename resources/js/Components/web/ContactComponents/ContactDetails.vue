@@ -32,9 +32,7 @@
           <hr class="mx-5 my-2" />
 
           <p>
-            <span class="fw-normal"
-              >198 West 21th Street, Suite 721 New York NY 10016</span
-            >
+            <span class="fw-normal">{{ settings.CompanyAdress }}</span>
           </p>
         </b-card> </b-col
       ><b-col cols="12" class="col-md-3"
@@ -43,7 +41,10 @@
           <div><span class="fw-bold">Phone</span></div>
           <hr class="mx-5 my-2" />
           <p>
-            <span class="fw-normal"> + 01 234 567 89</span>
+            <span class="fw-normal">{{ settings.CompanyPhone }}</span>
+          </p>
+          <p>
+            <span class="fw-normal">{{ settings.CompanyAlternatePhone }}</span>
           </p>
         </b-card></b-col
       ><b-col cols="12" class="col-md-3"
@@ -52,7 +53,7 @@
           <div><span class="fw-bold">Email</span></div>
           <hr class="mx-5 my-2" />
           <p>
-            <span class="fw-normal"> info@example.com</span>
+            <span class="fw-normal"> {{ settings.email }}</span>
           </p>
         </b-card></b-col
       ><b-col cols="12" class="col-md-3"
@@ -62,19 +63,15 @@
           </div>
           <div><span class="fw-bold">OPENING TIMES</span></div>
           <hr class="mx-5 my-2" />
-          <p>
-            <span class="fw-normal"> MON - FRI: 10 AM - 11 PM </span><br />
-            <span class="fw-normal"> SAT : 10 AM - 07 PM</span>
-          </p>
-        </b-card></b-col
-      ></b-row
-    ></b-container
-  >
+
+          <div v-html="settings.openingTime"></div> </b-card></b-col></b-row
+  ></b-container>
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../../stores/web/settingStore.js";
 import ContactForm from "./ContactForm.vue";
-
-const { logo, slogo } = storeToRefs(useSettingStore());
+const { settings, loading } = storeToRefs(useSettingStore());
+const { getSettings } = useSettingStore();
+getSettings();
 </script>
