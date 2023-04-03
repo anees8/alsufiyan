@@ -148,7 +148,7 @@ public function index(Request $request){
     
             
             $post->update();
-            return $this->sendResponse('Post Updated Successfully.',Response::HTTP_OK);
+            return $this->sendResponse([],'Post Updated Successfully.',Response::HTTP_OK);
 
     }
 
@@ -162,14 +162,14 @@ public function index(Request $request){
     {    
         $this->authorizeForUser($request->user('api'), 'delete', Post::class);
         $post->delete();
-        return $this->sendResponse('Post Recycle Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Post Recycle Successfully.',Response::HTTP_OK);
     }
 
 
     public function restore(Request $request, Post $post){
         $this->authorizeForUser($request->user('api'), 'restore', Post::class);
         $post->restore();
-        return $this->sendResponse('Post Restore Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Post Restore Successfully.',Response::HTTP_OK);
     }
 
 public function forcedelete(Request $request, Post $post){
@@ -178,7 +178,7 @@ public function forcedelete(Request $request, Post $post){
         unlink(public_path($post->attachment));
         }
         $post->forceDelete();
-        return $this->sendResponse('Post Deleted Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Post Deleted Successfully.',Response::HTTP_OK);
 
         }
 

@@ -26,7 +26,8 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                 iconclass: "text-success",
             },
         ],
-        errors:[]
+        errors:[],
+        message:""
     }),
 
     actions: {
@@ -56,6 +57,8 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                 this.previewlogo= response.data.data.settings.logo;
                 this.previewslogo= response.data.data.settings.slogo;
 
+                this.message=response.data.message;
+               
 
             } catch (error) {
                 if (error.response) {

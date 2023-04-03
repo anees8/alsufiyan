@@ -84,7 +84,7 @@ class UsersController extends Controller
 
         $request->user()->token()->delete();
         // $request->user()->token()->revoke();
-        return $this->sendResponse('User Successfully logged out.',Response::HTTP_OK);
+        return $this->sendResponse([],'User Successfully logged out.',Response::HTTP_OK);
        
 
         }
@@ -167,7 +167,7 @@ class UsersController extends Controller
         $user->email =  $request->email;   
          
         $user->update();
-        return $this->sendResponse('User Updated Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'User Updated Successfully.',Response::HTTP_OK);
 
     }
 
@@ -181,7 +181,7 @@ class UsersController extends Controller
     {
         $this->authorizeForUser($request->user('api'), 'delete', User::class);
         $user->delete();
-        return $this->sendResponse('User Recycle Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'User Recycle Successfully.',Response::HTTP_OK);
 
     }
 
@@ -189,14 +189,14 @@ class UsersController extends Controller
         $this->authorizeForUser($request->user('api'), 'restore', User::class);
 
         $user->restore();
-        return $this->sendResponse('User Restore Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'User Restore Successfully.',Response::HTTP_OK);
     }
 
     public function forcedelete(Request $request, User $user){
         $this->authorizeForUser($request->user('api'), 'forceDelete', User::class);
             
         $user->forceDelete();
-        return $this->sendResponse('User Deleted Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'User Deleted Successfully.',Response::HTTP_OK);
 
     }
 

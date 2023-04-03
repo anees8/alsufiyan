@@ -101,6 +101,41 @@ class SettingController extends Controller
 
 
 
+
+        if ($request->has('CompanyName')) {
+            $setting->CompanyName = $request->CompanyName;
+        }
+        if ($request->has('email')) {
+            $setting->email = $request->email;
+        }
+
+        if ($request->has('CompanyPhone')) {
+            $setting->CompanyPhone = $request->CompanyPhone;
+        }
+        if ($request->has('CompanyAlternatePhone')) {
+            $setting->CompanyAlternatePhone = $request->CompanyAlternatePhone;
+        }
+        if ($request->has('CompanyAdress')) {
+            $setting->CompanyAdress = $request->CompanyAdress;
+        }
+
+        if ($request->has('facebook')) {
+            $setting->facebook = $request->facebook;
+        }
+        if ($request->has('youtube')) {
+            $setting->youtube = $request->youtube;
+        }
+        if ($request->has('whatsapp')) {
+            $setting->whatsapp = $request->whatsapp;
+        }
+        if ($request->has('footer')) {
+            $setting->footer = $request->footer;
+        }
+        if ($request->has('copyright')) {
+            $setting->copyright = $request->copyright;
+        }
+
+        
             if ($request->file('logo')) {
             if (File::exists(public_path($setting->logo))) {
             unlink(public_path($setting->logo));
@@ -121,7 +156,7 @@ class SettingController extends Controller
             }
 
         $setting->update();
-        return $this->sendResponse('Settings Updated Successfully.',Response::HTTP_OK);
+        return $this->sendResponse($setting,'Settings Updated Successfully',Response::HTTP_OK);
 
     }
 

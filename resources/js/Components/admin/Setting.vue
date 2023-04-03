@@ -309,7 +309,7 @@ import { storeToRefs } from "pinia";
 import { useLoginStore } from "../../stores/admin/loginStore.js";
 
 import { useAdminSettingStore } from "../../stores/admin/settingsStore";
-const { settings, previewlogo, previewslogo, loading, errors } = storeToRefs(
+const { settings, previewlogo, previewslogo, loading, message, errors } = storeToRefs(
   useAdminSettingStore()
 );
 

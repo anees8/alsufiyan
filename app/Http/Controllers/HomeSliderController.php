@@ -154,7 +154,7 @@ public function update(Request $request, HomeSlider $homeslider){
 
     
     $homeslider->update();
-    return $this->sendResponse('Home Slider Updated Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Home Slider Updated Successfully.',Response::HTTP_OK);
     
 
 
@@ -169,13 +169,13 @@ public function update(Request $request, HomeSlider $homeslider){
 public function destroy(Request $request, HomeSlider $homeslider){
     $this->authorizeForUser($request->user('api'), 'delete', HomeSlider::class);
         $homeslider->delete();
-        return $this->sendResponse('Home Slider Recycle Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Home Slider Recycle Successfully.',Response::HTTP_OK);
     }
 
 public function restore(Request $request, HomeSlider $homeslider){  
     $this->authorizeForUser($request->user('api'), 'restore', HomeSlider::class);  
         $homeslider->restore();
-        return $this->sendResponse('Home Slider Restore Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Home Slider Restore Successfully.',Response::HTTP_OK);
     }
 
 public function forcedelete(Request $request, HomeSlider $homeslider){
@@ -185,6 +185,6 @@ public function forcedelete(Request $request, HomeSlider $homeslider){
     unlink(public_path($homeslider->image));
     }
     $homeslider->forceDelete();
-    return $this->sendResponse('Home Slider Deleted Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Home Slider Deleted Successfully.',Response::HTTP_OK);
     }
 }

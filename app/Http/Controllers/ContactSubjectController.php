@@ -115,7 +115,7 @@ class ContactSubjectController extends Controller
 
         $contactsubject->subject = $request->subject;
         $contactsubject->update();
-        return $this->sendResponse('Contact Subject Updated Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact Subject Updated Successfully.', Response::HTTP_OK);
     }
 
     /**
@@ -129,20 +129,20 @@ class ContactSubjectController extends Controller
     {
         $this->authorizeForUser($request->user('api'), 'delete', ContactSubject::class);
         $contactsubject->delete();
-        return $this->sendResponse('Contact Subject Recycle  Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact Subject Recycle  Successfully.', Response::HTTP_OK);
     }
 
     public function restore(Request $request, ContactSubject $contactsubject)
     {
         $this->authorizeForUser($request->user('api'), 'restore', ContactSubject::class);
         $contactsubject->restore();
-        return $this->sendResponse('Contact Subject Restore Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact Subject Restore Successfully.', Response::HTTP_OK);
     }
 
     public function forcedelete(Request $request, ContactSubject $contactsubject)
     {
         $this->authorizeForUser($request->user('api'), 'forceDelete', ContactSubject::class);
         $contactsubject->forceDelete();
-        return $this->sendResponse('Contact Subject Deleted Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact Subject Deleted Successfully.', Response::HTTP_OK);
     }
 }

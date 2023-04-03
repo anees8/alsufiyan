@@ -92,7 +92,7 @@ class HomeCounterController extends Controller
         $homecounter->counter = $request->counter;
 
         $homecounter->update();
-        return $this->sendResponse('Home Counter Updated Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Home Counter Updated Successfully.', Response::HTTP_OK);
 
     }
 
@@ -107,20 +107,20 @@ class HomeCounterController extends Controller
     {
         $this->authorizeForUser($request->user('api'), 'delete', HomeCounter::class);
         $homecounter->delete();
-        return $this->sendResponse('Contact Counter Recycle  Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact Counter Recycle  Successfully.', Response::HTTP_OK);
     }
 
     public function restore(Request $request, HomeCounter $homecounter)
     {
         $this->authorizeForUser($request->user('api'), 'restore', HomeCounter::class);
         $homecounter->restore();
-        return $this->sendResponse('Contact Counter Restore Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact Counter Restore Successfully.', Response::HTTP_OK);
     }
 
     public function forcedelete(Request $request, HomeCounter $homecounter)
     {
         $this->authorizeForUser($request->user('api'), 'forceDelete', HomeCounter::class);
         $homecounter->forceDelete();
-        return $this->sendResponse('Contact Counter Deleted Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact Counter Deleted Successfully.', Response::HTTP_OK);
     }
 }

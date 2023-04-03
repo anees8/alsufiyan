@@ -129,7 +129,7 @@ class PermissionsController extends Controller
         }            
         $permission->update();
          $permission->roles()->sync($request->roles);
-        return $this->sendResponse('Role Updated Successfully.',Response::HTTP_OK);     
+        return $this->sendResponse([],'Role Updated Successfully.',Response::HTTP_OK);     
     }
 
     /**
@@ -143,7 +143,7 @@ class PermissionsController extends Controller
         $this->authorizeForUser($request->user('api'),'delete', Permission::class);
         $permission->roles()->detach();
         $permission->delete();
-        return $this->sendResponse('Permission deleted Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Permission deleted Successfully.',Response::HTTP_OK);
 
     
     }

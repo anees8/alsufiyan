@@ -156,7 +156,7 @@ class RolesController extends Controller
         if($request->has('user')){
         $role->users()->sync($request->user);
         }
-        return $this->sendResponse('Role Updated Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Role Updated Successfully.',Response::HTTP_OK);
     }
 
     /**
@@ -170,6 +170,6 @@ class RolesController extends Controller
         $this->authorizeForUser($request->user('api'),'delete', Role::class);
         $role->permissions()->detach();
         $role->delete();
-        return $this->sendResponse('Role deleted Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Role deleted Successfully.',Response::HTTP_OK);
     }
 }

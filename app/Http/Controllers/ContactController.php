@@ -126,7 +126,7 @@ class ContactController extends Controller
         $this->authorizeForUser($request->user('api'), 'delete', Contact::class);
         $contact->delete();
 
-        return $this->sendResponse('Contact  Recycle Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact  Recycle Successfully.', Response::HTTP_OK);
     }
 
     public function restore(Request $request, Contact $contact)
@@ -134,7 +134,7 @@ class ContactController extends Controller
 
         $this->authorizeForUser($request->user('api'), 'restore', Contact::class);
         $contact->restore();
-        return $this->sendResponse('Contact  Restored Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact  Restored Successfully.', Response::HTTP_OK);
     }
 
     public function forcedelete(Request $request, Contact $contact)
@@ -142,7 +142,7 @@ class ContactController extends Controller
         $this->authorizeForUser($request->user('api'), 'forcedelete', Contact::class);
 
         $contact->forceDelete();
-        return $this->sendResponse('Contact  Deleted Successfully.', Response::HTTP_OK);
+        return $this->sendResponse([],'Contact  Deleted Successfully.', Response::HTTP_OK);
 
     }
 }

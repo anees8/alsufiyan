@@ -53,10 +53,11 @@ export const useAdminBlogsStore = defineStore("adminblogsStore", {
                 this.rows = response.data.data.posts.total;
 
                 this.isBusy = false;
-            } catch (error) {
-                setTimeout(() => {
+                  setTimeout(() => {
                     this.message = {};
                 }, 5000);
+            } catch (error) {
+              
                 if (error.response) {
                     if (error.response.status === 403) {
                         router.push({ name: "NotAuthorize" });

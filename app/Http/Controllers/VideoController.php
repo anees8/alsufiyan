@@ -149,7 +149,7 @@ public function update(Request $request, Video $video)
 
         
         $video->update();
-        return $this->sendResponse('Video Updated Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Video Updated Successfully.',Response::HTTP_OK);
       
     }
 
@@ -162,13 +162,13 @@ public function update(Request $request, Video $video)
 public function destroy(Request $request, Video $video){
     $this->authorizeForUser($request->user('api'), 'delete', Video::class);
     $video->delete();
-    return $this->sendResponse('Video Recycle Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Video Recycle Successfully.',Response::HTTP_OK);
     }
 
 public function restore(Request $request, Video $video){
     $this->authorizeForUser($request->user('api'), 'restore', Video::class);
     $video->restore();
-    return $this->sendResponse('Video Restore Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Video Restore Successfully.',Response::HTTP_OK);
     }
 
 public function forcedelete(Request $request, Video $video){
@@ -177,7 +177,7 @@ public function forcedelete(Request $request, Video $video){
     unlink(public_path($video->video_url));
     }
     $video->forceDelete();
-    return $this->sendResponse('Video Deleted Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Video Deleted Successfully.',Response::HTTP_OK);
     }
 
 }

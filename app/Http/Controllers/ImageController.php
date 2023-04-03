@@ -136,7 +136,7 @@ public function update(Request $request,Image $image){
 
         
         $image->update();
-        return $this->sendResponse('Image Updated Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Image Updated Successfully.',Response::HTTP_OK);
       
     }
 
@@ -149,14 +149,14 @@ public function update(Request $request,Image $image){
 public function destroy(Request $request, Image $image){
     $this->authorizeForUser($request->user('api'), 'delete', Image::class);
     $image->delete();
-    return $this->sendResponse('Image Recycle Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Image Recycle Successfully.',Response::HTTP_OK);
     }
 
 public function restore(Request $request, Image $image){
 
     $this->authorizeForUser($request->user('api'), 'restore', Image::class);
     $image->restore();
-    return $this->sendResponse('Image Restore Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Image Restore Successfully.',Response::HTTP_OK);
     }
 
 public function forcedelete(Request $request, Image $image){
@@ -166,7 +166,7 @@ public function forcedelete(Request $request, Image $image){
     }
 
     $image->forceDelete();
-    return $this->sendResponse('Image Deleted Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Image Deleted Successfully.',Response::HTTP_OK);
     }
 
 

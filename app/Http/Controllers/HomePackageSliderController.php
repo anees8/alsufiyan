@@ -189,7 +189,7 @@ public function update(Request $request, HomePackageSlider $homepackageslider)
         
             
             $homepackageslider->update();
-            return $this->sendResponse('Home Package Slider Updated Successfully.',Response::HTTP_OK);
+            return $this->sendResponse([],'Home Package Slider Updated Successfully.',Response::HTTP_OK);
             
         
     }
@@ -203,14 +203,14 @@ public function update(Request $request, HomePackageSlider $homepackageslider)
 public function destroy(Request $request, HomePackageSlider $homepackageslider){
     $this->authorizeForUser($request->user('api'), 'delete', HomePackageSlider::class);
     $homepackageslider->delete();
-    return $this->sendResponse('Home Package Recycle Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Home Package Recycle Successfully.',Response::HTTP_OK);
  }
 
 public function restore(Request $request, HomePackageSlider $homepackageslider){
     $this->authorizeForUser($request->user('api'), 'restore', HomePackageSlider::class);
 
     $homepackageslider->restore();
-    return $this->sendResponse('Home Package Restore Successfully.',Response::HTTP_OK);
+    return $this->sendResponse([],'Home Package Restore Successfully.',Response::HTTP_OK);
  }
 
 public function forcedelete(Request $request, HomePackageSlider $homepackageslider){
@@ -220,6 +220,6 @@ public function forcedelete(Request $request, HomePackageSlider $homepackageslid
             }
     
         $homepackageslider->forceDelete();
-        return $this->sendResponse('Home Package Deleted Successfully.',Response::HTTP_OK);
+        return $this->sendResponse([],'Home Package Deleted Successfully.',Response::HTTP_OK);
     }
 }
