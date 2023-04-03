@@ -103,6 +103,11 @@ Route::get('/homeslider', [HomeSliderController::class, 'index']);
 
 Route::get('/homepackageslider', [HomePackageSliderController::class, 'index']);
 
+// Route::get('/test', function (Request $request) {
+
+
+//    return App\Models\Permission::get()->groupBy("group_id");
+// });
 
     
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

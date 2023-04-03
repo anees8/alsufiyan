@@ -221,40 +221,40 @@ class DatabaseSeeder extends Seeder
                     \App\Models\Setting::create($setting);
                     }
 
-                    // DB::table('group_permissions')->insert(
+                    // DB::table('permission_groups')->insert(
                     //   array([
                     //     'id'    => 1,
-                    //     'name'  => 'Users',
+                    //     'group_name'  => 'Users',
                     //   ],[
                     //     'id'    => 2,
-                    //     'name'  => 'Videos',
+                    //     'group_name'  => 'Videos',
                     //   ],[
                     //     'id'    => 3,
-                    //     'name'  => 'Images',
+                    //     'group_name'  => 'Images',
                     //   ],[
                     //     'id'    => 4,
-                    //     'name'  => 'Blogs',
+                    //     'group_name'  => 'Blogs',
                     //   ],[
                     //     'id'    => 5,
-                    //     'name'  => 'Slider',
+                    //     'group_name'  => 'Slider',
                     //   ],[
                     //     'id'    => 6,
-                    //     'name'  => 'Packages',
+                    //     'group_name'  => 'Packages',
                     //   ],[
                     //     'id'    => 7,
-                    //     'name'  => 'Counters',
+                    //     'group_name'  => 'Counters',
                     //   ],[
                     //     'id'    => 8,
-                    //     'name'  => 'Contacts',
+                    //     'group_name'  => 'Contacts',
                     //   ],[
                     //     'id'    => 9,
-                    //     'name'  => 'Contacts Subject',
+                    //     'group_name'  => 'Contacts Subject',
                     //   ],[
                     //     'id'    => 10,
-                    //     'name'  => 'Roles',
+                    //     'group_name'  => 'Roles',
                     //   ],[
                     //     'id'    => 11,
-                    //     'name'  => 'Permissions',
+                    //     'group_name'  => 'Permissions',
                     //   ],
                     // ));
                     
@@ -263,41 +263,41 @@ class DatabaseSeeder extends Seeder
                         'id'    => 1,
                         'name'  => 'Users List',
                         'slug'  => 'users_list',
-                        // 'permissiongroup_id'=>1,
+                        // 'group_id'=>1,
                       ],
                       [
                         'id'    => 2,
                         'name'  => 'User Edit',
                         'slug'  => 'user_edit',
-                        // 'permissiongroup_id'=>1,
+                        // 'group_id'=>1,
                       
                       ],
                       [
                         'id'    => 3,
                         'name'  => 'User Delete',
                         'slug'  => 'user_delete',
-                        // 'permissiongroup_id'=>1,
+                        // 'group_id'=>1,
                       
                       ],
                       [
                         'id'    => 4,
                         'name'  => 'User Add',
                         'slug'  => 'user_add',
-                        // 'permissiongroup_id'=>1,
+                        // 'group_id'=>1,
                       
                       ],
                       [
                         'id'    => 5,
                         'name'  => 'User Restore',
                         'slug'  => 'user_restore',
-                        // 'permissiongroup_id'=>1,
+                        // 'group_id'=>1,
                       
                       ],
                       [
                         'id'    => 6,
                         'name'  => 'User Force Delete',
                         'slug'  => 'user_forceDelete',
-                        // 'permissiongroup_id'=>1,
+                        // 'group_id'=>1,
                       
                       ],
 
@@ -305,7 +305,7 @@ class DatabaseSeeder extends Seeder
                         'id'    => 7,
                         'name'  => 'Videos List',
                         'slug'  => 'videos_list',
-                        // 'permissiongroup_id'=>2,
+                        // 'group_id'=>2,
                       
                       ],
 
@@ -313,119 +313,119 @@ class DatabaseSeeder extends Seeder
                         'id'    => 8,
                         'name'  => 'Video Edit',
                         'slug'  => 'video_edit',
-                        // 'permissiongroup_id'=>2,
+                        // 'group_id'=>2,
                       
                       ],
                       [
                         'id'    => 9,
                         'name'  => 'Video Delete',
                         'slug'  => 'video_delete',
-                        // 'permissiongroup_id'=>2,
+                        // 'group_id'=>2,
                       
                       ],
                       [
                         'id'    => 10,
                         'name'  => 'Video Add',
                         'slug'  => 'video_add',
-                        // 'permissiongroup_id'=>2,
+                        // 'group_id'=>2,
                       
                       ],
                       [
                         'id'    => 11,
                         'name'  => 'Video Restore',
                         'slug'  => 'video_restore',
-                        // 'permissiongroup_id'=>2,
+                        // 'group_id'=>2,
                       
                       ],
                       [
                         'id'    => 12,
                         'name'  => 'Video Force Delete',
                         'slug'  => 'video_forceDelete',
-                        // 'permissiongroup_id'=>2,
+                        // 'group_id'=>2,
                       
                       ],
                       [
                         'id'    => 13,
                         'name'  => 'Images List',
                         'slug'  => 'images_list',
-                        // 'permissiongroup_id'=>3,
+                        // 'group_id'=>3,
                       
                       ],
                       [
                         'id'    => 14,
                         'name'  => 'Image Edit',
                         'slug'  => 'image_edit',
-                        // 'permissiongroup_id'=>3,
+                        // 'group_id'=>3,
                       
                       ],
                       [
                         'id'    => 15,
                         'name'  => 'Image Delete',
                         'slug'  => 'image_delete',
-                        // 'permissiongroup_id'=>3,
+                        // 'group_id'=>3,
                       
                       ],
                       [
                         'id'    => 16,
                         'name'  => 'Image Add',
                         'slug'  => 'image_add',
-                        // 'permissiongroup_id'=>3,
+                        // 'group_id'=>3,
                       
                       ],
                       [
                         'id'    => 17,
                         'name'  => 'Image Restore',
                         'slug'  => 'image_restore',
-                        // 'permissiongroup_id'=>3,
+                        // 'group_id'=>3,
                       
                       ],
                       [
                         'id'    => 18,
                         'name'  => 'Image Force Delete',
                         'slug'  => 'image_forceDelete',
-                        // 'permissiongroup_id'=>3,
+                        // 'group_id'=>3,
                       
                       ],
                       [
                         'id'    => 19,
                         'name'  => 'Blogs List',
                         'slug'  => 'blogs_list',
-                        // 'permissiongroup_id'=>4,
+                        // 'group_id'=>4,
                       
                       ],
                       [
                         'id'    => 20,
                         'name'  => 'Blog Edit',
                         'slug'  => 'blog_edit',
-                        // 'permissiongroup_id'=>4,
+                        // 'group_id'=>4,
                       
                       ],
                       [
                         'id'    => 21,
                         'name'  => 'Blog Delete',
                         'slug'  => 'blog_delete',
-                        // 'permissiongroup_id'=>4,
+                        // 'group_id'=>4,
                       
                       ],
                       [
                         'id'    => 22,
                         'name'  => 'Blog Add',
                         'slug'  => 'blog_add',
-                        // 'permissiongroup_id'=>4,
+                        // 'group_id'=>4,
                       
                       ],
                       [
                         'id'    => 23,
                         'name'  => 'Blog Restore',
                         'slug'  => 'blog_restore',
-                        // 'permissiongroup_id'=>4,
+                        // 'group_id'=>4,
                       
                       ],
                       [
                         'id'    => 24,
                         'name'  => 'Blog Force Delete',
                         'slug'  => 'blog_forceDelete',
-                        // 'permissiongroup_id'=>4,
+                        // 'group_id'=>4,
                       
                       ],
                       
@@ -433,258 +433,258 @@ class DatabaseSeeder extends Seeder
                         'id'    => 25,
                         'name'  => 'Sliders List',
                         'slug'  => 'home_slider_list',
-                        // 'permissiongroup_id'=>5,
+                        // 'group_id'=>5,
                       ],
 
                       [
                         'id'    => 26,
                         'name'  => 'Slider Add',
                         'slug'  => 'home_slider_add',
-                        // 'permissiongroup_id'=>5,
+                        // 'group_id'=>5,
                       ],
                       [
                         'id'    => 27,
                         'name'  => 'Slider Edit',
                         'slug'  => 'home_slider_edit',
-                        // 'permissiongroup_id'=>5,
+                        // 'group_id'=>5,
                       ],
                       [
                         'id'    => 28,
                         'name'  => 'Slider Delete',
                         'slug'  => 'home_slider_delete',
-                        // 'permissiongroup_id'=>5,
+                        // 'group_id'=>5,
                       ],
                       [
                         'id'    => 29,
                         'name'  => 'Slider Restore',
                         'slug'  => 'home_slider_restore',
-                        // 'permissiongroup_id'=>5,
+                        // 'group_id'=>5,
                       ],
                       [
                         'id'    => 30,
                         'name'  => 'Slider Force Delete',
                         'slug'  => 'home_slider_forceDelete',
-                        // 'permissiongroup_id'=>5,
+                        // 'group_id'=>5,
                       ],
 
                       [
                         'id'    => 31,
                         'name'  => 'Packages List',
                         'slug'  => 'home_package_slider_list',
-                        // 'permissiongroup_id'=>6,
+                        // 'group_id'=>6,
                       
                       ],
                       [
                         'id'    => 32,
                         'name'  => 'Package Add',
                         'slug'  => 'home_package_slider_add',
-                        // 'permissiongroup_id'=>6,  
+                        // 'group_id'=>6,  
                       ],
                       [
                         'id'    => 33,
                         'name'  => 'Package Edit',
                         'slug'  => 'home_package_slider_edit',
-                        // 'permissiongroup_id'=>6,  
+                        // 'group_id'=>6,  
                       ],
                       [
                         'id'    => 34,
                         'name'  => 'Package Delete',
                         'slug'  => 'home_package_slider_delete',
-                        // 'permissiongroup_id'=>6,  
+                        // 'group_id'=>6,  
                       ],
                       [
                         'id'    => 35,
                         'name'  => 'Package Restore',
                         'slug'  => 'home_package_slider_restore',
-                        // 'permissiongroup_id'=>6,  
+                        // 'group_id'=>6,  
                       ],
                       [
                         'id'    => 36,
                         'name'  => 'Package Force Delete',
                         'slug'  => 'home_package_slider_forceDelete',
-                        // 'permissiongroup_id'=>6,  
+                        // 'group_id'=>6,  
                       ],
                       [
                         'id'    => 37,
                         'name'  => 'Counters List',
                         'slug'  => 'home_counter_list',
-                        // 'permissiongroup_id'=>7,
+                        // 'group_id'=>7,
                       ],
                       [
                         'id'    => 38,
                         'name'  => 'Counter Add',
                         'slug'  => 'home_counter_add',
-                        // 'permissiongroup_id'=>7,
+                        // 'group_id'=>7,
                       ],
                       [
                         'id'    => 39,
                         'name'  => 'Counter Edit',
                         'slug'  => 'home_counter_edit',
-                        // 'permissiongroup_id'=>7,
+                        // 'group_id'=>7,
                       ],
                       [
                         'id'    => 40,
                         'name'  => 'Counter Delete',
                         'slug'  => 'home_counter_delete',
-                        // 'permissiongroup_id'=>7,
+                        // 'group_id'=>7,
                       ],
                       [
                         'id'    => 41,
                         'name'  => 'Counter Restore',
                         'slug'  => 'home_counter_restore',
-                        // 'permissiongroup_id'=>7,
+                        // 'group_id'=>7,
                       ],
                       [
                         'id'    => 42,
                         'name'  => 'Counter Force Delete',
                         'slug'  => 'home_counter_forceDelete',
-                        // 'permissiongroup_id'=>7,
+                        // 'group_id'=>7,
                       ],
                       [
                         'id'    => 43,
                         'name'  => 'Contacts List',
                         'slug'  => 'contacts_list',
-                            // 'permissiongroup_id'=>8,
+                            // 'group_id'=>8,
                       ],
                       [
                         'id'    => 44,
                         'name'  => 'Contact Add',
                         'slug'  => 'contacts_add',
-                            // 'permissiongroup_id'=>8,
+                            // 'group_id'=>8,
                       ],
                       [
                         'id'    => 45,
                         'name'  => 'Contact Edit',
                         'slug'  => 'contacts_edit',
-                            // 'permissiongroup_id'=>8,
+                            // 'group_id'=>8,
                       ],
                       [
                         'id'    => 46,
                         'name'  => 'Contact Delete',
                         'slug'  => 'contacts_delete',
-                            // 'permissiongroup_id'=>8,
+                            // 'group_id'=>8,
                       ],
                       [
                         'id'    => 47,
                         'name'  => 'Contact Restore',
                         'slug'  => 'contacts_restore',
-                            // 'permissiongroup_id'=>8,
+                            // 'group_id'=>8,
                       ],
                       [
                         'id'    => 48,
                         'name'  => 'Contact Force Delete',
                         'slug'  => 'contacts_forceDelete',
-                            // 'permissiongroup_id'=>8,
+                            // 'group_id'=>8,
                       ],
                       [
                         'id'    => 49,
                         'name'  => 'Contacts Subject List',
                         'slug'  => 'contact_subject_list',
-                            // 'permissiongroup_id'=>9,
+                            // 'group_id'=>9,
                       ],
                       [
                         'id'    => 50,
                         'name'  => 'Contacts Subject Add',
                         'slug'  => 'contact_subject_add',
-                      // 'permissiongroup_id'=>9,
+                      // 'group_id'=>9,
                       ],
                       [
                         'id'    => 51,
                         'name'  => 'Contacts Subject Edit',
                         'slug'  => 'contact_subject_edit',
-                      // 'permissiongroup_id'=>9,
+                      // 'group_id'=>9,
                       ],
                       [
                         'id'    => 52,
                         'name'  => 'Contacts Subject Delete',
                         'slug'  => 'contact_subject_delete',
-                      // 'permissiongroup_id'=>9,
+                      // 'group_id'=>9,
                       ],
                       [
                         'id'    => 53,
                         'name'  => 'Contacts Subject Restore',
                         'slug'  => 'contact_subject_restore',
-                      // 'permissiongroup_id'=>9,
+                      // 'group_id'=>9,
                       ],
                       [
                         'id'    => 54,
                         'name'  => 'Contacts Subject Force Delete',
                         'slug'  => 'contact_subject_forceDelete',
-                      // 'permissiongroup_id'=>9,
+                      // 'group_id'=>9,
                       ],
                       [
                         'id'    => 55,
                         'name'  => 'Roles List',
                         'slug'  => 'role_list',
-                      // 'permissiongroup_id'=>10,
+                      // 'group_id'=>10,
                       ],
                       [
                         'id'    => 56,
                         'name'  => 'Roles Add',
                         'slug'  => 'role_add',
-                        // 'permissiongroup_id'=>10,
+                        // 'group_id'=>10,
                       
                       ],
                       [
                         'id'    => 57,
                         'name'  => 'Roles Edit',
                         'slug'  => 'role_edit',
-                      // 'permissiongroup_id'=>10,
+                      // 'group_id'=>10,
                       ],
                       [
                         'id'    => 58,
                         'name'  => 'Roles Delete',
                         'slug'  => 'role_delete',
-                      // 'permissiongroup_id'=>10,
+                      // 'group_id'=>10,
                       ],
                       [
                         'id'    => 59,
                         'name'  => 'Roles Restore',
                         'slug'  => 'role_restore',
-                      // 'permissiongroup_id'=>10,
+                      // 'group_id'=>10,
                       ],
                       [
                         'id'    => 60,
                         'name'  => 'Roles Force Delete',
                         'slug'  => 'role_forceDelete',
-                      // 'permissiongroup_id'=>10,
+                      // 'group_id'=>10,
                       ],
 
                       [
                         'id'    => 61,
                         'name'  => 'Permissions List',
                         'slug'  => 'permission_list',
-                      // 'permissiongroup_id'=>11,
+                      // 'group_id'=>11,
                       ],
                       [
                         'id'    => 62,
                         'name'  => 'Permissions Add',
                         'slug'  => 'permission_add',
-                      // 'permissiongroup_id'=>11,
+                      // 'group_id'=>11,
                       ],
                       [
                         'id'    => 63,
                         'name'  => 'Permissions Edit',
                         'slug'  => 'permission_edit',
-                      // 'permissiongroup_id'=>11,
+                      // 'group_id'=>11,
                       ],
                       [
                         'id'    => 64,
                         'name'  => 'Permissions Delete',
                         'slug'  => 'permission_delete',
-                      // 'permissiongroup_id'=>11,
+                      // 'group_id'=>11,
                       ],
                       [
                         'id'    => 65,
                         'name'  => 'Permissions Restore',
                         'slug'  => 'permission_restore',
-                      // 'permissiongroup_id'=>11,
+                      // 'group_id'=>11,
                       ],
                       [
                         'id'    => 66,
                         'name'  => 'Permissions Force Delete',
                         'slug'  => 'permission_forceDelete',
-                      // 'permissiongroup_id'=>11,
+                      // 'group_id'=>11,
                       ],
 
 

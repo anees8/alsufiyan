@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug');
+            // $table->unsignedBigInteger('group_id');
+            // $table->foreign('group_id')->references('id')->on('permission_groups')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
