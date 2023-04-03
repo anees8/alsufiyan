@@ -3,11 +3,7 @@ import axios from "axios";
 
 export const useSettingStore = defineStore("settingStore", {
     state: () => ({
-        logo: "/logo/logo.png",
-        slogo: "/logo/slogo2.png",
-        loading: false,
-        FooterAbout:
-            " Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc.",
+         settings:[],
         social_icons: [
             {
                 icon: "fa-brands fa-facebook-f",
@@ -24,7 +20,37 @@ export const useSettingStore = defineStore("settingStore", {
 
     actions: {
 
-      
+        async getSettings() {
+            this.loading = true;
+           
+            try {
+                let url = "setting";
+             
+                const response = await axios.get(url);
+
+                this.settings=response.data.data.settings;
+            
+                this.loading = false;
+               
+
+            } catch (error) {
+                if (error.response) {
+                    if (error.response.status === 403) {
+                        router.push({ name: "NotAuthorize" });
+                    } else if (error.response.status === 400) {
+                        this.errors = error.response.data.errors;
+                    }
+                }
+                this.isBusy = false;
+                setTimeout(() => {
+                    this.errors = {};
+                }, 5000);
+            }
+           
+          
+
+
+        },
 
 
     },

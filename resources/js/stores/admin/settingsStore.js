@@ -27,6 +27,7 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
             },
         ],
         errors:[],
+
         message:""
     }),
 
@@ -47,6 +48,7 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
             };
         },
         async getSettings() {
+            this.loading = true;
            
             try {
                 let url = "settings";
@@ -56,8 +58,7 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                 this.settings=response.data.data.settings;
                 this.previewlogo= response.data.data.settings.logo;
                 this.previewslogo= response.data.data.settings.slogo;
-
-                this.message=response.data.message;
+                this.loading = false;
                
 
             } catch (error) {
@@ -79,7 +80,7 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
 
         },
       async  onSettingChange(){
-          
+        this.loading = true;
             const formData = new FormData();
             let config = {
                 header: {
@@ -128,6 +129,12 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
             if (this.settings.copyright) {
                 formData.append("copyright", this.settings.copyright);
             }
+            if (this.settings.openingTime) {
+                formData.append("openingTime", this.settings.openingTime);
+            }
+
+
+            
          
             try {
                 formData.append("_method", "put");
@@ -136,6 +143,16 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                     formData,
                     config
                 );
+
+                 this.message=response.data.message;
+                setTimeout(() => {
+                    this.message = "";
+                }, 5000);
+
+                setTimeout(() => {
+                    this.loading = false;
+                }, 2000);
+              
                
             } catch (error) {
                 if (error.response) {

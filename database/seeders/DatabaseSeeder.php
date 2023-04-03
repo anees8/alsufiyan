@@ -198,7 +198,7 @@ class DatabaseSeeder extends Seeder
                     ["email" =>"info@example.com",
 
                     "CompanyName"=>"Testing",
-
+                    "openingTime"=>"<p>Monday: Friday: 10.00 - 23.00</p><p>Saturday: 10.00 - 19.00</p>",
                     "logo"=>"/logo/logo.png",
 
                     "slogo"=>"/logo/slogo.png",

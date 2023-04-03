@@ -3,11 +3,11 @@
   <!-- Footer -->
 
   <footer class="text-center text-lg-start bg-white text-dark">
-    <div class="container-fluid text-md-start mt-5">
+    <div class="container text-md-start mt-5">
       <!-- Grid row -->
       <div class="row mt-3">
         <!-- Grid column -->
-        <div class="col-md-6 col-lg-4 col-xl-4 mx-auto mb-4">
+        <div class="col-md-6 col-lg-4 col-xl-4 mb-4">
           <!-- Content -->
           <h5 class="text-uppercase mb-4 d-flex" v-if="loading">
             <b-skeleton type="avatar" class="mx-1"></b-skeleton>
@@ -18,8 +18,15 @@
             ></b-skeleton>
           </h5>
           <h5 class="text-uppercase mb-4" v-else>
-            <img loading="lazy" class="ms-5" :src="logo" alt="" width="50" height="50" />
-            <img loading="lazy" :src="slogo" alt="" height="60" />
+            <img
+              loading="lazy"
+              class="ms-xl-5"
+              :src="settings.logo"
+              alt=""
+              width="50"
+              height="50"
+            />
+            <img loading="lazy" :src="settings.slogo" alt="" height="60" />
           </h5>
           <p v-if="loading">
             <b-skeleton animation="fade" width="100%"></b-skeleton>
@@ -27,71 +34,75 @@
             <b-skeleton animation="fade" width="90%"></b-skeleton>
           </p>
 
-          <p v-if="FooterAbout && !loading">
-            {{ FooterAbout }}
+          <p v-if="settings.footer && !loading">
+            {{ settings.footer }}
           </p>
         </div>
 
         <!-- Grid column -->
-        <div class="col-md-4 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link class="nav-link text-dark" to="/"
-                ><font-awesome-icon class="me-2" icon="home" />Home</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link text-dark" to="/about"
-                ><font-awesome-icon class="me-2" icon="address-card" />About</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link text-dark" to="/contact"
-                ><font-awesome-icon class="me-2" icon="envelope" />Contact</router-link
-              >
-            </li>
-          </ul>
-        </div>
-        <!-- Grid column -->
-        <div
-          class="col-md-6 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 d-flex justify-content-center row align-items-center text-center"
-        >
-          <h6 class="text-uppercase fw-bold mb-4">Opening times</h6>
+        <div class="col-md-6 col-lg-4 col-xl-4 text-center">
+          <h6 class="text-uppercase fw-bold mb-5">Opening times</h6>
 
-          <p>Monday: Friday: 10.00 - 23.00</p>
-          <p>Saturday: 10.00 - 19.00</p>
-
+          <div v-html="settings.openingTime"></div>
           <p>
             <a
-              v-for="(social_icon, index) in social_icons"
-              :key="index"
+              v-if="settings.facebook"
               class="nav-link text-dark me-3 d-inline"
-              :to="social_icon.url"
+              :href="settings.facebook"
               target="_blank"
             >
               <font-awesome-icon
-                :icon="social_icon.icon"
-                :class="social_icon.iconclass"
+                icon="fa-brands fa-facebook-f"
+                class="text-primary"
+                size="xl"
+              />
+            </a>
+            <a
+              v-if="settings.whatsapp"
+              class="nav-link text-dark me-3 d-inline"
+              :href="settings.whatsapp"
+              target="_blank"
+            >
+              <font-awesome-icon
+                icon="fa-brands fa-whatsapp"
+                class="text-success"
+                size="xl"
+              />
+            </a>
+            <a
+              v-if="settings.youtube"
+              class="nav-link text-dark me-3 d-inline"
+              :href="settings.youtube"
+              target="_blank"
+            >
+              <font-awesome-icon
+                icon="fa-brands fa-youtube"
+                class="text-danger"
                 size="xl"
               />
             </a>
           </p>
         </div>
         <!-- Grid column -->
-        <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+        <div class="col-md-6 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p>
+          <p v-if="settings.CompanyAdress">
             <font-awesome-icon icon="location-dot" class="me-3" />
-            123 Main St, Anytown USA 12345
+            {{ settings.CompanyAdress }}
           </p>
-          <p>
+          <p v-if="settings.email">
             <font-awesome-icon icon="envelope" class="me-3" />
-            info@example.com
+            {{ settings.email }}
           </p>
-          <p><font-awesome-icon icon="phone" class="me-3" /> + 01 234 567 89</p>
+          <p v-if="settings.CompanyPhone">
+            <font-awesome-icon icon="mobile-screen" class="me-3" />
+            {{ settings.CompanyPhone }}
+          </p>
+          <p v-if="settings.CompanyAlternatePhone">
+            <font-awesome-icon icon="mobile-screen" class="me-3" />
+            {{ settings.CompanyAlternatePhone }}
+          </p>
         </div>
         <!-- Grid column -->
       </div>
@@ -100,9 +111,7 @@
 
     <!-- Copyright -->
     <div class="text-center p-4 bg-white text-dark border-top border-1">
-      © 2023 Copyright:
-      <a class="text-reset fw-bold" href="#">Al Sufiyan</a>
-      Website Proudly Developed & Maintained by MEERANJI TECHNOLOGY, INDIA
+      <div v-html="settings.copyright"></div>
     </div>
     <!-- Copyright -->
   </footer>
@@ -111,7 +120,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../stores/web/settingStore.js";
-const { logo, slogo, FooterAbout, social_icons, loading } = storeToRefs(
-  useSettingStore()
-);
+const { settings, loading } = storeToRefs(useSettingStore());
+const { getSettings } = useSettingStore();
+getSettings();
 </script>

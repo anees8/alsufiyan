@@ -7,18 +7,18 @@
         <b-skeleton type="avatar" class="mx-1"></b-skeleton>
         <b-skeleton
           type="image"
-          style="height: 48px; width: 135px"
+          style="height: 48px; width: 130px"
           class="p-1"
         ></b-skeleton>
       </a>
 
       <a v-else class="navbar-brand" href="#">
-        <img loading="lazy" class="mx-1" :src="logo" height="48" />
+        <img loading="lazy" class="mx-1" :src="settings.logo" height="48" />
         <img
           loading="lazy"
-          :src="slogo"
+          :src="settings.slogo"
           height="48"
-          style="max-width: 135px"
+          style="max-width: 130px"
           class="p-1"
         />
       </a>
@@ -141,6 +141,8 @@
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../stores/web/settingStore.js";
 import { useLoginStore } from "../../stores/admin/loginStore.js";
-const { logo, slogo, loading } = storeToRefs(useSettingStore());
+const { settings, loading } = storeToRefs(useSettingStore());
 const { loginUser } = storeToRefs(useLoginStore());
+const { getSettings } = useSettingStore();
+getSettings();
 </script>

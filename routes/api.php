@@ -86,6 +86,7 @@ Route::middleware('auth:api')->group(function () {
 
 
 Route::get('/counter', [HomeCounterController::class, 'index']);
+Route::get('/setting', [SettingController::class, 'index']);
 
 Route::post('/contactForm', [ContactController::class, 'store']);
 

@@ -3,9 +3,16 @@
     <div class="row align-items-center justify-content-center vh-100">
       <div class="col-11 col-xl-3 col-lg-5 col-md-6 card shadow rounded p-md-4 p-2 py-5">
         <div class="text-center">
-          <button class="btn btn-dark rounded-circle p-4 mb-3">
-            <font-awesome-icon icon="fa-regular fa-user" size="2x" />
-          </button>
+          <div class="d-flex mb-4 mt-2 align-items-center justify-content-center">
+            <img loading="lazy" :src="settings.logo" width="50" />
+            <img
+              loading="lazy"
+              v-if="!smallMenu"
+              :src="settings.slogo"
+              height="50"
+              style="max-width: 10rem"
+            />
+          </div>
           <div>
             <div>
               <span v-if="errors.error" class="text-danger">{{ errors.error }}</span>
@@ -76,8 +83,13 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useLoginStore } from "@/stores/admin/loginStore.js";
+import { useSettingStore } from "../../stores/web/settingStore.js";
 const { user, errors, loading } = storeToRefs(useLoginStore());
+const { settings } = storeToRefs(useSettingStore());
+const { getSettings } = useSettingStore();
 const { login, resetForm } = useLoginStore();
 
 resetForm();
+
+getSettings();
 </script>

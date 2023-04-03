@@ -85,6 +85,7 @@ class SettingController extends Controller
             'CompanyPhone'=> 'required|min:10|max:15',   
             'CompanyAlternatePhone'=> 'required|min:10|max:15',   
             'CompanyAdress'=>'required|min:10',
+            'openingTime'=>'required|min:10',
             'slogo'=>'required',
             'logo'=>'required',
             'facebook'=>'required',
@@ -135,12 +136,16 @@ class SettingController extends Controller
             $setting->copyright = $request->copyright;
         }
 
+        if ($request->has('openingTime')) {
+            $setting->openingTime = $request->openingTime;
+        }
+
         
             if ($request->file('logo')) {
             if (File::exists(public_path($setting->logo))) {
             unlink(public_path($setting->logo));
             }
-            $logoName = time().'.'.$request->logo->extension();  
+            $logoName = time().'logo.'.$request->logo->extension();  
             $request->logo->move(public_path('logo'), $logoName);
             $setting->logo = "/logo/".$logoName;
             }
@@ -150,7 +155,7 @@ class SettingController extends Controller
             if (File::exists(public_path($setting->slogo))) {
             unlink(public_path($setting->slogo));
             }
-            $slogoName = time().'.'.$request->slogo->extension();  
+            $slogoName = time().'slogo.'.$request->slogo->extension();  
             $request->slogo->move(public_path('logo'), $slogoName);
             $setting->slogo = "/logo/".$slogoName;
             }

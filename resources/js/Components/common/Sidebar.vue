@@ -14,11 +14,11 @@
         ></b-skeleton>
       </div>
       <div class="d-flex" v-else>
-        <img loading="lazy" :src="logo" width="50" />
+        <img loading="lazy" :src="settings.logo" width="50" />
         <img
           loading="lazy"
           v-if="!smallMenu"
-          :src="slogo"
+          :src="settings.slogo"
           height="50"
           style="max-width: 10rem"
         />
@@ -51,9 +51,10 @@ import { onMounted } from "vue";
 import MenuItem from "./Menu/MenuItem.vue";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import { useSettingStore } from "../../stores/web/settingStore.js";
-const { logo, slogo, loading } = storeToRefs(useSettingStore());
-
+import { useAdminSettingStore } from "../../stores/admin/settingsStore.js";
+const { settings, loading } = storeToRefs(useAdminSettingStore());
+const { getSettings } = useAdminSettingStore();
+getSettings();
 let smallMenu = ref(false);
 
 const menuTree = [

@@ -3,7 +3,8 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <b-card header="General">
+          <b-card header="General Setting">
+            <span class="text-success" v-if="message"> {{ message }}</span>
             <b-form @submit="onSettingChange">
               <b-container fluid>
                 <b-row>
@@ -13,7 +14,7 @@
                       label="Company Name:"
                       label-for="input-2"
                     >
-                      <b-input-group class="mt-3">
+                      <b-input-group class="mt-1">
                         <template #prepend>
                           <b-input-group-text
                             ><font-awesome-icon icon="briefcase" />
@@ -39,7 +40,7 @@
                       label="Email address:"
                       label-for="input-1"
                     >
-                      <b-input-group class="mt-3">
+                      <b-input-group class="mt-1">
                         <template #prepend>
                           <b-input-group-text
                             ><font-awesome-icon icon="at" />
@@ -63,7 +64,7 @@
                       label="Phone Number:"
                       label-for="input-2"
                     >
-                      <b-input-group class="mt-3">
+                      <b-input-group class="mt-1">
                         <template #prepend>
                           <b-input-group-text
                             ><font-awesome-icon icon="mobile-screen" />
@@ -89,7 +90,7 @@
                       label="Alternate Phone Number:"
                       label-for="input-2"
                     >
-                      <b-input-group class="mt-3">
+                      <b-input-group class="mt-1">
                         <template #prepend>
                           <b-input-group-text
                             ><font-awesome-icon icon="mobile-screen" />
@@ -116,7 +117,7 @@
                       label="Facebook Link:"
                       label-for="input-2"
                     >
-                      <b-input-group class="mt-3">
+                      <b-input-group class="mt-1">
                         <template #prepend>
                           <b-input-group-text
                             ><font-awesome-icon icon="fa-brands fa-facebook-f" />
@@ -142,7 +143,7 @@
                       label="Whatsapp Link:"
                       label-for="input-2"
                     >
-                      <b-input-group class="mt-3">
+                      <b-input-group class="mt-1">
                         <template #prepend>
                           <b-input-group-text
                             ><font-awesome-icon icon="fa-brands fa-whatsapp" />
@@ -168,7 +169,7 @@
                       label="Youtube Channel Link:"
                       label-for="input-2"
                     >
-                      <b-input-group class="mt-3">
+                      <b-input-group class="mt-1">
                         <template #prepend>
                           <b-input-group-text
                             ><font-awesome-icon icon="fa-brands fa-youtube" />
@@ -194,7 +195,7 @@
                       label="Copyright:"
                       label-for="input-2"
                     >
-                      <b-input-group class="mt-3">
+                      <b-input-group class="mt-1">
                         <template #prepend>
                           <b-input-group-text
                             ><font-awesome-icon icon="copyright" />
@@ -255,7 +256,7 @@
                   <b-col cols="12" lg="6">
                     <b-img
                       start
-                      v-bind="{ height: 75, class: 'm1' }"
+                      v-bind="{ height: 50, class: 'm1' }"
                       rounded
                       :src="previewslogo"
                       alt="Center image"
@@ -294,9 +295,27 @@
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="Opening Time" class="mb-0">
+                      <b-form-textarea
+                        id="textarea"
+                        v-model="settings.openingTime"
+                        placeholder="Enter Opening Time..."
+                        rows="3"
+                      ></b-form-textarea>
+                      <b-form-invalid-feedback
+                        v-if="errors.openingTime"
+                        :state="errors.openingTime"
+                      >
+                        {{ errors.openingTime[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
                 </b-row>
               </b-container>
-              <b-button type="submit" variant="dark">Update</b-button>
+              <b-button type="submit" variant="dark" :disabled="!loading ? false : true"
+                >Update</b-button
+              >
             </b-form>
           </b-card>
         </b-col>
