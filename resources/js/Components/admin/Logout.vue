@@ -35,6 +35,6 @@ getSettings();
 onMounted(() => {
   setTimeout(function () {
     removeToken();
-  }, 500000);
+  }, 500);
 });
 </script>

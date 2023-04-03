@@ -9,6 +9,8 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 
 
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 // import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
 
@@ -154,7 +156,7 @@ app.component("font-awesome-layer-text", FontAwesomeLayersText);
 app.use(createPinia());
 app.use(router);
 app.use(VueNumber);
-
+app.component('QuillEditor', QuillEditor);
 // app.use(VueReCaptcha, { siteKey: '6LenSowkAAAAADTvKcDRW33ZtVkpr-I2vLVlbP3B' });
 app.mount("#app");
 

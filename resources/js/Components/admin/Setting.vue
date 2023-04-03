@@ -189,24 +189,65 @@
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="Company Address" class="mb-0">
+                      <b-form-textarea
+                        id="textarea"
+                        v-model="settings.CompanyAdress"
+                        placeholder="Enter Company Adress..."
+                        rows="1"
+                      ></b-form-textarea>
+                      <b-form-invalid-feedback
+                        v-if="errors.CompanyAdress"
+                        :state="errors.CompanyAdress"
+                      >
+                        {{ errors.CompanyAdress[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
+
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="Footer About" class="mb-0">
+                      <b-form-textarea
+                        id="textarea"
+                        v-model="settings.footer"
+                        placeholder="Enter Footer About..."
+                        rows="3"
+                      ></b-form-textarea>
+                      <b-form-invalid-feedback
+                        v-if="errors.footer"
+                        :state="errors.footer"
+                      >
+                        {{ errors.footer[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
+
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="Opening Time" class="mb-0">
+                      <QuillEditor
+                        v-model:content="settings.openingTime"
+                        contentType="html"
+                      />
+                      <b-form-invalid-feedback
+                        v-if="errors.openingTime"
+                        :state="errors.openingTime"
+                      >
+                        {{ errors.openingTime[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
                   <b-col col="12" lg="6">
                     <b-form-group
                       id="input-group-2"
                       label="Copyright:"
                       label-for="input-2"
                     >
-                      <b-input-group class="mt-1">
-                        <template #prepend>
-                          <b-input-group-text
-                            ><font-awesome-icon icon="copyright" />
-                          </b-input-group-text>
-                        </template>
-                        <b-form-input
-                          id="input-2"
-                          v-model="settings.copyright"
-                          placeholder="Enter CopyRight"
-                        ></b-form-input>
-                      </b-input-group>
+                      <QuillEditor
+                        v-model:content="settings.copyright"
+                        contentType="html"
+                      />
+
                       <b-form-invalid-feedback
                         v-if="errors.copyright"
                         :state="errors.copyright"
@@ -215,6 +256,7 @@
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
+                  <b-col cols="12" lg="6"></b-col>
                   <b-col cols="12" md="6">
                     <b-form-group label="ICON" class="mb-0">
                       <input
@@ -261,55 +303,6 @@
                       :src="previewslogo"
                       alt="Center image"
                     ></b-img>
-                  </b-col>
-
-                  <b-col cols="12" lg="6">
-                    <b-form-group label="Footer About" class="mb-0">
-                      <b-form-textarea
-                        id="textarea"
-                        v-model="settings.footer"
-                        placeholder="Enter Footer About..."
-                        rows="3"
-                      ></b-form-textarea>
-                      <b-form-invalid-feedback
-                        v-if="errors.footer"
-                        :state="errors.footer"
-                      >
-                        {{ errors.footer[0] }}
-                      </b-form-invalid-feedback>
-                    </b-form-group>
-                  </b-col>
-                  <b-col cols="12" lg="6">
-                    <b-form-group label="Company Address" class="mb-0">
-                      <b-form-textarea
-                        id="textarea"
-                        v-model="settings.CompanyAdress"
-                        placeholder="Enter Company Adress..."
-                        rows="3"
-                      ></b-form-textarea>
-                      <b-form-invalid-feedback
-                        v-if="errors.CompanyAdress"
-                        :state="errors.CompanyAdress"
-                      >
-                        {{ errors.CompanyAdress[0] }}
-                      </b-form-invalid-feedback>
-                    </b-form-group>
-                  </b-col>
-                  <b-col cols="12" lg="6">
-                    <b-form-group label="Opening Time" class="mb-0">
-                      <b-form-textarea
-                        id="textarea"
-                        v-model="settings.openingTime"
-                        placeholder="Enter Opening Time..."
-                        rows="3"
-                      ></b-form-textarea>
-                      <b-form-invalid-feedback
-                        v-if="errors.openingTime"
-                        :state="errors.openingTime"
-                      >
-                        {{ errors.openingTime[0] }}
-                      </b-form-invalid-feedback>
-                    </b-form-group>
                   </b-col>
                 </b-row>
               </b-container>
