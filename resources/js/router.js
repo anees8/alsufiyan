@@ -8,6 +8,7 @@ const routes = [
         component: ()=>import('./Components/web/Home.vue'),
         meta: {
             requireAuth: false,    
+          
         },
     },
     {

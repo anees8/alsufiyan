@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+{{-- 
 	<link rel="icon" href="logo/logo.png">
 	
 	
-	<title>Al-Sufiyan | Haj and Umrah Service </title>
+	<title>Al-Sufiyan | Haj and Umrah Service </title> --}}
 	
 
 	<meta name="og:title" content="Al Sufiyan">

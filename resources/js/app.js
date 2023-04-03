@@ -9,8 +9,6 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 
 
-  
-          
 
 // import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
 
@@ -141,8 +139,12 @@ axios.defaults.headers.common["Authorization"] =
     "Bearer " + localStorage.getItem("token");
 
 
+
+      
+      
  
 const app = createApp(App);
+
 app.use(VueAxios, axios);
 app.use(BootstrapVueNext);
 app.use(VueEasyLightbox);
@@ -152,6 +154,7 @@ app.component("font-awesome-layer-text", FontAwesomeLayersText);
 app.use(createPinia());
 app.use(router);
 app.use(VueNumber);
+
 // app.use(VueReCaptcha, { siteKey: '6LenSowkAAAAADTvKcDRW33ZtVkpr-I2vLVlbP3B' });
 app.mount("#app");
 
