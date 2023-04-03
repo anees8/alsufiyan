@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Setting;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,11 @@ Route::get('unauthorized', function () {
 })->name('unauthorized');
 
 Route::get('/{any}', function () { 
-    return view('App'); 
+    
+    $data['title']=Setting::first()->CompanyName;
+    $data['icon']=Setting::first()->logo;
+   
+
+    return view('App',$data); 
 })->where('any','.*'); 
 
