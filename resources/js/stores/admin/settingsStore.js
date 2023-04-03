@@ -14,18 +14,6 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
         previewslogo:null,
         loading: false,
       
-        social_icons: [
-            {
-                icon: "fa-brands fa-facebook-f",
-                url: "https://www.facebook.com/ColanInfotechTeam/",
-                iconclass: "text-primary",
-            },
-            {
-                icon: "fa-brands fa-whatsapp",
-                url: "https://wa.me/9876543210?text=[Hi]",
-                iconclass: "text-success",
-            },
-        ],
         errors:[],
 
         message:""

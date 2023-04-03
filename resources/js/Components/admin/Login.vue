@@ -7,7 +7,7 @@
             <img loading="lazy" :src="settings.logo" width="50" />
             <img
               loading="lazy"
-              v-if="!smallMenu"
+              v-if="settings.slogo"
               :src="settings.slogo"
               height="50"
               style="max-width: 10rem"

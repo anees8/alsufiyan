@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import { useLoginStore } from "@/stores/admin/loginStore.js";
 
+
 const routes = [
     {
         path: "/",
@@ -253,6 +254,8 @@ const router = createRouter({
 
   router.beforeEach((to, from, next) => {
     const { getAccessToken, refreshUserPermissions } = useLoginStore();
+
+  
     refreshUserPermissions();
 
     if (to.meta.requireAuth && getAccessToken === null) {   
