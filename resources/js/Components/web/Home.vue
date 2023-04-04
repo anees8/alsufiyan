@@ -8,9 +8,19 @@
   </div>
 </template>
 <script setup>
-import HomeSliders from "./HomeComponents/HomeSliders.vue";
-import HomePackage from "./HomeComponents/HomePackage.vue";
-import HomeCounter from "./HomeComponents/HomeCounter.vue";
-import HomeBlogs from "./HomeComponents/HomeBlogs.vue";
-import HomeGallery from "./HomeComponents/HomeGallery.vue";
+import { defineAsyncComponent } from "vue";
+
+const HomeSliders = defineAsyncComponent(() =>
+  import("./HomeComponents/HomeSliders.vue")
+);
+const HomePackage = defineAsyncComponent(() =>
+  import("./HomeComponents/HomePackage.vue")
+);
+const HomeCounter = defineAsyncComponent(() =>
+  import("./HomeComponents/HomeCounter.vue")
+);
+const HomeBlogs = defineAsyncComponent(() => import("./HomeComponents/HomeBlogs.vue"));
+const HomeGallery = defineAsyncComponent(() =>
+  import("./HomeComponents/HomeGallery.vue")
+);
 </script>

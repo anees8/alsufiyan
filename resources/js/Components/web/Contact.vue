@@ -4,5 +4,9 @@
   </div>
 </template>
 <script setup>
-import ContactDetails from "./ContactComponents/ContactDetails.vue";
+import { defineAsyncComponent } from "vue";
+
+const ContactDetails = defineAsyncComponent(() =>
+  import("./ContactComponents/ContactDetails.vue")
+);
 </script>

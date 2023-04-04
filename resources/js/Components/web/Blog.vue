@@ -2,5 +2,7 @@
   <BlogPost />
 </template>
 <script setup>
-import BlogPost from "./BlogComponents/BlogPost.vue";
+import { defineAsyncComponent } from "vue";
+
+const BlogPost = defineAsyncComponent(() => import("./BlogComponents/BlogPost.vue"));
 </script>
