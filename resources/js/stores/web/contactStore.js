@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import router from "../../router";
 
+
 export const useContactStore = defineStore("contactStore", {
     state: () => ({
         contactForm: {
@@ -13,11 +14,15 @@ export const useContactStore = defineStore("contactStore", {
         },
         options: [],
         errors: {},
+        modal:false,
         message: "",
         loading: false,
     }),
 
     actions: {
+        changeModel(){
+            this.modal=true;
+        },
         async contact() {
             this.loading = true;
 

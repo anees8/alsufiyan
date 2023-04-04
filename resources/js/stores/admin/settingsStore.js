@@ -1,6 +1,8 @@
-import { defineStore } from "pinia";
+import { defineStore } from "pinia"
 import axios from "axios";
 import router from "../../router.js";
+import { useLoginStore } from "./loginStore.js";
+import { useSettingStore } from "../web/settingStore.js";
 
 export const useAdminSettingStore = defineStore("adminsettingStore", {
     state: () => ({
@@ -131,6 +133,11 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                     formData,
                     config
                 );
+                useSettingStore().getSettings();
+                useLoginStore().refreshUserPermissions();
+                this.getSettings();
+              
+            
 
                  this.message=response.data.message;
                 setTimeout(() => {

@@ -2,6 +2,9 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
 import router from "../../../router.js";
+import { useLoginStore } from "../loginStore.js";
+
+const {  refreshUserPermissions } = useLoginStore();
 
 export const usePermissionsStore = defineStore("permissionsStore", {
     state: () => ({
@@ -144,6 +147,7 @@ export const usePermissionsStore = defineStore("permissionsStore", {
                                 "Permission has been deleted.",
                                 "success"
                             );
+                            refreshUserPermissions();
                         })
                         .catch((error) => {
                             if (error.response) {
@@ -249,6 +253,7 @@ export const usePermissionsStore = defineStore("permissionsStore", {
                     }, 5000);
                 }
             }
+            refreshUserPermissions();
         },
     },
 });

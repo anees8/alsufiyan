@@ -688,6 +688,22 @@ class DatabaseSeeder extends Seeder
                       ],
 
 
+                      [
+                        'id'    => 67,
+                        'name'  => 'Settings',
+                        'slug'  => 'settings',
+                      // 'group_id'=>11,
+                      ],
+                      [
+                        'id'    => 68,
+                        'name'  => 'Dashboard',
+                        'slug'  => 'dashboard',
+                      // 'group_id'=>11,
+                      ],
+
+
+
+
 
                       ) );
 

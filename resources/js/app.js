@@ -146,7 +146,6 @@ axios.defaults.headers.common["Authorization"] =
       
  
 const app = createApp(App);
-
 app.use(VueAxios, axios);
 app.use(BootstrapVueNext);
 app.use(VueEasyLightbox);

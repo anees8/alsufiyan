@@ -2,7 +2,11 @@
   <div class="menu-item" :class="{ expanded: expanded }">
     <RouterLink
       v-if="name"
-      v-show="userLogin.permissions && userLogin.permissions.includes(Permissions)"
+      v-show="
+        userLogin.permissions && Permissions
+          ? userLogin.permissions.includes(Permissions)
+          : true
+      "
       class="nav-link text-dark"
       data-bs-toggle="tooltip"
       data-bs-placement="top"

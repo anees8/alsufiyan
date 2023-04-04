@@ -46,8 +46,9 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { if($request->has('admin')){
         $this->authorizeForUser($request->user('api'), 'create', Contact::class);
+    }
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email:rfc,dns',

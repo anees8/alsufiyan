@@ -134,7 +134,9 @@ export const useRolesStore = defineStore("rolesStore", {
                     axios
                         .delete(url + id)
                         .then((res) => {
+
                             this.getRolesPermission();
+                            refreshUserPermissions();
                             Swal.fire(
                                 "Deleted!",
                                 "Role has been deleted.",

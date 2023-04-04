@@ -62,13 +62,12 @@ const menuTree = [
     label: "Web",
     icon: "globe",
     name: "Home",
-    Permissions: "users_list",
   },
   {
     label: "Dashboard",
     icon: "gauge",
     name: "Dashboard",
-    Permissions: "users_list",
+    Permissions: "dashboard",
   },
   {
     label: "Home",
@@ -174,13 +173,12 @@ const menuTree = [
     label: "Settings",
     icon: "gear",
     name: "Setting",
-    Permissions: "users_list",
+    Permissions: "settings",
   },
   {
     label: "Logout",
     icon: "right-from-bracket",
     name: "Logout",
-    Permissions: "users_list",
   },
 ];
 </script>

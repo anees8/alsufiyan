@@ -1,6 +1,9 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import router from "../../../router.js";
+import { useLoginStore } from "../loginStore.js";
+
+const {  refreshUserPermissions } = useLoginStore();
 
 export const useUsersRolesStore = defineStore("usersroleStore", {
     state: () => ({
@@ -131,6 +134,7 @@ export const useUsersRolesStore = defineStore("usersroleStore", {
                         .delete(url + id)
                         .then((res) => {
                             this.getRolesPermission();
+                            refreshUserPermissions();
                             Swal.fire(
                                 "Deleted!",
                                 "Role has been deleted.",
@@ -225,6 +229,7 @@ export const useUsersRolesStore = defineStore("usersroleStore", {
                   
                 }
             }
+            refreshUserPermissions();
         },
         resetRole() {
             this.role = {};
