@@ -10,11 +10,9 @@
 </template>
 <script setup>
 import { defineAsyncComponent } from "vue";
-
 const HomeContactModal = defineAsyncComponent(() =>
   import("./HomeComponents/HomeContactModal.vue")
 );
-
 const HomeSliders = defineAsyncComponent(() =>
   import("./HomeComponents/HomeSliders.vue")
 );

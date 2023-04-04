@@ -32,6 +32,7 @@ export const useContactStore = defineStore("contactStore", {
                     this.contactForm
                 );
                 this.showMessage(response.data.message);
+                this.modal=false;
             } catch (error) {
                 if (error.response) {
                     this.errors = error.response.data.errors;
