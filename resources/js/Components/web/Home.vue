@@ -6,6 +6,7 @@
     <HomeCounter />
     <HomeBlogs />
     <HomeGallery />
+    <HomeReviews />
   </div>
 </template>
 <script setup>
@@ -15,6 +16,9 @@ const HomeContactModal = defineAsyncComponent(() =>
 );
 const HomeSliders = defineAsyncComponent(() =>
   import("./HomeComponents/HomeSliders.vue")
+);
+const HomeReviews = defineAsyncComponent(() =>
+  import("./HomeComponents/HomeReviews.vue")
 );
 const HomePackage = defineAsyncComponent(() =>
   import("./HomeComponents/HomePackage.vue")

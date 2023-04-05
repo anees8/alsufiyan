@@ -24,7 +24,7 @@
     <section v-else>
       <b-row>
         <b-col>
-          <h2 class="fw-bolder text-dark text-center"><u>Gallery</u></h2>
+          <h3 class="fw-bolder text-dark text-center"><u>Gallery</u></h3>
 
           <router-link
             class="btn btn-dark float-end mb-3"

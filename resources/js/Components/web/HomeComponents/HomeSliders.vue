@@ -15,7 +15,12 @@
     </carousel>
   </div>
   <div v-else>
-    <carousel :items-to-show="itemsToShow" :autoplay="2000" :wrap-around="true">
+    <carousel
+      :items-to-show="itemsToShow"
+      :autoplay="2000"
+      :wrap-around="true"
+      :pauseAutoplayOnHover="true"
+    >
       <slide v-for="slider in sliders" :key="slider.id">
         <img
           loading="lazy"

@@ -51,11 +51,16 @@
       </carousel>
     </div>
     <div v-else>
-      <h2 class="text-center fw-bolder text-dark">
+      <h3 class="text-center fw-bolder text-dark">
         OUR
         <u>PACKAGES</u>
-      </h2>
-      <carousel :autoplay="3000" :wrap-around="true" :breakpoints="breakpoints">
+      </h3>
+      <carousel
+        :autoplay="3000"
+        :wrap-around="true"
+        :breakpoints="breakpoints"
+        :pauseAutoplayOnHover="true"
+      >
         <slide v-for="pack in packages" :key="pack.id">
           <div class="card m-1 h-100 w-100">
             <img

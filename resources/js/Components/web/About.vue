@@ -4,6 +4,7 @@
     <About />
     <Branch />
     <HomeCounter />
+    <HomeReviews />
   </div>
 </template>
 
@@ -17,6 +18,9 @@ const Branch = defineAsyncComponent(() => import("./AboutComponents/branch.vue")
 
 const HomeCounter = defineAsyncComponent(() =>
   import("./HomeComponents/HomeCounter.vue")
+);
+const HomeReviews = defineAsyncComponent(() =>
+  import("./HomeComponents/HomeReviews.vue")
 );
 const loading = ref(false);
 </script>
