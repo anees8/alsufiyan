@@ -199,17 +199,18 @@ class DatabaseSeeder extends Seeder
 
                     "CompanyName"=>"Colan Infotech",
                     "openingTime"=>"<p>Monday: Friday: 10.00 - 23.00</p><p>Saturday: 10.00 - 19.00</p>",
-                    "logo"=>"/logo/logo.png",
-
-                    "slogo"=>"/logo/slogo.png",
+                    "logo"=>"/logo/1680602374logo.png",
+                    "slogo"=>"/logo/1680516198slogo.png",
                     "facebook"=>"https://www.facebook.com/ColanInfotechTeam/",
                     "youtube"=>"https://www.youtube.com/@al-sufiyaninternationaltou8181",
                     "whatsapp"=>"https://wa.me/9876543210?text=[Hi]",
-
+                    "copyright"=>"©2022 by Al Sufiyan International Tours Haj Umrah & Ziyarat. Website Proudly Developed & Maintained by M Infotech.",
                     "footer"=>"Hajj and Umrah are Islamic pilgrimages to Mecca, with Hajj being mandatory and Umrah being optional. Service providers offer packages including transportation, accommodation, food, etc.",
                     "CompanyAdress"=>"123 Main St, Anytown USA 12345",
                     "CompanyPhone"=>"+91 9876543210",
                     "CompanyAlternatePhone"=>"+91 9876543210",
+                    "poster"=>"/poster/1680689569poster.webp",
+                    "about"=>"One of the best Hajj, Umrah & Ziyarat service provided in Mysore, most comfortable & satisfied service we provide to all our esteem client's surrounding our locations. Guidance of Experts with supervision. It is the hearts desire of every muslim to be blessed with an opportunity to visit the Kabatullah Shareef with their family and their near and dear ones. One of the greatest acts of ibadah among Muslims. Better pilgrimage is our motto for all pilgrims. We have been setting up benchmarks in trust and commitments",
 
                     ]
                     

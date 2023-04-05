@@ -256,7 +256,19 @@
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </b-col>
-                  <b-col cols="12" lg="6"></b-col>
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="About us" class="mb-0">
+                      <b-form-textarea
+                        id="textarea"
+                        v-model="settings.about"
+                        placeholder="Enter About us..."
+                        rows="4"
+                      ></b-form-textarea>
+                      <b-form-invalid-feedback v-if="errors.about" :state="errors.about">
+                        {{ errors.about[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
                   <b-col cols="12" md="6">
                     <b-form-group label="ICON" class="mb-0">
                       <input
@@ -277,6 +289,7 @@
                       v-bind="{ width: 75, height: 75, class: 'm1' }"
                       rounded="circle"
                       :src="previewlogo"
+                      @click="show(previewlogo)"
                       alt="Center image"
                     ></b-img>
                   </b-col>
@@ -301,8 +314,41 @@
                       v-bind="{ height: 50, class: 'm1' }"
                       rounded
                       :src="previewslogo"
+                      @click="show(previewslogo)"
                       alt="Center image"
                     ></b-img>
+                  </b-col>
+                  <b-col cols="12" lg="6">
+                    <b-form-group label="Poster" class="mb-0">
+                      <input
+                        id="poster"
+                        type="file"
+                        accept="image/*"
+                        class="form-control"
+                        v-on:change="onFileChange"
+                      />
+                      <b-form-invalid-feedback
+                        v-if="errors.poster"
+                        :state="errors.poster"
+                      >
+                        {{ errors.poster[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </b-col>
+                  <b-col cols="12" lg="6">
+                    <b-img
+                      start
+                      v-bind="{ height: 120, class: 'm1' }"
+                      rounded
+                      :src="previewsposter"
+                      @click="show(previewsposter)"
+                      alt="Center image"
+                    ></b-img>
+                    <vue-easy-lightbox
+                      :visible="visible"
+                      :imgs="currentindex"
+                      @hide="handleHide"
+                    ></vue-easy-lightbox>
                   </b-col>
                 </b-row>
               </b-container>
@@ -321,11 +367,26 @@ import { storeToRefs } from "pinia";
 import { useLoginStore } from "../../stores/admin/loginStore.js";
 
 import { useAdminSettingStore } from "../../stores/admin/settingsStore";
-const { settings, previewlogo, previewslogo, loading, message, errors } = storeToRefs(
-  useAdminSettingStore()
-);
+const {
+  settings,
+  previewlogo,
+  previewslogo,
+  previewsposter,
+  loading,
+  message,
+  visible,
+  currentindex,
 
-const { onFileChange, getSettings, onSettingChange } = useAdminSettingStore();
+  errors,
+} = storeToRefs(useAdminSettingStore());
+
+const {
+  onFileChange,
+  show,
+  handleHide,
+  getSettings,
+  onSettingChange,
+} = useAdminSettingStore();
 
 const { permissions } = storeToRefs(useLoginStore());
 

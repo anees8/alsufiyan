@@ -14,7 +14,10 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
     
         previewlogo:null,
         previewslogo:null,
+        previewsposter:null,
         loading: false,
+        visible: false,
+        currentindex: null,
       
         errors:[],
 
@@ -22,6 +25,13 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
     }),
 
     actions: {
+        show(index) {
+            this.currentindex = index;
+            this.visible = true;
+        },
+        handleHide() {
+            this.visible = false;
+        },
 
         onFileChange: function (e) {
            
@@ -34,6 +44,9 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
             }else if(e.target.id=='slogo'){
              this.settings.slogo=e.target.files[0];
             this.previewslogo = reader.result;
+            }else if(e.target.id=='poster'){
+                this.settings.poster=e.target.files[0];
+                this.previewsposter = reader.result;
             }
             };
         },
@@ -48,6 +61,7 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
                 this.settings=response.data.data.settings;
                 this.previewlogo= response.data.data.settings.logo;
                 this.previewslogo= response.data.data.settings.slogo;
+                this.previewsposter= response.data.data.settings.poster;
                 this.loading = false;
                
 
@@ -96,12 +110,18 @@ export const useAdminSettingStore = defineStore("adminsettingStore", {
             if (this.settings.CompanyAdress) {
                 formData.append("CompanyAdress", this.settings.CompanyAdress);
             }
+            if (this.settings.about) {
+                formData.append("about", this.settings.about);
+            }
 
             if (this.settings.logo) {
                 formData.append("logo", this.settings.logo);
             }
             if (this.settings.slogo) {
                 formData.append("slogo", this.settings.slogo);
+            }
+            if (this.settings.poster) {
+                formData.append("poster", this.settings.poster);
             }
             if (this.settings.facebook) {
                 formData.append("facebook", this.settings.facebook);

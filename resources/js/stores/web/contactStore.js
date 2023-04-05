@@ -17,9 +17,18 @@ export const useContactStore = defineStore("contactStore", {
         modal:false,
         message: "",
         loading: false,
+        visible: false,
+        currentindex: null,
     }),
 
     actions: {
+        show(index) {
+            this.currentindex = index;
+            this.visible = true;
+        },
+        handleHide() {
+            this.visible = false;
+        },
         changeModel(){
             this.modal=true;
         },

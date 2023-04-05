@@ -26,7 +26,9 @@ return new class extends Migration
             $table->text('facebook')->nullable();
             $table->text('youtube')->nullable();
             $table->text('whatsapp')->nullable();
+            $table->text('about');
             $table->text('footer');
+            $table->text('poster');
             $table->text('copyright')->default("Proudly Developed & Maintained by MEERANJI TECHNOLOGY");
             $table->softDeletes();
             $table->timestamps();

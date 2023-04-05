@@ -86,6 +86,8 @@ class SettingController extends Controller
             'CompanyAlternatePhone'=> 'required|min:10|max:15',   
             'CompanyAdress'=>'required|min:10',
             'openingTime'=>'required|min:10',
+            'about'=>'required|min:10',
+            'poster'=>'required',
             'slogo'=>'required',
             'logo'=>'required',
             'facebook'=>'required',
@@ -109,6 +111,11 @@ class SettingController extends Controller
         if ($request->has('email')) {
             $setting->email = $request->email;
         }
+        if ($request->has('about')) {
+            $setting->about = $request->about;
+        }
+
+      
 
         if ($request->has('CompanyPhone')) {
             $setting->CompanyPhone = $request->CompanyPhone;
@@ -150,6 +157,7 @@ class SettingController extends Controller
             $setting->logo = "/logo/".$logoName;
             }
 
+            
 
             if ($request->file('slogo')) {
             if (File::exists(public_path($setting->slogo))) {
@@ -160,6 +168,14 @@ class SettingController extends Controller
             $setting->slogo = "/logo/".$slogoName;
             }
 
+            if ($request->file('poster')) {
+            if (File::exists(public_path($setting->poster))) {
+            unlink(public_path($setting->poster));
+            }
+            $posterName = time().'poster.'.$request->poster->extension();  
+            $request->poster->move(public_path('poster'), $posterName);
+            $setting->poster = "/poster/".$posterName;
+            }
         $setting->update();
         return $this->sendResponse($setting,'Settings Updated Successfully',Response::HTTP_OK);
 
