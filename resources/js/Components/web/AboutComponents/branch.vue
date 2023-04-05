@@ -11,7 +11,7 @@
         :key="index"
       >
         <b-card
-          :title="branch.title"
+          :title="branch.location"
           :img-src="branch.image"
           img-alt="Image"
           img-top
@@ -42,4 +42,7 @@
 import { storeToRefs } from "pinia";
 import { useAboutStore } from "../../../stores/web/aboutStore.js";
 const { branches } = storeToRefs(useAboutStore());
+const { getBraches } = useAboutStore();
+
+getBraches();
 </script>

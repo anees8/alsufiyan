@@ -197,7 +197,7 @@ class DatabaseSeeder extends Seeder
                   $settings= [ 
                     ["email" =>"info@example.com",
 
-                    "CompanyName"=>"Testing",
+                    "CompanyName"=>"Colan Infotech",
                     "openingTime"=>"<p>Monday: Friday: 10.00 - 23.00</p><p>Saturday: 10.00 - 19.00</p>",
                     "logo"=>"/logo/logo.png",
 
@@ -714,6 +714,8 @@ class DatabaseSeeder extends Seeder
                             'name'  => 'Super Admin',
                             'slug' => 'super_admin',
                         ]) );
+
+
                         DB::table('role_user')->insert(
                           array(
                               'role_id' => 1,
@@ -722,12 +724,67 @@ class DatabaseSeeder extends Seeder
                       );
 
                   
-                  for ($i = 1; $i <= 66; $i++) {
+                  for ($i = 1; $i <= 68; $i++) {
                   DB::table('roles_permissions')->insert([
                   'role_id' => 1,
                   'permission_id' => $i,
                   ]);                             
                   }
+
+                  DB::table('our_branches')->insert(
+                    array(                   
+                    [
+                      "location"=> "Kushalnagar",
+                     "image"=>"https://picsum.photos/600/300/?image=25",
+                     "address"=>" 1ST FLOOR, MUNICIPAL OFFICE, GULZAR 1ST ST, OPPOSITE OF PERNAMBUT, PERANAMPATTU, TAMIL NADU-635810",
+                      "map"=>"https://goo.gl/maps/5TMV336XmwG72U1g9",
+                      "phone"=>"+91 9632148975",
+                      "person"=>"Maulana Shaukat Saheb"
+      
+                  ]   ,               [
+                      "location"=>"Tumkur",
+                     "image"=>"https://picsum.photos/600/300/?image=25",
+                     "address"=>" 1ST FLOOR, MUNICIPAL OFFICE, GULZAR 1ST ST, OPPOSITE OF PERNAMBUT, PERANAMPATTU, TAMIL NADU-635810",
+                      "map"=>"https://goo.gl/maps/5TMV336XmwG72U1g9",
+                      "phone"=>" +91 8904466801",
+                      "person"=>"Mohammed Ibrahim"
+      
+                  ]  ,                [
+                      "location"=> "Ponnompet",
+                     "image"=>"https://picsum.photos/600/300/?image=25",
+                     "address"=>" 1ST FLOOR, MUNICIPAL OFFICE, GULZAR 1ST ST, OPPOSITE OF PERNAMBUT, PERANAMPATTU, TAMIL NADU-635810",
+                      "map"=>"https://goo.gl/maps/5TMV336XmwG72U1g9",
+                      "phone"=>"+91 7619511105",
+                      "person"=>"Mohammed Riyaz"
+      
+                  ]  ,                [
+                      "location"=> "Mysore",
+                     "image"=>"https://picsum.photos/600/300/?image=25",
+                     "address"=>" 1ST FLOOR, MUNICIPAL OFFICE, GULZAR 1ST ST, OPPOSITE OF PERNAMBUT, PERANAMPATTU, TAMIL NADU-635810",
+                      "map"=>"https://goo.gl/maps/5TMV336XmwG72U1g9",
+                      "phone"=>"+91 9663371183",
+                      "person"=>"Syed Usman Saheb"
+      
+                  ]   ,               [
+                      "location"=> "Pernambut",
+                     "image"=>"https://picsum.photos/600/300/?image=25",
+                     "address"=>" 1ST FLOOR, MUNICIPAL OFFICE, GULZAR 1ST ST, OPPOSITE OF PERNAMBUT, PERANAMPATTU, TAMIL NADU-635810",
+                      "map"=>"https://goo.gl/maps/5TMV336XmwG72U1g9",
+                      "phone"=>"+91 9898941296",
+                      "person"=>"Meeranji Thufail Ahmed"
+      
+                  ]   ,               [
+                      "location"=> "Banglore",
+                     "image"=>"https://picsum.photos/600/300/?image=25",
+                     "address"=>" 1ST FLOOR, MUNICIPAL OFFICE, GULZAR 1ST ST, OPPOSITE OF PERNAMBUT, PERANAMPATTU, TAMIL NADU-635810",
+                      "map"=>"https://goo.gl/maps/5TMV336XmwG72U1g9",
+                      "phone"=>"+91 7019389088",
+                      "person"=>"Abdul Rauf Saheb"
+      
+                  ]                    ) );
+                    DB::table('client_reviews')->insert(
+                      array(['comment'=>"One of te best travels in mysore most comfortable experience with complete support guidance from Bangalore Airport to ruten Bangalore thanks again for your travels","user"=>"Rizwan Ahmed"],
+                      ['comment'=>"One of te best travels in mysore most comfortable experience with complete support guidance from Bangalore Airport to ruten Bangalore thanks again for your travels","user"=>"Saniya"]) );
 
 
                 }

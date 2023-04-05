@@ -14,6 +14,8 @@ use App\Http\Controllers\HomeCounterController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\OurBranchController;
+use App\Http\Controllers\ClientReviewController;
 
 
 
@@ -83,6 +85,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/logout', [UsersController::class, 'logout']);
 
 });
+
+
+Route::get('/branch', [OurBranchController::class, 'index']);
+Route::get('/review', [ClientReviewController::class, 'index']);
 
 
 Route::get('/counter', [HomeCounterController::class, 'index']);

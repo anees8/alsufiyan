@@ -5,7 +5,7 @@
         <b-skeleton type="h1" class="fw-bold p-2 mx-auto mb-4" width="30%"></b-skeleton>
         <carousel :autoplay="3000" :wrap-around="true">
           <slide v-for="rewiew in 5" :key="rewiew">
-            <b-card class="text-center" style="width: 80%">
+            <b-card cols="12" md="8" class="text-center">
               <b-skeleton
                 animation="fade"
                 type="text"
@@ -83,4 +83,8 @@ import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { storeToRefs } from "pinia";
 import { useReviewsStore } from "../../../stores/web/HomeComponents/reviewStore.js";
 const { reviews, loading } = storeToRefs(useReviewsStore());
+
+const { getReviews } = useReviewsStore();
+
+getReviews();
 </script>
