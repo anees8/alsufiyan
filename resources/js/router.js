@@ -130,10 +130,19 @@ const routes = [
             requireAuth: true,
         },
     },
+    
     {
         path: "/admin/home/counter",
         name: "AdminHomeCounter",
         component: ()=>import('./Components/admin/HomeComponents/HomeCounter.vue'),
+        meta: {
+            requireAuth: true,
+        },
+    },
+    {
+        path: "/admin/home/reviews",
+        name: "AdminHomeReview",
+        component: ()=>import('./Components/admin/HomeComponents/ClientReview.vue'),
         meta: {
             requireAuth: true,
         },
@@ -240,6 +249,8 @@ const routes = [
             requireAuth: true,
         },
     },  
+
+    
 ];
 
 const router = createRouter({

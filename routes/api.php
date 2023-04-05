@@ -82,6 +82,8 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('settings', SettingController::class);
 
     Route::resource('homecounters', HomeCounterController::class);
+    Route::resource('ourbranchs', OurBranchController::class);
+    Route::resource('clientreviews', ClientReviewController::class);
     Route::get('/logout', [UsersController::class, 'logout']);
 
 });

@@ -701,7 +701,18 @@ class DatabaseSeeder extends Seeder
                         'slug'  => 'dashboard',
                       // 'group_id'=>11,
                       ],
-
+                      [
+                        'id'    => 69,
+                        'name'  => 'Review List',
+                        'slug'  => 'home_review_list',
+                      // 'group_id'=>11,
+                      ],    
+                      [
+                        'id'    => 70,
+                        'name'  => 'Our Branch List',
+                        'slug'  => 'our_branch_list',
+                      // 'group_id'=>11,
+                      ],               
 
 
 
@@ -725,7 +736,7 @@ class DatabaseSeeder extends Seeder
                       );
 
                   
-                  for ($i = 1; $i <= 68; $i++) {
+                  for ($i = 1; $i <= 70; $i++) {
                   DB::table('roles_permissions')->insert([
                   'role_id' => 1,
                   'permission_id' => $i,

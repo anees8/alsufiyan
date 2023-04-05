@@ -84,7 +84,7 @@ export const useAdminBlogsStore = defineStore("adminblogsStore", {
         },
 
         dateTime(value) {
-            return moment(value).format("D-MMM-Y");
+            return value?moment(value).format("D-MMM-Y"):null;
         },
         setPerPage(value) {
             this.perPage = value;

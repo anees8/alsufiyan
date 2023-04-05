@@ -1,21 +1,17 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
-import router from "../../router.js";
 
-export const useContactsStore = defineStore("contactsStore", {
+export const useAboutBranchStore = defineStore("aboutbranchStore", {
     state: () => ({
+        branches:[],
         fields: [
             { key: "id", label: "ID" },
-            { key: "name", label: "Name" },
-            { key: "email", label: "Email" },
-            { key: "phone", label: "Phone" },
-            { key: "subject", label: "Subject", thStyle: { width: "15%" } },
-            { key: "message", label: "Message", thStyle: { width: "40%" } },
-            { key: "created_at", label: "Created Date" },
+            { key: "location", label: "Location" },      
+          
             { key: "actions", label: "Action" },
         ],
-        contacts: [],
+      
         perPage: 5,
         currentPage: 1,
         isBusy: false,
@@ -28,13 +24,15 @@ export const useContactsStore = defineStore("contactsStore", {
         ],
 
         errors: {},
+
+
     }),
 
     actions: {
-        async getContacts() {
+       async getBranches(){
             this.isBusy = true;
             try {
-                let url = "contacts";
+                let url = "ourbranchs";
                 url += `?permission`;
                 if (this.perPage) {
                     url += `&perPage=${this.perPage}`;
@@ -43,10 +41,10 @@ export const useContactsStore = defineStore("contactsStore", {
                     url += `&page=${this.currentPage}`;
                 }
                 const response = await axios.get(url);
-                this.contacts = response.data.data.contacts.data;
+                this.branches = response.data.data.branches.data;
 
-                this.currentPage = response.data.data.contacts.current_page;
-                this.rows = response.data.data.contacts.total;
+                this.currentPage = response.data.data.branches.current_page;
+                this.rows = response.data.data.branches.total;
 
                 this.isBusy = false;
             } catch (error) {
@@ -63,18 +61,20 @@ export const useContactsStore = defineStore("contactsStore", {
                     this.errors = {};
                 }, 5000);
             }
+        
+
         },
-
-        deleteContactSubject(id) {},
-
         dateTime(value) {
+            
             return value?moment(value).format("D-MMM-Y"):null;
         },
-
         setPerPage(value) {
             this.perPage = value;
             this.currentPage = 1;
-            this.getContacts();
+            this.getBranches();
         },
-    },
+
+    }
+    
+    
 });

@@ -1,21 +1,19 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import moment from "moment";
-import router from "../../router.js";
 
-export const useContactsStore = defineStore("contactsStore", {
+export const useAdminReviewsStore = defineStore("adminreviwsStore", {
     state: () => ({
+        reviews:[],
         fields: [
             { key: "id", label: "ID" },
-            { key: "name", label: "Name" },
-            { key: "email", label: "Email" },
-            { key: "phone", label: "Phone" },
-            { key: "subject", label: "Subject", thStyle: { width: "15%" } },
-            { key: "message", label: "Message", thStyle: { width: "40%" } },
-            { key: "created_at", label: "Created Date" },
+      
+            { key: "comment", label: "Review", thStyle: { width: "50%" }  },
+            { key: "user", label: "Username" },
+            { key: "comment_date", label: "Review Date" },
             { key: "actions", label: "Action" },
         ],
-        contacts: [],
+      
         perPage: 5,
         currentPage: 1,
         isBusy: false,
@@ -28,13 +26,15 @@ export const useContactsStore = defineStore("contactsStore", {
         ],
 
         errors: {},
+
+
     }),
 
     actions: {
-        async getContacts() {
+       async getReviews(){
             this.isBusy = true;
             try {
-                let url = "contacts";
+                let url = "clientreviews";
                 url += `?permission`;
                 if (this.perPage) {
                     url += `&perPage=${this.perPage}`;
@@ -43,10 +43,10 @@ export const useContactsStore = defineStore("contactsStore", {
                     url += `&page=${this.currentPage}`;
                 }
                 const response = await axios.get(url);
-                this.contacts = response.data.data.contacts.data;
+                this.reviews = response.data.data.reviews.data;
 
-                this.currentPage = response.data.data.contacts.current_page;
-                this.rows = response.data.data.contacts.total;
+                this.currentPage = response.data.data.reviews.current_page;
+                this.rows = response.data.data.reviews.total;
 
                 this.isBusy = false;
             } catch (error) {
@@ -63,18 +63,20 @@ export const useContactsStore = defineStore("contactsStore", {
                     this.errors = {};
                 }, 5000);
             }
+        
+
         },
-
-        deleteContactSubject(id) {},
-
         dateTime(value) {
+            
             return value?moment(value).format("D-MMM-Y"):null;
         },
-
         setPerPage(value) {
             this.perPage = value;
             this.currentPage = 1;
-            this.getContacts();
+            this.getReviews();
         },
-    },
+
+    }
+    
+    
 });

@@ -14,7 +14,7 @@
           caption-top
           hover
           footClone
-          :items="branches"
+          :items="reviews"
           :fields="fields"
           :busy="isBusy"
           responsive
@@ -37,7 +37,7 @@
         <b-col xl="5" lg="6" md="8" class="p-2">
           <b-pagination
             v-if="rows / perPage > 1"
-            v-on:click="getBranches"
+            v-on:click="getReviews"
             v-model="currentPage"
             :total-rows="rows"
             :per-page="perPage"
@@ -50,12 +50,12 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
-import { useAboutBranchStore } from "../../stores/admin/branchStore.js";
-const { branches, fields, options, perPage, currentPage, rows, isBusy } = storeToRefs(
-  useAboutBranchStore()
+import { useAdminReviewsStore } from "../../../stores/admin/HomeComponents/reviewsStore.js";
+const { reviews, fields, options, perPage, currentPage, rows, isBusy } = storeToRefs(
+  useAdminReviewsStore()
 );
 
-const { getBranches, dateTime, setPerPage } = useAboutBranchStore();
+const { getReviews, dateTime, setPerPage } = useAdminReviewsStore();
 
-getBranches();
+getReviews();
 </script>

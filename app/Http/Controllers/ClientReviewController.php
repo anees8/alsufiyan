@@ -18,6 +18,9 @@ class ClientReviewController extends Controller
     public function index(Request $request)
     {
         if ($request->perPage) {
+            if ($request->has('permission')) {
+            $this->authorizeForUser($request->user('api'), 'view', ClientReview::class);
+            }
 
             $reviews = ClientReview::orderBy('id', 'DESC');
             $data['reviews'] = $reviews->Paginate($request->perPage);

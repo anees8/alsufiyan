@@ -25,7 +25,7 @@ export const usePostsStore = defineStore("postsStore", {
 
     actions: {
         dateTime(value) {
-            return moment(value).format("MMM D, Y");
+            return value?moment(value).format("D-MMM-Y"):null;
         },
 
         setPerPage(value) {

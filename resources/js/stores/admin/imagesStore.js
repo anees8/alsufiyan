@@ -287,7 +287,7 @@ export const useAdminImagesStore = defineStore("adminimagesStore", {
         },
 
         dateTime(value) {
-            return moment(value).format("D-MMM-Y");
+            return value?moment(value).format("D-MMM-Y"):null;
         },
 
         setPerPage(value) {

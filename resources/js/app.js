@@ -64,6 +64,8 @@ import {
     faMobileScreen,
     faCopyright,
     faMapLocationDot,
+    
+    faStarHalf,
     } from "@fortawesome/free-solid-svg-icons";
 import {
     
@@ -85,6 +87,7 @@ import {
 } from "@fortawesome/vue-fontawesome";
 
 library.add(
+    faStarHalf,
     faGear,faYoutube,
     faCopyright,
     faMapLocationDot,

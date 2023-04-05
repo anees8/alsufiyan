@@ -92,6 +92,12 @@ const menuTree = [
         name: "AdminHomeCounter",
         Permissions: "home_counter_list",
       },
+      {
+        label: "Reviews",
+        icon: "star-half",
+        name: "AdminHomeReview",
+        Permissions: "home_review_list",
+      },
     ],
   },
   {
