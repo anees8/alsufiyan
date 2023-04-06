@@ -839,5 +839,9 @@ class DatabaseSeeder extends Seeder
                       ['comment'=>"One of te best travels in mysore most comfortable experience with complete support guidance from Bangalore Airport to ruten Bangalore thanks again for your travels","user"=>"Saniya"]) );
 
 
+
+                      DB::table('contacts_status')->insert(array(['id'=>1,'name'=>'Received'],['id'=>2,'name'=>'Replied'],['id'=>3,'name'=>'Reject']));
+
+
                 }
 }

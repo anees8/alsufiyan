@@ -21,7 +21,8 @@ return new class extends Migration
             $table->bigInteger('phone');
             $table->unsignedBigInteger('subject_id');
              $table->foreign('subject_id')->references('id')->on('contact_subjects')->constrained()->onUpdate('cascade')->onDelete('cascade');
-             $table->unsignedBigInteger('status')->default(1);
+             $table->unsignedBigInteger('status_id')->default(1);
+             $table->foreign('status_id')->references('id')->on('contacts_status')->constrained()->onUpdate('cascade')->onDelete('cascade');
            
             $table->text('message');
             $table->softDeletes();
