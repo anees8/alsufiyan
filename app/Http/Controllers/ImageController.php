@@ -121,9 +121,11 @@ public function update(Request $request,Image $image){
         }
       
         if ($request->file('image')) {
+            if(!empty($image->image_url)){
         if (File::exists(public_path($image->image_url))) {
         unlink(public_path($image->image_url));
         }
+    }
         $imageName = time().'.'.$request->image->extension();  
         $request->image->move(public_path('gallery'), $imageName);
         $image->image_url = "/gallery/".$imageName;
@@ -161,10 +163,12 @@ public function restore(Request $request, Image $image){
 
 public function forcedelete(Request $request, Image $image){
     $this->authorizeForUser($request->user('api'), 'forceDelete', Image::class);
+    if(!empty($image->image_url)){
     if (File::exists(public_path($image->image_url))) {
     unlink(public_path($image->image_url));
     }
 
+}
     $image->forceDelete();
     return $this->sendResponse([],'Image Deleted Successfully.',Response::HTTP_OK);
     }

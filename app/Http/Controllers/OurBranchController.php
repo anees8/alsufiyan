@@ -6,6 +6,7 @@ use App\Models\OurBranch;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
+use Illuminate\Support\Facades\File;
 
 class OurBranchController extends Controller
 {
@@ -17,11 +18,11 @@ class OurBranchController extends Controller
     public function index(Request $request)
     {
         if ($request->perPage) {
-
+            $this->authorizeForUser($request->user('api'), 'view', OurBranch::class);
             $branches = OurBranch::orderBy('id', 'DESC');
             $data['branches'] = $branches->Paginate($request->perPage);
         } else {
-            $data['branches'] = OurBranch::orderBy('id', 'DESC')->get();
+            $data['branches'] = OurBranch::get();
         }
         return $this->sendResponse($data, 'branches return successfully.', Response::HTTP_OK);
     }
@@ -50,10 +51,10 @@ class OurBranchController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OurBranch  $ourBranch
+     * @param  \App\Models\OurBranch  $ourbranch
      * @return \Illuminate\Http\Response
      */
-    public function show(OurBranch $ourBranch)
+    public function show(OurBranch $ourbranch)
     {
         //
     }
@@ -61,10 +62,10 @@ class OurBranchController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\OurBranch  $ourBranch
+     * @param  \App\Models\OurBranch  $ourbranch
      * @return \Illuminate\Http\Response
      */
-    public function edit(OurBranch $ourBranch)
+    public function edit(OurBranch $ourbranch)
     {
         //
     }
@@ -73,10 +74,10 @@ class OurBranchController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OurBranch  $ourBranch
+     * @param  \App\Models\OurBranch  $ourbranch
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OurBranch $ourBranch)
+    public function update(Request $request, OurBranch $ourbranch)
     {
         //
     }
@@ -84,11 +85,19 @@ class OurBranchController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\OurBranch  $ourBranch
+     * @param  \App\Models\OurBranch  $ourbranch
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OurBranch $ourBranch)
+    public function destroy(Request $request, OurBranch $ourbranch)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'delete', OurBranch::class);
+                if(!empty($ourbranch->image)){
+            if (File::exists(public_path($ourbranch->image))) {
+            unlink(public_path($ourbranch->image));
+            }
+        }
+        $ourbranch->delete();
+        return $this->sendResponse([],'Branch Deleted Successfully.',Response::HTTP_OK);
+        
     }
 }

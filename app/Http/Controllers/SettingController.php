@@ -149,9 +149,11 @@ class SettingController extends Controller
 
         
             if ($request->file('logo')) {
+                if(!empty($setting->logo)){
             if (File::exists(public_path($setting->logo))) {
             unlink(public_path($setting->logo));
             }
+        }
             $logoName = time().'logo.'.$request->logo->extension();  
             $request->logo->move(public_path('logo'), $logoName);
             $setting->logo = "/logo/".$logoName;
@@ -160,18 +162,22 @@ class SettingController extends Controller
             
 
             if ($request->file('slogo')) {
+                if(!empty($setting->slogo)){
             if (File::exists(public_path($setting->slogo))) {
             unlink(public_path($setting->slogo));
             }
+        }
             $slogoName = time().'slogo.'.$request->slogo->extension();  
             $request->slogo->move(public_path('logo'), $slogoName);
             $setting->slogo = "/logo/".$slogoName;
             }
 
             if ($request->file('poster')) {
+                if(!empty($setting->poster)){
             if (File::exists(public_path($setting->poster))) {
             unlink(public_path($setting->poster));
             }
+        }
             $posterName = time().'poster.'.$request->poster->extension();  
             $request->poster->move(public_path('poster'), $posterName);
             $setting->poster = "/poster/".$posterName;

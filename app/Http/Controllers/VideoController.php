@@ -134,9 +134,12 @@ public function update(Request $request, Video $video)
         }
         
         if ($request->file('video')) {
+            
+            if(!empty($video->video_url)){
         if (File::exists(public_path($video->video_url))) {
         unlink(public_path($video->video_url));
         }
+    }
         $videoName = time().'.'.$request->video->extension();  
         $request->video->move(public_path('Videos'), $videoName);
         $video->video_url = "/Videos/".$videoName;
@@ -173,9 +176,11 @@ public function restore(Request $request, Video $video){
 
 public function forcedelete(Request $request, Video $video){
     $this->authorizeForUser($request->user('api'), 'forceDelete', Video::class);
+    if(!empty($video->video_url)){
     if (File::exists(public_path($video->video_url))) {
     unlink(public_path($video->video_url));
     }
+}
     $video->forceDelete();
     return $this->sendResponse([],'Video Deleted Successfully.',Response::HTTP_OK);
     }

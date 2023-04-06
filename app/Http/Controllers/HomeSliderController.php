@@ -135,9 +135,11 @@ public function update(Request $request, HomeSlider $homeslider){
     }
   
     if ($request->file('image')) {
+        if(!empty($homeslider->image)){
     if (File::exists(public_path($homeslider->image))) {
     unlink(public_path($homeslider->image));
     }
+}
     $imageName = time().'.'.$request->image->extension();  
     $request->image->move(public_path('homeslider'), $imageName);
     $homeslider->image = "/homeslider/".$imageName;
@@ -180,10 +182,11 @@ public function restore(Request $request, HomeSlider $homeslider){
 
 public function forcedelete(Request $request, HomeSlider $homeslider){
     $this->authorizeForUser($request->user('api'), 'forceDelete', HomeSlider::class);
-        
+    if(!empty($homeslider->image)){
     if (File::exists(public_path($homeslider->image))) {
     unlink(public_path($homeslider->image));
     }
+}
     $homeslider->forceDelete();
     return $this->sendResponse([],'Home Slider Deleted Successfully.',Response::HTTP_OK);
     }

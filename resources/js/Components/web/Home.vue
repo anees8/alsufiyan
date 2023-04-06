@@ -1,7 +1,7 @@
 <template>
   <div class="router_view_min">
-    <HomeSliders />
     <HomeContactModal />
+    <HomeSliders />
     <HomePackage />
     <HomeCounter />
     <HomeBlogs />

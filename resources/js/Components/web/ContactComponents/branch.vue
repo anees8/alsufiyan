@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row class="py-5 align-items-center">
+    <b-row class="py-2 align-items-center">
       <h1 class="fw-bold text-center">Our Branch</h1>
       <b-col
         cols="12"

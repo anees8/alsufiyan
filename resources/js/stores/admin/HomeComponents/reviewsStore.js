@@ -8,7 +8,7 @@ export const useAdminReviewsStore = defineStore("adminreviwsStore", {
         fields: [
             { key: "id", label: "ID" },
       
-            { key: "comment", label: "Review", thStyle: { width: "50%" }  },
+            { key: "comment", label: "Review",thStyle: { width: "50%" }  },
             { key: "user", label: "Username" },
             { key: "comment_date", label: "Review Date" },
             { key: "actions", label: "Action" },

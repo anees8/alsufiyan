@@ -158,9 +158,11 @@ public function update(Request $request, HomePackageSlider $homepackageslider)
             }
           
             if ($request->file('image')) {
+                if(!empty($homepackageslider->image)){
             if (File::exists(public_path($homepackageslider->image))) {
             unlink(public_path($homepackageslider->image));
             }
+        }
             $imageName = time().'.'.$request->image->extension();  
             $request->image->move(public_path('homepackage'), $imageName);
             $homepackageslider->image = "/homepackage/".$imageName;
@@ -215,9 +217,11 @@ public function restore(Request $request, HomePackageSlider $homepackageslider){
 
 public function forcedelete(Request $request, HomePackageSlider $homepackageslider){
     $this->authorizeForUser($request->user('api'), 'forceDelete', HomePackageSlider::class);
+        if(!empty($homepackageslider->image)){
         if (File::exists(public_path($homepackageslider->image))) {
             unlink(public_path($homepackageslider->image));
             }
+        }
     
         $homepackageslider->forceDelete();
         return $this->sendResponse([],'Home Package Deleted Successfully.',Response::HTTP_OK);

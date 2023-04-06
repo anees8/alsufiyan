@@ -134,9 +134,11 @@ public function index(Request $request){
         }
 
         if ($request->file('image')) {
+            if(!empty($post->attachment)){
             if (File::exists(public_path($post->attachment))) {
             unlink(public_path($post->attachment));
             }
+        }
             $imageName = time().'.'.$request->image->extension();  
             $request->image->move(public_path('posts'), $imageName);
             $post->attachment = "/posts/".$imageName;
@@ -174,9 +176,11 @@ public function index(Request $request){
 
 public function forcedelete(Request $request, Post $post){
     $this->authorizeForUser($request->user('api'), 'forceDelete', Post::class);
+    if(!empty($post->attachment)){
         if (File::exists(public_path($post->attachment))) {
         unlink(public_path($post->attachment));
         }
+    }
         $post->forceDelete();
         return $this->sendResponse([],'Post Deleted Successfully.',Response::HTTP_OK);
 

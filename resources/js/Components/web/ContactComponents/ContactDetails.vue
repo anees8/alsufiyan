@@ -64,13 +64,18 @@
           <div><span class="fw-bold">OPENING TIMES</span></div>
           <hr class="mx-5 my-2" />
 
-          <div v-html="settings.openingTime"></div> </b-card></b-col></b-row
-  ></b-container>
+          <div v-html="settings.openingTime"></div> </b-card></b-col
+    ></b-row>
+    <Branch />
+  </b-container>
 </template>
 <script setup>
+import { defineAsyncComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { useSettingStore } from "../../../stores/web/settingStore.js";
 import ContactForm from "./ContactForm.vue";
+
+const Branch = defineAsyncComponent(() => import("./branch.vue"));
 const { settings, loading } = storeToRefs(useSettingStore());
 const { getSettings } = useSettingStore();
 getSettings();

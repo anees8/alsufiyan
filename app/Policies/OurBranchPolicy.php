@@ -69,7 +69,9 @@ class OurBranchPolicy
      */
     public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'our_branch_delete')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
