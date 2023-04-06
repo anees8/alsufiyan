@@ -45,7 +45,9 @@ class OurBranchPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'our_branch_add')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -57,7 +59,9 @@ class OurBranchPolicy
      */
     public function update(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'our_branch_edit')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**

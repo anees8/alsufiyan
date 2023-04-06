@@ -45,7 +45,33 @@ class OurBranchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $this->authorizeForUser($request->user('api'), 'create', OurBranch::class);
+        
+        $validator = Validator::make($request->all(), [
+            'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+       
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+
+            $branch = new OurBranch;
+
+            if ($request->file('image')) {
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('branch'), $imageName);
+            $branch->image = "/branch/".$imageName;
+            }
+
+
+            $branch->save();
+
+            $success['branch'] =  $branch ;
+
+            return $this->sendResponse($success, 'Branch Created Successfully.',Response::HTTP_CREATED);
+
     }
 
     /**
@@ -79,7 +105,31 @@ class OurBranchController extends Controller
      */
     public function update(Request $request, OurBranch $ourbranch)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'update', OurBranch::class);
+
+        $validator = Validator::make($request->all(), [
+        
+            'image' => 'bail|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+
+        if ($request->file('image')){
+        if(!empty($ourbranch->image)){
+        if (File::exists(public_path($ourbranch->image))) {
+        unlink(public_path($ourbranch->image));
+        }
+        }
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('branch'), $imageName);
+            $ourbranch->image = "/branch/".$imageName;
+            }
+            
+            $ourbranch->update();
+            return $this->sendResponse([],'Branch Updated Successfully.',Response::HTTP_OK);
+
     }
 
     /**

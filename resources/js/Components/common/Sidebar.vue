@@ -173,6 +173,12 @@ const menuTree = [
         name: "AdminContactSubject",
         Permissions: "contact_subject_list",
       },
+      {
+        label: "Branch",
+        icon: "code-branch",
+        name: "AdminContactBranch",
+        Permissions: "our_branch_list",
+      },
     ],
   },
   {

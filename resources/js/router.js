@@ -242,6 +242,14 @@ const routes = [
         },
     },
     {
+        path: "/admin/contact/branch",
+        name: "AdminContactBranch",
+        component: ()=>import('./Components/admin/ContactComponents/Branch.vue'),
+        meta: {
+            requireAuth: true,
+        },
+    },
+    {
         path: "/admin/home/package",
         name: "AdminHomePackage",
         component: ()=>import('./Components/admin/HomeComponents/HomePackage.vue'),

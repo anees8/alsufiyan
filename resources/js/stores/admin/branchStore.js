@@ -41,6 +41,7 @@ export const useAboutBranchStore = defineStore("aboutbranchStore", {
     }),
 
     actions: {
+
        async getBranches(){
             this.isBusy = true;
             try {
@@ -76,10 +77,76 @@ export const useAboutBranchStore = defineStore("aboutbranchStore", {
         
 
         },
+        async updateBranch() {
+
+            const formData = new FormData();
+            let url = "ourbranchs";
+            let config = {
+                header: { "content-type": "multipart/form-data" },
+            };
+            this.loading = true;
+
+            if (this.branch.image) {
+                formData.append("image", this.branch.image);
+            }
+
+
+            if (!this.branch.id) {
+            
+                try {
+                    const response = await axios.post(url, formData, config);
+                    this.hideModel();
+                } catch (error) {
+                    if (error.response) {
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                                this.errors = error.response.data.errors;
+                        }
+                    }
+                    this.loading = false;
+                  
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
+                }
+            } else {
+              
+                try {
+                    
+                
+
+                    formData.append("_method", "put");
+                  
+                    const response = await axios.post(
+                        url+'/'+this.branch.id,
+                        formData,
+                        config
+                    );
+
+                    this.hideModel();
+                } catch (error) {
+                    if (error.response) {
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                                this.errors = error.response.data.errors;
+                        }
+                    }
+                  
+                    setTimeout(() => {
+                        this.errors = {};
+                    }, 5000);
+                }
+            }
+       
+            this.loading = false;
+        },
 
         editBranch(id) {
             this.branch = this.branches.find((branch) => branch.id == id);
             if (this.branch) {
+                this.branch.previewImage = this.branch.image;
                 this.modal = !this.modal;
             }
         },
@@ -129,6 +196,15 @@ export const useAboutBranchStore = defineStore("aboutbranchStore", {
             
             return value?moment(value).format("D-MMM-Y"):null;
         },
+      
+        onFileChange: function (e) {
+            this.branch.image = e.target.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = () => {
+                this.branch.previewImage = reader.result;
+            };
+        },
         setPerPage(value) {
             this.perPage = value;
             this.currentPage = 1;
@@ -142,9 +218,9 @@ export const useAboutBranchStore = defineStore("aboutbranchStore", {
         hideModel() {
             this.modal = !this.modal;
 
-            (this.branch = {
+            this.branch = {
                 id: null,
-            }),
+            };
                 this.getBranches();
             this.resetForm();
         },

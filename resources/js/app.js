@@ -66,6 +66,8 @@ import {
     faMapLocationDot,
     
     faStarHalf,
+    faCodeBranch,
+    faMap,
     } from "@fortawesome/free-solid-svg-icons";
 import {
     
@@ -87,6 +89,8 @@ import {
 } from "@fortawesome/vue-fontawesome";
 
 library.add(
+    faMap,
+    faCodeBranch,
     faStarHalf,
     faGear,faYoutube,
     faCopyright,
