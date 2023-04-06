@@ -22,6 +22,7 @@
         >
           <template #cell(subject)="data">{{ data.item.subject.subject }}</template>
           <template #cell(created_at)="data">{{ dateTime(data.value) }}</template>
+
           <template #cell(actions)> </template> </b-table
       ></b-col>
       <b-row align-h="end" class="mt-5">

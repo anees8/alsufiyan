@@ -13,6 +13,7 @@ export const useContactsStore = defineStore("contactsStore", {
             { key: "subject", label: "Subject", thStyle: { width: "15%" } },
             { key: "message", label: "Message", thStyle: { width: "40%" } },
             { key: "created_at", label: "Created Date" },
+            { key: "status_id", label: "Status"},
             { key: "actions", label: "Action" },
         ],
         contacts: [],

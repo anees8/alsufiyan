@@ -29,4 +29,5 @@ class Contact extends Model
         return $this->hasOne(ContactSubject::class,'id', 'subject_id');
     }
    
+    
 }
