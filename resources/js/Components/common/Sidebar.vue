@@ -100,12 +100,7 @@ const menuTree = [
       },
     ],
   },
-  {
-    label: "About",
-    icon: "address-card",
-    name: "AdminAbout",
-    Permissions: "users_list",
-  },
+
   {
     label: "Users",
     icon: "users",

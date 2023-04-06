@@ -85,12 +85,33 @@ export const useAboutBranchStore = defineStore("aboutbranchStore", {
                 header: { "content-type": "multipart/form-data" },
             };
             this.loading = true;
+            if (this.branch.location) {
+                formData.append("location", this.branch.location);
+            }
 
             if (this.branch.image) {
                 formData.append("image", this.branch.image);
             }
+            if (this.branch.address) {
+                formData.append("address", this.branch.address);
+            }
 
-
+            if (this.branch.map) {
+                formData.append("map", this.branch.map);
+            }
+            if (this.branch.person) {
+                formData.append("person", this.branch.person);
+            }
+            if (this.branch.phone) {
+                formData.append("phone", this.branch.phone);
+            }
+            if (this.branch.secondary_person) {
+                formData.append("secondary_person", this.branch.secondary_person);
+            }
+            if (this.branch.secondary_phone) {
+                formData.append("secondary_phone", this.branch.secondary_phone);
+            }
+          
             if (!this.branch.id) {
             
                 try {

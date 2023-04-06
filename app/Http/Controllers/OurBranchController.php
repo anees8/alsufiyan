@@ -19,8 +19,8 @@ class OurBranchController extends Controller
     {
         if ($request->perPage) {
             $this->authorizeForUser($request->user('api'), 'view', OurBranch::class);
-            $branches = OurBranch::orderBy('id', 'DESC');
-            $data['branches'] = $branches->Paginate($request->perPage);
+           $ourbranches = OurBranch::orderBy('id', 'DESC');
+            $data['branches'] =$ourbranches->Paginate($request->perPage);
         } else {
             $data['branches'] = OurBranch::get();
         }
@@ -49,6 +49,11 @@ class OurBranchController extends Controller
         $this->authorizeForUser($request->user('api'), 'create', OurBranch::class);
         
         $validator = Validator::make($request->all(), [
+            'location' => 'required|min:2',
+            'address' => 'required|min:10',
+            'map' => 'required|min:10',
+            'person' => 'required|min:3',
+            'phone' => 'required|min:10',
             'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -57,18 +62,41 @@ class OurBranchController extends Controller
             return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
 
-            $branch = new OurBranch;
+           $ourbranch = new OurBranch;
 
+            if ($request->has('location')) {
+               $ourbranch->location = $request->location;
+            }
+            if ($request->has('address')) {
+               $ourbranch->address = $request->address;
+            }
+            if ($request->has('map')) {
+               $ourbranch->map = $request->map;
+            }
+            if ($request->has('person')) {
+               $ourbranch->person = $request->person;
+            }
+            if ($request->has('phone')) {
+               $ourbranch->phone = $request->phone;
+            }
+            if ($request->has('secondary_person')) {
+               $ourbranch->secondary_person = $request->secondary_person;
+            }
+    
+            if ($request->has('secondary_phone')) {
+               $ourbranch->secondary_phone = $request->secondary_phone;
+            }
+    
             if ($request->file('image')) {
             $imageName = time().'.'.$request->image->extension();  
             $request->image->move(public_path('branch'), $imageName);
-            $branch->image = "/branch/".$imageName;
+           $ourbranch->image = "/branch/".$imageName;
             }
 
 
-            $branch->save();
+           $ourbranch->save();
 
-            $success['branch'] =  $branch ;
+            $success['branch'] = $ourbranch ;
 
             return $this->sendResponse($success, 'Branch Created Successfully.',Response::HTTP_CREATED);
 
@@ -105,27 +133,57 @@ class OurBranchController extends Controller
      */
     public function update(Request $request, OurBranch $ourbranch)
     {
+
+      
         $this->authorizeForUser($request->user('api'), 'update', OurBranch::class);
 
         $validator = Validator::make($request->all(), [
-        
-            'image' => 'bail|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'location' => 'required|min:2',
+            'address' => 'required|min:10',
+            'map' => 'required|min:10',
+            'person' => 'required|min:3',
+            'phone' => 'required|min:10',
+           
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
         }
 
+        if ($request->has('location')) {
+           $ourbranch->location = $request->location;
+        }
+        if ($request->has('address')) {
+           $ourbranch->address = $request->address;
+        }
+        if ($request->has('map')) {
+           $ourbranch->map = $request->map;
+        }
+        if ($request->has('person')) {
+           $ourbranch->person = $request->person;
+        }
+        if ($request->has('phone')) {
+           $ourbranch->phone = $request->phone;
+        }
+        if ($request->has('secondary_person')) {
+           $ourbranch->secondary_person = $request->secondary_person;
+        }
+
+        if ($request->has('secondary_phone')) {
+           $ourbranch->secondary_phone = $request->secondary_phone;
+        }
+
+        
         if ($request->file('image')){
         if(!empty($ourbranch->image)){
         if (File::exists(public_path($ourbranch->image))) {
         unlink(public_path($ourbranch->image));
         }
         }
-            $imageName = time().'.'.$request->image->extension();  
-            $request->image->move(public_path('branch'), $imageName);
-            $ourbranch->image = "/branch/".$imageName;
-            }
+        $imageName = time().'.'.$request->image->extension();  
+        $request->image->move(public_path('branch'), $imageName);
+        $ourbranch->image = "/branch/".$imageName;
+        }
             
             $ourbranch->update();
             return $this->sendResponse([],'Branch Updated Successfully.',Response::HTTP_OK);

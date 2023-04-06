@@ -117,7 +117,27 @@
                   {{ errors.person[0] }}
                 </b-form-invalid-feedback>
               </b-form-group>
-
+              <b-form-group
+                id="input-group-2"
+                label="Primary Phone Number:"
+                label-for="input-2"
+              >
+                <b-input-group class="mt-1">
+                  <template #prepend>
+                    <b-input-group-text
+                      ><font-awesome-icon icon="mobile-screen" />
+                    </b-input-group-text>
+                  </template>
+                  <b-form-input
+                    id="input-2"
+                    v-model="branch.phone"
+                    placeholder="Enter Primary Phone Number"
+                  ></b-form-input>
+                </b-input-group>
+                <b-form-invalid-feedback v-if="errors.phone" :state="errors.phone">
+                  {{ errors.phone[0] }}
+                </b-form-invalid-feedback>
+              </b-form-group>
               <b-form-group
                 id="input-group-2"
                 label="Contact Secondary Person:"
@@ -142,7 +162,30 @@
                   {{ errors.secondary_person[0] }}
                 </b-form-invalid-feedback>
               </b-form-group>
-
+              <b-form-group
+                id="input-group-2"
+                label="Secondary Phone Number:"
+                label-for="input-2"
+              >
+                <b-input-group class="mt-1">
+                  <template #prepend>
+                    <b-input-group-text
+                      ><font-awesome-icon icon="mobile-screen" />
+                    </b-input-group-text>
+                  </template>
+                  <b-form-input
+                    id="input-2"
+                    v-model="branch.secondary_phone"
+                    placeholder="Enter Secondary Phone Number"
+                  ></b-form-input>
+                </b-input-group>
+                <b-form-invalid-feedback
+                  v-if="errors.secondary_phone"
+                  :state="errors.secondary_phone"
+                >
+                  {{ errors.secondary_phone[0] }}
+                </b-form-invalid-feedback>
+              </b-form-group>
               <template #footer>
                 <div>
                   <button class="btn btn-outline-dark" @click="hideModel">Close</button>

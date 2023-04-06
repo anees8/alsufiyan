@@ -114,14 +114,7 @@ const routes = [
             requireAuth: true,
         },
     },
-    {
-        path: "/admin/about",
-        name: "AdminAbout",
-        component: ()=>import('./Components/admin/About.vue'),
-        meta: {
-            requireAuth: true,
-        },
-    },
+    
     {
         path: "/admin/home/slider",
         name: "AdminHomeSlider",
