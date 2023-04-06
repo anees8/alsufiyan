@@ -68,6 +68,8 @@ import {
     faStarHalf,
     faCodeBranch,
     faMap,
+    faCalendar,
+    faCalendarDays,
     } from "@fortawesome/free-solid-svg-icons";
 import {
     
@@ -88,6 +90,9 @@ import {
     FontAwesomeLayersText,
 } from "@fortawesome/vue-fontawesome";
 
+import { setupCalendar, Calendar, DatePicker } from 'v-calendar';
+
+import 'v-calendar/style.css';
 library.add(
     faMap,
     faCodeBranch,
@@ -136,7 +141,10 @@ library.add(
     faComment,
     faPen,
     faTrashAlt,
-    faPlus
+    faPlus,
+    faCalendar,
+    faCalendarDays
+
 );
 import VueNumber from 'vue-number-animation'
 
@@ -162,6 +170,9 @@ app.component("font-awesome-layer-text", FontAwesomeLayersText);
 app.use(createPinia());
 app.use(router);
 app.use(VueNumber);
+app.use(setupCalendar, {})
+app.component('VCalendar', Calendar)
+app.component('VDatePicker', DatePicker)
 app.component('QuillEditor', QuillEditor);
 // app.use(VueReCaptcha, { siteKey: '6LenSowkAAAAADTvKcDRW33ZtVkpr-I2vLVlbP3B' });
 app.mount("#app");

@@ -706,32 +706,54 @@ class DatabaseSeeder extends Seeder
                         'name'  => 'Review List',
                         'slug'  => 'home_review_list',
                       // 'group_id'=>11,
-                      ],    
+                      ],   
+                        
                       [
                         'id'    => 70,
+                        'name'  => 'Review Edit',
+                        'slug'  => 'home_review_edit',
+                      // 'group_id'=>11,
+                      ],    
+                      [
+                        'id'    => 71,
+                        'name'  => 'Review Delete',
+                        'slug'  => 'home_review_delete',
+                      // 'group_id'=>11,
+                      ],   
+                      [
+                        'id'    => 72,
+                        'name'  => 'Review Add',
+                        'slug'  => 'home_review_add',
+                      // 'group_id'=>11,
+                      ],    
+                      
+                      
+                      [
+                        'id'    => 73,
                         'name'  => 'Our Branch List',
                         'slug'  => 'our_branch_list',
                       // 'group_id'=>11,
                       ],    
                       [
-                        'id'    => 71,
+                        'id'    => 74,
                         'name'  => 'Our Branch Edit',
                         'slug'  => 'our_branch_edit',
                       // 'group_id'=>11,
                       ],    
                       [
-                        'id'    => 72,
+                        'id'    => 75,
                         'name'  => 'Our Branch Delete',
                         'slug'  => 'our_branch_delete',
                       // 'group_id'=>11,
                       ],   
                       [
-                        'id'    => 73,
+                        'id'    => 76,
                         'name'  => 'Our Branch Add',
                         'slug'  => 'our_branch_add',
                       // 'group_id'=>11,
-                      ],                
-
+                      ],      
+                      
+                    
 
 
 
@@ -754,7 +776,7 @@ class DatabaseSeeder extends Seeder
                       );
 
                   
-                  for ($i = 1; $i <= 73; $i++) {
+                  for ($i = 1; $i <= 76; $i++) {
                   DB::table('roles_permissions')->insert([
                   'role_id' => 1,
                   'permission_id' => $i,

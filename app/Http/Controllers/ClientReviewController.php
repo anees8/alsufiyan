@@ -49,16 +49,44 @@ class ClientReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'create', ClientReview::class);
+        
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required|min:10',
+            'user'=> 'required',
+        ]);       
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+
+           $clientreview = new ClientReview;
+           if ($request->has('comment')) {
+            $clientreview->comment = $request->comment;
+         }
+         if ($request->has('user')) {
+            $clientreview->user = $request->user;
+         }
+         if ($request->has('comment_date')) {
+            $clientreview->comment_date = $request->comment_date;
+         }
+
+         
+         $clientreview->save();
+
+         $success['branch'] = $clientreview ;
+
+         return $this->sendResponse($success, 'Review Created Successfully.',Response::HTTP_CREATED);
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ClientReview  $clientReview
+     * @param  \App\Models\ClientReview  $clientreview
      * @return \Illuminate\Http\Response
      */
-    public function show(ClientReview $clientReview)
+    public function show(ClientReview $clientreview)
     {
         //
     }
@@ -66,10 +94,10 @@ class ClientReviewController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ClientReview  $clientReview
+     * @param  \App\Models\ClientReview  $clientreview
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClientReview $clientReview)
+    public function edit(ClientReview $clientreview)
     {
         //
     }
@@ -78,22 +106,49 @@ class ClientReviewController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ClientReview  $clientReview
+     * @param  \App\Models\ClientReview  $clientreview
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClientReview $clientReview)
+    public function update(Request $request, ClientReview $clientreview)
     {
-        //
+        $this->authorizeForUser($request->user('api'), 'update', ClientReview::class);
+        
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required|min:10',
+            'user'=> 'required',
+        ]);       
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);       
+        }
+
+          
+           if ($request->has('comment')) {
+            $clientreview->comment = $request->comment;
+         }
+         if ($request->has('user')) {
+            $clientreview->user = $request->user;
+         }
+         if ($request->has('comment_date')) {
+            $clientreview->comment_date = $request->comment_date;
+         }
+
+         
+         $clientreview->save();
+
+         $clientreview->update();
+         return $this->sendResponse([],'Review Updated Successfully.',Response::HTTP_OK);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ClientReview  $clientReview
+     * @param  \App\Models\ClientReview  $clientreview
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClientReview $clientReview)
+    public function destroy(Request $request, ClientReview $clientreview)
     {
-        //
+            $this->authorizeForUser($request->user('api'), 'delete', ClientReview::class);
+            $clientreview->delete();
+            return $this->sendResponse([],'Review Deleted Successfully.',Response::HTTP_OK);
     }
 }

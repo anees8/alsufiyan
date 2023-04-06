@@ -45,7 +45,9 @@ class ClientReviewPolicy
      */
     public function create(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_review_add')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -57,7 +59,9 @@ class ClientReviewPolicy
      */
     public function update(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_review_edit')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**
@@ -69,7 +73,9 @@ class ClientReviewPolicy
      */
     public function delete(User $user)
     {
-        //
+        $permission = Permission::where('slug', 'home_review_delete')->first();
+        
+        return $user->hasRole($permission->roles);
     }
 
     /**

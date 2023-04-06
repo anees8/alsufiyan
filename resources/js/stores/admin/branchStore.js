@@ -213,10 +213,7 @@ export const useAboutBranchStore = defineStore("aboutbranchStore", {
                 }
             });
         },
-        dateTime(value) {
-            
-            return value?moment(value).format("D-MMM-Y"):null;
-        },
+       
       
         onFileChange: function (e) {
             this.branch.image = e.target.files[0];
