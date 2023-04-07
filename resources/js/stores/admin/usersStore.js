@@ -6,7 +6,7 @@ import router from "../../router.js";
 export const useUsersStore = defineStore("usersStore", {
     state: () => ({
         fields: [
-            { key: "id", label: "ID" },
+            { key: "id", label: "ID" , sortable: true },
             { key: "name", label: "Name" },
             { key: "email", label: "Email" },
             { key: "roles", label: "Role" },

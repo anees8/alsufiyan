@@ -4,7 +4,7 @@
     <title>{{$ContactForm['subject']}}</title>
   </head>
   <body>
-    <p>Dear {{$ContactForm['name']}},</p>
+    <p>Dear {{$ContactForm['company']}},</p>
     <p>My name is {{$ContactForm['name']}} and I am reaching out to you from {{$ContactForm['company']}}.</p>
     <p>Please find my contact details below:</p>
     <table role="presentation" style="width: 600px; border-collapse: collapse;">
