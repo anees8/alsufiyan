@@ -28,6 +28,10 @@ class Contact extends Model
     public function subject(){
         return $this->hasOne(ContactSubject::class,'id', 'subject_id');
     }
+    public function status(){
+        return $this->hasOne(ContactsStatus::class,'id', 'status_id');
+    }
    
+    
     
 }

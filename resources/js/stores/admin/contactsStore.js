@@ -11,13 +11,15 @@ export const useContactsStore = defineStore("contactsStore", {
             { key: "email", label: "Email" },
             { key: "phone", label: "Phone" },
             { key: "subject", label: "Subject", thStyle: { width: "15%" } },
-            { key: "message", label: "Message", thStyle: { width: "40%" } },
+            { key: "message", label: "Message", thStyle: { width: "30%" } },
             { key: "created_at", label: "Created Date" },
-            { key: "status_id", label: "Status"},
-            { key: "actions", label: "Action" },
+            { key: "status", label: "Status"},
+            { key: "actions", label: "Action" ,thStyle: { width: "10%" }},
         ],
         contacts: [],
+        
         perPage: 5,
+    
         currentPage: 1,
         isBusy: false,
         rows: null,
@@ -27,7 +29,12 @@ export const useContactsStore = defineStore("contactsStore", {
             { value: 50, text: "50" },
             { value: 100, text: "100" },
         ],
-
+        statusloading:false,
+        status_id:null,
+        statusOption:[ 
+       
+      ],
+        message:null,
         errors: {},
     }),
 
@@ -45,11 +52,12 @@ export const useContactsStore = defineStore("contactsStore", {
                 }
                 const response = await axios.get(url);
                 this.contacts = response.data.data.contacts.data;
-
+                this.statusOption=response.data.data.status
                 this.currentPage = response.data.data.contacts.current_page;
                 this.rows = response.data.data.contacts.total;
 
                 this.isBusy = false;
+
             } catch (error) {
                              if (error.response) {
                     if (error.response.status === 403) {
@@ -66,7 +74,60 @@ export const useContactsStore = defineStore("contactsStore", {
             }
         },
 
-        deleteContactSubject(id) {},
+       async changeStatus(item){
+      
+                this.statusloading=true;
+
+                   
+
+                try{
+                    let url = "contacts";
+
+                    const formData = new FormData();
+                    formData.append("_method", "put");
+                    
+                if(item.status_id){
+                    formData.append("status_id", item.status_id);
+                }
+                
+                let config = {
+                        header: { "Content-Type": "multipart/form-data" },
+                    };
+                    const response = await axios.post(
+                        url+'/'+item.id,
+                        formData,
+                        config
+                    );  
+                        this.getContacts();
+                        this.message=response.data.message
+                    setTimeout(() => {
+                        this.statusloading=false;
+                        this.message="";
+                       
+                    }, 1000);
+                    
+
+                }catch(error){
+                    if (error.response) {
+                        if (error.response.status === 403) {
+                            router.push({ name: "NotAuthorize" });
+                        } else if (error.response.status === 400) {
+                                this.errors = error.response.data.errors;
+                        }
+                }
+
+                setTimeout(() => {
+                    this.errors = {};
+                   
+                }, 5000);
+                this.statusloading=false;
+               
+            }
+
+       
+
+        
+       },
 
         dateTime(value) {
             return value?moment(value).format("D-MMM-Y"):null;

@@ -27,7 +27,7 @@
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
-import { ref, onMounted, defineAsyncComponent } from "vue";
+import { ref, onBeforeUnmount, defineAsyncComponent } from "vue";
 
 import { useContactStore } from "../../../stores/web/contactStore.js";
 import { useSettingStore } from "../../../stores/web/settingStore.js";
@@ -38,7 +38,7 @@ const ContactForm = defineAsyncComponent(() =>
   import("../ContactComponents/ContactForm.vue")
 );
 
-onMounted(() => {
+onBeforeUnmount(() => {
   setTimeout(function () {
     changeModel();
   }, 2000);

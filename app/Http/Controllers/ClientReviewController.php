@@ -133,7 +133,7 @@ class ClientReviewController extends Controller
          }
 
          
-         $clientreview->save();
+      
 
          $clientreview->update();
          return $this->sendResponse([],'Review Updated Successfully.',Response::HTTP_OK);

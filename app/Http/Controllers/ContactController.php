@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ContactFormEmail;
 use App\Mail\ContactReceiptFormEmail;
 use App\Models\Contact;
+use App\Models\ContactsStatus;
 use App\Models\ContactSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -23,8 +24,10 @@ class ContactController extends Controller
 
         if ($request->has('permission')) {
             $this->authorizeForUser($request->user('api'), 'view', Contact::class);
+            $data['status']=ContactsStatus::get(['id as value','name as text']); 
+
         }
-        $data['contacts'] = Contact::with('subject')->orderBy('id', 'DESC')->Paginate($request->perPage);
+        $data['contacts'] = Contact::with('subject','status')->orderBy('id', 'DESC')->Paginate($request->perPage);
 
         return $this->sendResponse($data, 'Contacts return successfully.', Response::HTTP_OK);
     }
@@ -114,6 +117,25 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         $this->authorizeForUser($request->user('api'), 'update', Contact::class);
+
+        $validator = Validator::make($request->all(), [
+        'status_id' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
+
+
+
+        if ($request->has('status_id')) {
+            $contact->status_id = $request->status_id;
+         }
+       
+
+         $contact->update();
+         return $this->sendResponse([],'Contact Status Updated Successfully.',Response::HTTP_OK);
+
     }
 
     /**
