@@ -63,7 +63,19 @@
             size="xl"
         /></a>
       </div>
-      <HomeContactModal />
+      <HomeContactModal
+        v-if="
+          [
+            'Home',
+            'About',
+            'gallery',
+            'blog',
+            'PostDetail',
+            'contact',
+            'Videos',
+          ].includes($route.name)
+        "
+      />
       <RouterView
         v-if="
           [
