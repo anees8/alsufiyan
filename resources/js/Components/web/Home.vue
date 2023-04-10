@@ -1,6 +1,5 @@
 <template>
   <div class="router_view_min">
-    <HomeContactModal />
     <HomeSliders />
     <HomePackage />
     <HomeCounter />
@@ -11,9 +10,7 @@
 </template>
 <script setup>
 import { defineAsyncComponent } from "vue";
-const HomeContactModal = defineAsyncComponent(() =>
-  import("./HomeComponents/HomeContactModal.vue")
-);
+
 const HomeSliders = defineAsyncComponent(() =>
   import("./HomeComponents/HomeSliders.vue")
 );

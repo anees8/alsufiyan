@@ -25,7 +25,6 @@
                       /></b-input-group-text>
                     </template>
                     <b-form-input
-                      id="email"
                       v-model="user.email"
                       :class="errors.email ? 'is-invalid' : ''"
                       type="email"

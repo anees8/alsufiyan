@@ -264,6 +264,7 @@ const router = createRouter({
   });
 
 
+
   router.beforeEach((to, from, next) => {
     const { getAccessToken, refreshUserPermissions } = useLoginStore();
 
@@ -278,6 +279,9 @@ const router = createRouter({
         next();
     }
 });
+
+   
+
 
 
 export default router;

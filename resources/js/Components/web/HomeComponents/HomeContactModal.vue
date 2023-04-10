@@ -27,20 +27,14 @@
 </template>
 <script setup>
 import { storeToRefs } from "pinia";
-import { ref, onBeforeUnmount, defineAsyncComponent } from "vue";
+import { ref, defineAsyncComponent } from "vue";
 
 import { useContactStore } from "../../../stores/web/contactStore.js";
 import { useSettingStore } from "../../../stores/web/settingStore.js";
 const { modal, visible, currentindex } = storeToRefs(useContactStore());
 const { settings } = storeToRefs(useSettingStore());
-const { changeModel, show, handleHide } = useContactStore();
+const { show, handleHide } = useContactStore();
 const ContactForm = defineAsyncComponent(() =>
   import("../ContactComponents/ContactForm.vue")
 );
-
-onBeforeUnmount(() => {
-  setTimeout(function () {
-    changeModel();
-  }, 2000);
-});
 </script>

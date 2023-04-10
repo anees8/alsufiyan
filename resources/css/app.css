@@ -1,0 +1,5 @@
+@import '@vueup/vue-quill/dist/vue-quill.snow.css';
+@import 'v-calendar/style.css';
+
+@import "bootstrap/dist/css/bootstrap.css";
+@import "bootstrap-vue-next/dist/bootstrap-vue-next.css";

@@ -63,7 +63,7 @@
             size="xl"
         /></a>
       </div>
-
+      <HomeContactModal />
       <RouterView
         v-if="
           [
@@ -97,15 +97,22 @@
 </template>
 <script setup>
 import { ref, onBeforeMount } from "vue";
-import Navbar from "@/Components/common/Navbar.vue";
-import Loader from "@/Components/common/HomeLoader.vue";
-import Header from "@/Components/common/Header.vue";
-import Sidebar from "@/Components/common/Sidebar.vue";
-import Footer from "@/Components/common/Footer.vue";
+
+import { defineAsyncComponent } from "vue";
 import { useLoginStore } from "./stores/admin/loginStore";
+
+const HomeContactModal = defineAsyncComponent(() =>
+  import("./Components/web/HomeComponents/HomeContactModal.vue")
+);
+const Navbar = defineAsyncComponent(() => import("@/Components/common/Navbar.vue"));
+const Loader = defineAsyncComponent(() => import("@/Components/common/HomeLoader.vue"));
+const Header = defineAsyncComponent(() => import("@/Components/common/Header.vue"));
+const Sidebar = defineAsyncComponent(() => import("@/Components/common/Sidebar.vue"));
+const Footer = defineAsyncComponent(() => import("@/Components/common/Footer.vue"));
 const { startIdleTimer, refreshUserPermissions } = useLoginStore();
 
 const Loading = ref(false);
+
 startIdleTimer();
 onBeforeMount(() => {
   refreshUserPermissions();
