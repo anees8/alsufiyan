@@ -21,6 +21,7 @@ import '../css/App.css'
 axios.defaults.baseURL = "/api/";
 axios.defaults.headers.common["Authorization"] =
 "Bearer " + localStorage.getItem("token");
+
 import { useLoginStore } from "./stores/admin/loginStore.js";
 import { useContactStore } from "@/stores/web/contactStore.js";
 

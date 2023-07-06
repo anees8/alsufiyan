@@ -42,7 +42,9 @@ export const useUsersStore = defineStore("usersStore", {
                 if (this.currentPage > 1) {
                     url += `&page=${this.currentPage}`;
                 }
+                
                 const response = await axios.get(url);
+        
                 this.users = response.data.data.users.data;
                 this.currentPage = response.data.data.users.current_page;
                 this.rows = response.data.data.users.total;
