@@ -1,5 +1,5 @@
 <template>
-  <b-modal size="xl" v-model="modal" title="Contact us" hide-footer no-close-on-backdrop>
+  <b-modal size="xl" v-model="modal" title="Contact us" hide-footer >
     <b-container fluid>
       <b-row class="no-gutters align-items-start">
         <b-col cols="12" lg="6">

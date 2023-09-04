@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row align-items-center justify-content-center vh-100">
-      <div class="col-11 col-xl-3 col-lg-5 col-md-6 card shadow rounded p-md-4 p-2 py-5">
+      <div class="col-12 col-xl-4 card shadow rounded p-md-4 p-2 py-5">
         <div class="text-center">
           <div class="d-flex mb-4 mt-2 align-items-center justify-content-center">
             <img loading="lazy" :src="settings.logo" width="50" />
